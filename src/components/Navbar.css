@@ -1,3 +1,26 @@
+.navbar__sticky {
+  background-color: white;
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0, 0.15);
+  color: var(--black) !important;
+  transition: all 0.7s;
+}
+
+.navbar__sticky a {
+  color: var(--black) !important;
+}
+
+.navbar__sticky h1 {
+  color: var(--black) !important;
+}
+
+.navbar__sticky .navbar__linkRegister {
+  border-color: var(--black);
+}
+
+.navbar__sticky path {
+  color: black !important;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
@@ -15,7 +38,7 @@
 }
 
 .navbar__title .fa-bars path {
-  color: white !important;
+  color: white;
 }
 
 .navbar h1 {
@@ -35,7 +58,7 @@
   font-weight: 500;
   text-transform: capitalize;
   font-size: 1rem;
-  color: white !important;
+  color: white;
 }
 
 .navbar__links a:hover,

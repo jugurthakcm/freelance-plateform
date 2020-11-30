@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
+  useEffect(() => {
+    const header = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', () => {
+      header && window.scrollY > 0
+        ? header.classList.add('navbar__sticky')
+        : header.classList.remove('navbar__sticky');
+    });
+
+    header && window.scrollY > 0
+      ? header.classList.add('navbar__sticky')
+      : header.classList.remove('navbar__sticky');
+  }, []);
+
   return (
     <nav className="navbar">
       <div className="navbar__title">
@@ -13,8 +27,9 @@ const Navbar = () => {
           className="d-md-none d-block"
           size="2x"
         />
-        <h1>Handelp</h1>
+        <h1 className="d-sm-block d-none">Handelp</h1>
       </div>
+      <h1 className="d-sm-none">Handelp</h1>
       <div className="navbar__links">
         <div className="navbar__navLinks d-md-flex d-none">
           <Link to="/">A propos</Link>
