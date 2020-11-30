@@ -2,21 +2,28 @@ import React, { useEffect } from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars } from '@fortawesome/free-solid-svg-icons';
+import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const Navbar = () => {
   useEffect(() => {
     const header = document.querySelector('.navbar');
+    const navSearch = document.querySelector('.navbar__search');
 
     window.addEventListener('scroll', () => {
       header && window.scrollY > 0
         ? header.classList.add('navbar__sticky')
         : header.classList.remove('navbar__sticky');
+      navSearch && window.scrollY > 0
+        ? navSearch.classList.remove('d-none')
+        : navSearch.classList.add('d-none');
     });
 
     header && window.scrollY > 0
       ? header.classList.add('navbar__sticky')
       : header.classList.remove('navbar__sticky');
+    navSearch && window.scrollY > 0
+      ? navSearch.classList.remove('d-none')
+      : navSearch.classList.add('d-none');
   }, []);
 
   return (
@@ -30,6 +37,13 @@ const Navbar = () => {
         <h1 className="d-sm-block d-none">Handelp</h1>
       </div>
       <h1 className="d-sm-none">Handelp</h1>
+      <div className="navbar__search d-none">
+        <div className="navbar__searchBar">
+          <FontAwesomeIcon icon={faSearch} />
+          <input type="text" placeholder="Search..." />
+        </div>
+        <button className="navbar__searchButton">Chercher</button>
+      </div>
       <div className="navbar__links">
         <div className="navbar__navLinks d-md-flex d-none">
           <Link to="/">A propos</Link>
