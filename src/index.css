@@ -53,9 +53,17 @@
   font-weight: 200;
   font-style: italic;
 }
+
 @font-face {
   font-family: Metropolis;
   src: url('./assets/fonts/metropolis.medium.otf') format('opentype');
   font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Midnight Signature';
+  src: url('./assets/fonts/MidnightSignature.ttf');
+  font-weight: 400;
   font-style: normal;
 }
