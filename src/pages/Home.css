@@ -1,0 +1,9 @@
+.home__description {
+  display: flex;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.description__text h1 {
+  font-weight: 600;
+}

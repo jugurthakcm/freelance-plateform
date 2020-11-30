@@ -1,7 +1,6 @@
 import React from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
-import menu from '../assets/icons/menu.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 
