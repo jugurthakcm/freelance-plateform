@@ -1,12 +1,14 @@
+:root {
+  --yellow: #fece1b;
+  --black: #0f0e1b;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-:root {
-  --yellow: #fece1b;
-  --black: #0f0e1b;
+  font-family: 'Metropolis', sans-serif;
+  color: var(--black);
 }
 
 @font-face {
@@ -50,4 +52,10 @@
     format('opentype');
   font-weight: 200;
   font-style: italic;
+}
+@font-face {
+  font-family: Metropolis;
+  src: url('./assets/fonts/metropolis.medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
 }
