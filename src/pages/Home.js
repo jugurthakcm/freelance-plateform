@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <div className="home">
       <HomeComponent />
-      <div className="home__description row mx-4">
+      <div className="home__description row">
         <div className="description__text col-lg-6 ">
           <h1>Qui sommes-nous ?</h1>
           <p className="mt-4">

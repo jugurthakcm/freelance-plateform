@@ -1,7 +1,7 @@
 .home__description {
   display: flex;
   align-items: center;
-  margin-top: 2rem;
+  margin: 2rem 20px 0 20px !important;
 }
 
 .description__text h1 {
