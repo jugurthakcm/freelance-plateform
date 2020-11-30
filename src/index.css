@@ -1,0 +1,53 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --yellow: #fece1b;
+  --black: #0f0e1b;
+}
+
+@font-face {
+  font-family: Metropolis;
+  src: url('./assets/fonts/metropolis.regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Metropolis;
+  src: url('./assets/fonts/metropolis.thin.otf') format('opentype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Metropolis;
+  src: url('./assets/fonts/metropolis.black-italic.otf') format('opentype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Metropolis;
+  src: url('./assets/fonts/metropolis.bold-italic.otf') format('opentype');
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: Metropolis;
+  src: url('./assets/fonts/metropolis.bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: Metropolis;
+  src: url('./assets/fonts/metropolis.extra-light-italic.otf')
+    format('opentype');
+  font-weight: 200;
+  font-style: italic;
+}
