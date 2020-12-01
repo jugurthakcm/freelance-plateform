@@ -1,15 +1,17 @@
 import './App.css';
 import Navbar from './components/Navbar';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
+import Video from './pages/Video';
 import Footer from './components/Footer';
 
 function App() {
   return (
     <div className="app">
-      <Navbar />
-      <Route exact path="/" component={Home} />
-      <Footer />
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/video" component={Video} />
+      </Switch>
     </div>
   );
 }
