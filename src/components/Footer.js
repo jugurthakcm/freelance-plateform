@@ -7,13 +7,20 @@ import {
   faLinkedin,
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
+import logoBlack from '../assets/images/logo_black.png';
 
 const Footer = () => {
   const date = new Date();
   return (
     <div className="footer">
       <div className="footer__left">
-        <h1 className="footer__title">Handelp</h1>
+        {/* <h1 className="footer__title">Handelp</h1> */}
+        <img
+          src={logoBlack}
+          alt="logo"
+          width="150px"
+          className="footer__title"
+        />
         <p className="footer__copyright">
           © Tous droits réservés. Handelp. {date.getFullYear()}
         </p>

@@ -3,6 +3,7 @@ import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
+import logoYellow from '../assets/images/logo_yellow.png';
 
 const Navbar = () => {
   useEffect(() => {
@@ -34,9 +35,16 @@ const Navbar = () => {
           className="d-md-none d-block"
           size="2x"
         />
-        <h1 className="d-sm-block d-none">Handelp</h1>
+        {/*  <h1 className="d-sm-block d-none">Handelp</h1> */}
+        <img
+          src={logoYellow}
+          alt="logo"
+          width="150px"
+          className="d-sm-block d-none"
+        />
       </div>
-      <h1 className="d-sm-none">Handelp</h1>
+      {/* <h1 className="d-sm-none">Handelp</h1> */}
+      <img src={logoYellow} alt="logo" width="150px" className="d-sm-none" />
       <div className="navbar__search d-none">
         <div className="navbar__searchBar">
           <FontAwesomeIcon icon={faSearch} />
