@@ -1,14 +1,19 @@
 .video__container {
-  background-color: #131313;
+  background-color: #fcd114;
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100vw;
   height: 100vh;
-  animation: anim;
-  animation-duration: 0.3s;
-  animation-delay: 4.3s;
-  animation-fill-mode: forwards;
+  /* animation: anim;
+  animation-duration: 100ms;
+  animation-delay: 4310ms;
+  animation-fill-mode: forwards; */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  overflow: hidden;
 }
 
 @keyframes anim {
@@ -19,6 +24,6 @@
     background-color: #fcd114;
   }
 }
-video {
+.video__container img {
   width: 100vw;
 }

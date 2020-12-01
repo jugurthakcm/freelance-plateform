@@ -5,14 +5,24 @@ import Video from './pages/Video';
 import Aside from './components/Aside';
 
 function App() {
+  setTimeout(() => {
+    document.querySelector('.app').classList.remove('d-none');
+    document.querySelector('.intro').classList.add('d-none');
+  }, 6000);
+
   return (
-    <div className="app">
-      <Aside />
-      <Switch>
-        <Route exact path="/" component={Home} />
-        <Route path="/video" component={Video} />
-      </Switch>
-    </div>
+    <>
+      <div className="intro">
+        <Video />
+      </div>
+      <div className="app d-none">
+        <Aside />
+        <Switch>
+          <Route exact path="/" component={Home} />
+          {/* <Route path="/video" component={Video} /> */}
+        </Switch>
+      </div>
+    </>
   );
 }
 
