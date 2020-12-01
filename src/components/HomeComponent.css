@@ -30,6 +30,8 @@
   width: 100%;
   border-top-left-radius: 5px;
   border-bottom-left-radius: 5px;
+  display: flex;
+  align-items: center;
 }
 
 .main__searchBar .fa-search path {
@@ -40,6 +42,7 @@
   background-color: none;
   border: none;
   margin-left: 0.7rem;
+  width: 100%;
 }
 
 .main__searchButton {
