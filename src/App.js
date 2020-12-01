@@ -6,7 +6,7 @@ import Aside from './components/Aside';
 
 function App() {
   setTimeout(() => {
-    document.querySelector('.app').classList.remove('d-none');
+    document.querySelector('.app').classList.remove('app-anim');
     document.querySelector('.intro').classList.add('d-none');
   }, 6000);
 
@@ -15,7 +15,7 @@ function App() {
       <div className="intro">
         <Video />
       </div>
-      <div className="app d-none">
+      <div className="app app-anim">
         <Aside />
         <Switch>
           <Route exact path="/" component={Home} />

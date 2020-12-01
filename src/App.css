@@ -1,3 +1,17 @@
 body {
   overflow-x: hidden;
 }
+
+.app-anim {
+  display: none;
+}
+
+@media (max-width: 992px) {
+  .intro {
+    display: none;
+  }
+
+  .app-anim {
+    display: block;
+  }
+}
