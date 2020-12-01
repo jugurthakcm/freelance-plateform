@@ -15,7 +15,7 @@ const HomeComponent = () => {
         duration={4}
         transition={0.5}
       />
-      <div className="main__content col-md-12 pt-5">
+      <div className="main__content pl-3 pr-4 pt-5">
         <h1 className="main__slogan">
           Hand it the right freelance.
           <br />
