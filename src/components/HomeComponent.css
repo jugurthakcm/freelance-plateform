@@ -6,7 +6,7 @@
 }
 
 .main__content {
-  position: relative;
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -70,6 +70,11 @@
   .main__search {
     width: 100%;
     flex-direction: column;
+  }
+
+  .main__slogan {
+    text-align: center;
+    margin-top: -20px;
   }
 
   .main__searchBar {
