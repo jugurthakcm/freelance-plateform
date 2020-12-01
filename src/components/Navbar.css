@@ -154,8 +154,41 @@
 }
 
 @media (max-width: 576px) {
+  .navbar {
+    justify-content: space-between;
+  }
   .navbar__links a:nth-child(2) {
     margin-right: 0rem;
     margin-left: 0rem;
   }
 }
+
+@media (max-width: 360px) {
+  .navbar__linkRegister {
+    border: none;
+    padding: 0;
+  }
+
+  .navbar__links a {
+    font-size: 0.8rem !important;
+    font-weight: bold;
+    color: black;
+  }
+
+  .responsive__logo {
+    width: 120px;
+  }
+
+  .navbar__title .fa-2x {
+    font-size: 1.3em;
+  }
+  .navbar__title .fa-bars path {
+    color: unset;
+  }
+}
+
+@media (max-width: 255px) {
+  .navbar__linkRegister {
+    display: none;
+  }
+} ;

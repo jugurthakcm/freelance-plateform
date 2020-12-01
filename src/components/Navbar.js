@@ -44,16 +44,22 @@ const Navbar = () => {
         />
       </div>
       {/* <h1 className="d-sm-none">Handelp</h1> */}
-      <img src={logoYellow} alt="logo" width="150px" className="d-sm-none" />
+      <img
+        src={logoYellow}
+        alt="logo"
+        width="150px"
+        className="responsive__logo d-sm-none"
+      />
       <div className="navbar__search d-none">
         <div className="navbar__searchBar">
           <FontAwesomeIcon icon={faSearch} />
-          <input type="text" placeholder="Search..." />
+          <input type="text" placeholder="Chercher..." />
         </div>
         <button className="navbar__searchButton">Chercher</button>
       </div>
       <div className="navbar__links">
         <div className="navbar__navLinks d-md-flex d-none">
+          <Link to="/">Acceuil</Link>
           <Link to="/">A propos</Link>
           <Link to="/">Services</Link>
           <Link to="/">Store</Link>

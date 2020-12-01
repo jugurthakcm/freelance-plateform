@@ -43,6 +43,7 @@
   border: none;
   margin-left: 0.7rem;
   width: 100%;
+  overflow-x: hidden;
 }
 
 .main__searchButton {
@@ -82,5 +83,9 @@
   .main__searchButton {
     border-radius: 5px;
     width: 100%;
+  }
+
+  .navbar__title img {
+    margin-left: 1rem;
   }
 }

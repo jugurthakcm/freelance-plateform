@@ -15,7 +15,7 @@ const HomeComponent = () => {
         <div className="main__search">
           <div className="main__searchBar">
             <FontAwesomeIcon icon={faSearch} />
-            <input type="text" placeholder="Search..." />
+            <input type="text" placeholder="Chercher..." />
           </div>
           <button className="main__searchButton">Chercher</button>
         </div>
