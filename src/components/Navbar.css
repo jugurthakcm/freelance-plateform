@@ -29,6 +29,8 @@
   width: 100vw;
   top: 0;
   z-index: 99;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
 }
 
 .navbar__title {
@@ -138,7 +140,7 @@
   color: var(--black) !important;
 }
 
-@media (max-width: 1095px) {
+@media (max-width: 1150px) {
   .navbar__searchButton {
     display: none;
   }
@@ -147,7 +149,7 @@
   }
 }
 
-@media (max-width: 985px) {
+@media (max-width: 1030px) {
   .navbar__search {
     display: none;
   }
@@ -176,7 +178,7 @@
   }
 
   .responsive__logo {
-    width: 120px;
+    width: 180px;
   }
 
   .navbar__title .fa-2x {
@@ -187,8 +189,14 @@
   }
 }
 
-@media (max-width: 255px) {
-  .navbar__linkRegister {
+@media (max-width: 330px) {
+  .responsive__logo {
+    width: 150px;
+  }
+  .navbar__links {
     display: none;
   }
-} ;
+}
+
+@media (max-width: 255px) {
+}

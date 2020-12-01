@@ -39,7 +39,7 @@ const Navbar = () => {
         <img
           src={logoYellow}
           alt="logo"
-          width="150px"
+          width="200px"
           className="d-sm-block d-none"
         />
       </div>
@@ -47,7 +47,7 @@ const Navbar = () => {
       <img
         src={logoYellow}
         alt="logo"
-        width="150px"
+        width="200px"
         className="responsive__logo d-sm-none"
       />
       <div className="navbar__search d-none">
