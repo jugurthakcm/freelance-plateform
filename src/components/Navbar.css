@@ -40,13 +40,13 @@
 }
 
 .navbar__title .fa-bars path {
-  color: white;
+  color: var(--black);
 }
 
 .navbar h1 {
   margin-bottom: 0 !important;
   margin-left: 1rem;
-  color: white;
+  color: var(--black);
 }
 
 .navbar__search {
@@ -103,13 +103,13 @@
   font-weight: 500;
   text-transform: capitalize;
   font-size: 1rem;
-  color: white;
+  color: var(--black);
 }
 
 .navbar__links a:hover,
 .navbar__links a:active {
   text-decoration: none;
-  color: white;
+  color: var(--black);
 }
 
 .navbar__links a:nth-child(2) {
@@ -128,7 +128,7 @@
 }
 
 .navbar__linkRegister {
-  border: 1px solid white;
+  border: 1px solid var(--black);
   padding: 0.6rem 0.5rem;
   border-radius: 3px;
 }
@@ -196,7 +196,4 @@
   .navbar__links {
     display: none;
   }
-}
-
-@media (max-width: 255px) {
 }
