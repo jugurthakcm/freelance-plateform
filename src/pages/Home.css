@@ -7,3 +7,28 @@
 .description__text h1 {
   font-weight: 600;
 }
+
+.description__text h1::after {
+  content: '';
+  display: block;
+  height: 8px;
+  background-color: var(--yellow);
+  width: 100px;
+}
+
+.home__services h1 {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.home__services h1::after {
+  content: '';
+  display: block;
+  height: 8px;
+  background-color: var(--yellow);
+  width: 150px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+}
