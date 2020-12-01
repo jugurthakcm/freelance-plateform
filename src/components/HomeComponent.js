@@ -5,11 +5,12 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 const HomeComponent = () => {
   return (
-    <div className="main container-fluid">
+    <div className="main">
       <div className="main__content col-md-12 pt-5">
         <h1 className="main__slogan">
-          Find the perfect freelance <br />
-          services for your business
+          Hand it the right freelance.
+          <br />
+          We are the solution
         </h1>
         <div className="main__search">
           <div className="main__searchBar">
