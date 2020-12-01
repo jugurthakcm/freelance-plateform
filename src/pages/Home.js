@@ -1,7 +1,7 @@
 import React from 'react';
 import HomeComponent from '../components/HomeComponent';
 import './Home.css';
-import freelance from '../assets/images/freelacing.jpg';
+import freelance from '../assets/images/Description.jpg';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
