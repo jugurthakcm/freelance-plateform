@@ -68,6 +68,9 @@
 }
 
 @media (max-width: 768px) {
+  .main {
+    background-position: 50% 0;
+  }
   .main__content {
     display: flex;
     justify-content: center;

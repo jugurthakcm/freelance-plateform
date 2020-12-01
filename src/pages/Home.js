@@ -15,7 +15,7 @@ const Home = () => {
     { title: 'Traduction', background: '#16697a' },
     { title: 'Voice', background: '#222831' },
     { title: 'Design', background: '#393e46' },
-    { title: 'Graphic Motion', background: '#ea2c62' },
+    { title: 'Montage Vidéo', background: '#ea2c62' },
   ];
   return (
     <>
