@@ -27,6 +27,12 @@ const Navbar = () => {
       : navSearch.classList.add('d-none');
   }, []);
 
+  const handleClick = () => {
+    const aside = document.getElementsByClassName('aside')[0];
+    aside.classList.add('aside__opened');
+    aside.classList.remove('aside__closed');
+  };
+
   return (
     <nav className="navbar">
       <div className="navbar__title">
@@ -34,6 +40,7 @@ const Navbar = () => {
           icon={faBars}
           className="d-md-none d-block"
           size="2x"
+          onClick={() => handleClick()}
         />
         {/*  <h1 className="d-sm-block d-none">Handelp</h1> */}
         <img

@@ -1,0 +1,97 @@
+.aside {
+  position: fixed;
+  top: 0;
+  height: 100%;
+  width: 250px;
+  background-color: white;
+  box-shadow: 5px 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 99999;
+  transition: left 0.5s;
+}
+
+.close {
+  text-align: right;
+  font-size: 2rem !important;
+}
+
+.close:focus,
+.close:active {
+  outline-width: 0;
+}
+
+.aside__links {
+  list-style: none;
+  padding-left: 2rem;
+}
+
+.aside__item {
+  margin-bottom: 20px;
+}
+
+.aside__link {
+  color: var(--black);
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+.aside__link:hover {
+  color: var(--yellow);
+  text-decoration: none;
+}
+
+.aside__opened {
+  left: 0;
+}
+.aside__closed {
+  left: -260px;
+}
+
+.aside__auth {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.aside__auth a {
+  margin-bottom: 10px;
+  padding: 10px 1rem;
+  border-radius: 5px;
+  width: 185px;
+  text-align: center;
+  font-weight: 500;
+}
+
+.aside__auth a:hover,
+.aside__auth a:active {
+  text-decoration: none;
+}
+
+.aside__register {
+  color: var(--black);
+  border: 1px solid var(--yellow);
+  background-color: var(--yellow);
+}
+
+.aside__register:hover,
+.aside__register:active {
+  text-decoration: none;
+  color: var(--black);
+}
+
+.aside__login {
+  border-color: var(--black);
+  background-color: var(--black);
+  color: white;
+}
+
+.aside__login:hover,
+.aside__login:active {
+  text-decoration: none;
+  color: white !important;
+}
+
+@media (max-width: 250px) {
+  .aside {
+    width: 100vw;
+  }
+}

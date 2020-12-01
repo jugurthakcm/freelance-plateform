@@ -9,11 +9,11 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import logoBlack from '../assets/images/logo_black.png';
 
-const Footer = () => {
+const Footer = ({ aside }) => {
   const date = new Date();
   return (
-    <div className="footer">
-      <div className="footer__left">
+    <div className={`footer ${aside && `aside__footer`}`}>
+      <div className={`footer__left ${aside && `aside__footerLeft`}`}>
         {/* <h1 className="footer__title">Handelp</h1> */}
         <img
           src={logoBlack}
