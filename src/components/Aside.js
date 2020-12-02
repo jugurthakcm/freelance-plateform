@@ -2,20 +2,21 @@ import React, { useRef, useEffect } from 'react';
 import './Aside.css';
 import { NavLink, Link } from 'react-router-dom';
 import Footer from './Footer';
+import { FormattedMessage } from 'react-intl';
 
 const Aside = () => {
   const asideLinks = [
-    { title: 'Acceuil', link: '/' },
-    { title: 'A Propos', link: '/about' },
-    { title: 'Services', link: '/services' },
-    { title: 'Store', link: '/store' },
+    { title: 'home', link: '/' },
+    { title: 'about', link: '/about' },
+    { title: 'services', link: '/services' },
+    { title: 'store', link: '/store' },
   ];
 
   const aside = useRef();
 
   const handleClick = () => {
-    aside.current.classList.add('aside__closed');
-    aside.current.classList.remove('aside__opened');
+    aside && aside.current.classList.add('aside__closed');
+    aside && aside.current.classList.remove('aside__opened');
   };
 
   const handleClickOutside = (e) => {
@@ -27,8 +28,8 @@ const Aside = () => {
   };
 
   useEffect(() => {
-    aside.current.classList.add('aside__closed');
-    aside.current.classList.remove('aside__opened');
+    aside && aside.current.classList.add('aside__closed');
+    aside && aside.current.classList.remove('aside__opened');
 
     document.addEventListener('mousedown', handleClickOutside);
   }, []);
@@ -55,17 +56,17 @@ const Aside = () => {
               className="aside__link"
               onClick={handleClick}
             >
-              {asideLink.title}
+              <FormattedMessage id={`navbar.${asideLink.title}`} />
             </NavLink>
           </li>
         ))}
       </ul>
       <div className="aside__auth">
         <Link to="/" className="aside__register">
-          Rejoignez-nous
+          <FormattedMessage id="navbar.register" />
         </Link>
         <Link to="/" className="aside__login">
-          Connectez-vous
+          <FormattedMessage id="navbar.login" />
         </Link>
       </div>
       <Footer aside={true} />

@@ -12,10 +12,10 @@ const Home = () => {
         <div className="home__description row">
           <div className="description__text col-lg-6 ">
             <h1>
-              <FormattedMessage id="titleDescription" />
+              <FormattedMessage id="description.descriptionTitle" />
             </h1>
             <p className="mt-4">
-              <FormattedMessage id="description" />
+              <FormattedMessage id="description.descriptionText" />
             </p>
           </div>
 

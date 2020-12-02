@@ -5,6 +5,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import BackgroundSlider from 'react-background-slider';
 import Home1 from '../assets/images/Home1.jpg';
 import Home2 from '../assets/images/Home2.jpg';
+import { FormattedMessage } from 'react-intl';
 
 const Main = () => {
   return (
@@ -19,9 +20,13 @@ const Main = () => {
         <div className="main__search">
           <div className="main__searchBar">
             <FontAwesomeIcon icon={faSearch} />
-            <input type="text" placeholder="Chercher..." />
+            <FormattedMessage id="search.placeholder" defaultMessage="search">
+              {(placeholder) => <input type="text" placeholder={placeholder} />}
+            </FormattedMessage>
           </div>
-          <button className="main__searchButton">Chercher</button>
+          <button className="main__searchButton">
+            <FormattedMessage id="search.button" />
+          </button>
         </div>
       </div>
     </div>

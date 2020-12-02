@@ -7,6 +7,7 @@ import { useLanguageContext } from '../ContextAPI/LanguageProvider';
 
 const Language = () => {
   const dispatch = useLanguageContext()[1];
+
   useEffect(() => {
     const languageIsSet = localStorage.getItem('language') ? true : false;
     if (!languageIsSet) {
@@ -18,13 +19,12 @@ const Language = () => {
 
   const handleClick = (language) => {
     const languageObject = {
-      isSet: true,
-      language,
+      language: language,
     };
     localStorage.setItem('language', JSON.stringify(languageObject));
+    dispatch({ type: language, language });
     document.querySelector('.language').classList.add('d-none');
     document.querySelector('body').classList.remove('no-overflow');
-    dispatch({ type: language, language });
   };
 
   return (

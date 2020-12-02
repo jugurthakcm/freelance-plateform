@@ -8,7 +8,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Language from './components/Language';
 import Translate from './pages/Translate';
-import Provider from './i18n/Provider';
+import I18nProvider from './i18n/Provider';
 import { useLanguageContext } from './ContextAPI/LanguageProvider';
 
 function App() {
@@ -31,7 +31,7 @@ function App() {
 
       <div className="app">
         <Language />
-        <Provider locale={language}>
+        <I18nProvider locale={language}>
           <Navbar />
           <Aside />
           <Switch>
@@ -40,7 +40,7 @@ function App() {
             <Route path="/translate" component={Translate} />
           </Switch>
           <Footer />
-        </Provider>
+        </I18nProvider>
       </div>
     </div>
   );

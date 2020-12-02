@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
 import logoYellow from '../assets/images/logo_yellow.png';
+import { FormattedMessage } from 'react-intl';
 
 const Navbar = () => {
   useEffect(() => {
@@ -60,23 +61,35 @@ const Navbar = () => {
       <div className="navbar__search d-none">
         <div className="navbar__searchBar">
           <FontAwesomeIcon icon={faSearch} />
-          <input type="text" placeholder="Chercher..." />
+          <FormattedMessage id="search.placeholder" defaultMessage="search">
+            {(placeholder) => <input type="text" placeholder={placeholder} />}
+          </FormattedMessage>
         </div>
-        <button className="navbar__searchButton">Chercher</button>
+        <button className="navbar__searchButton">
+          <FormattedMessage id="search.button" />
+        </button>
       </div>
       <div className="navbar__links">
         <div className="navbar__navLinks d-md-flex d-none">
-          <Link to="/">Acceuil</Link>
-          <Link to="/about">A propos</Link>
-          <Link to="/services">Services</Link>
-          <Link to="/store">Store</Link>
+          <Link to="/">
+            <FormattedMessage id="navbar.home" />
+          </Link>
+          <Link to="/about">
+            <FormattedMessage id="navbar.about" />
+          </Link>
+          <Link to="/services">
+            <FormattedMessage id="navbar.services" />
+          </Link>
+          <Link to="/store">
+            <FormattedMessage id="navbar.store" />
+          </Link>
         </div>
         <div className="navbar__authLinks">
           <Link to="/" className="d-sm-inline d-none">
-            Connexion
+            <FormattedMessage id="navbar.login" />
           </Link>
           <Link to="/" className="navbar__linkRegister">
-            Inscription
+            <FormattedMessage id="navbar.register" />
           </Link>
         </div>
       </div>

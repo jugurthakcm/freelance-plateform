@@ -1,13 +1,14 @@
 import { Fragment } from 'react';
 import { IntlProvider } from 'react-intl';
-import { LOCALES } from './constants';
+import { LOCALES } from './locales';
 import content from './content/content';
+import flatten from 'flat';
 
-const Provider = ({ children, locale = LOCALES.ENGLISH }) => (
+const I18nProvider = ({ children, locale = LOCALES.ENGLISH }) => (
   <IntlProvider
     textComponent={Fragment}
     locale={locale}
-    messages={content[locale]}
+    messages={flatten(content[locale])}
     defaultRichTextElements={{
       strong: (chunks) => <strong>{chunks}</strong>,
       br: () => <br />,
@@ -17,4 +18,4 @@ const Provider = ({ children, locale = LOCALES.ENGLISH }) => (
     {children}
   </IntlProvider>
 );
-export default Provider;
+export default I18nProvider;

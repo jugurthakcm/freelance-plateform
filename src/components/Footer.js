@@ -8,6 +8,7 @@ import {
   faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
 import logoBlack from '../assets/images/logo_black.png';
+import { FormattedMessage } from 'react-intl';
 
 const Footer = ({ aside }) => {
   const date = new Date();
@@ -22,7 +23,8 @@ const Footer = ({ aside }) => {
           className="footer__title"
         />
         <p className="footer__copyright">
-          © Tous droits réservés. Handelp. {date.getFullYear()}
+          © <FormattedMessage id="footer.copyright" />. Handelp.{' '}
+          {date.getFullYear()}
         </p>
       </div>
       <div className="footer__right">
