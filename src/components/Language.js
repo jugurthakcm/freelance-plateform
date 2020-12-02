@@ -3,13 +3,16 @@ import './Language.css';
 import french from '../assets/icons/french.png';
 import english from '../assets/icons/english.png';
 import arabic from '../assets/icons/arabic.png';
+import { useLanguageContext } from '../ContextAPI/LanguageProvider';
 
 const Language = () => {
+  const dispatch = useLanguageContext()[1];
   useEffect(() => {
     const languageIsSet = localStorage.getItem('language') ? true : false;
     if (!languageIsSet) {
       document.querySelector('.language').classList.remove('d-none');
       document.querySelector('body').classList.add('no-overflow');
+      window.scrollTo(0, 0);
     }
   }, []);
 
@@ -21,6 +24,7 @@ const Language = () => {
     localStorage.setItem('language', JSON.stringify(languageObject));
     document.querySelector('.language').classList.add('d-none');
     document.querySelector('body').classList.remove('no-overflow');
+    dispatch({ type: language, language });
   };
 
   return (

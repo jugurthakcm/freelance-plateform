@@ -5,11 +5,18 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.css';
+import { LanguageProvider } from './ContextAPI/LanguageProvider';
+import { initialLanguage, languageReducer } from './ContextAPI/languageReducer';
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <LanguageProvider
+        initialLanguage={initialLanguage}
+        languageReducer={languageReducer}
+      >
+        <App />
+      </LanguageProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
