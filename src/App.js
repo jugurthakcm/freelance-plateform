@@ -14,14 +14,14 @@ import { useLanguageContext } from './ContextAPI/LanguageProvider';
 function App() {
   const languageContext = useLanguageContext()[0];
   const languageStorageItem = localStorage.getItem('language');
-  const { language } = languageStorageItem
-    ? JSON.parse(localStorage.getItem('language'))
+  const language = languageStorageItem
+    ? JSON.parse(languageStorageItem).language
     : languageContext;
 
   setTimeout(() => {
     document.querySelector('.app').classList.remove('app-anim');
     document.querySelector('.intro').classList.add('d-none');
-  }, 6900);
+  }, 6100);
 
   return (
     <div>

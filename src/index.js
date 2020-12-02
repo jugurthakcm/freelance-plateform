@@ -4,7 +4,11 @@ import App from './App';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import $ from 'jquery'; //eslint-disable-line
+import Popper from 'popper.js'; //eslint-disable-line
+import 'bootstrap/dist/js/bootstrap.bundle.min';
+
 import { LanguageProvider } from './ContextAPI/LanguageProvider';
 import { initialLanguage, languageReducer } from './ContextAPI/languageReducer';
 

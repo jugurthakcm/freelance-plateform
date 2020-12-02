@@ -18,7 +18,7 @@ const Main = () => {
       />
       <div className="main__content col-md-12 pl-3 pr-4">
         <h1 className="main__slogan">
-          Hand it the right freelance.
+          Hand it to the right freelance.
           <br />
           We are the solution
         </h1>

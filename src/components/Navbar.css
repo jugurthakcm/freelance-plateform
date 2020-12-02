@@ -140,6 +140,36 @@
   color: var(--black) !important;
 }
 
+.navbar__language #dropdownMenuButton {
+  width: 25px;
+  height: 25px;
+  background-position: 0 0;
+  background-size: contain;
+}
+
+.navbar__language .dropdown-menu {
+  right: 0 !important;
+  left: unset !important;
+  margin-top: 10px;
+}
+
+.navbar__language .dropdown-item {
+  display: flex;
+  justify-content: space-around;
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+  cursor: pointer;
+}
+
+.navbar__language .dropdown-menu img {
+  width: 20px;
+  object-fit: contain;
+}
+
+.navbar__language .dropdown-item:nth-child(3) img {
+  margin-right: 10px;
+}
+
 @media (max-width: 1150px) {
   .navbar__searchButton {
     display: none;

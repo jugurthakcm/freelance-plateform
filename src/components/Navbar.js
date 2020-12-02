@@ -5,6 +5,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
 import logoYellow from '../assets/images/logo_yellow.png';
 import { FormattedMessage } from 'react-intl';
+import french from '../assets/icons/french.png';
+import english from '../assets/icons/english.png';
+import arabic from '../assets/icons/arabic.png';
+import { useLanguageContext } from '../ContextAPI/LanguageProvider';
+import { selectLanguageIcon } from '../util';
 
 const Navbar = () => {
   useEffect(() => {
@@ -32,6 +37,22 @@ const Navbar = () => {
     const aside = document.getElementsByClassName('aside')[0];
     aside.classList.add('aside__opened');
     aside.classList.remove('aside__closed');
+  };
+
+  const [languageContext, dispatch] = useLanguageContext();
+  const languageStorageItem = localStorage.getItem('language');
+  const language = languageStorageItem
+    ? JSON.parse(languageStorageItem).language
+    : languageContext;
+
+  const languageImage = selectLanguageIcon(language);
+
+  const changeLanguage = (language) => {
+    const languageObject = {
+      language: language,
+    };
+    localStorage.setItem('language', JSON.stringify(languageObject));
+    dispatch({ type: language, language });
   };
 
   return (
@@ -91,6 +112,38 @@ const Navbar = () => {
           <Link to="/" className="navbar__linkRegister">
             <FormattedMessage id="navbar.register" />
           </Link>
+        </div>
+        <div className="navbar__language mr-2">
+          <div className="dropdown">
+            <div
+              id="dropdownMenuButton"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              style={{ backgroundImage: `url(${languageImage})` }}
+            ></div>
+            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li
+                className="dropdown-item"
+                onClick={() => changeLanguage('french')}
+              >
+                <img src={french} alt="french" /> French
+              </li>
+              <li
+                className="dropdown-item"
+                onClick={() => changeLanguage('english')}
+              >
+                <img src={english} alt="english" /> English
+              </li>
+              <li
+                className="dropdown-item"
+                onClick={() => changeLanguage('arabic')}
+              >
+                <img src={arabic} alt="arabic" />
+                العربية
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </nav>
