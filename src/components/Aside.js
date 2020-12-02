@@ -6,9 +6,9 @@ import Footer from './Footer';
 const Aside = () => {
   const asideLinks = [
     { title: 'Acceuil', link: '/' },
-    { title: 'A Propos', link: '/' },
-    { title: 'Services', link: '/' },
-    { title: 'Store', link: '/' },
+    { title: 'A Propos', link: '/about' },
+    { title: 'Services', link: '/services' },
+    { title: 'Store', link: '/store' },
   ];
 
   const aside = useRef();

@@ -4,22 +4,10 @@ import './Home.css';
 import freelance from '../assets/images/Description.jpg';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import Service from '../components/Service';
 
 const Home = () => {
-  const services = [
-    { title: 'Programmation', background: '#0a043c' },
-    { title: 'Business', background: '#583d72' },
-    { title: 'Marketing', background: '#682c0e' },
-    { title: 'Coaching', background: '#222831' },
-    { title: 'Traduction', background: '#16697a' },
-    { title: 'Voice', background: '#222831' },
-    { title: 'Design', background: '#393e46' },
-    { title: 'Montage Vidéo', background: '#ea2c62' },
-  ];
   return (
     <>
-      <Navbar />
       <div className="home">
         <HomeComponent />
         <div className="home__description row">
@@ -53,16 +41,7 @@ const Home = () => {
             className="description__image col-lg-6"
           />
         </div>
-        <div className="home__services px-4 mt-5">
-          <h1>Nos Services</h1>
-          <div className="row">
-            {services.map((service) => (
-              <Service title={service.title} background={service.background} />
-            ))}
-          </div>
-        </div>
       </div>
-      <Footer />
     </>
   );
 };

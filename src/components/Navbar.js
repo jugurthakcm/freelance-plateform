@@ -67,9 +67,9 @@ const Navbar = () => {
       <div className="navbar__links">
         <div className="navbar__navLinks d-md-flex d-none">
           <Link to="/">Acceuil</Link>
-          <Link to="/">A propos</Link>
-          <Link to="/">Services</Link>
-          <Link to="/">Store</Link>
+          <Link to="/about">A propos</Link>
+          <Link to="/services">Services</Link>
+          <Link to="/store">Store</Link>
         </div>
         <div className="navbar__authLinks">
           <Link to="/" className="d-sm-inline d-none">

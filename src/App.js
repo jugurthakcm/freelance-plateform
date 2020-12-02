@@ -3,6 +3,9 @@ import { Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
 import Video from './pages/Video';
 import Aside from './components/Aside';
+import Services from './pages/Services';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 function App() {
   setTimeout(() => {
@@ -16,11 +19,14 @@ function App() {
         <Video />
       </div>
       <div className="app app-anim">
+        <Navbar />
         <Aside />
         <Switch>
           <Route exact path="/" component={Home} />
+          <Route path="/services" component={Services} />
           {/* <Route path="/video" component={Video} /> */}
         </Switch>
+        <Footer />
       </div>
     </>
   );
