@@ -61,8 +61,12 @@ const Aside = () => {
         ))}
       </ul>
       <div className="aside__auth">
-        <Link className="aside__register">Rejoignez-nous</Link>
-        <Link className="aside__login">Connectez-vous</Link>
+        <Link to="/" className="aside__register">
+          Rejoignez-nous
+        </Link>
+        <Link to="/" className="aside__login">
+          Connectez-vous
+        </Link>
       </div>
       <Footer aside={true} />
     </aside>
