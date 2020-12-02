@@ -20,7 +20,6 @@
   font-weight: 600;
   color: var(--black);
   font-size: 3rem;
-  line-height: 4rem;
 }
 
 .main__search {
@@ -84,7 +83,6 @@
   }
 
   .main__slogan {
-    text-align: center;
     margin-top: 40px;
   }
 
@@ -103,5 +101,14 @@
 
   .navbar__title img {
     margin-left: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .main__slogan {
+    font-size: 2.3rem;
+    margin-bottom: 40px;
+    margin-top: 0;
+    text-align: left;
   }
 }

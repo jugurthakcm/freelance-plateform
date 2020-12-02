@@ -1,5 +1,5 @@
 import React from 'react';
-import HomeComponent from '../components/HomeComponent';
+import Main from '../components/Main';
 import './Home.css';
 import freelance from '../assets/images/Description.jpg';
 
@@ -7,7 +7,7 @@ const Home = () => {
   return (
     <>
       <div className="home">
-        <HomeComponent />
+        <Main />
         <div className="home__description row">
           <div className="description__text col-lg-6 ">
             <h1>Qui sommes-nous ?</h1>

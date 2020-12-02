@@ -1,12 +1,12 @@
 import React from 'react';
-import './HomeComponent.css';
+import './Main.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import BackgroundSlider from 'react-background-slider';
 import Home1 from '../assets/images/Home1.jpg';
 import Home2 from '../assets/images/Home2.jpg';
 
-const HomeComponent = () => {
+const Main = () => {
   return (
     <div className="main">
       <BackgroundSlider images={[Home1, Home2]} duration={4} transition={0.5} />
@@ -28,4 +28,4 @@ const HomeComponent = () => {
   );
 };
 
-export default HomeComponent;
+export default Main;
