@@ -113,7 +113,7 @@ const Navbar = () => {
             <FormattedMessage id="navbar.register" />
           </Link>
         </div>
-        <div className="navbar__language mr-2">
+        <div className="navbar__language">
           <div className="dropdown">
             <div
               id="dropdownMenuButton"
