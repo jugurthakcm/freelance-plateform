@@ -18,18 +18,18 @@ function App() {
     ? JSON.parse(localStorage.getItem('language'))
     : languageContext;
 
-  /* setTimeout(() => {
+  setTimeout(() => {
     document.querySelector('.app').classList.remove('app-anim');
     document.querySelector('.intro').classList.add('d-none');
-  }, 6900); */
+  }, 6900);
 
   return (
     <div>
-      {/* <div className="intro">
+      <div className="intro">
         <Video />
-      </div> */}
+      </div>
 
-      <div className="app">
+      <div className="app app-anim">
         <Language />
         <I18nProvider locale={language}>
           <Navbar />
