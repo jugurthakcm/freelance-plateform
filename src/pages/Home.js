@@ -20,10 +20,11 @@ const Home = () => {
               <br />
               Les entreprises et les particuliers rencontrent souvent des
               problèmes lors du développement des projets par manque d’effectif
-              ou de professionnels d’un domaine précis, Handelp sera là pour
-              vous aider à trouver la personne idéale qui saura mettre au point
-              votre idée ou projet grâce à son large carnet d’adresses et de
-              contacts.
+              ou de professionnels d’un domaine précis,{' '}
+              <strong>Handelp </strong>
+              sera là pour vous aider à trouver la personne idéale qui saura
+              mettre au point votre idée ou projet grâce à son large carnet
+              d’adresses et de contacts.
               <br />
               <br />
               Vous n’aurez qu’à nous contacter via un message sur notre site web
