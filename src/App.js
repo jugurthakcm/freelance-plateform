@@ -7,7 +7,7 @@ import Services from './pages/Services';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Language from './components/Language';
-import Translate from './pages/Translate';
+import Login from './pages/Login';
 import I18nProvider from './i18n/Provider';
 import { useLanguageContext } from './ContextAPI/LanguageProvider';
 
@@ -32,14 +32,12 @@ function App() {
       <div className="app app-anim">
         <Language />
         <I18nProvider locale={language}>
-          <Navbar />
           <Aside />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/services" component={Services} />
-            <Route path="/translate" component={Translate} />
+            <Route path="/login" component={Login} />
           </Switch>
-          <Footer />
         </I18nProvider>
       </div>
     </div>

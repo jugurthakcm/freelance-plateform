@@ -1,0 +1,138 @@
+.login {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: var(--black);
+  overflow: hidden;
+}
+
+.login__container {
+  background-color: white;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 450px;
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.login h2 {
+  font-weight: 600;
+}
+
+.login h2::after {
+  content: '';
+  display: block;
+  height: 5px;
+  width: 50px;
+  background-color: var(--yellow);
+}
+
+.home__link {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  color: gray;
+  font-weight: 500;
+}
+
+.home__link:hover,
+.home__link:active {
+  text-decoration: none;
+  border-bottom: 2px solid gray;
+  color: gray;
+}
+
+.home__link .fa-home {
+  margin-right: 5px;
+}
+
+.home__link .fa-home path {
+  color: gray;
+}
+
+.login__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  height: 80%;
+}
+
+.login__input {
+  background-color: rgb(240, 240, 240);
+  padding: 0.5rem 10px 0.5rem 10px;
+  margin-bottom: 1rem;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+}
+
+.login__input input {
+  background-color: inherit;
+  border: none;
+  margin-left: 10px;
+}
+
+.login__input input:focus {
+  outline: none;
+}
+
+.login__input .svg-inline--fa path {
+  color: rgb(180, 180, 180);
+}
+
+.login__checkbox {
+  display: flex;
+  align-items: center;
+  color: darkgray;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.login__checkbox input {
+  margin-right: 5px;
+}
+
+.login__submit {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+}
+
+.login__submit p {
+  margin-bottom: 0;
+  color: darkgray;
+  font-size: 0.9rem;
+  border-bottom: 1px solid lightgray;
+  cursor: pointer;
+}
+
+.login__submit input {
+  border: 1px solid var(--yellow);
+  color: var(--black);
+  font-weight: 500;
+  background-color: var(--yellow);
+  border-radius: 5px;
+  padding: 7px 15px;
+}
+
+@media (max-width: 800px) {
+  .login img {
+    display: none;
+  }
+
+  .login {
+    background-color: white;
+  }
+  .home__link {
+    right: unset;
+  }
+}
