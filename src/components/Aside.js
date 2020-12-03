@@ -62,10 +62,10 @@ const Aside = () => {
         ))}
       </ul>
       <div className="aside__auth">
-        <Link to="/register" className="aside__register">
+        <Link to="/register" className="aside__register" onClick={handleClick}>
           <FormattedMessage id="navbar.register" />
         </Link>
-        <Link to="/login" className="aside__login">
+        <Link to="/login" className="aside__login" onClick={handleClick}>
           <FormattedMessage id="navbar.login" />
         </Link>
       </div>
