@@ -35,7 +35,7 @@ const englishContent = {
       forgetPassword: 'Forgot password',
       button: 'Login',
       footer: {
-        text: "If you don't have an account,",
+        text: "If you don't have an account",
         link: 'Register here',
       },
     },

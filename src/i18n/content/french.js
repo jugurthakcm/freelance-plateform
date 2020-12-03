@@ -35,7 +35,7 @@ const frenchContent = {
       forgetPassword: 'Mot de passe oublié',
       button: 'Connexion',
       footer: {
-        text: "Si vous n'avez pas de compte,",
+        text: "Si vous n'avez pas de compte",
         link: 'Inscrivez-vous',
       },
     },

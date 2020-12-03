@@ -106,7 +106,7 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar__authLinks d-flex">
-          <Link to="/login" className="navbar__linkLogin">
+          <Link to="/login" className="navbar__linkLogin d-sm-inline d-none">
             <FormattedMessage id="navbar.login" />
           </Link>
           <Link to="/register" className="navbar__linkRegister">
