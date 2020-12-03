@@ -120,9 +120,10 @@
 .register__submit a:hover,
 .register__submit a:active {
   text-decoration: none;
+  color: var(--black);
 }
 
-.register__submit input {
+.register__submit button {
   border: 1px solid var(--yellow);
   color: var(--black);
   font-weight: 500;

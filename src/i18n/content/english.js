@@ -27,6 +27,28 @@ const englishContent = {
     footer: {
       copyright: 'All rights reserved',
     },
+    login: {
+      home: 'Home',
+      title: 'Login',
+      password: 'Password',
+      rememberMe: 'Remember Me',
+      forgetPassword: 'Forgot password',
+      button: 'Login',
+      footer: {
+        text: "If you don't have an account,",
+        link: 'Register here',
+      },
+    },
+    register: {
+      home: 'Home',
+      title: 'Register',
+      firstName: 'First Name',
+      lastName: 'Last Name',
+      password: 'Password',
+      terms: 'Accept all our terms',
+      button: 'Register',
+      signIn: 'Sign In',
+    },
   },
 };
 

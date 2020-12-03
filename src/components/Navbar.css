@@ -1,12 +1,13 @@
 .navbar__sticky {
   background-color: white;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 5px 15px 10px rgba(254, 206, 27, 0.4);
   color: var(--black) !important;
   transition: all 0.5s;
 }
 
 .navbar__sticky a {
   color: var(--black) !important;
+  text-shadow: 3px 3px 1px rgba(254, 206, 27, 0.7);
 }
 
 .navbar__sticky h1 {
@@ -15,6 +16,7 @@
 
 .navbar__sticky .navbar__linkRegister {
   border-color: var(--black);
+  text-shadow: none;
 }
 
 .navbar__sticky path {
@@ -167,8 +169,12 @@
   object-fit: contain;
 }
 
+.navbar__language .dropdown-item:nth-child(2) img {
+  margin-right: 7px;
+}
+
 .navbar__language .dropdown-item:nth-child(3) img {
-  margin-right: 15px;
+  margin-right: 17px;
 }
 
 @media (max-width: 1150px) {

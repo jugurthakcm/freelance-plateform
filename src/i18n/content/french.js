@@ -27,6 +27,28 @@ const frenchContent = {
     footer: {
       copyright: 'Tous droits réservés',
     },
+    login: {
+      home: 'Acceuil',
+      title: 'Connexion',
+      password: 'Mot de passe',
+      rememberMe: 'Se Souvenir De Moi',
+      forgetPassword: 'Mot de passe oublié',
+      button: 'Connexion',
+      footer: {
+        text: "Si vous n'avez pas de compte,",
+        link: 'Inscrivez-vous',
+      },
+    },
+    register: {
+      home: 'Acceuil',
+      title: 'Inscription',
+      firstName: 'Prénom',
+      lastName: 'Nom',
+      password: 'Mot de passe',
+      terms: 'Accepter nos termes',
+      button: 'Inscription',
+      signIn: 'Connexion',
+    },
   },
 };
 

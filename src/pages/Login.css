@@ -115,7 +115,7 @@
   cursor: pointer;
 }
 
-.login__submit input {
+.login__submit button {
   border: 1px solid var(--yellow);
   color: var(--black);
   font-weight: 500;

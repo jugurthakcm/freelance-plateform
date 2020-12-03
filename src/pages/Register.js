@@ -9,6 +9,7 @@ import {
   faUser,
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { FormattedMessage } from 'react-intl';
 
 const Register = () => {
   const handleSubmit = (e) => {
@@ -20,35 +21,67 @@ const Register = () => {
       <div className="register__container">
         <Link to="/" className="home__link">
           <FontAwesomeIcon icon={faHome} />
-          Home
+          <FormattedMessage id="register.home" />
         </Link>
         <img src={register} alt="register" width="400px" />
         <div className="register__form">
-          <h2>Register</h2>
+          <h2>
+            <FormattedMessage id="register.title" />
+          </h2>
           <form onSubmit={handleSubmit}>
             <div className="register__firstName register__input">
               <FontAwesomeIcon icon={faUser} />
-              <input type="text" placeholder="First Name" />
+              <FormattedMessage
+                id="register.firstName"
+                defaultMessage="register"
+              >
+                {(placeholder) => (
+                  <input type="text" placeholder={placeholder} />
+                )}
+              </FormattedMessage>
             </div>
+
             <div className="register__lastName register__input">
               <FontAwesomeIcon icon={faUser} />
-              <input type="text" placeholder="Last Name" />
+              <FormattedMessage
+                id="register.lastName"
+                defaultMessage="register"
+              >
+                {(placeholder) => (
+                  <input type="text" placeholder={placeholder} />
+                )}
+              </FormattedMessage>
             </div>
+
             <div className="register__email register__input">
               <FontAwesomeIcon icon={faEnvelope} />
               <input type="email" placeholder="Email" />
             </div>
+
             <div className="register__password register__input">
               <FontAwesomeIcon icon={faLock} />
-              <input type="password" placeholder="Password" />
+              <FormattedMessage
+                id="register.password"
+                defaultMessage="register"
+              >
+                {(placeholder) => (
+                  <input type="password" placeholder={placeholder} />
+                )}
+              </FormattedMessage>
             </div>
+
             <label htmlFor="rememberMe" className="register__checkbox">
               <input type="checkbox" name="rememberMe" />
-              Accept our terms
+              <FormattedMessage id="register.terms" />
             </label>
             <div className="register__submit">
-              <Link to="/login">Sign In</Link>
-              <input type="submit" value="Register" />
+              <Link to="/login">
+                <FormattedMessage id="register.signIn" />
+              </Link>
+              <button type="submit">
+                {' '}
+                <FormattedMessage id="register.button" />
+              </button>
             </div>
           </form>
         </div>

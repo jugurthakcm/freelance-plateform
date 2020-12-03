@@ -127,7 +127,7 @@ const Navbar = () => {
                 className="dropdown-item"
                 onClick={() => changeLanguage('french')}
               >
-                <img src={french} alt="french" /> French
+                <img src={french} alt="french" /> Français
               </li>
               <li
                 className="dropdown-item"
