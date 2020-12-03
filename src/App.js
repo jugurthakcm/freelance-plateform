@@ -17,12 +17,10 @@ function App() {
     ? JSON.parse(languageStorageItem).language
     : languageContext;
 
-  window.addEventListener('load', function () {
-    setTimeout(() => {
-      document.querySelector('.app').classList.remove('app-anim');
-      document.querySelector('.intro').classList.add('d-none');
-    }, 6100);
-  });
+  setTimeout(() => {
+    document.querySelector('.app').classList.remove('app-anim');
+    document.querySelector('.intro').classList.add('d-none');
+  }, 6100);
 
   return (
     <div>

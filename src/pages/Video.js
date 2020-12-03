@@ -1,5 +1,5 @@
 import React from 'react';
-import Handelp from '../assets/videos/Handelp.gif';
+import Handelp from '../assets/videos/NewGif.gif';
 import './Video.css';
 
 const Video = () => {
