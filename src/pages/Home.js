@@ -3,10 +3,13 @@ import Main from '../components/Main';
 import './Home.css';
 import freelance from '../assets/images/Description.jpg';
 import { FormattedMessage } from 'react-intl';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const Home = () => {
   return (
     <>
+      <Navbar />
       <div className="home">
         <Main />
         <div className="home__description row">
@@ -26,6 +29,7 @@ const Home = () => {
           />
         </div>
       </div>
+      <Footer />
     </>
   );
 };

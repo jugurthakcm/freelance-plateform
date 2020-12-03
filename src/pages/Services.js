@@ -1,6 +1,8 @@
 import React from 'react';
 import Service from '../components/Service';
 import './Services.css';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const Services = () => {
   const services = [
@@ -14,14 +16,18 @@ const Services = () => {
     { title: 'Montage Vidéo', background: '#ea2c62' },
   ];
   return (
-    <div className="services px-4">
-      <h1>Nos Services</h1>
-      <div className="row">
-        {services.map((service) => (
-          <Service title={service.title} background={service.background} />
-        ))}
+    <>
+      <Navbar />
+      <div className="services px-4">
+        <h1>Nos Services</h1>
+        <div className="row">
+          {services.map((service) => (
+            <Service title={service.title} background={service.background} />
+          ))}
+        </div>
       </div>
-    </div>
+      <Footer />
+    </>
   );
 };
 

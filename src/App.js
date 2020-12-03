@@ -4,12 +4,11 @@ import Home from './pages/Home';
 import Video from './pages/Video';
 import Aside from './components/Aside';
 import Services from './pages/Services';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
 import Language from './components/Language';
 import Login from './pages/Login';
 import I18nProvider from './i18n/Provider';
 import { useLanguageContext } from './ContextAPI/LanguageProvider';
+import Register from './pages/Register';
 
 function App() {
   const languageContext = useLanguageContext()[0];
@@ -37,6 +36,7 @@ function App() {
             <Route exact path="/" component={Home} />
             <Route path="/services" component={Services} />
             <Route path="/login" component={Login} />
+            <Route path="/register" component={Register} />
           </Switch>
         </I18nProvider>
       </div>

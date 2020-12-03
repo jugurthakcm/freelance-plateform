@@ -106,10 +106,10 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar__authLinks">
-          <Link to="/" className="d-sm-inline d-none">
+          <Link to="/login" className="d-sm-inline d-none">
             <FormattedMessage id="navbar.login" />
           </Link>
-          <Link to="/" className="navbar__linkRegister">
+          <Link to="/register" className="navbar__linkRegister">
             <FormattedMessage id="navbar.register" />
           </Link>
         </div>

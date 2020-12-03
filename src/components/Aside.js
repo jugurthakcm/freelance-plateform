@@ -62,10 +62,10 @@ const Aside = () => {
         ))}
       </ul>
       <div className="aside__auth">
-        <Link to="/" className="aside__register">
+        <Link to="/register" className="aside__register">
           <FormattedMessage id="navbar.register" />
         </Link>
-        <Link to="/" className="aside__login">
+        <Link to="/login" className="aside__login">
           <FormattedMessage id="navbar.login" />
         </Link>
       </div>

@@ -26,7 +26,7 @@ const Login = () => {
             </div>
             <div className="login__password login__input">
               <FontAwesomeIcon icon={faLock} />
-              <input type="email" placeholder="Password" />
+              <input type="password" placeholder="Password" />
             </div>
             <label htmlFor="rememberMe" className="login__checkbox">
               <input type="checkbox" name="rememberMe" />
@@ -37,6 +37,10 @@ const Login = () => {
               <input type="submit" value="Login" />
             </div>
           </form>
+          <p className="login__register">
+            If you don't have an account,&nbsp;
+            <Link to="/register">Register here</Link>
+          </p>
         </div>
       </div>
     </div>
