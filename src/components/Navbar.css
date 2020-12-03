@@ -1,13 +1,12 @@
 .navbar__sticky {
   background-color: white;
-  box-shadow: 0 5px 15px 10px rgba(254, 206, 27, 0.4);
+  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
   color: var(--black) !important;
   transition: all 0.5s;
 }
 
 .navbar__sticky a {
   color: var(--black) !important;
-  text-shadow: 3px 3px 1px rgba(254, 206, 27, 0.7);
 }
 
 .navbar__sticky h1 {
@@ -114,6 +113,16 @@
   color: var(--black);
 }
 
+.navbar__links a:hover::after,
+.navbar__links a:active::after {
+  content: '';
+  display: block;
+  height: 5px;
+  width: 100%;
+  background-color: var(--yellow);
+  margin-bottom: -5px;
+}
+
 .navbar__links a:nth-child(2) {
   margin-right: 1rem;
   margin-left: 1rem;
@@ -129,6 +138,10 @@
   margin-right: 1rem;
 }
 
+.navbar__authLinks {
+  align-items: center;
+}
+
 .navbar__linkRegister {
   border: 1px solid var(--black);
   padding: 0.6rem 0.5rem;
@@ -140,6 +153,12 @@
   border-color: var(--yellow);
   background-color: var(--yellow);
   color: var(--black) !important;
+}
+
+.navbar__linkRegister:hover::after,
+.navbar__linkRegister:active::after {
+  content: '';
+  display: none !important;
 }
 
 .navbar__language #dropdownMenuButton {
