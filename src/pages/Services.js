@@ -4,11 +4,11 @@ import './Services.css';
 
 const Services = () => {
   const services = [
-    { title: 'Programmation', background: '#0a043c' },
+    { title: 'Programmation et Développement', background: '#0a043c' },
     { title: 'Business', background: '#583d72' },
     { title: 'Marketing', background: '#682c0e' },
     { title: 'Coaching', background: '#222831' },
-    { title: 'Traduction', background: '#16697a' },
+    { title: 'Traduction et Rédaction', background: '#16697a' },
     { title: 'Voice', background: '#222831' },
     { title: 'Design', background: '#393e46' },
     { title: 'Montage Vidéo', background: '#ea2c62' },
