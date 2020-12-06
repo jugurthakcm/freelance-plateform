@@ -8,7 +8,6 @@ export const selectLanguageIcon = (language) => {
       return french;
 
     case 'english':
-      console.log('english');
       return english;
 
     case 'arabic':
