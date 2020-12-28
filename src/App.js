@@ -12,11 +12,7 @@ import Register from './pages/Register';
 // import EachService from './pages/EachService';
 
 function App() {
-  const languageContext = useLanguageContext()[0];
-  const languageStorageItem = localStorage.getItem('language');
-  const language = languageStorageItem
-    ? JSON.parse(languageStorageItem).language
-    : languageContext;
+  const language = useLanguageContext()[0];
 
   setTimeout(() => {
     document.querySelector('.app').classList.remove('app-anim');

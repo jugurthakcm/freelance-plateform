@@ -1,8 +1,14 @@
-export const initialLanguage = 'english';
+import { LOCALES } from '../i18n/locales';
+
+const languageStorage = localStorage.getItem('language');
+
+export const initialLanguage = languageStorage
+  ? JSON.parse(languageStorage).language
+  : LOCALES.ENGLISH;
 
 export const languagesActionsTypes = {
-  FRENCH: 'french',
-  ENGLISH: 'english',
+  FRENCH: LOCALES.FRENCH,
+  ENGLISH: LOCALES.ENGLISH,
 };
 
 export const languageReducer = (state = initialLanguage, action) => {
