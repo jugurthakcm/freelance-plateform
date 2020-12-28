@@ -2,7 +2,7 @@ import React from 'react';
 import './Services.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 const Services = () => {
   const services = [
@@ -30,20 +30,28 @@ const Services = () => {
         <h1>Nos Services</h1>
         <div className="row">
           {services.map((service) => (
-            <Link
-              to={{
-                pathname: `/services/${service.link}`,
-                aboutProps: { title: service.title },
-              }}
-              className="service__container col-lg-3 col-md-4 col-sm-6 p-2"
-            >
+            // <Link
+            //   to={{
+            //     pathname: `/services/${service.link}`,
+            //     aboutProps: { title: service.title },
+            //   }}
+            //   className="service__container col-lg-3 col-md-4 col-sm-6 p-2"
+            // >
+            //   <div
+            //     className="service"
+            //     style={{ backgroundColor: service.background }}
+            //   >
+            //     <h2>{service.title}</h2>
+            //   </div>
+            // </Link>
+            <div className="service__container col-lg-3 col-md-4 col-sm-6 p-2">
               <div
                 className="service"
                 style={{ backgroundColor: service.background }}
               >
                 <h2>{service.title}</h2>
               </div>
-            </Link>
+            </div>
           ))}
         </div>
       </div>

@@ -9,7 +9,7 @@ import Login from './pages/Login';
 import I18nProvider from './i18n/Provider';
 import { useLanguageContext } from './ContextAPI/LanguageProvider';
 import Register from './pages/Register';
-import EachService from './pages/EachService';
+// import EachService from './pages/EachService';
 
 function App() {
   const languageContext = useLanguageContext()[0];
@@ -36,7 +36,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route exact path="/services" component={Services} />
-            <Route path="/services/:service" component={EachService} />
+            {/* <Route path="/services/:service" component={EachService} /> */}
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
           </Switch>
