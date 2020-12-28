@@ -39,12 +39,7 @@ const Navbar = () => {
     aside.classList.remove('aside__closed');
   };
 
-  const [languageContext, dispatch] = useLanguageContext();
-  const languageStorageItem = localStorage.getItem('language');
-  const language = languageStorageItem
-    ? JSON.parse(languageStorageItem).language
-    : languageContext;
-
+  const [language, dispatch] = useLanguageContext();
   const languageImage = selectLanguageIcon(language);
 
   const changeLanguage = (language) => {
