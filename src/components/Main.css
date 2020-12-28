@@ -113,7 +113,7 @@
   }
 }
 
-@media (min-height: 1000px) {
+/* @media (min-height: 1000px) {
   .main {
     height: 50vh;
   }
@@ -121,4 +121,4 @@
   #ReactBackgroundSlider > figure {
     height: 50% !important;
   }
-}
+} */
