@@ -34,13 +34,21 @@
   cursor: pointer;
   border-radius: 10px;
   padding: 0 15px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  filter: brightness(0.6);
 }
 
-.service h2 {
+.service__container h2 {
   margin: auto 0;
   color: white;
   font-weight: 600;
   font-size: 1.6rem;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
 }
 
 .service p {
