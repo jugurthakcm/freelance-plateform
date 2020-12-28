@@ -43,10 +43,7 @@ const Navbar = () => {
   const languageImage = selectLanguageIcon(language);
 
   const changeLanguage = (language) => {
-    const languageObject = {
-      language: language,
-    };
-    localStorage.setItem('language', JSON.stringify(languageObject));
+    localStorage.setItem('language', JSON.stringify({ language }));
     dispatch({ type: language, language });
   };
 

@@ -10,18 +10,15 @@ const Language = () => {
 
   useEffect(() => {
     const languageIsSet = localStorage.getItem('language') ? true : false;
+
     if (!languageIsSet) {
       document.querySelector('.language').classList.remove('d-none');
       document.querySelector('body').classList.add('no-overflow');
-      window.scrollTo(0, 0);
     }
   }, []);
 
   const handleClick = (language) => {
-    const languageObject = {
-      language: language,
-    };
-    localStorage.setItem('language', JSON.stringify(languageObject));
+    localStorage.setItem('language', JSON.stringify({ language }));
     dispatch({ type: language, language });
     document.querySelector('.language').classList.add('d-none');
     document.querySelector('body').classList.remove('no-overflow');
