@@ -7,7 +7,6 @@ import programmation from '../assets/images/programmation.jpg';
 import digitalMarketing from '../assets/images/digitalMarketing.jpg';
 import photography from '../assets/images/photography.jpg';
 import translation from '../assets/images/translation.jpg';
-import business from '../assets/images/business.jpg';
 import design from '../assets/images/design.jpg';
 import motion from '../assets/images/motion.jpeg';
 import voice from '../assets/images/voice.jpg';
@@ -20,8 +19,11 @@ const Services = () => {
       background: programmation,
       link: 'programmation',
     },
-    { title: 'Business', background: business, link: 'business' },
-    { title: 'Marketing', background: digitalMarketing, link: 'marketing' },
+    {
+      title: 'Digital Marketing',
+      background: digitalMarketing,
+      link: 'marketing',
+    },
     { title: 'Photography', background: photography, link: 'coaching' },
     {
       title: 'Traduction et Rédaction',
@@ -62,7 +64,7 @@ const Services = () => {
             //     <h2>{service.title}</h2>
             //   </div>
             // </Link>
-            <div className="service__container col-lg-3 col-md-4 col-sm-6 p-2">
+            <div className="service__container col-lg-3 col-md-4 col-sm-6 p-3">
               <div
                 className="service"
                 style={{ backgroundImage: `url(${service.background})` }}
