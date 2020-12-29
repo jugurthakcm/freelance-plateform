@@ -26,6 +26,7 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
+  cursor: pointer;
 }
 
 .service p {
@@ -68,7 +69,8 @@
   cursor: pointer;
 }
 
-.service__list span:hover {
+.service__list span:hover,
+.service__list span:focus {
   border-color: var(--yellow);
   color: black;
   background-color: var(--yellow);
