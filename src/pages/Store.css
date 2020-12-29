@@ -1,0 +1,59 @@
+.store {
+  margin-top: 100px;
+}
+
+.store__gig {
+  border: 1px solid lightgray;
+}
+
+.store__gig p,
+.store__gig h5 {
+  margin-bottom: 0;
+}
+
+.gig__image {
+  cursor: pointer;
+}
+
+.gig__type {
+  color: gray;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin-bottom: 0.6rem !important;
+  cursor: pointer;
+}
+
+.gig__title {
+  cursor: pointer;
+}
+
+.gig__seller {
+  font-size: 0.9rem;
+  color: grey;
+  margin-top: 3px;
+}
+
+.gig__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.gig__footer button {
+  background-color: var(--yellow);
+  color: var(--black);
+  border-radius: 5px;
+  border: none;
+  padding: 5px 12px;
+  font-size: 0.9rem;
+}
+
+.gig__footer button:hover,
+.gig__footer:focus {
+  background-color: orange;
+}
+
+.gig__footer span {
+  cursor: pointer;
+}
