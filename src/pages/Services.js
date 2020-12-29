@@ -11,34 +11,47 @@ import design from '../assets/images/design.jpg';
 import motion from '../assets/images/motion.jpeg';
 import voice from '../assets/images/voice.jpg';
 import architecture from '../assets/images/architecture.jpg';
+import { FormattedMessage } from 'react-intl';
 
 const Services = () => {
   const services = [
     {
-      title: 'Programmation et Développement',
+      title: <FormattedMessage id="services.programmation" />,
       background: programmation,
       link: 'programmation',
     },
     {
-      title: 'Digital Marketing',
+      title: <FormattedMessage id="services.marketing" />,
       background: digitalMarketing,
       link: 'marketing',
     },
-    { title: 'Photography', background: photography, link: 'coaching' },
     {
-      title: 'Traduction et Rédaction',
+      title: <FormattedMessage id="services.photography" />,
+      background: photography,
+      link: 'coaching',
+    },
+    {
+      title: <FormattedMessage id="services.translation" />,
       background: translation,
       link: 'translation_redaction',
     },
-    { title: 'Voice', background: voice, link: 'voice' },
-    { title: 'Design', background: design, link: 'design' },
     {
-      title: 'Montage Vidéo',
+      title: <FormattedMessage id="services.voice" />,
+      background: voice,
+      link: 'voice',
+    },
+    {
+      title: <FormattedMessage id="services.design" />,
+      background: design,
+      link: 'design',
+    },
+    {
+      title: <FormattedMessage id="services.motion" />,
       background: motion,
       link: 'graphic_motion',
     },
     {
-      title: 'Architecture',
+      title: <FormattedMessage id="services.architecture" />,
       background: architecture,
       link: 'architecture',
     },

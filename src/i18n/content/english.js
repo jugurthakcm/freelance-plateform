@@ -49,6 +49,16 @@ const englishContent = {
       button: 'Register',
       signIn: 'Sign In',
     },
+    services: {
+      programmation: 'Programmation and Developpement',
+      marketing: 'Digital Marketing',
+      photography: 'Photography',
+      translation: 'Translation and Redaction',
+      voice: 'Voice',
+      design: 'Graphic Design',
+      motion: 'Graphic Motion',
+      architecture: 'Architecture',
+    },
   },
 };
 

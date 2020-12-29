@@ -49,6 +49,16 @@ const frenchContent = {
       button: 'Inscription',
       signIn: 'Connexion',
     },
+    services: {
+      programmation: 'Programmation et Développement',
+      marketing: 'Marketing Digitale',
+      photography: 'Photographie',
+      translation: 'Traduction et Rédaction',
+      voice: 'Voix',
+      design: 'Design Graphique',
+      motion: 'Montage Vidéo',
+      architecture: 'Architecture',
+    },
   },
 };
 
