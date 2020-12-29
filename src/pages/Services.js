@@ -12,48 +12,49 @@ import motion from '../assets/images/motion.jpeg';
 import voice from '../assets/images/voice.jpg';
 import architecture from '../assets/images/architecture.jpg';
 import { FormattedMessage } from 'react-intl';
+import Service from '../components/Service';
 
 const Services = () => {
   const services = [
     {
       title: <FormattedMessage id="services.programmation" />,
       background: programmation,
-      link: 'programmation',
+      list: ['programmation'],
     },
     {
       title: <FormattedMessage id="services.marketing" />,
       background: digitalMarketing,
-      link: 'marketing',
+      list: ['digitalMark'],
     },
     {
       title: <FormattedMessage id="services.photography" />,
       background: photography,
-      link: 'coaching',
+      list: ['hello'],
     },
     {
       title: <FormattedMessage id="services.translation" />,
       background: translation,
-      link: 'translation_redaction',
+      list: ['hello'],
     },
     {
       title: <FormattedMessage id="services.voice" />,
       background: voice,
-      link: 'voice',
+      list: ['hello'],
     },
     {
       title: <FormattedMessage id="services.design" />,
       background: design,
-      link: 'design',
+      list: ['hello'],
     },
     {
       title: <FormattedMessage id="services.motion" />,
       background: motion,
-      link: 'graphic_motion',
+      list: ['hello'],
     },
     {
       title: <FormattedMessage id="services.architecture" />,
       background: architecture,
-      link: 'architecture',
+      list: ['architec'],
     },
   ];
   return (
@@ -63,27 +64,7 @@ const Services = () => {
         <h1>Nos Services</h1>
         <div className="row">
           {services.map((service) => (
-            // <Link
-            //   to={{
-            //     pathname: `/services/${service.link}`,
-            //     aboutProps: { title: service.title },
-            //   }}
-            //   className="service__container col-lg-3 col-md-4 col-sm-6 p-2"
-            // >
-            //   <div
-            //     className="service"
-            //     style={{ backgroundColor: service.background }}
-            //   >
-            //     <h2>{service.title}</h2>
-            //   </div>
-            // </Link>
-            <div className="service__container col-lg-3 col-md-4 col-sm-6 p-3">
-              <div
-                className="service"
-                style={{ backgroundImage: `url(${service.background})` }}
-              ></div>
-              <h2>{service.title}</h2>
-            </div>
+            <Service service={service} />
           ))}
         </div>
       </div>
