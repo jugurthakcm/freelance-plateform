@@ -51,11 +51,11 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 800px;
-  height: auto;
+  max-height: 500px;
   background-color: white;
   padding: 10px;
   border-radius: 10px;
+  overflow-y: auto;
 }
 
 .service__list span {
@@ -74,4 +74,10 @@
   border-color: var(--yellow);
   color: black;
   background-color: var(--yellow);
+}
+
+@media (min-width: 900px) {
+  .service__list {
+    max-width: 800px !important;
+  }
 }

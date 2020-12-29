@@ -9,7 +9,7 @@ const ServiceList = (props) => {
 
   return (
     <div className="service__listContainer">
-      <div className="service__list">
+      <div className="service__list col-11">
         <button type="button" className="close" onClick={handleClick}>
           &times;
         </button>
