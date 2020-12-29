@@ -8,9 +8,10 @@ import digitalMarketing from '../assets/images/digitalMarketing.jpg';
 import photography from '../assets/images/photography.jpg';
 import translation from '../assets/images/translation.jpg';
 import business from '../assets/images/business.jpg';
-import design from '../assets/images/design.jpeg';
+import design from '../assets/images/design.jpg';
 import motion from '../assets/images/motion.jpeg';
 import voice from '../assets/images/voice.jpg';
+import architecture from '../assets/images/architecture.jpg';
 
 const Services = () => {
   const services = [
@@ -33,6 +34,11 @@ const Services = () => {
       title: 'Montage Vidéo',
       background: motion,
       link: 'graphic_motion',
+    },
+    {
+      title: 'Architecture',
+      background: architecture,
+      link: 'architecture',
     },
   ];
   return (
