@@ -5,7 +5,7 @@ export const store = [
     seller: 'jugurtha',
     likes: Math.floor(Math.random() * 100),
     color: 'ef4f4f',
-    height: 100 + Math.floor(Math.random() * 300),
+    height: 150 + Math.floor(Math.random() * 250),
   },
   {
     title: 'SEO',
@@ -13,7 +13,7 @@ export const store = [
     seller: 'jugurtha',
     likes: Math.floor(Math.random() * 100),
     color: '11698e',
-    height: 100 + Math.floor(Math.random() * 300),
+    height: 150 + Math.floor(Math.random() * 250),
   },
   {
     title: 'Photos',
@@ -21,7 +21,7 @@ export const store = [
     seller: 'jugurtha',
     likes: Math.floor(Math.random() * 100),
     color: '16c79a',
-    height: 100 + Math.floor(Math.random() * 300),
+    height: 150 + Math.floor(Math.random() * 250),
   },
   {
     title: 'Translate',
@@ -29,7 +29,7 @@ export const store = [
     seller: 'jugurtha',
     likes: Math.floor(Math.random() * 100),
     color: 'a3ddcb',
-    height: 100 + Math.floor(Math.random() * 300),
+    height: 150 + Math.floor(Math.random() * 250),
   },
   {
     title: 'Voice Recorder',
@@ -37,7 +37,7 @@ export const store = [
     seller: 'jugurtha',
     likes: Math.floor(Math.random() * 100),
     color: '583d72',
-    height: 100 + Math.floor(Math.random() * 300),
+    height: 150 + Math.floor(Math.random() * 250),
   },
   {
     title: 'Landing pages',
@@ -45,7 +45,7 @@ export const store = [
     seller: 'jugurtha',
     likes: Math.floor(Math.random() * 100),
     color: '949cdf',
-    height: 100 + Math.floor(Math.random() * 300),
+    height: 150 + Math.floor(Math.random() * 250),
   },
   {
     title: 'Montage vidéo',
@@ -53,7 +53,7 @@ export const store = [
     seller: 'jugurtha',
     likes: Math.floor(Math.random() * 100),
     color: '21209c',
-    height: 100 + Math.floor(Math.random() * 300),
+    height: 150 + Math.floor(Math.random() * 250),
   },
   {
     title: 'House design',
@@ -61,6 +61,6 @@ export const store = [
     seller: 'jugurtha',
     likes: Math.floor(Math.random() * 100),
     color: '61b15a',
-    height: 100 + Math.floor(Math.random() * 300),
+    height: 150 + Math.floor(Math.random() * 250),
   },
 ];

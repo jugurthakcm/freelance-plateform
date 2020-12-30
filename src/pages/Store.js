@@ -24,7 +24,7 @@ const Store = () => {
               <div className="gig__details mx-3 my-3">
                 <p className="gig__type">{gig.type}</p>
                 <h5 className="gig__title">{gig.title}</h5>
-                <p className="gig__seller">by {gig.seller}</p>
+                <p className="gig__seller">Seller Name</p>
                 <div className="gig__footer">
                   <button>Contact the seller</button>
                   <span>
