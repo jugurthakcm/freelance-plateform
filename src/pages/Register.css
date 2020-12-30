@@ -25,14 +25,15 @@
 
 .register h2 {
   font-weight: 600;
+  position: relative;
 }
 
-.register h2::after {
-  content: '';
+.register h2 div {
   display: block;
   height: 5px;
   width: 80px;
   background-color: var(--yellow);
+  position: absolute;
 }
 
 .home__link {

@@ -24,14 +24,15 @@
 
 .login h2 {
   font-weight: 600;
+  position: relative;
 }
 
-.login h2::after {
-  content: '';
+.login h2 div {
   display: block;
   height: 5px;
-  width: 50px;
+  width: 80px;
   background-color: var(--yellow);
+  position: absolute;
 }
 
 .home__link {

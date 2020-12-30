@@ -10,11 +10,16 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import { useLanguageContext } from '../ContextAPI/LanguageProvider';
 
 const Register = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
+  const language = useLanguageContext()[0];
+  const leftAfter = language !== 'arabic' ? '0' : 'unset';
+  const rightAfter = language === 'arabic' ? '0' : 'unset';
 
   return (
     <div className="register">
@@ -27,6 +32,7 @@ const Register = () => {
         <div className="register__form">
           <h2>
             <FormattedMessage id="register.title" />
+            <div style={{ right: rightAfter, left: leftAfter }}></div>
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="register__firstName register__input">

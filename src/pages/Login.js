@@ -5,11 +5,17 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faHome } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
+import { useLanguageContext } from '../ContextAPI/LanguageProvider';
 
 const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+
+  const language = useLanguageContext()[0];
+  const leftAfter = language !== 'arabic' ? '0' : 'unset';
+  const rightAfter = language === 'arabic' ? '0' : 'unset';
+
   return (
     <div className="login">
       <div className="login__container">
@@ -21,6 +27,7 @@ const Login = () => {
         <div className="login__form">
           <h2>
             <FormattedMessage id="login.title" />
+            <div style={{ right: rightAfter, left: leftAfter }}></div>
           </h2>
           <form onSubmit={handleSubmit}>
             <div className="login__email login__input">
