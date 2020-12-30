@@ -33,7 +33,7 @@ const frenchContent = {
       email: 'Email',
       password: 'Mot de passe',
       rememberMe: 'Se Souvenir De Moi',
-      forgetPassword: 'Mot de passe oublié',
+      forgetPassword: 'Mot de passe oublié ?',
       button: 'Connexion',
       footer: {
         text: "Si vous n'avez pas de compte",

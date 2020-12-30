@@ -52,7 +52,7 @@ const Login = () => {
             </label>
             <div className="login__submit">
               <p>
-                <FormattedMessage id="login.forgetPassword" /> ?
+                <FormattedMessage id="login.forgetPassword" />
               </p>
               <button type="submit">
                 <FormattedMessage id="login.button" />

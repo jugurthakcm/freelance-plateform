@@ -35,7 +35,7 @@ const englishContent = {
       email: 'Email',
       password: 'Password',
       rememberMe: 'Remember Me',
-      forgetPassword: 'Forgot password',
+      forgetPassword: 'Forgot password ?',
       button: 'Login',
       footer: {
         text: "If you don't have an account",
