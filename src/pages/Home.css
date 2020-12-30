@@ -8,10 +8,12 @@
   font-weight: 600;
 }
 
-.description__text h1::after {
-  content: '';
+.description__text h1 div {
   display: block;
   height: 8px;
   background-color: var(--yellow);
   width: 100px;
+  text-align: right;
+  position: absolute;
+  margin-top: 5px;
 }
