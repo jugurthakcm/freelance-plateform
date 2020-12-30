@@ -52,6 +52,17 @@ const arabicContent = {
       button: 'تسجيل',
       signIn: 'تسجيل الدخول',
     },
+    services: {
+      title: 'خدماتنا',
+      programmation: 'Programmation & Tech',
+      marketing: 'Digital Marketing',
+      photography: 'Photography',
+      translation: 'Translation & Redaction',
+      voice: 'Voice',
+      design: 'Graphic & Design',
+      motion: 'Video & Animation',
+      architecture: 'Architecture',
+    },
   },
 };
 
