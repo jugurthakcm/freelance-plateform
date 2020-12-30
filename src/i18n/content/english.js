@@ -3,14 +3,16 @@ import { LOCALES } from '../locales';
 const englishContent = {
   [LOCALES.ENGLISH]: {
     description: {
-      descriptionTitle: 'Who are we ?',
-      descriptionText: `<strong>Handelp</strong> is the first partner website in Algeria to help to find professionals from fields of communication, marketing and creation, Graphic art and design, Data processing and IT.
+      descriptionTitle: 'Who we are ?',
+      descriptionText: `<strong>Handelp</strong> is your number 1 partner website in Algeria .when looking for professionals in the field of communication ,creation and marketing ,design and graphic arts as well as computer engineering;.
       <br></br>
       <br></br>
-        Companies and individuals, often encounter problems in the development of an idea or a project because of the lack of staff or lack of professionals in a specific field. 
+      Companies and individuals often encounter problems during the development of projects to a lack of stuff or professionals in a specific field,      <br></br>
+      <br></br>
+      <strong>Handelp </strong> will be there to help you find the ideal person who will be able to develop your idea or project thanks to our large address books and contacts; all you have to do id contact us on our website telling us your needs ;
       <br></br>
       <br></br>
-        <strong>Handelp </strong> is here to help you to find the ideal professional`,
+      We will take care of analyzing your needs then you can choose the professional who are suitable to your needs and your budget `,
     },
     navbar: {
       home: 'Home',

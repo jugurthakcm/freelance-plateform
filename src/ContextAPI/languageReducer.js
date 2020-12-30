@@ -9,14 +9,19 @@ export const initialLanguage = languageStorage
 export const languagesActionsTypes = {
   FRENCH: LOCALES.FRENCH,
   ENGLISH: LOCALES.ENGLISH,
+  ARABIC: LOCALES.ARABIC,
 };
 
 export const languageReducer = (state = initialLanguage, action) => {
+  console.log(action.language);
   switch (action.type) {
     case languagesActionsTypes.FRENCH:
       return action.language;
 
     case languagesActionsTypes.ENGLISH:
+      return action.language;
+
+    case languagesActionsTypes.ARABIC:
       return action.language;
 
     default:
