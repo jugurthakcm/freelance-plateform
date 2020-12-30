@@ -33,7 +33,7 @@ const Register = () => {
               <FontAwesomeIcon icon={faUser} />
               <FormattedMessage
                 id="register.firstName"
-                defaultMessage="register"
+                defaultMessage="First Name"
               >
                 {(placeholder) => (
                   <input type="text" placeholder={placeholder} />
@@ -45,7 +45,7 @@ const Register = () => {
               <FontAwesomeIcon icon={faUser} />
               <FormattedMessage
                 id="register.lastName"
-                defaultMessage="register"
+                defaultMessage="Last Name"
               >
                 {(placeholder) => (
                   <input type="text" placeholder={placeholder} />
@@ -55,14 +55,18 @@ const Register = () => {
 
             <div className="register__email register__input">
               <FontAwesomeIcon icon={faEnvelope} />
-              <input type="email" placeholder="Email" />
+              <FormattedMessage id="login.email" defaultMessage="Email">
+                {(placeholder) => (
+                  <input type="email" placeholder={placeholder} />
+                )}
+              </FormattedMessage>
             </div>
 
             <div className="register__password register__input">
               <FontAwesomeIcon icon={faLock} />
               <FormattedMessage
                 id="register.password"
-                defaultMessage="register"
+                defaultMessage="Password"
               >
                 {(placeholder) => (
                   <input type="password" placeholder={placeholder} />

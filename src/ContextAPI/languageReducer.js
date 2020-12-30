@@ -13,7 +13,6 @@ export const languagesActionsTypes = {
 };
 
 export const languageReducer = (state = initialLanguage, action) => {
-  console.log(action.language);
   switch (action.type) {
     case languagesActionsTypes.FRENCH:
       return action.language;

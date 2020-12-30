@@ -32,6 +32,7 @@ const englishContent = {
     login: {
       home: 'Home',
       title: 'Login',
+      email: 'Email',
       password: 'Password',
       rememberMe: 'Remember Me',
       forgetPassword: 'Forgot password',

@@ -30,6 +30,7 @@ const frenchContent = {
     login: {
       home: 'Acceuil',
       title: 'Connexion',
+      email: 'Email',
       password: 'Mot de passe',
       rememberMe: 'Se Souvenir De Moi',
       forgetPassword: 'Mot de passe oublié',

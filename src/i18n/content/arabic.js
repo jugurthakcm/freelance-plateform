@@ -22,6 +22,36 @@ const arabicContent = {
       login: 'تسجيل الدخول',
       register: 'تسجيل جديد',
     },
+    search: {
+      placeholder: '...بحث',
+      button: 'بحث',
+    },
+    footer: {
+      copyright: 'جميع الحقوق محفوظة',
+    },
+    login: {
+      home: 'الرئيسية',
+      title: 'تسجيل الدخول',
+      email: 'البريد الالكتروني',
+      password: 'كلمة المرور',
+      rememberMe: 'حفظ البيانات',
+      forgetPassword: 'نسيت كلمة المرور',
+      button: 'دخول',
+      footer: {
+        text: 'إذا ليس عندك حساب',
+        link: 'سجل هنا',
+      },
+    },
+    register: {
+      home: 'الرئيسية',
+      title: 'تسجيل جديد',
+      firstName: 'الإسم',
+      lastName: 'اللقب',
+      password: 'كلمة المرور',
+      terms: 'أقبل بالشروط',
+      button: 'تسجيل',
+      signIn: 'تسجيل الدخول',
+    },
   },
 };
 

@@ -25,11 +25,15 @@ const Login = () => {
           <form onSubmit={handleSubmit}>
             <div className="login__email login__input">
               <FontAwesomeIcon icon={faEnvelope} />
-              <input type="email" placeholder="Email" />
+              <FormattedMessage id="login.email" defaultMessage="Email">
+                {(placeholder) => (
+                  <input type="email" placeholder={placeholder} />
+                )}
+              </FormattedMessage>
             </div>
             <div className="login__password login__input">
               <FontAwesomeIcon icon={faLock} />
-              <FormattedMessage id="login.password" defaultMessage="login">
+              <FormattedMessage id="login.password" defaultMessage="Password">
                 {(placeholder) => (
                   <input type="password" placeholder={placeholder} />
                 )}
