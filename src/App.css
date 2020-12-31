@@ -15,3 +15,7 @@ body {
     display: block;
   }
 }
+
+input:focus {
+  outline: none !important;
+}
