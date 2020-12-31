@@ -6,15 +6,28 @@ import { faEnvelope, faLock, faHome } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { useLanguageContext } from '../ContextAPI/LanguageProvider';
+import { useForm } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+import Joi from 'joi';
 
 const Login = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   const language = useLanguageContext()[0];
   const leftAfter = language !== 'arabic' ? '0' : 'unset';
   const rightAfter = language === 'arabic' ? '0' : 'unset';
+
+  const schema = Joi.object({
+    email: Joi.string()
+      .trim()
+      .email({ tlds: { allow: false } })
+      .required(),
+    password: Joi.string().trim().required().min(8),
+  });
+
+  const { register, handleSubmit, errors } = useForm({
+    resolver: joiResolver(schema),
+  });
+
+  const submitForm = (e) => {};
 
   return (
     <div className="login">
@@ -29,23 +42,45 @@ const Login = () => {
             <FormattedMessage id="login.title" />
             <div style={{ right: rightAfter, left: leftAfter }}></div>
           </h2>
-          <form onSubmit={handleSubmit}>
-            <div className="login__email login__input">
-              <FontAwesomeIcon icon={faEnvelope} />
-              <FormattedMessage id="login.email" defaultMessage="Email">
-                {(placeholder) => (
-                  <input type="email" placeholder={placeholder} />
-                )}
-              </FormattedMessage>
+          <form onSubmit={handleSubmit(submitForm)}>
+            <div className="login__inputForm">
+              <div className="login__email login__input">
+                <FontAwesomeIcon icon={faEnvelope} />
+                <FormattedMessage id="login.email" defaultMessage="Email">
+                  {(placeholder) => (
+                    <input
+                      type="email"
+                      placeholder={placeholder}
+                      ref={register}
+                      name="email"
+                    />
+                  )}
+                </FormattedMessage>
+              </div>
+              {errors.email && (
+                <p className="textError">{errors.email?.message}</p>
+              )}
             </div>
-            <div className="login__password login__input">
-              <FontAwesomeIcon icon={faLock} />
-              <FormattedMessage id="login.password" defaultMessage="Password">
-                {(placeholder) => (
-                  <input type="password" placeholder={placeholder} />
-                )}
-              </FormattedMessage>
+
+            <div className="login__inputForm">
+              <div className="login__password login__input">
+                <FontAwesomeIcon icon={faLock} />
+                <FormattedMessage id="login.password" defaultMessage="Password">
+                  {(placeholder) => (
+                    <input
+                      type="password"
+                      placeholder={placeholder}
+                      ref={register}
+                      name="password"
+                    />
+                  )}
+                </FormattedMessage>
+              </div>
+              {errors.password && (
+                <p className="textError">{errors.password?.message}</p>
+              )}
             </div>
+
             <label htmlFor="rememberMe" className="login__checkbox">
               <input type="checkbox" name="rememberMe" />
               <FormattedMessage id="login.rememberMe" />
