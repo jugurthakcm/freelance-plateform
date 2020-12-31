@@ -1,6 +1,6 @@
 import React from 'react';
 import './Register.css';
-import register from '../assets/images/Register.png';
+import registerImg from '../assets/images/Register.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEnvelope,
@@ -13,24 +13,31 @@ import { FormattedMessage } from 'react-intl';
 import { useLanguageContext } from '../ContextAPI/LanguageProvider';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
+import { useForm } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+import Joi from 'joi';
 
 const Register = () => {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
   const language = useLanguageContext()[0];
   const leftAfter = language !== 'arabic' ? '0' : 'unset';
   const rightAfter = language === 'arabic' ? '0' : 'unset';
 
-  // console.log(FetchCountries());
-  // const countries = FetchCountries();
+  const schema = Joi.object({
+    fullName: Joi.string().trim().max(30).required(),
+    username: Joi.string().trim().max(30).required(),
+    email: Joi.string()
+      .trim()
+      .email({ tlds: { allow: false } })
+      .required(),
+    password: Joi.string().trim().required().min(8),
+    confirmPassword: Joi.ref('password'),
+  });
 
-  // const handleChangePhone = () => {
-  //   var countrycode = document.getElementById('countrycode');
-  //   countrycode.options[countrycode.selectedIndex].text =
-  //     '+' + countrycode.value;
-  // };
+  const { register, handleSubmit, errors } = useForm({
+    resolver: joiResolver(schema),
+  });
+
+  const submitForm = (e) => {};
 
   return (
     <div className="register">
@@ -39,44 +46,74 @@ const Register = () => {
           <FontAwesomeIcon icon={faHome} />
           <FormattedMessage id="register.home" />
         </Link>
-        <img src={register} alt="register" width="400px" />
+        <img src={registerImg} alt="register" width="400px" />
         <div className="register__form">
           <h2>
             <FormattedMessage id="register.title" />
             <div style={{ right: rightAfter, left: leftAfter }}></div>
           </h2>
-          <form onSubmit={handleSubmit}>
-            <div className="register__fullName register__input">
-              <FontAwesomeIcon icon={faUser} />
-              <FormattedMessage
-                id="register.fullName"
-                defaultMessage="Full Name"
-              >
-                {(placeholder) => (
-                  <input type="text" placeholder={placeholder} />
-                )}
-              </FormattedMessage>
+          <form onSubmit={handleSubmit(submitForm)}>
+            <div className="register__inputForm">
+              <div className="register__fullName register__input">
+                <FontAwesomeIcon icon={faUser} />
+                <FormattedMessage
+                  id="register.fullName"
+                  defaultMessage="Full Name"
+                >
+                  {(placeholder) => (
+                    <input
+                      type="text"
+                      placeholder={placeholder}
+                      ref={register}
+                      name="fullName"
+                    />
+                  )}
+                </FormattedMessage>
+              </div>
+              {errors.fullName && (
+                <p className="textError">{errors.fullName?.message}</p>
+              )}
             </div>
 
-            <div className="register_username register__input">
-              <FontAwesomeIcon icon={faUser} />
-              <FormattedMessage
-                id="register.username"
-                defaultMessage="Username"
-              >
-                {(placeholder) => (
-                  <input type="text" placeholder={placeholder} />
-                )}
-              </FormattedMessage>
+            <div className="register__inputForm">
+              <div className="register_username register__input">
+                <FontAwesomeIcon icon={faUser} />
+                <FormattedMessage
+                  id="register.username"
+                  defaultMessage="Username"
+                >
+                  {(placeholder) => (
+                    <input
+                      type="text"
+                      placeholder={placeholder}
+                      ref={register}
+                      name="username"
+                    />
+                  )}
+                </FormattedMessage>
+              </div>
+              {errors.username && (
+                <p className="textError">{errors.username?.message}</p>
+              )}
             </div>
 
-            <div className="register__email register__input">
-              <FontAwesomeIcon icon={faEnvelope} />
-              <FormattedMessage id="login.email" defaultMessage="Email">
-                {(placeholder) => (
-                  <input type="email" placeholder={placeholder} />
-                )}
-              </FormattedMessage>
+            <div className="register__inputForm">
+              <div className="register__email register__input">
+                <FontAwesomeIcon icon={faEnvelope} />
+                <FormattedMessage id="login.email" defaultMessage="Email">
+                  {(placeholder) => (
+                    <input
+                      type="email"
+                      placeholder={placeholder}
+                      ref={register}
+                      name="email"
+                    />
+                  )}
+                </FormattedMessage>
+              </div>
+              {errors.email && (
+                <p className="textError">{errors.email?.message}</p>
+              )}
             </div>
 
             <div className="register__phone">
@@ -86,28 +123,48 @@ const Register = () => {
               <PhoneInput country={'dz'} />
             </div>
 
-            <div className="register__password register__input">
-              <FontAwesomeIcon icon={faLock} />
-              <FormattedMessage
-                id="register.password"
-                defaultMessage="Password"
-              >
-                {(placeholder) => (
-                  <input type="password" placeholder={placeholder} />
-                )}
-              </FormattedMessage>
+            <div className="register__inputForm">
+              <div className="register__password register__input">
+                <FontAwesomeIcon icon={faLock} />
+                <FormattedMessage
+                  id="register.password"
+                  defaultMessage="Password"
+                >
+                  {(placeholder) => (
+                    <input
+                      type="password"
+                      placeholder={placeholder}
+                      ref={register}
+                      name="password"
+                    />
+                  )}
+                </FormattedMessage>
+              </div>
+              {errors.password && (
+                <p className="textError">{errors.password?.message}</p>
+              )}
             </div>
 
-            <div className="register__password register__input">
-              <FontAwesomeIcon icon={faLock} />
-              <FormattedMessage
-                id="register.confirmPassword"
-                defaultMessage="Confirm password"
-              >
-                {(placeholder) => (
-                  <input type="password" placeholder={placeholder} />
-                )}
-              </FormattedMessage>
+            <div className="register__inputForm">
+              <div className="register__password register__input">
+                <FontAwesomeIcon icon={faLock} />
+                <FormattedMessage
+                  id="register.confirmPassword"
+                  defaultMessage="Confirm password"
+                >
+                  {(placeholder) => (
+                    <input
+                      type="password"
+                      placeholder={placeholder}
+                      ref={register}
+                      name="confirmPassword"
+                    />
+                  )}
+                </FormattedMessage>
+              </div>
+              {errors.confirmPassword && (
+                <p className="textError">The passwords must be equal</p>
+              )}
             </div>
 
             <label htmlFor="rememberMe" className="register__checkbox">
@@ -119,7 +176,6 @@ const Register = () => {
                 <FormattedMessage id="register.signIn" />
               </Link>
               <button type="submit">
-                {' '}
                 <FormattedMessage id="register.button" />
               </button>
             </div>
