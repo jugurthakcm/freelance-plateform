@@ -1,7 +1,7 @@
 import React from 'react';
 import Main from '../components/Main';
 import './Home.css';
-import freelance from '../assets/images/Description.jpg';
+import freelance from '../assets/images/logo512.png';
 import { FormattedMessage } from 'react-intl';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
@@ -18,8 +18,8 @@ const Home = () => {
       <Navbar />
       <div className="home">
         <Main />
-        <div className="home__description row">
-          <div className="description__text col-lg-6 ">
+        <div className="home__description row justify-content-around">
+          <div className="description__text col-lg-7 ">
             <h1
               style={{
                 textAlign: rightText,
@@ -36,7 +36,8 @@ const Home = () => {
           <img
             src={freelance}
             alt="description"
-            className="description__image col-lg-6"
+            className="description__image col-lg-5"
+            style={{ maxWidth: 400 }}
           />
         </div>
       </div>
