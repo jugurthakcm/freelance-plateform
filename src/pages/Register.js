@@ -11,6 +11,8 @@ import {
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
 import { useLanguageContext } from '../ContextAPI/LanguageProvider';
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
 
 const Register = () => {
   const handleSubmit = (e) => {
@@ -20,6 +22,15 @@ const Register = () => {
   const language = useLanguageContext()[0];
   const leftAfter = language !== 'arabic' ? '0' : 'unset';
   const rightAfter = language === 'arabic' ? '0' : 'unset';
+
+  // console.log(FetchCountries());
+  // const countries = FetchCountries();
+
+  // const handleChangePhone = () => {
+  //   var countrycode = document.getElementById('countrycode');
+  //   countrycode.options[countrycode.selectedIndex].text =
+  //     '+' + countrycode.value;
+  // };
 
   return (
     <div className="register">
@@ -35,11 +46,11 @@ const Register = () => {
             <div style={{ right: rightAfter, left: leftAfter }}></div>
           </h2>
           <form onSubmit={handleSubmit}>
-            <div className="register__firstName register__input">
+            <div className="register__fullName register__input">
               <FontAwesomeIcon icon={faUser} />
               <FormattedMessage
-                id="register.firstName"
-                defaultMessage="First Name"
+                id="register.fullName"
+                defaultMessage="Full Name"
               >
                 {(placeholder) => (
                   <input type="text" placeholder={placeholder} />
@@ -47,11 +58,11 @@ const Register = () => {
               </FormattedMessage>
             </div>
 
-            <div className="register__lastName register__input">
+            <div className="register_username register__input">
               <FontAwesomeIcon icon={faUser} />
               <FormattedMessage
-                id="register.lastName"
-                defaultMessage="Last Name"
+                id="register.username"
+                defaultMessage="Username"
               >
                 {(placeholder) => (
                   <input type="text" placeholder={placeholder} />
@@ -68,11 +79,30 @@ const Register = () => {
               </FormattedMessage>
             </div>
 
+            <div className="register__phone">
+              <label>
+                <FormattedMessage id="register.phone" />
+              </label>
+              <PhoneInput country={'dz'} />
+            </div>
+
             <div className="register__password register__input">
               <FontAwesomeIcon icon={faLock} />
               <FormattedMessage
                 id="register.password"
                 defaultMessage="Password"
+              >
+                {(placeholder) => (
+                  <input type="password" placeholder={placeholder} />
+                )}
+              </FormattedMessage>
+            </div>
+
+            <div className="register__password register__input">
+              <FontAwesomeIcon icon={faLock} />
+              <FormattedMessage
+                id="register.confirmPassword"
+                defaultMessage="Confirm password"
               >
                 {(placeholder) => (
                   <input type="password" placeholder={placeholder} />

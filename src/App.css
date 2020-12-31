@@ -16,6 +16,8 @@ body {
   }
 }
 
-input:focus {
+input:focus,
+button:focus,
+select:focus {
   outline: none !important;
 }

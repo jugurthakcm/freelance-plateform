@@ -5,7 +5,7 @@
   width: 100vw;
   height: 100vh;
   background-color: var(--black);
-  overflow: hidden;
+  overflow: auto;
 }
 
 .register__container {
@@ -14,7 +14,7 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  height: 450px;
+  height: 560px;
   width: 100%;
   max-width: 800px;
   display: flex;
@@ -96,16 +96,50 @@
   color: rgb(180, 180, 180);
 }
 
+.register__phone {
+  margin-bottom: 1rem;
+}
+
+.register__phone label {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: gray;
+  margin-bottom: -5px;
+}
+
+.register__phone .react-tel-input input {
+  width: 100%;
+  background-color: rgb(240, 240, 240);
+  border: none;
+}
+
+.register__phone .react-tel-input input:focus {
+  box-shadow: none;
+}
+
+.register__phone .react-tel-input .flag-dropdown {
+  border: none;
+}
+
+.register__phone .react-tel-input .selected-flag {
+  background-color: var(--yellow) !important;
+}
+
+.register__phone .react-tel-input .selected-flag:hover {
+  background-color: var(--yellow) !important;
+}
+
 .register__checkbox {
   display: flex;
   align-items: center;
-  color: darkgray;
+  color: gray;
   font-weight: 500;
   font-size: 0.9rem;
 }
 
 .register__checkbox input {
   margin-right: 5px;
+  margin-top: -4px;
 }
 
 .register__submit {
