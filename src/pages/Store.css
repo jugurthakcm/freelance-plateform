@@ -3,7 +3,12 @@
 }
 
 .store__gig {
-  border: 1px solid lightgray;
+  border: 1px solid #e8e8e8;
+  transition: box-shadow 0.4s ease;
+}
+
+.store__gig:hover {
+  box-shadow: 0 0 4px 1px rgba(0, 0, 0, 0.15);
 }
 
 .store__gig p,
@@ -21,6 +26,16 @@
   font-weight: 500;
   margin-bottom: 0.6rem !important;
   cursor: pointer;
+  display: inline-block;
+}
+
+.gig__type:hover::after {
+  content: '';
+  display: block;
+  height: 1px;
+  background-color: gray;
+  width: 100%;
+  margin-bottom: -1px;
 }
 
 .gig__title {
