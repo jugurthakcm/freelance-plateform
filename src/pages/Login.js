@@ -1,6 +1,6 @@
 import React from 'react';
 import './Login.css';
-import login from '../assets/images/Login.jpg';
+import login from '../assets/images/Login.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faHome } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';

@@ -18,7 +18,7 @@
   width: 100%;
   max-width: 800px;
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
 }
 
@@ -58,6 +58,10 @@
   color: gray;
 }
 
+.login img {
+  margin-left: -100px;
+}
+
 .login__form {
   display: flex;
   flex-direction: column;
@@ -80,6 +84,8 @@
   background-color: inherit;
   border: none;
   margin-left: 10px;
+  width: 280px;
+  font-size: 0.9rem;
 }
 
 .login__input input:focus {

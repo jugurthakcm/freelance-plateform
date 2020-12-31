@@ -18,7 +18,7 @@
   width: 100%;
   max-width: 800px;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   flex-direction: row-reverse;
 }
@@ -59,6 +59,10 @@
   color: gray;
 }
 
+.register img {
+  margin-right: -80px;
+}
+
 .register__form {
   display: flex;
   flex-direction: column;
@@ -80,6 +84,8 @@
   background-color: inherit;
   border: none;
   margin-left: 10px;
+  width: 280px;
+  font-size: 0.9rem;
 }
 
 .register__input input:focus {

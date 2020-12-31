@@ -1,6 +1,6 @@
 import React from 'react';
 import './Register.css';
-import register from '../assets/images/Register.jpg';
+import register from '../assets/images/Register.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faEnvelope,
