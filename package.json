@@ -1,0 +1,23 @@
+{
+  "name": "handelp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/jugurthakcm/handelp.git",
+  "author": "jugurthakcm <kjugurtha1711@gmail.com>",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "client": "cd frontend && yarn start",
+    "build frontend": "cd frontend && yarn build",
+    "dev": "concurrently \"cd frontend && yarn start\" \"nodemon index.js\"",
+    "serve": "nodemon index.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "joi": "^17.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.11.15"
+  }
+}
