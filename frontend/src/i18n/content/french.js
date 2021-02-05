@@ -13,7 +13,7 @@ const frenchContent = {
       Vous n’aurez qu’à nous contacter via un message sur notre site web en joignant vos besoins et votre contact, nous prendrons le soin d’analyser vos besoins pour vous suggérer les professionnels qui conviennent à votre projet.`,
     },
     navbar: {
-      home: 'Acceuil',
+      home: 'Accueil',
       about: 'A Propos',
       services: 'Services',
       store: 'Boutique',
