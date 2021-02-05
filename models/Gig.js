@@ -14,7 +14,7 @@ const gigSchema = mongoose.Schema({
     max: 50,
   },
   category: {
-    type: Number,
+    type: String,
     required: true,
     min: 1,
     max: 50,
@@ -27,7 +27,6 @@ const gigSchema = mongoose.Schema({
   },
   rating: {
     type: Number,
-    required: true,
     min: 1,
     max: 5,
   },

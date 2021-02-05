@@ -4,6 +4,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const userRoutes = require('./routes/userRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
+const gigRoutes = require('./routes/gigRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -13,6 +14,7 @@ app.use(express.json());
 
 app.use('/api', userRoutes);
 app.use('/api/categories', categoryRoutes);
+app.use('/api/gigs', gigRoutes);
 
 mongoose
   .connect('mongodb://localhost:27017/handelp', {
