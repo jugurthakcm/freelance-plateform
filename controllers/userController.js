@@ -78,3 +78,10 @@ exports.logout = (req, res) => {
   req.userId = null;
   res.status(200).send('Successfully logged out');
 };
+
+//Add a bio
+exports.addBio = async (req, res) => {
+  User.findByIdAndUpdate(req.userId, { bio: req.body.bio })
+    .then(() => res.status(200).send('Bio added successfully'))
+    .catch(() => res.status(400).send('Failed to add the bio'));
+};

@@ -29,6 +29,10 @@ const userSchema = mongoose.Schema({
     required: true,
     min: 8,
   },
+  bio: {
+    type: String,
+    max: 250,
+  },
   createdAt: {
     type: Date,
     default: new Date(),
