@@ -8,6 +8,7 @@ exports.addGig = async (req, res) => {
 
     //Getting the category title
     const category = await Category.findById(categoryId);
+
     if (!category) throw "This category doesn't exist";
     const categoryTitle = category.title;
 
@@ -44,4 +45,11 @@ exports.deleteGig = async (req, res) => {
   } catch (error) {
     res.status(400).send(error);
   }
+};
+
+//Get a user's gigs
+exports.getGigs = async (req, res) => {
+  Gig.find({ sellerId: req.userId })
+    .then((data) => res.status(200).send(data))
+    .catch(() => res.status(400).send('Error during fetching gigs'));
 };
