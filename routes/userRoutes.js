@@ -4,13 +4,15 @@ const {
   register,
   login,
   logout,
-  addBio,
+  updateBio,
+  updateSkills,
 } = require('../controllers/userController');
 const { auth } = require('../middlewares/authMiddleware');
 
 router.post('/register', register);
 router.post('/login', login);
 router.post('/logout', auth, logout);
-router.put('/bio/add', auth, addBio);
+router.put('/bio/update', auth, updateBio);
+router.put('/skills/update', auth, updateSkills);
 
 module.exports = router;

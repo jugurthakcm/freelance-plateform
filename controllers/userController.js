@@ -79,9 +79,16 @@ exports.logout = (req, res) => {
   res.status(200).send('Successfully logged out');
 };
 
-//Add a bio
-exports.addBio = async (req, res) => {
+//Update bio
+exports.updateBio = async (req, res) => {
   User.findByIdAndUpdate(req.userId, { bio: req.body.bio })
-    .then(() => res.status(200).send('Bio added successfully'))
-    .catch(() => res.status(400).send('Failed to add the bio'));
+    .then(() => res.status(200).send('Bio updated successfully'))
+    .catch(() => res.status(400).send('Failed to update the bio'));
+};
+
+//Update skills
+exports.updateSkills = async (req, res) => {
+  User.findByIdAndUpdate(req.userId, { skills: req.body.skills })
+    .then(() => res.status(200).send('Skills updated successfully'))
+    .catch(() => res.status(400).send('Failed to update the skills'));
 };
