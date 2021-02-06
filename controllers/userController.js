@@ -80,3 +80,9 @@ exports.login = async (req, res) => {
     res.status(400).send(error);
   }
 };
+
+//Logout a User
+exports.logout = (req, res) => {
+  req.userId = null;
+  res.status(200).send('Successfully logged out');
+};
