@@ -35,15 +35,7 @@ exports.register = async (req, res) => {
       email: user.email,
       password: hash,
     })
-      .then((data) =>
-        res.status(200).json({
-          firstName: data.firstName,
-          lastName: data.lastName,
-          username: data.username,
-          email: data.email,
-          _id: data._id,
-        })
-      )
+      .then(() => res.status(200).send('User added successfully'))
       .catch((error) => {
         throw error;
       });
