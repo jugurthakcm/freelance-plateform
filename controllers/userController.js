@@ -92,3 +92,26 @@ exports.updateSkills = async (req, res) => {
     .then(() => res.status(200).send('Skills updated successfully'))
     .catch(() => res.status(400).send('Failed to update the skills'));
 };
+
+//Delete a skill
+exports.deleteSkill = async (req, res) => {
+  try {
+    //Get the skills of the user
+    const { skills } = await User.findById(req.userId);
+
+    if (!skills.find((skill) => skill.id === req.body.skillId))
+      throw "This skill doesn't exist";
+
+    //Update the skills array
+    const skillsUpdated = skills.filter(
+      (skill) => skill.id !== req.body.skillId
+    );
+
+    //Update the skills in the db
+    User.findByIdAndUpdate(req.userId, { skills: skillsUpdated })
+      .then(() => res.status(200).send('Skill deleted successfully'))
+      .catch(() => res.status(400).send('Failed to delete the skill'));
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
