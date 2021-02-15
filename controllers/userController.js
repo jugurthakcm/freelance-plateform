@@ -67,7 +67,8 @@ exports.login = async (req, res) => {
     //Assign a token to the user
     const token = jwt.sign({ _id: userDB._id }, process.env.JWT_KEY);
 
-    res.json({ userId: userDB._id, token });
+    res.cookie('token', token);
+    res.status(200).send('Logged In');
   } catch (error) {
     res.status(400).send(error);
   }
@@ -75,7 +76,7 @@ exports.login = async (req, res) => {
 
 //Logout a User
 exports.logout = (req, res) => {
-  req.userId = null;
+  res.clearCookie('token');
   res.status(200).send('Successfully logged out');
 };
 

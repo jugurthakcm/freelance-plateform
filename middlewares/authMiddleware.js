@@ -3,10 +3,12 @@ const jwt = require('jsonwebtoken');
 
 exports.auth = (req, res, next) => {
   try {
-    const header = req.headers['authorization'];
-    const token = header.split(' ')[1];
+    // const header = req.headers['authorization'];
+    // const token = header.split(' ')[1];
+    const token = req.cookies.token;
 
-    if (!token || !header) throw 'no token';
+    // if (!token || !header) throw 'no token';
+    if (!token) throw 'no token';
     const userId = jwt.verify(token, process.env.JWT_KEY);
     req.userId = userId;
     next();
