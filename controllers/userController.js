@@ -67,7 +67,7 @@ exports.login = async (req, res) => {
     //Assign a token to the user
     const token = jwt.sign({ _id: userDB._id }, process.env.JWT_KEY);
 
-    res.cookie('token', token);
+    res.cookie('token', token, { httpOnly: true });
     res.status(200).send('Logged In');
   } catch (error) {
     res.status(400).send(error);
