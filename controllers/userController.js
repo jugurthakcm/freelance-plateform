@@ -7,7 +7,11 @@ const {
   loginValidation,
 } = require('../validation/userValidation');
 
-//Register a User
+/**
+ * Register a user
+ * /POST
+ * @params {firstName, lastName, username, email, password}
+ */
 exports.register = async (req, res) => {
   try {
     //Validation
@@ -44,7 +48,11 @@ exports.register = async (req, res) => {
   }
 };
 
-//Login a User
+/**
+ * Login a user
+ * /POST
+ * @params {email, password}
+ */
 exports.login = async (req, res) => {
   try {
     //Validation
@@ -74,27 +82,43 @@ exports.login = async (req, res) => {
   }
 };
 
-//Logout a User
+/**
+ * Logout a user
+ * /POST
+ * @params {}
+ */
 exports.logout = (req, res) => {
   res.clearCookie('token');
   res.status(200).send('Successfully logged out');
 };
 
-//Update bio
+/**
+ * Update bio of a user
+ * /PUT
+ * @params {bio}
+ */
 exports.updateBio = async (req, res) => {
   User.findByIdAndUpdate(req.userId, { bio: req.body.bio })
     .then(() => res.status(200).send('Bio updated successfully'))
     .catch(() => res.status(400).send('Failed to update the bio'));
 };
 
-//Update skills
+/**
+ * Update skills of a user
+ * /PUT
+ * @params {skills []}
+ */
 exports.updateSkills = async (req, res) => {
   User.findByIdAndUpdate(req.userId, { skills: req.body.skills })
     .then(() => res.status(200).send('Skills updated successfully'))
     .catch(() => res.status(400).send('Failed to update the skills'));
 };
 
-//Delete a skill
+/**
+ * Delete a skill
+ * /DELETE
+ * @params {skillId}
+ */
 exports.deleteSkill = async (req, res) => {
   try {
     //Get the skills of the user
