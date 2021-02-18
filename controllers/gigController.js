@@ -77,3 +77,40 @@ exports.getMyGig = (req, res) => {
     .then((data) => res.status(200).send(data))
     .catch(() => res.status(400).send('Error during fetching gig'));
 };
+
+/*
+ * A user edit his gig
+ * /PUT
+ * @params {title, price, category, subCategory}
+ */
+
+exports.editMyGig = async (req, res) => {
+  try {
+    const { title, categoryId, subCategory, price } = req.body;
+
+    //Getting the category title
+    const category = await Category.findById(categoryId);
+    console.log(category);
+    if (!category) throw "This category doesn't exist";
+    const categoryTitle = category.title;
+
+    //Get the gig and edit it
+    const gig = await Gig.findOne({ _id: req.params.id, sellerId: req.userId });
+
+    //Check if the gig exists
+    if (!gig) throw "This gig doesn't exist";
+
+    //Update the gig
+    gig
+      .updateOne({
+        title,
+        price,
+        category: categoryTitle,
+        subCategory,
+      })
+      .then(() => res.status(200).send('Gig Edited successfully'))
+      .catch(() => res.status(400).send('Error editing the gig'));
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
