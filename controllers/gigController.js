@@ -60,8 +60,20 @@ exports.deleteGig = async (req, res) => {
  * /GET
  * @params {userId}
  */
-exports.getGigs = async (req, res) => {
+exports.getMyGigs = (req, res) => {
   Gig.find({ sellerId: req.userId })
     .then((data) => res.status(200).send(data))
     .catch(() => res.status(400).send('Error during fetching gigs'));
+};
+
+/*
+ * A user gets his gig
+ * /GET
+ * @params {userId, gigId}
+ */
+
+exports.getMyGig = (req, res) => {
+  Gig.find({ sellerId: req.userId, _id: req.params.id })
+    .then((data) => res.status(200).send(data))
+    .catch(() => res.status(400).send('Error during fetching gig'));
 };
