@@ -1,7 +1,11 @@
 const { Category } = require('../models/Category');
 const { Gig } = require('../models/Gig');
 
-//Adding a Gig
+/*
+ * User adds his gig
+ * /POST
+ * @params {title, categoryId, subCategory, price}
+ */
 exports.addGig = async (req, res) => {
   try {
     const { title, categoryId, subCategory, price } = req.body;
@@ -27,7 +31,11 @@ exports.addGig = async (req, res) => {
   }
 };
 
-//Deleting a Gig
+/*
+ * A user deletes his gig
+ * /DELETE
+ * @params {gigId}
+ */
 exports.deleteGig = async (req, res) => {
   try {
     const gig = await Gig.findById(req.body.id);
@@ -47,7 +55,11 @@ exports.deleteGig = async (req, res) => {
   }
 };
 
-//Get a user's gigs
+/*
+ * A user gets his own gigs
+ * /GET
+ * @params {userId}
+ */
 exports.getGigs = async (req, res) => {
   Gig.find({ sellerId: req.userId })
     .then((data) => res.status(200).send(data))
