@@ -153,3 +153,68 @@ exports.editName = (req, res) => {
     .then(() => res.status(200).send('Name changed successfully'))
     .catch((err) => res.status(400).send(err));
 };
+
+/*
+ * User edits his username
+ * /PUT
+ * @params {username}
+ */
+
+exports.editUsername = (req, res) => {
+  const { username } = req.body;
+  User.findOneAndUpdate({ _id: req.userId }, { username })
+    .then(() => res.status(200).send('Username changed successfully'))
+    .catch((err) => res.status(400).send(err));
+};
+
+/*
+ * User edits his email
+ * /PUT
+ * @params {email}
+ */
+
+exports.editEmail = (req, res) => {
+  const { email } = req.body;
+  User.findOneAndUpdate({ _id: req.userId }, { email })
+    .then(() => res.status(200).send('Email changed successfully'))
+    .catch((err) => res.status(400).send(err));
+};
+
+/*
+ * User edits his password
+ * /PUT
+ * @params {oldPassword, newPassword, confirmedPassword}
+ */
+
+exports.editPassword = async (req, res) => {
+  try {
+    const { oldPassword, newPassword, confirmedPassword } = req.body;
+    if (newPassword !== confirmedPassword) throw 'Passwords must be equals';
+    const user = await User.findOne({ _id: req.userId });
+
+    const comparePassword = await bcrypt.compare(oldPassword, user.password);
+    if (!comparePassword) throw 'Wrong password';
+
+    const salt = await bcrypt.genSalt(10);
+    const hash = await bcrypt.hash(newPassword, salt);
+
+    user
+      .updateOne({ password: hash })
+      .then(() => res.status(200).send('Password changed successfully'))
+      .catch((err) => res.status(400).send(err));
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
+/*
+ * User deletes his account
+ * /DELETE
+ * @params {userId}
+ */
+
+exports.deleteAccount = (req, res) => {
+  User.findOneAndDelete({ _id: req.userId })
+    .then(() => res.status(200).send('Account deleted successfully'))
+    .catch(() => res.status(400).send('Error during deleting account'));
+};
