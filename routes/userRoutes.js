@@ -15,16 +15,37 @@ const {
 } = require('../controllers/userController');
 const { auth } = require('../middlewares/authMiddleware');
 
+//Register a user
 router.post('/register', register);
+
+//Login a user
 router.post('/login', login);
+
+//Logout a user
 router.post('/logout', auth, logout);
+
+//Update a user's bio
 router.put('/bio/update', auth, updateBio);
+
+//Update a user's skills
 router.put('/skills/update', auth, updateSkills);
+
+//Delete a user's skill
 router.delete('/skills/delete', auth, deleteSkill);
+
+//Edit user's name
 router.put('/settings/name/edit', auth, editName);
+
+//Edit user's username
 router.put('/settings/username/edit', auth, editUsername);
+
+//Edit user's email
 router.put('/settings/email/edit', auth, editEmail);
+
+//Edit user's password
 router.put('/settings/password/edit', auth, editPassword);
+
+//Delete user's account
 router.delete('/settings/account/delete', auth, deleteAccount);
 
 module.exports = router;
