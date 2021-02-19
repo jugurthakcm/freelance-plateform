@@ -90,7 +90,7 @@ exports.editMyGig = async (req, res) => {
 
     //Getting the category title
     const category = await Category.findById(categoryId);
-    console.log(category);
+
     if (!category) throw "This category doesn't exist";
     const categoryTitle = category.title;
 

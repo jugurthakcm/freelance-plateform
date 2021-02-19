@@ -140,3 +140,16 @@ exports.deleteSkill = async (req, res) => {
     res.status(400).send(error);
   }
 };
+
+/*
+ * User edits his name
+ * /PUT
+ * @params {firstName, lastName}
+ */
+
+exports.editName = (req, res) => {
+  const { firstName, lastName } = req.body;
+  User.findOneAndUpdate({ _id: req.userId }, { firstName, lastName })
+    .then(() => res.status(200).send('Name changed successfully'))
+    .catch((err) => res.status(400).send(err));
+};
