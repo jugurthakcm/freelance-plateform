@@ -1,7 +1,7 @@
 const { Category } = require('../models/Category');
 const { Gig } = require('../models/Gig');
 
-/*
+/**
  * User adds his gig
  * /POST
  * @params {title, categoryId, subCategory, price}
@@ -31,7 +31,7 @@ exports.addGig = async (req, res) => {
   }
 };
 
-/*
+/**
  * A user deletes his gig
  * /DELETE
  * @params {gigId}
@@ -55,7 +55,7 @@ exports.deleteGig = async (req, res) => {
   }
 };
 
-/*
+/**
  * A user gets his own gigs
  * /GET
  * @params {userId}
@@ -66,7 +66,7 @@ exports.getMyGigs = (req, res) => {
     .catch(() => res.status(400).send('Error during fetching gigs'));
 };
 
-/*
+/**
  * A user gets his gig
  * /GET
  * @params {userId, gigId}
@@ -78,7 +78,7 @@ exports.getMyGig = (req, res) => {
     .catch(() => res.status(400).send('Error during fetching gig'));
 };
 
-/*
+/**
  * A user edit his gig
  * /PUT
  * @params {title, price, category, subCategory}

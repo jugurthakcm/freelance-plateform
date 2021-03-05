@@ -5,6 +5,11 @@ const { User } = require('../models/User');
 const {
   registerValidation,
   loginValidation,
+  deleteSkillValidation,
+  nameValidation,
+  usernameValidation,
+  emailValidation,
+  passwordValidation,
 } = require('../validation/userValidation');
 
 /**
@@ -124,13 +129,17 @@ exports.deleteSkill = async (req, res) => {
     //Get the skills of the user
     const { skills } = await User.findById(req.userId);
 
-    if (!skills.find((skill) => skill.id === req.body.skillId))
+    //Validate the skill request
+    const { error, value } = deleteSkillValidation(req.body);
+    if (error) throw 'Skill is not defined';
+
+    const { skillId } = value;
+
+    if (!skills.find((skill) => skill.id === skillId))
       throw "This skill doesn't exist";
 
     //Update the skills array
-    const skillsUpdated = skills.filter(
-      (skill) => skill.id !== req.body.skillId
-    );
+    const skillsUpdated = skills.filter((skill) => skill.id !== skillId);
 
     //Update the skills in the db
     User.findByIdAndUpdate(req.userId, { skills: skillsUpdated })
@@ -141,46 +150,60 @@ exports.deleteSkill = async (req, res) => {
   }
 };
 
-/*
+/**
  * User edits his name
  * /PUT
  * @params {firstName, lastName}
  */
 
 exports.editName = (req, res) => {
-  const { firstName, lastName } = req.body;
+  //Validate the name
+  const { error, value } = nameValidation(req.body);
+  if (error) return error;
+
+  const { firstName, lastName } = value;
+
   User.findOneAndUpdate({ _id: req.userId }, { firstName, lastName })
     .then(() => res.status(200).send('Name changed successfully'))
     .catch((err) => res.status(400).send(err));
 };
 
-/*
+/**
  * User edits his username
  * /PUT
  * @params {username}
  */
 
 exports.editUsername = (req, res) => {
-  const { username } = req.body;
+  //Validate the username
+  const { error, value } = usernameValidation(req.body);
+  if (error) return error;
+
+  const { username } = value;
+
   User.findOneAndUpdate({ _id: req.userId }, { username })
     .then(() => res.status(200).send('Username changed successfully'))
     .catch((err) => res.status(400).send(err));
 };
 
-/*
+/**
  * User edits his email
  * /PUT
  * @params {email}
  */
 
 exports.editEmail = (req, res) => {
-  const { email } = req.body;
+  //Validate the email
+  const { error, value } = emailValidation(req.body);
+  if (error) return error;
+
+  const { email } = value;
   User.findOneAndUpdate({ _id: req.userId }, { email })
     .then(() => res.status(200).send('Email changed successfully'))
     .catch((err) => res.status(400).send(err));
 };
 
-/*
+/**
  * User edits his password
  * /PUT
  * @params {oldPassword, newPassword, confirmedPassword}
@@ -188,16 +211,30 @@ exports.editEmail = (req, res) => {
 
 exports.editPassword = async (req, res) => {
   try {
-    const { oldPassword, newPassword, confirmedPassword } = req.body;
+    //Validate the new password
+    const { error, value } = passwordValidation(req.body);
+    if (error) throw error;
+
+    const { newPassword, confirmedPassword } = value;
+
+    //Getting the old password from body
+    const { oldPassword } = req.body;
+
+    //Check newPassword and confirmed one are equals
     if (newPassword !== confirmedPassword) throw 'Passwords must be equals';
+
+    //Get the user from the DB
     const user = await User.findOne({ _id: req.userId });
 
+    //Compare oldPassword to password in DB
     const comparePassword = await bcrypt.compare(oldPassword, user.password);
     if (!comparePassword) throw 'Wrong password';
 
+    //Hash newPassword
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(newPassword, salt);
 
+    //Update the new password
     user
       .updateOne({ password: hash })
       .then(() => res.status(200).send('Password changed successfully'))
@@ -207,7 +244,7 @@ exports.editPassword = async (req, res) => {
   }
 };
 
-/*
+/**
  * User deletes his account
  * /DELETE
  * @params {userId}
