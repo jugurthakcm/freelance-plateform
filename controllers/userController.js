@@ -10,6 +10,7 @@ const {
   usernameValidation,
   emailValidation,
   passwordValidation,
+  skillsValidation,
 } = require('../validation/userValidation');
 
 /**

@@ -1,5 +1,6 @@
 const { Category } = require('../models/Category');
 const { Gig } = require('../models/Gig');
+const { gigValidation } = require('../validation/gigValidation');
 
 /**
  * User adds his gig
@@ -8,7 +9,10 @@ const { Gig } = require('../models/Gig');
  */
 exports.addGig = async (req, res) => {
   try {
-    const { title, categoryId, subCategory, price } = req.body;
+    const { error, value } = gigValidation(req.body);
+    if (error) throw error.details[0].message;
+
+    const { title, categoryId, subCategory, price } = value;
 
     //Getting the category title
     const category = await Category.findById(categoryId);
@@ -38,7 +42,10 @@ exports.addGig = async (req, res) => {
  */
 exports.deleteGig = async (req, res) => {
   try {
-    const gig = await Gig.findById(req.body.id);
+    const { id } = req.body;
+    if (!id) throw 'No gig definded';
+
+    const gig = await Gig.findById(id);
 
     //Verify if the gig exists
     if (!gig) throw "This gig doesn't exist";
@@ -48,7 +55,7 @@ exports.deleteGig = async (req, res) => {
       throw "You don't have the permission to delete this gig";
 
     //Delete the gig
-    const deletedGig = await Gig.findByIdAndRemove(req.body.id);
+    const deletedGig = await Gig.findByIdAndRemove(id);
     res.status(200).send('Gig deleted successfully');
   } catch (error) {
     res.status(400).send(error);
@@ -86,7 +93,10 @@ exports.getMyGig = (req, res) => {
 
 exports.editMyGig = async (req, res) => {
   try {
-    const { title, categoryId, subCategory, price } = req.body;
+    const { error, value } = gigValidation(req.body);
+    if (error) throw error.details[0].message;
+
+    const { title, categoryId, subCategory, price } = value;
 
     //Getting the category title
     const category = await Category.findById(categoryId);
