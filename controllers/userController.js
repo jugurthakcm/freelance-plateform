@@ -114,9 +114,21 @@ exports.updateBio = async (req, res) => {
  * @params {skills []}
  */
 exports.updateSkills = async (req, res) => {
-  User.findByIdAndUpdate(req.userId, { skills: req.body.skills })
-    .then(() => res.status(200).send('Skills updated successfully'))
-    .catch(() => res.status(400).send('Failed to update the skills'));
+  try {
+    const { skillId, skill } = req.body;
+    const user = await User.findById(req.userId);
+    const skills = user.skills;
+    skills.push({ id: skillId, skill });
+
+    user
+      .updateOne({ skills })
+      .then(() => res.status(200).send('Skills updated successfully'))
+      .catch(() => res.status(400).send('Failed to update the skills'));
+
+    // User.findByIdAndUpdate(req.userId, { skills })
+  } catch (error) {
+    res.status(400).send(error);
+  }
 };
 
 /**
