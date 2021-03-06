@@ -171,7 +171,7 @@ exports.deleteSkill = async (req, res) => {
 exports.editName = (req, res) => {
   //Validate the name
   const { error, value } = nameValidation(req.body);
-  if (error) return error;
+  if (error) res.status(400).send(error.details[0].message);
 
   const { firstName, lastName } = value;
 
@@ -189,7 +189,7 @@ exports.editName = (req, res) => {
 exports.editUsername = (req, res) => {
   //Validate the username
   const { error, value } = usernameValidation(req.body);
-  if (error) return error;
+  if (error) res.status(400).send(error.details[0].message);
 
   const { username } = value;
 
@@ -207,7 +207,7 @@ exports.editUsername = (req, res) => {
 exports.editEmail = (req, res) => {
   //Validate the email
   const { error, value } = emailValidation(req.body);
-  if (error) return error;
+  if (error) res.status(400).send(error.details[0].message);
 
   const { email } = value;
   User.findOneAndUpdate({ _id: req.userId }, { email })
