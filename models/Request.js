@@ -24,4 +24,4 @@ const requestSchema = mongoose.Schema({
   },
 });
 
-exports.User = mongoose.model('requests', requestSchema);
+exports.Request = mongoose.model('requests', requestSchema);

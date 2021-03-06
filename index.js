@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const userRoutes = require('./routes/userRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const gigRoutes = require('./routes/gigRoutes');
+const requestRoutes = require('./routes/requestRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -17,6 +18,7 @@ app.use(cookieParser());
 app.use('/api', userRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/gigs', gigRoutes);
+app.use('/api/requests', requestRoutes);
 
 mongoose
   .connect('mongodb://localhost:27017/handelp', {
