@@ -20,7 +20,7 @@ exports.addRequest = (req, res) => {
 };
 
 /**
- * Add a request
+ * Edit a request
  * /PUT
  * @params {title, description, userId, requestId(id)}
  */
@@ -49,19 +49,25 @@ exports.editRequest = async (req, res) => {
 };
 
 /**
- * Add a request
- * /POST
- * @params {title, description, userId}
+ * Delete a request
+ * /DELETE
+ * @params {requestId(id), userId}
  */
-exports.addRequest = (req, res) => {
-  const userId = req.userId;
+exports.deleteRequest = async (req, res) => {
+  try {
+    //Check if the request ID is sent in the req.body
+    if (!req.body.id) throw 'No request defined';
 
-  const { error, value } = requestValidation(req.body);
-  if (error) res.status(400).send(error.details[0].message);
+    const userId = req.userId;
 
-  const { title, description } = value;
+    const request = await Request.findOne({ _id: req.body.id });
+    if (request.userId !== userId) throw "You can't delete this request";
 
-  Request.create({ title, description, userId })
-    .then(() => res.status(200).send('Request added successfully'))
-    .catch(() => res.status(400).send('Failed to add request'));
+    request
+      .deleteOne({ _id: req.body.id })
+      .then(() => res.status(200).send('Request deleted successfully'))
+      .catch(() => res.status(400).send('Failed delete request'));
+  } catch (error) {
+    res.status(400).send(error);
+  }
 };
