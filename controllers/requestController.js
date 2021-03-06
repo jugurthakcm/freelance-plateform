@@ -71,3 +71,14 @@ exports.deleteRequest = async (req, res) => {
     res.status(400).send(error);
   }
 };
+
+/**
+ * Get the user's requests
+ * /GET
+ * @params {userId}
+ */
+exports.getUserRequests = (req, res) => {
+  Request.find({ userId: req.userId })
+    .then((data) => res.status(200).send(data))
+    .catch(() => res.status(400).send('Failed to get your requests'));
+};
