@@ -115,7 +115,10 @@ exports.updateBio = async (req, res) => {
  */
 exports.updateSkills = async (req, res) => {
   try {
-    const { skillId, skill } = req.body;
+    const { error, value } = skillsValidation(req.body);
+    if (error) throw error.details[0].message;
+
+    const { skillId, skill } = value;
     const user = await User.findById(req.userId);
     const skills = user.skills;
     skills.push({ id: skillId, skill });

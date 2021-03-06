@@ -117,3 +117,19 @@ exports.passwordValidation = ({ newPassword, confirmedPassword }) => {
     confirmedPassword,
   });
 };
+
+/**
+ * Validate update skills
+ * @params {skillId, skill}
+ */
+exports.skillsValidation = ({ skillId, skill }) => {
+  const schema = Joi.object({
+    skillId: Joi.string().required().trim().min(1),
+    skill: Joi.string().required().min(2).max(50),
+  });
+
+  return schema.validate({
+    skillId,
+    skill,
+  });
+};
