@@ -4,13 +4,13 @@ const { commentValidation } = require('../validation/commentValidation');
 
 exports.addComment = async (req, res) => {
   try {
-    const gig = await Gig.findById(req.params.gigId);
-    if (!gig) throw 'No gig defined';
-
     const { error, value } = commentValidation(req.body);
     if (error) throw error.details[0].message;
 
-    const { content } = value;
+    const { content, gigId } = value;
+
+    const gig = await Gig.findById(gigId);
+    if (!gig) throw 'No gig defined';
 
     const receiverId = gig.sellerId;
 
@@ -18,7 +18,7 @@ exports.addComment = async (req, res) => {
       content,
       senderId: req.userId,
       receiverId,
-      gigId: req.params.gigId,
+      gigId,
     })
       .then(() => res.status(200).send('Comment created successfully'))
       .catch(() => res.status(500).send('Error during creating comment'));
