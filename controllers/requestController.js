@@ -10,7 +10,7 @@ exports.addRequest = (req, res) => {
   const userId = req.userId;
 
   const { error, value } = requestValidation(req.body);
-  if (error) res.status(400).send(error.details[0].message);
+  if (error) return res.status(400).send(error.details[0].message);
 
   const { title, description } = value;
 
@@ -32,7 +32,8 @@ exports.editRequest = async (req, res) => {
     const userId = req.userId;
 
     const request = await Request.findOne({ _id: req.body.id });
-    if (request.userId !== userId) throw "You can't edit this request";
+    if (!request) throw "This request doesn't exist";
+    if (request.userId !== userId._id) throw "You can't edit this request";
 
     const { error, value } = requestValidation(req.body);
     if (error) res.status(400).send(error.details[0].message);
@@ -40,7 +41,7 @@ exports.editRequest = async (req, res) => {
     const { title, description } = value;
 
     request
-      .UpdateOne({ title, description })
+      .update({ title, description })
       .then(() => res.status(200).send('Request updated successfully'))
       .catch(() => res.status(400).send('Failed to update request'));
   } catch (error) {
@@ -61,7 +62,8 @@ exports.deleteRequest = async (req, res) => {
     const userId = req.userId;
 
     const request = await Request.findOne({ _id: req.body.id });
-    if (request.userId !== userId) throw "You can't delete this request";
+    if (!request) throw "This request doesn't exist";
+    if (request.userId !== userId._id) throw "You can't delete this request";
 
     request
       .deleteOne({ _id: req.body.id })
