@@ -1,6 +1,9 @@
 const { Category } = require('../models/Category');
 const { Gig } = require('../models/Gig');
-const { gigValidation } = require('../validation/gigValidation');
+const {
+  gigValidation,
+  ratingValidation,
+} = require('../validation/gigValidation');
 
 /**
  * User adds his gig
@@ -14,13 +17,11 @@ exports.addGig = async (req, res) => {
 
     const { title, categoryId, subCategory, price } = value;
 
-    //Getting the category title
     const category = await Category.findById(categoryId);
 
     if (!category) throw "This category doesn't exist";
     const categoryTitle = category.title;
 
-    //Saving the gig to the db
     Gig.create({
       title,
       category: categoryTitle,
@@ -47,10 +48,8 @@ exports.deleteGig = async (req, res) => {
 
     const gig = await Gig.findById(id);
 
-    //Verify if the gig exists
     if (!gig) throw "This gig doesn't exist";
 
-    //Check if the user owns the gig
     if (req.userId._id !== gig.sellerId)
       throw "You don't have the permission to delete this gig";
 
@@ -98,19 +97,15 @@ exports.editMyGig = async (req, res) => {
 
     const { title, categoryId, subCategory, price } = value;
 
-    //Getting the category title
     const category = await Category.findById(categoryId);
 
     if (!category) throw "This category doesn't exist";
     const categoryTitle = category.title;
 
-    //Get the gig and edit it
     const gig = await Gig.findOne({ _id: req.params.id, sellerId: req.userId });
 
-    //Check if the gig exists
     if (!gig) throw "This gig doesn't exist";
 
-    //Update the gig
     gig
       .updateOne({
         title,
@@ -120,6 +115,38 @@ exports.editMyGig = async (req, res) => {
       })
       .then(() => res.status(200).send('Gig Edited successfully'))
       .catch(() => res.status(400).send('Error editing the gig'));
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
+exports.exploreGigs = (req, res) => {
+  Gig.find({ sellerId: { $ne: req.userId._id } })
+    .then((data) => res.status(200).send(data))
+    .catch(() => res.status(500).send('Error fetching gigs'));
+};
+
+exports.filterGigsPerCategory = (req, res) => {
+  const categoryURL = req.params.category.split('_').join(' ').toUpperCase();
+
+  Gig.find({ category: categoryURL })
+    .then((data) => res.status(200).send(data))
+    .catch(() => res.status(500).send('Error fetching gigs'));
+};
+
+exports.rateGig = async (req, res) => {
+  try {
+    const { error, value } = ratingValidation(req.body);
+    if (error) throw error.details[0].message;
+
+    const { rating } = value;
+
+    const gig = await Gig.findOne({ _id: req.params.gigId });
+
+    gig
+      .update({ rating: (gig.rating + rating) / 2 })
+      .then(() => res.status(200).send('Gig rated successfully'))
+      .catch(() => res.status(500).send('Error during rating gig'));
   } catch (error) {
     res.status(400).send(error);
   }
