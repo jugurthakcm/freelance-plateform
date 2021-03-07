@@ -50,7 +50,7 @@ exports.deleteGig = async (req, res) => {
 
     if (!gig) throw "This gig doesn't exist";
 
-    if (req.userId._id !== gig.sellerId)
+    if (req.userId !== gig.sellerId)
       throw "You don't have the permission to delete this gig";
 
     //Delete the gig
@@ -121,7 +121,7 @@ exports.editMyGig = async (req, res) => {
 };
 
 exports.exploreGigs = (req, res) => {
-  Gig.find({ sellerId: { $ne: req.userId._id } })
+  Gig.find({ sellerId: { $ne: req.userId } })
     .then((data) => res.status(200).send(data))
     .catch(() => res.status(500).send('Error fetching gigs'));
 };
@@ -129,7 +129,7 @@ exports.exploreGigs = (req, res) => {
 exports.filterGigsPerCategory = (req, res) => {
   const categoryURL = req.params.category.split('_').join(' ');
 
-  Gig.find({ category: categoryURL, sellerId: { $ne: req.userId._id } })
+  Gig.find({ category: categoryURL, sellerId: { $ne: req.userId } })
     .then((data) => res.status(200).send(data))
     .catch(() => res.status(500).send('Error fetching gigs'));
 };
@@ -145,7 +145,7 @@ exports.rateGig = async (req, res) => {
     const gig = await Gig.findOne({ _id: req.params.gigId });
     if (!gig) throw "this gig doesn't exist";
 
-    if (gig.sellerId === req.userId._id) throw "you can't rate your own gig";
+    if (gig.sellerId === req.userId) throw "you can't rate your own gig";
 
     const newRate = (gig.rating + rating) / 2;
 

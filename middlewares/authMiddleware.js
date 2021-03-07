@@ -9,8 +9,8 @@ exports.auth = (req, res, next) => {
 
     if (!token || !header) throw 'no token';
     // if (!token) throw 'no token';
-    const userId = jwt.verify(token, process.env.JWT_KEY);
-    req.userId = userId;
+    const user = jwt.verify(token, process.env.JWT_KEY);
+    req.userId = user._id;
     next();
   } catch (error) {
     res

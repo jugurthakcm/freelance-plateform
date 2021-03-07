@@ -33,7 +33,7 @@ exports.editRequest = async (req, res) => {
 
     const request = await Request.findOne({ _id: req.body.id });
     if (!request) throw "This request doesn't exist";
-    if (request.userId !== userId._id) throw "You can't edit this request";
+    if (request.userId !== userId) throw "You can't edit this request";
 
     const { error, value } = requestValidation(req.body);
     if (error) res.status(400).send(error.details[0].message);
@@ -63,7 +63,7 @@ exports.deleteRequest = async (req, res) => {
 
     const request = await Request.findOne({ _id: req.body.id });
     if (!request) throw "This request doesn't exist";
-    if (request.userId !== userId._id) throw "You can't delete this request";
+    if (request.userId !== userId) throw "You can't delete this request";
 
     request
       .deleteOne({ _id: req.body.id })
