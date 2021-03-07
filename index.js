@@ -7,6 +7,7 @@ const userRoutes = require('./routes/userRoutes');
 const categoryRoutes = require('./routes/categoryRoutes');
 const gigRoutes = require('./routes/gigRoutes');
 const requestRoutes = require('./routes/requestRoutes');
+const commentRoutes = require('./routes/commentRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -19,6 +20,7 @@ app.use('/api', userRoutes);
 app.use('/api/categories', categoryRoutes);
 app.use('/api/gigs', gigRoutes);
 app.use('/api/requests', requestRoutes);
+app.use('/api/comment', commentRoutes);
 
 mongoose
   .connect('mongodb://localhost:27017/handelp', {
