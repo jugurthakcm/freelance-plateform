@@ -18,7 +18,7 @@ exports.gigValidation = ({ title, categoryId, subCategory, price }) => {
 
 exports.ratingValidation = ({ rating }) => {
   const schema = Joi.object({
-    rating: Joi.number().required().trim().min(1).max(5),
+    rating: Joi.number().required().min(1).max(5),
   });
 
   return schema.validate({

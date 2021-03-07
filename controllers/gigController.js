@@ -127,9 +127,9 @@ exports.exploreGigs = (req, res) => {
 };
 
 exports.filterGigsPerCategory = (req, res) => {
-  const categoryURL = req.params.category.split('_').join(' ').toUpperCase();
+  const categoryURL = req.params.category.split('_').join(' ');
 
-  Gig.find({ category: categoryURL })
+  Gig.find({ category: categoryURL, sellerId: { $ne: req.userId._id } })
     .then((data) => res.status(200).send(data))
     .catch(() => res.status(500).send('Error fetching gigs'));
 };
@@ -137,14 +137,20 @@ exports.filterGigsPerCategory = (req, res) => {
 exports.rateGig = async (req, res) => {
   try {
     const { error, value } = ratingValidation(req.body);
+
     if (error) throw error.details[0].message;
 
     const { rating } = value;
 
     const gig = await Gig.findOne({ _id: req.params.gigId });
+    if (!gig) throw "this gig doesn't exist";
+
+    if (gig.sellerId === req.userId._id) throw "you can't rate your own gig";
+
+    const newRate = (gig.rating + rating) / 2;
 
     gig
-      .update({ rating: (gig.rating + rating) / 2 })
+      .update({ rating: newRate })
       .then(() => res.status(200).send('Gig rated successfully'))
       .catch(() => res.status(500).send('Error during rating gig'));
   } catch (error) {

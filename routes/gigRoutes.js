@@ -17,8 +17,8 @@ router.post('/add', auth, addGig);
 router.delete('/delete', auth, deleteGig);
 router.get('/mygigs/:id', auth, getMyGig);
 router.put('/mygigs/:id/edit', auth, editMyGig);
-router.get('/explore/:category', filterGigsPerCategory);
-router.get('/explore', exploreGigs);
-router.post('/:gigId/rate', auth, rateGig);
+router.get('/explore/:category', auth, filterGigsPerCategory);
+router.get('/explore', auth, exploreGigs);
+router.put('/:gigId/rate', auth, rateGig);
 
 module.exports = router;
