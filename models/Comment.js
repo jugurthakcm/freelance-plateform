@@ -12,12 +12,12 @@ const commentSchema = mongoose.Schema({
     min: 1,
     max: 50,
   },
-  //   receiverId: {
-  //     type: String,
-  //     required: true,
-  //     min: 1,
-  //     max: 50,
-  //   },
+  receiverId: {
+    type: String,
+    required: true,
+    min: 1,
+    max: 50,
+  },
   gigId: {
     type: String,
     required: true,

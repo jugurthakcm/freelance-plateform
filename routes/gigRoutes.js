@@ -1,4 +1,5 @@
 const express = require('express');
+const { addComment } = require('../controllers/commentController');
 const router = express.Router();
 const {
   addGig,
@@ -20,5 +21,6 @@ router.put('/mygigs/:id/edit', auth, editMyGig);
 router.get('/explore/:category', auth, filterGigsPerCategory);
 router.get('/explore', auth, exploreGigs);
 router.put('/:gigId/rate', auth, rateGig);
+router.post('/:gigId/comment', auth, addComment);
 
 module.exports = router;
