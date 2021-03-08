@@ -73,7 +73,7 @@ exports.deleteComment = async (req, res) => {
   try {
     if (!req.body.commentId) throw 'No comment is defined';
 
-    const comment = await Comment.findById(commentId);
+    const comment = await Comment.findById(req.body.commentId);
 
     if (comment.senderId !== req.userId) throw "You can't delete this comment";
 
@@ -89,7 +89,7 @@ exports.deleteComment = async (req, res) => {
 exports.getComments = (req, res) => {
   if (!req.body.gigId) return res.status(400).send('No gig is defined');
 
-  Comment.find({ gigId })
+  Comment.find({ gigId: req.body.gigId })
     .then((data) => res.status(200).send(data))
     .catch(() => res.status(500).send('Error during fetching comments'));
 };
