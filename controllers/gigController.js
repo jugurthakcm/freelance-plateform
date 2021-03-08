@@ -120,12 +120,22 @@ exports.editMyGig = async (req, res) => {
   }
 };
 
+/**
+ * A user explore all gigs except his
+ * /GET
+ * @params {userId}
+ */
 exports.exploreGigs = (req, res) => {
   Gig.find({ sellerId: { $ne: req.userId } })
     .then((data) => res.status(200).send(data))
     .catch(() => res.status(500).send('Error fetching gigs'));
 };
 
+/**
+ * A user explore gigs filtred by categories
+ * /GET
+ * @params {userId, categoryURL}
+ */
 exports.filterGigsPerCategory = (req, res) => {
   const categoryURL = req.params.category.split('_').join(' ');
 
@@ -134,6 +144,11 @@ exports.filterGigsPerCategory = (req, res) => {
     .catch(() => res.status(500).send('Error fetching gigs'));
 };
 
+/**
+ * A user rate a gig
+ * /POST
+ * @params {gigId, rating}
+ */
 exports.rateGig = async (req, res) => {
   try {
     const { error, value } = ratingValidation(req.body);
