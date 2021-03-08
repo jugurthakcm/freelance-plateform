@@ -15,7 +15,7 @@ exports.addCommentValidation = ({ content, gigId }) => {
 exports.editCommentValidation = ({ content, commentId }) => {
   const schema = Joi.object({
     content: Joi.string().required().trim().min(1),
-    commentIdId: Joi.string().required().trim().min(1).max(50),
+    commentId: Joi.string().required().trim().min(1).max(50),
   });
 
   return schema.validate({
