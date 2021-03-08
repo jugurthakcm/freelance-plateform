@@ -1,7 +1,9 @@
 const { Gig } = require('../models/Gig');
 const { Comment } = require('../models/Comment');
-const { addCommentValidation } = require('../validation/commentValidation');
-const { editCommentValidation } = require('../validation/commentValidation');
+const {
+  addCommentValidation,
+  editCommentValidation,
+} = require('../validation/commentValidation');
 
 /**
  * A user adds a comment to a gig
