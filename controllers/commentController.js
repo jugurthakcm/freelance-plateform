@@ -36,7 +36,7 @@ exports.addComment = async (req, res) => {
 
 /**
  * A user edits his comment on a gig
- * /POST
+ * /PUT
  * @params {content, commentId}
  */
 exports.editComment = async (req, res) => {
@@ -49,11 +49,36 @@ exports.editComment = async (req, res) => {
     const comment = await Comment.findById(commentId);
     if (!comment) throw 'No comment defined';
 
+    if (comment.senderId !== req.userId) throw "you can't edit this comment";
+
     Comment.updateOne({
       content,
     })
       .then(() => res.status(200).send('Comment updated successfully'))
       .catch(() => res.status(500).send('Error during updating comment'));
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
+/**
+ * A user delete his comment
+ * /DELETE
+ * @params {commentId}
+ */
+
+exports.deleteComment = async (req, res) => {
+  try {
+    if (!req.body.commentId) throw 'No comment is defined';
+
+    const comment = await Comment.findById(commentId);
+
+    if (comment.senderId !== req.userId) throw "You can't delete this comment";
+
+    comment
+      .deleteOne({})
+      .then(() => res.status(200).send('Comment deleted successfully'))
+      .catch(() => res.status(500).send('Error during deleting comment'));
   } catch (error) {
     res.status(400).send(error);
   }
