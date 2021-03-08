@@ -10,7 +10,8 @@
     "client": "cd frontend && yarn start",
     "build frontend": "cd frontend && yarn build",
     "dev": "concurrently \"cd frontend && yarn start\" \"nodemon index.js\"",
-    "serve": "nodemon index.js"
+    "serve": "nodemon index.js",
+    "start ": "node index.js"
   },
   "dependencies": {
     "bcrypt": "^5.0.0",
