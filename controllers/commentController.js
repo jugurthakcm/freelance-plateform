@@ -83,3 +83,11 @@ exports.deleteComment = async (req, res) => {
     res.status(400).send(error);
   }
 };
+
+exports.getComments = (req, res) => {
+  if (!req.body.gigId) return res.status(400).send('No gig is defined');
+
+  Comment.find({ gigId })
+    .then((data) => res.status(200).send(data))
+    .catch(() => res.status(500).send('Error during fetching comments'));
+};
