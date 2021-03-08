@@ -30,4 +30,6 @@ mongoose
   .then(() => console.log('Connected to the database'))
   .catch((err) => console.log(err));
 
+app.get('/', (req, res) => res.send('Hello world'));
+
 app.listen(PORT, () => console.log('Listening to ' + PORT));
