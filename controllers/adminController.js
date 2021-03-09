@@ -8,6 +8,7 @@ const {
 } = require('../validation/adminValidation');
 const { Admin } = require('../models/Admin');
 const { Gig } = require('../models/Gig');
+const { User } = require('../models/User');
 
 /**
  * Register an admin
@@ -101,4 +102,10 @@ exports.approveGig = (req, res) => {
   Gig.findOneAndUpdate({ _id: req.body.gigId }, { confirmed: true })
     .then(() => res.status(200).send('Gig confirmed successfully'))
     .catch(() => res.status(500).send('Error during confirming gig'));
+};
+
+exports.getUsers = (req, res) => {
+  User.find({}, { password: 0, __v: 0 })
+    .then((data) => res.status(200).send(data))
+    .catch(() => res.status(500).send('Error during fetching users'));
 };
