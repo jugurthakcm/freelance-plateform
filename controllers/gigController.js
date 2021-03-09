@@ -188,3 +188,9 @@ exports.rateGig = async (req, res) => {
     res.status(400).send(error);
   }
 };
+
+exports.getPendingGigs = (req, res) => {
+  Gig.find({ sellerId: req.userId, confirmed: false })
+    .then((data) => res.status(200).send(data))
+    .catch(() => res.status(500).send('Error during fetching gigs'));
+};
