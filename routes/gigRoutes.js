@@ -10,10 +10,12 @@ const {
   exploreGigs,
   filterGigsPerCategory,
   rateGig,
+  getMyPendingGigs,
 } = require('../controllers/gigController');
 const { auth } = require('../middlewares/authMiddleware');
 
 router.get('/mygigs', auth, getMyGigs);
+router.get('/mygigs/pending', auth, getMyPendingGigs);
 router.post('/add', auth, addGig);
 router.delete('/delete', auth, deleteGig);
 router.get('/mygigs/:id', auth, getMyGig);

@@ -29,8 +29,8 @@ exports.addGig = async (req, res) => {
       price,
       sellerId: req.userId,
     })
-      .then(() => res.status(201).send('Gig added successfully'))
-      .catch(() => res.status(400).send('Failed to add the gig'));
+      .then(() => res.status(200).send('Gig added successfully'))
+      .catch(() => res.status(500).send('Failed to add the gig'));
   } catch (err) {
     res.status(400).send(err);
   }
@@ -67,7 +67,18 @@ exports.deleteGig = async (req, res) => {
  * @params {userId}
  */
 exports.getMyGigs = (req, res) => {
-  Gig.find({ sellerId: req.userId })
+  Gig.find({ sellerId: req.userId, confirmed: true })
+    .then((data) => res.status(200).send(data))
+    .catch(() => res.status(400).send('Error during fetching gigs'));
+};
+
+/**
+ * A user gets his pending gigs
+ * /GET
+ * @params {userId}
+ */
+exports.getMyPendingGigs = (req, res) => {
+  Gig.find({ sellerId: req.userId, confirmed: false })
     .then((data) => res.status(200).send(data))
     .catch(() => res.status(400).send('Error during fetching gigs'));
 };
@@ -79,7 +90,7 @@ exports.getMyGigs = (req, res) => {
  */
 
 exports.getMyGig = (req, res) => {
-  Gig.find({ sellerId: req.userId, _id: req.params.id })
+  Gig.find({ sellerId: req.userId, _id: req.params.id, confirmed: true })
     .then((data) => res.status(200).send(data))
     .catch(() => res.status(400).send('Error during fetching gig'));
 };
@@ -112,6 +123,7 @@ exports.editMyGig = async (req, res) => {
         price,
         category: categoryTitle,
         subCategory,
+        confirmed: false,
       })
       .then(() => res.status(200).send('Gig Edited successfully'))
       .catch(() => res.status(400).send('Error editing the gig'));
@@ -126,7 +138,7 @@ exports.editMyGig = async (req, res) => {
  * @params {userId}
  */
 exports.exploreGigs = (req, res) => {
-  Gig.find({ sellerId: { $ne: req.userId } })
+  Gig.find({ sellerId: { $ne: req.userId }, confirmed: true })
     .then((data) => res.status(200).send(data))
     .catch(() => res.status(500).send('Error fetching gigs'));
 };
@@ -139,7 +151,11 @@ exports.exploreGigs = (req, res) => {
 exports.filterGigsPerCategory = (req, res) => {
   const categoryURL = req.params.category.split('_').join(' ');
 
-  Gig.find({ category: categoryURL, sellerId: { $ne: req.userId } })
+  Gig.find({
+    category: categoryURL,
+    sellerId: { $ne: req.userId },
+    confirmed: true,
+  })
     .then((data) => res.status(200).send(data))
     .catch(() => res.status(500).send('Error fetching gigs'));
 };
@@ -157,7 +173,7 @@ exports.rateGig = async (req, res) => {
 
     const { rating } = value;
 
-    const gig = await Gig.findOne({ _id: req.params.gigId });
+    const gig = await Gig.findOne({ _id: req.params.gigId, confirmed: true });
     if (!gig) throw "this gig doesn't exist";
 
     if (gig.sellerId === req.userId) throw "you can't rate your own gig";

@@ -5,7 +5,7 @@ exports.gigValidation = ({ title, categoryId, subCategory, price }) => {
     title: Joi.string().required().trim().min(1).max(50),
     categoryId: Joi.string().required().trim().min(1).max(50),
     subCategory: Joi.string().required().trim().min(1).max(50),
-    price: Joi.number().required().trim().min(1),
+    price: Joi.number().required().min(1),
   });
 
   return schema.validate({
