@@ -24,6 +24,10 @@ const userSchema = mongoose.Schema({
     required: true,
     max: 50,
   },
+  confirmedEmail: {
+    type: Boolean,
+    default: false,
+  },
   password: {
     type: String,
     required: true,
