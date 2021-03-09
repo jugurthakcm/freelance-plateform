@@ -1,6 +1,7 @@
 require('dotenv').config();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { sendMail } = require('../mail/nodemailer');
 const { User } = require('../models/User');
 const {
   registerValidation,
@@ -36,6 +37,10 @@ exports.register = async (req, res) => {
     //Crypt password
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(user.password, salt);
+
+    const email = { subject: 'Confirm your email', html: '<b>Hello</b>' };
+    const emailSent = await sendMail(email, user.email);
+    if (!emailSent.messageId) throw 'Failed during sending email';
 
     //Add the user to the DB
     User.create({
