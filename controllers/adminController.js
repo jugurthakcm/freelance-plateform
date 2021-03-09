@@ -96,16 +96,61 @@ exports.getPendingGigs = (req, res) => {
     .catch(() => res.status(500).send('Error during fetching gigs'));
 };
 
-exports.approveGig = (req, res) => {
-  if (!req.body.gigId) return res.status(400).send('No gig defined');
+exports.approveGig = async (req, res) => {
+  try {
+    if (!req.body.gigId) return res.status(400).send('No gig defined');
 
-  Gig.findOneAndUpdate({ _id: req.body.gigId }, { confirmed: true })
-    .then(() => res.status(200).send('Gig confirmed successfully'))
-    .catch(() => res.status(500).send('Error during confirming gig'));
+    const { gigId } = req.body;
+    if (!gigId) throw 'No gig definded';
+
+    const gig = await Gig.findById(gigId);
+    if (!gig) throw "This gig doesn't exist";
+
+    gig
+      .updateOne({ confirmed: true })
+      .then(() => res.status(200).send('Gig confirmed successfully'))
+      .catch(() => res.status(500).send('Error during confirming gig'));
+  } catch (error) {
+    res.status(400).send(error);
+  }
 };
 
 exports.getUsers = (req, res) => {
   User.find({}, { password: 0, __v: 0 })
     .then((data) => res.status(200).send(data))
     .catch(() => res.status(500).send('Error during fetching users'));
+};
+
+exports.deleteGig = async (req, res) => {
+  try {
+    const { gigId } = req.body;
+    if (!gigId) throw 'No gig definded';
+
+    const gig = await Gig.findById(gigId);
+    if (!gig) throw "This gig doesn't exist";
+
+    gig
+      .deleteOne({})
+      .then(() => res.status(200).send('Gig deleted successfully'))
+      .catch(() => res.status(500).send('Error during deleting gig'));
+  } catch (error) {
+    res.status(400).send(error);
+  }
+};
+
+exports.deleteUser = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    if (!userId) throw 'No user definded';
+
+    const user = await User.findById(userId);
+    if (!user) throw "This user doesn't exist";
+
+    user
+      .deleteOne({})
+      .then(() => res.status(200).send('User deleted successfully'))
+      .catch(() => res.status(500).send('Error during deleting user'));
+  } catch (error) {
+    res.status(400).send(error);
+  }
 };
