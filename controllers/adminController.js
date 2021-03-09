@@ -1,10 +1,12 @@
+require('dotenv').config();
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+
 const {
   registerAdminValidation,
   loginAdminValidation,
 } = require('../validation/adminValidation');
 const { Admin } = require('../models/Admin');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
 
 /**
  * Register an admin
