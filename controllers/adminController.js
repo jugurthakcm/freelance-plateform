@@ -7,6 +7,7 @@ const {
   loginAdminValidation,
 } = require('../validation/adminValidation');
 const { Admin } = require('../models/Admin');
+const { Gig } = require('../models/Gig');
 
 /**
  * Register an admin
@@ -80,4 +81,24 @@ exports.loginAdmin = async (req, res) => {
   } catch (error) {
     res.status(400).send(error);
   }
+};
+
+exports.getGigs = (req, res) => {
+  Gig.find({})
+    .then((data) => res.status(200).send(data))
+    .catch(() => res.status(500).send('Error during fetching gigs'));
+};
+
+exports.getPendingGigs = (req, res) => {
+  Gig.find({ confirmed: false })
+    .then((data) => res.status(200).send(data))
+    .catch(() => res.status(500).send('Error during fetching gigs'));
+};
+
+exports.approveGig = (req, res) => {
+  if (!req.body.gigId) return res.status(400).send('No gig defined');
+
+  Gig.findOneAndUpdate({ _id: req.body.gigId }, { confirmed: true })
+    .then(() => res.status(200).send('Gig confirmed successfully'))
+    .catch(() => res.status(500).send('Error during confirming gig'));
 };
