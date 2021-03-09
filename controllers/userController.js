@@ -38,18 +38,21 @@ exports.register = async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(user.password, salt);
 
-    const email = { subject: 'Confirm your email', html: '<b>Hello</b>' };
-    const emailSent = await sendMail(email, user.email);
-    if (!emailSent.messageId) throw 'Failed during sending email';
-
-    //Add the user to the DB
-    User.create({
+    const newUser = new User({
       firstName: user.firstName,
       lastName: user.lastName,
       username: user.username,
       email: user.email,
       password: hash,
-    })
+    });
+
+    const email = { subject: 'Confirm your email', html: `${newUser._id}` };
+    const emailSent = await sendMail(email, user.email);
+    if (!emailSent.messageId) throw 'Failed during sending email';
+
+    //Add the user to the DB
+    newUser
+      .save()
       .then(() => res.status(200).send('User added successfully'))
       .catch((error) => {
         throw error;
