@@ -13,6 +13,8 @@ const {
   passwordValidation,
   skillsValidation,
 } = require('../validation/userValidation');
+const Joi = require('joi');
+const phoneJoi = Joi.extend(require('joi-phone-number'));
 
 /**
  * Register a user
@@ -21,18 +23,27 @@ const {
  */
 exports.register = async (req, res) => {
   try {
+    const phone = phoneJoi
+      .string()
+      .phoneNumber({
+        defaultCountry: 'DZ',
+        format: 'international',
+        strict: true,
+      })
+      .validate(req.body.phone);
+
+    if (phone.error) throw 'Invalid phone number';
     //Validation
     const { error, value } = registerValidation(req.body);
     if (error) throw error.details[0].message;
 
     const user = value;
 
-    //Verify if user exists
-    // const emailExists = await User.findOne({ email: user.email });
-    // if (emailExists) throw 'Email already exists';
+    const emailExists = await User.findOne({ email: user.email });
+    if (emailExists) throw 'Email already exists';
 
-    // const usernameExists = await User.findOne({ username: user.username });
-    // if (usernameExists) throw 'Username already exists';
+    const usernameExists = await User.findOne({ username: user.username });
+    if (usernameExists) throw 'Username already exists';
 
     //Crypt password
     const salt = await bcrypt.genSalt(10);
@@ -44,6 +55,7 @@ exports.register = async (req, res) => {
       username: user.username,
       email: user.email,
       password: hash,
+      phone: phone.value,
     });
 
     const token = jwt.sign({ _id: newUser._id }, process.env.JWT_KEY, {
