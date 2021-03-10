@@ -6,6 +6,7 @@ const router = express.Router();
 
 router.get('/confirmAccount/:token', (req, res) => {
   const token = req.params.token;
+
   jwt.verify(token, process.env.JWT_KEY, function (err, user) {
     if (err) return res.status(400).send('Invalid token');
 
@@ -14,4 +15,5 @@ router.get('/confirmAccount/:token', (req, res) => {
       .catch(() => res.status(500).send('Error during confirming email'));
   });
 });
+
 module.exports = router;

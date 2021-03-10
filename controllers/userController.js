@@ -46,7 +46,9 @@ exports.register = async (req, res) => {
       password: hash,
     });
 
-    const token = jwt.sign({ _id: newUser._id }, process.env.JWT_KEY);
+    const token = jwt.sign({ _id: newUser._id }, process.env.JWT_KEY, {
+      expiresIn: '1h',
+    });
 
     const paramsEmail = { subject: 'Confirm your email', token };
     const emailSent = await sendMail(paramsEmail, user.email);
