@@ -1,9 +1,10 @@
+require('dotenv').config();
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require('path');
 const hbs = require('handlebars');
 
-exports.sendMail = async (email, userEmail) => {
+exports.sendMail = async (paramsEmail, userEmail) => {
   try {
     const filePath = path.join(
       __dirname + '/templates/confirmEmail.handlebars'
@@ -13,7 +14,8 @@ exports.sendMail = async (email, userEmail) => {
 
     const template = hbs.compile(source);
     const replacements = {
-      username: 'Jugurtha',
+      token: paramsEmail.token,
+      url: process.env.URL,
     };
     const htmlToSend = template(replacements);
 
@@ -28,7 +30,7 @@ exports.sendMail = async (email, userEmail) => {
     return await transporter.sendMail({
       from: 'Handelp',
       to: userEmail,
-      subject: email.subject,
+      subject: paramsEmail.subject,
       html: htmlToSend,
     });
   } catch (error) {

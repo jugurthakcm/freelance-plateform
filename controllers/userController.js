@@ -46,8 +46,10 @@ exports.register = async (req, res) => {
       password: hash,
     });
 
-    const email = { subject: 'Confirm your email' };
-    const emailSent = await sendMail(email, user.email);
+    const token = jwt.sign({ _id: newUser._id }, process.env.JWT_KEY);
+
+    const paramsEmail = { subject: 'Confirm your email', token };
+    const emailSent = await sendMail(paramsEmail, user.email);
     if (!emailSent.messageId) throw 'Failed during sending email';
 
     //Add the user to the DB
