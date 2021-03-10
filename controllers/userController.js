@@ -28,11 +28,11 @@ exports.register = async (req, res) => {
     const user = value;
 
     //Verify if user exists
-    const emailExists = await User.findOne({ email: user.email });
-    if (emailExists) throw 'Email already exists';
+    // const emailExists = await User.findOne({ email: user.email });
+    // if (emailExists) throw 'Email already exists';
 
-    const usernameExists = await User.findOne({ username: user.username });
-    if (usernameExists) throw 'Username already exists';
+    // const usernameExists = await User.findOne({ username: user.username });
+    // if (usernameExists) throw 'Username already exists';
 
     //Crypt password
     const salt = await bcrypt.genSalt(10);
@@ -48,7 +48,6 @@ exports.register = async (req, res) => {
 
     const email = { subject: 'Confirm your email' };
     const emailSent = await sendMail(email, user.email);
-    console.log(emailSent);
     if (!emailSent.messageId) throw 'Failed during sending email';
 
     //Add the user to the DB
