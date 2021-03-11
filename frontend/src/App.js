@@ -14,18 +14,19 @@ import Store from './pages/Store';
 function App() {
   const language = useLanguageContext()[0];
 
-  setTimeout(() => {
-    document.querySelector('.app').classList.remove('app-anim');
-    document.querySelector('.intro').classList.add('d-none');
-  }, 6100);
+  // setTimeout(() => {
+  //   document.querySelector('.app').classList.remove('app-anim');
+  //   document.querySelector('.intro').classList.add('d-none');
+  // }, 6100);
 
   return (
     <div>
-      <div className="intro">
+      {/* <div className="intro">
         <Video />
-      </div>
+      </div> */}
 
-      <div className="app app-anim">
+      {/* <div className="app app-anim"> */}
+      <div className="app">
         <Language />
         <I18nProvider locale={language}>
           <Aside />

@@ -22,23 +22,16 @@ const Navbar = ({ navStore }) => {
       .catch((err) => console.error(err));
 
     const header = document.querySelector('.navbar');
-    const navSearch = document.querySelector('.navbar__search');
 
     window.addEventListener('scroll', () => {
       header && window.scrollY > 0
         ? header.classList.add('navbar__sticky')
         : header.classList.remove('navbar__sticky');
-      navSearch && window.scrollY > 0
-        ? navSearch.classList.remove('d-none')
-        : navSearch.classList.add('d-none');
     });
 
     header && window.scrollY > 0
       ? header.classList.add('navbar__sticky')
       : header.classList.remove('navbar__sticky');
-    navSearch && window.scrollY > 0
-      ? navSearch.classList.remove('d-none')
-      : navSearch.classList.add('d-none');
   }, []);
 
   const handleClick = () => {
@@ -58,41 +51,25 @@ const Navbar = ({ navStore }) => {
   return (
     <nav className="navbar" style={{ boxShadow: boxShadow }}>
       <div className="navbar__up">
-        <div className="navbar__title">
-          <FontAwesomeIcon
-            icon={faBars}
-            className="d-md-none d-block"
-            size="2x"
-            onClick={() => handleClick()}
-          />
-          {/*  <h1 className="d-sm-block d-none">Handelp</h1> */}
-          <img
-            src={logoYellow}
-            alt="logo"
-            width="180px"
-            className="d-sm-block d-none"
-          />
-        </div>
-        {/* <h1 className="d-sm-none">Handelp</h1> */}
-        <img
-          src={logoYellow}
-          alt="logo"
-          width="200px"
-          className="responsive__logo d-sm-none"
-        />
-        <div className="navbar__search d-none">
-          <div className="navbar__searchBar">
-            <FontAwesomeIcon icon={faSearch} />
-            <FormattedMessage id="search.placeholder" defaultMessage="search">
-              {(placeholder) => <input type="text" placeholder={placeholder} />}
-            </FormattedMessage>
+        <div className="navbar__left">
+          <div className="navbar__title">
+            <FontAwesomeIcon
+              icon={faBars}
+              className="d-md-none d-block"
+              size="2x"
+              onClick={() => handleClick()}
+            />
+            {/*  <h1 className="d-sm-block d-none">Handelp</h1> */}
+            <img
+              src={logoYellow}
+              alt="logo"
+              width="180px"
+              className="d-sm-block d-none"
+            />
           </div>
-          <button className="navbar__searchButton">
-            <FormattedMessage id="search.button" />
-          </button>
-        </div>
-        <div className="navbar__links">
-          <div className="navbar__navLinks d-md-flex d-none">
+          {/* <h1 className="d-sm-none">Handelp</h1> */}
+
+          <div className="navbar__center d-md-flex d-none">
             <Link to="/">
               <FormattedMessage id="navbar.home" />
             </Link>
@@ -106,14 +83,23 @@ const Navbar = ({ navStore }) => {
               <FormattedMessage id="navbar.store" />
             </Link>
           </div>
-          <div className="navbar__authLinks d-flex">
-            <Link to="/login" className="navbar__linkLogin d-sm-inline d-none">
-              <FormattedMessage id="navbar.login" />
-            </Link>
-            <Link to="/register" className="navbar__linkRegister">
-              <FormattedMessage id="navbar.register" />
-            </Link>
-          </div>
+        </div>
+
+        <img
+          src={logoYellow}
+          alt="logo"
+          width="180px"
+          className="responsive__logo d-sm-none"
+        />
+
+        <div className="navbar__right d-flex">
+          <Link to="/login" className="navbar__linkLogin d-sm-inline d-none">
+            <FormattedMessage id="navbar.login" />
+          </Link>
+          <Link to="/register" className="navbar__linkRegister">
+            <FormattedMessage id="navbar.register" />
+          </Link>
+
           <div className="navbar__language">
             <div className="dropdown">
               <div
