@@ -9,7 +9,7 @@ import { faHeart } from '@fortawesome/free-regular-svg-icons';
 const Store = () => {
   return (
     <>
-      <Navbar />
+      <Navbar navStore />
       <div className="store">
         <StackGrid columnWidth={275} gutterWidth={20} gutterHeight={20}>
           {store.map((gig) => (

@@ -24,14 +24,44 @@
 
 .navbar {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   position: fixed !important;
   width: 100%;
   top: 0;
   z-index: 99;
   padding-top: 1rem !important;
   padding-bottom: 1rem !important;
+}
+
+.navbar__up {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.navbar__down {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 1rem;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.navbar__down p {
+  cursor: pointer;
+  margin-bottom: 0 !important;
+}
+
+.navbar__down p:hover::after,
+.navbar__down p:active::after {
+  content: '';
+  display: block;
+  height: 3px;
+  width: 100%;
+  background-color: var(--yellow);
+  margin-bottom: -7px;
 }
 
 .navbar__title {
@@ -144,7 +174,7 @@
 
 .navbar__linkRegister {
   border: 1px solid var(--black);
-  padding: 0.6rem 0.5rem;
+  padding: 0.3rem 0.5rem;
   border-radius: 3px;
 }
 

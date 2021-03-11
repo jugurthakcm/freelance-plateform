@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -10,9 +10,17 @@ import english from '../assets/icons/english.png';
 import arabic from '../assets/icons/arabic.png';
 import { useLanguageContext } from '../ContextAPI/LanguageProvider';
 import { selectLanguageIcon } from '../util';
+import axios from '../axios';
 
-const Navbar = () => {
+const Navbar = ({ navStore }) => {
+  const [categories, setCategories] = useState([]);
+
   useEffect(() => {
+    axios
+      .get('/categories/')
+      .then((data) => setCategories(data.data))
+      .catch((err) => console.error(err));
+
     const header = document.querySelector('.navbar');
     const navSearch = document.querySelector('.navbar__search');
 
@@ -46,98 +54,110 @@ const Navbar = () => {
     localStorage.setItem('language', JSON.stringify({ language }));
     dispatch({ type: language, language });
   };
-
+  const boxShadow = navStore ? '0 5px 5px rgba(0, 0, 0, 0.15)' : '';
   return (
-    <nav className="navbar">
-      <div className="navbar__title">
-        <FontAwesomeIcon
-          icon={faBars}
-          className="d-md-none d-block"
-          size="2x"
-          onClick={() => handleClick()}
-        />
-        {/*  <h1 className="d-sm-block d-none">Handelp</h1> */}
+    <nav className="navbar" style={{ boxShadow: boxShadow }}>
+      <div className="navbar__up">
+        <div className="navbar__title">
+          <FontAwesomeIcon
+            icon={faBars}
+            className="d-md-none d-block"
+            size="2x"
+            onClick={() => handleClick()}
+          />
+          {/*  <h1 className="d-sm-block d-none">Handelp</h1> */}
+          <img
+            src={logoYellow}
+            alt="logo"
+            width="180px"
+            className="d-sm-block d-none"
+          />
+        </div>
+        {/* <h1 className="d-sm-none">Handelp</h1> */}
         <img
           src={logoYellow}
           alt="logo"
           width="200px"
-          className="d-sm-block d-none"
+          className="responsive__logo d-sm-none"
         />
-      </div>
-      {/* <h1 className="d-sm-none">Handelp</h1> */}
-      <img
-        src={logoYellow}
-        alt="logo"
-        width="200px"
-        className="responsive__logo d-sm-none"
-      />
-      <div className="navbar__search d-none">
-        <div className="navbar__searchBar">
-          <FontAwesomeIcon icon={faSearch} />
-          <FormattedMessage id="search.placeholder" defaultMessage="search">
-            {(placeholder) => <input type="text" placeholder={placeholder} />}
-          </FormattedMessage>
+        <div className="navbar__search d-none">
+          <div className="navbar__searchBar">
+            <FontAwesomeIcon icon={faSearch} />
+            <FormattedMessage id="search.placeholder" defaultMessage="search">
+              {(placeholder) => <input type="text" placeholder={placeholder} />}
+            </FormattedMessage>
+          </div>
+          <button className="navbar__searchButton">
+            <FormattedMessage id="search.button" />
+          </button>
         </div>
-        <button className="navbar__searchButton">
-          <FormattedMessage id="search.button" />
-        </button>
-      </div>
-      <div className="navbar__links">
-        <div className="navbar__navLinks d-md-flex d-none">
-          <Link to="/">
-            <FormattedMessage id="navbar.home" />
-          </Link>
-          <Link to="/about">
-            <FormattedMessage id="navbar.about" />
-          </Link>
-          <Link to="/services">
-            <FormattedMessage id="navbar.services" />
-          </Link>
-          <Link to="/store">
-            <FormattedMessage id="navbar.store" />
-          </Link>
-        </div>
-        <div className="navbar__authLinks d-flex">
-          <Link to="/login" className="navbar__linkLogin d-sm-inline d-none">
-            <FormattedMessage id="navbar.login" />
-          </Link>
-          <Link to="/register" className="navbar__linkRegister">
-            <FormattedMessage id="navbar.register" />
-          </Link>
-        </div>
-        <div className="navbar__language">
-          <div className="dropdown">
-            <div
-              id="dropdownMenuButton"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-              style={{ backgroundImage: `url(${languageImage})` }}
-            ></div>
-            <ul className="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li
-                className="dropdown-item"
-                onClick={() => changeLanguage('french')}
+        <div className="navbar__links">
+          <div className="navbar__navLinks d-md-flex d-none">
+            <Link to="/">
+              <FormattedMessage id="navbar.home" />
+            </Link>
+            <Link to="/about">
+              <FormattedMessage id="navbar.about" />
+            </Link>
+            <Link to="/services">
+              <FormattedMessage id="navbar.services" />
+            </Link>
+            <Link to="/store">
+              <FormattedMessage id="navbar.store" />
+            </Link>
+          </div>
+          <div className="navbar__authLinks d-flex">
+            <Link to="/login" className="navbar__linkLogin d-sm-inline d-none">
+              <FormattedMessage id="navbar.login" />
+            </Link>
+            <Link to="/register" className="navbar__linkRegister">
+              <FormattedMessage id="navbar.register" />
+            </Link>
+          </div>
+          <div className="navbar__language">
+            <div className="dropdown">
+              <div
+                id="dropdownMenuButton"
+                data-toggle="dropdown"
+                aria-haspopup="true"
+                aria-expanded="false"
+                style={{ backgroundImage: `url(${languageImage})` }}
+              ></div>
+              <ul
+                className="dropdown-menu"
+                aria-labelledby="dropdownMenuButton"
               >
-                <img src={french} alt="french" /> Français
-              </li>
-              <li
-                className="dropdown-item"
-                onClick={() => changeLanguage('english')}
-              >
-                <img src={english} alt="english" /> English
-              </li>
-              <li
-                className="dropdown-item"
-                onClick={() => changeLanguage('arabic')}
-              >
-                <img src={arabic} alt="arabic" />
-                العربية
-              </li>
-            </ul>
+                <li
+                  className="dropdown-item"
+                  onClick={() => changeLanguage('french')}
+                >
+                  <img src={french} alt="french" /> Français
+                </li>
+                <li
+                  className="dropdown-item"
+                  onClick={() => changeLanguage('english')}
+                >
+                  <img src={english} alt="english" /> English
+                </li>
+                <li
+                  className="dropdown-item"
+                  onClick={() => changeLanguage('arabic')}
+                >
+                  <img src={arabic} alt="arabic" />
+                  العربية
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
+      {navStore && (
+        <div className="navbar__down">
+          {categories.map((category) => (
+            <p key={category._id}>{category.title.toUpperCase()}</p>
+          ))}
+        </div>
+      )}
     </nav>
   );
 };
