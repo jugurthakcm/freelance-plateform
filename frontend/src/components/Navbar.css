@@ -191,17 +191,14 @@
   margin-right: 17px;
 }
 
-@media (max-width: 1150px) {
-  .navbar__searchButton {
+@media (min-width: 850px) {
+  .menu {
     display: none;
-  }
-  .navbar__searchBar {
-    border-radius: 5px;
   }
 }
 
-@media (max-width: 1030px) {
-  .navbar__search {
+@media (max-width: 850px) {
+  .navbar__center {
     display: none;
   }
 }
@@ -212,7 +209,7 @@
   }
 }
 
-@media (max-width: 432px) {
+@media (max-width: 466px) {
   .navbar__linkRegister {
     display: none;
   }

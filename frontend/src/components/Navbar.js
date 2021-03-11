@@ -55,21 +55,20 @@ const Navbar = ({ navStore }) => {
           <div className="navbar__title">
             <FontAwesomeIcon
               icon={faBars}
-              className="d-md-none d-block"
+              className="menu"
               size="2x"
               onClick={() => handleClick()}
             />
-            {/*  <h1 className="d-sm-block d-none">Handelp</h1> */}
+
             <img
               src={logoYellow}
               alt="logo"
               width="180px"
-              className="d-sm-block d-none"
+              className="d-sm-block d-none ml-3"
             />
           </div>
-          {/* <h1 className="d-sm-none">Handelp</h1> */}
 
-          <div className="navbar__center d-md-flex d-none">
+          <div className="navbar__center">
             <Link to="/">
               <FormattedMessage id="navbar.home" />
             </Link>
@@ -93,6 +92,8 @@ const Navbar = ({ navStore }) => {
         />
 
         <div className="navbar__right d-flex">
+          <FontAwesomeIcon icon={faSearch} className="mr-3" />
+
           <Link to="/login" className="navbar__linkLogin d-sm-inline d-none">
             <FormattedMessage id="navbar.login" />
           </Link>
