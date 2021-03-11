@@ -20,7 +20,7 @@ const Aside = () => {
   };
 
   const handleClickOutside = (e) => {
-    if (aside.current.contains(e.target)) {
+    if (aside && aside.current.contains(e.target)) {
       return;
     }
     aside.current.classList.add('aside__closed');

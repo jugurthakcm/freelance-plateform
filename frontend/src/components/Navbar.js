@@ -47,7 +47,15 @@ const Navbar = ({ navStore }) => {
     localStorage.setItem('language', JSON.stringify({ language }));
     dispatch({ type: language, language });
   };
+
   const boxShadow = navStore ? '0 5px 5px rgba(0, 0, 0, 0.15)' : '';
+
+  const navbarSearch = document.querySelector('.navbar__search');
+
+  const displaySearch = () => {
+    navbarSearch.style.top = '20px';
+  };
+
   return (
     <nav className="navbar" style={{ boxShadow: boxShadow }}>
       <div className="navbar__up">
@@ -92,7 +100,26 @@ const Navbar = ({ navStore }) => {
         />
 
         <div className="navbar__right d-flex">
-          <FontAwesomeIcon icon={faSearch} className="mr-3" />
+          {navStore && (
+            <FontAwesomeIcon
+              icon={faSearch}
+              className="searchBtn mr-3"
+              onClick={() => displaySearch()}
+            />
+          )}
+
+          <form className="navbar__search">
+            <FontAwesomeIcon
+              icon={faSearch}
+              className="searchBtn__input mr-3"
+            />
+            <input
+              type="text"
+              name="search"
+              placeholder="Search..."
+              id="searchInput"
+            />
+          </form>
 
           <Link to="/login" className="navbar__linkLogin d-sm-inline d-none">
             <FormattedMessage id="navbar.login" />
