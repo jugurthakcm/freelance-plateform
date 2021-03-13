@@ -2,7 +2,11 @@ import React, { useState, useEffect } from 'react';
 import './Navbar.css';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBars, faSearch } from '@fortawesome/free-solid-svg-icons';
+import {
+  faBars,
+  faSearch,
+  faTimesCircle,
+} from '@fortawesome/free-solid-svg-icons';
 import logoYellow from '../assets/images/logo_yellow.png';
 import { FormattedMessage } from 'react-intl';
 import french from '../assets/icons/french.png';
@@ -54,6 +58,10 @@ const Navbar = ({ navStore }) => {
 
   const displaySearch = () => {
     navbarSearch.style.top = '20px';
+  };
+
+  const closeSearch = () => {
+    navbarSearch.style.top = '-100px';
   };
 
   return (
@@ -118,6 +126,12 @@ const Navbar = ({ navStore }) => {
               name="search"
               placeholder="Search..."
               id="searchInput"
+            />
+
+            <FontAwesomeIcon
+              icon={faTimesCircle}
+              className="ml-3"
+              onClick={() => closeSearch()}
             />
           </form>
 
