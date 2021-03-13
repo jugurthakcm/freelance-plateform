@@ -15,7 +15,7 @@ const Store = () => {
       .get('/categories/')
       .then((data) => setCategories(data.data))
       .catch((err) => console.error(err));
-  });
+  }, [categories]);
 
   return (
     <>
@@ -23,13 +23,13 @@ const Store = () => {
 
       <div className="store">
         <div className="store__categories">
-          {/* <label htmlFor="storeCategories" className="mr-2 pt-2">
-            SORT BY :
-          </label> */}
-          <select name="categories" id="storeCategories" className="ml-2">
-            <option disabled selected>
-              Select a category
-            </option>
+          <select
+            name="categories"
+            id="storeCategories"
+            className="ml-2"
+            defaultValue="Select a category"
+          >
+            <option disabled>Select a category</option>
             {categories.map((category) => (
               <option value={category.title} key={category._id}>
                 {category.title}
