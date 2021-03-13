@@ -4,7 +4,7 @@ import BackgroundSlider from 'react-background-slider';
 import Home1 from '../assets/images/Home1.jpg';
 import Home2 from '../assets/images/Home2.jpg';
 import Home3 from '../assets/images/Home3.jpg';
-// import { FormattedMessage } from 'react-intl';
+import { FormattedMessage } from 'react-intl';
 
 const Main = () => {
   return (
@@ -27,8 +27,15 @@ const Main = () => {
               {(placeholder) => <input type="text" placeholder={placeholder} />}
             </FormattedMessage>
           </div> */}
-          <button className="main__buttonStart">Get started</button>
-          <button className="main__buttonAbout">About us</button>
+          <button className="main__buttonStart">
+            <FormattedMessage
+              id="home.getStarted"
+              defaultMessage="Get Started"
+            />
+          </button>
+          <button className="main__buttonAbout">
+            <FormattedMessage id="home.aboutUs" defaultMessage="About us" />
+          </button>
         </div>
       </div>
     </div>

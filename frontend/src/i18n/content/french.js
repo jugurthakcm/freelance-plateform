@@ -20,9 +20,9 @@ const frenchContent = {
       login: 'Connexion',
       register: 'Inscription',
     },
-    search: {
-      placeholder: 'Chercher...',
-      button: 'Chercher',
+    home: {
+      getStarted: 'Commencez',
+      aboutUs: 'A propos',
     },
     footer: {
       copyright: 'Tous droits réservés',

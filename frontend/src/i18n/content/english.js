@@ -23,9 +23,9 @@ const englishContent = {
       login: 'Login',
       register: 'Register',
     },
-    search: {
-      placeholder: 'Search...',
-      button: 'Search',
+    home: {
+      getStarted: 'Get started',
+      aboutUs: 'About us',
     },
     footer: {
       copyright: 'All rights reserved',

@@ -17,12 +17,12 @@ const arabicContent = {
       about: 'حول',
       services: 'خدماتنا',
       store: 'المتجر',
-      login: 'تسجيل الدخول',
-      register: 'تسجيل جديد',
+      login: 'دخول',
+      register: 'تسجيل',
     },
-    search: {
-      placeholder: '...بحث',
-      button: 'بحث',
+    home: {
+      getStarted: 'إبدأ اﻵن',
+      aboutUs: 'حول',
     },
     footer: {
       copyright: 'جميع الحقوق محفوظة',
