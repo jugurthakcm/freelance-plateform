@@ -1,12 +1,10 @@
 import React from 'react';
 import './Main.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
 import BackgroundSlider from 'react-background-slider';
 import Home1 from '../assets/images/Home1.jpg';
 import Home2 from '../assets/images/Home2.jpg';
 import Home3 from '../assets/images/Home3.jpg';
-import { FormattedMessage } from 'react-intl';
+// import { FormattedMessage } from 'react-intl';
 
 const Main = () => {
   return (
@@ -22,16 +20,15 @@ const Main = () => {
           <br />
           We are the solution
         </h1>
-        <div className="main__search">
-          <div className="main__searchBar">
+        <div className="main__buttons">
+          {/* <div className="main__searchBar">
             <FontAwesomeIcon icon={faSearch} />
             <FormattedMessage id="search.placeholder" defaultMessage="search">
               {(placeholder) => <input type="text" placeholder={placeholder} />}
             </FormattedMessage>
-          </div>
-          <button className="main__searchButton">
-            <FormattedMessage id="search.button" />
-          </button>
+          </div> */}
+          <button className="main__buttonStart">Get started</button>
+          <button className="main__buttonAbout">About us</button>
         </div>
       </div>
     </div>
