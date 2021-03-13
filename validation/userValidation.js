@@ -5,10 +5,17 @@ const Joi = require('joi');
  * @params {firstName, lastName, email, username, password}
  */
 
-exports.registerValidation = ({ firstName, lastName, email, password }) => {
+exports.registerValidation = ({
+  firstName,
+  lastName,
+  email,
+  username,
+  password,
+}) => {
   const schema = Joi.object({
     firstName: Joi.string().required().trim().min(2).max(50),
     lastName: Joi.string().required().trim().min(2).max(50),
+    username: Joi.string().required().trim().min(3).max(50),
     email: Joi.string().email().required().trim().max(50),
     password: Joi.string().required().trim().min(8).max(50),
   });
@@ -17,6 +24,7 @@ exports.registerValidation = ({ firstName, lastName, email, password }) => {
     firstName,
     lastName,
     email,
+    username,
     password,
   });
 };

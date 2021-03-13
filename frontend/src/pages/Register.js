@@ -26,6 +26,7 @@ const Register = () => {
   const schema = Joi.object({
     firstName: Joi.string().trim().min(2).max(30).required(),
     lastName: Joi.string().trim().min(2).max(30).required(),
+    username: Joi.string().trim().min(2).max(30).required(),
     email: Joi.string()
       .trim()
       .email({ tlds: { allow: false } })
@@ -41,10 +42,19 @@ const Register = () => {
   const [phone, setPhone] = useState('');
 
   const submitForm = (e) => {
-    const { firstName, lastName, email, password } = e;
+    const { firstName, lastName, email, username, password } = e;
+
+    console.log(phone);
 
     axios
-      .post('/register', { firstName, lastName, email, phone, password })
+      .post('/register', {
+        firstName,
+        lastName,
+        username,
+        email,
+        phone,
+        password,
+      })
       .then((data) => console.log(data))
       .catch((e) => console.log(e.response));
   };
@@ -109,7 +119,7 @@ const Register = () => {
               )}
             </div>
 
-            {/* <div className="register__inputForm">
+            <div className="register__inputForm">
               <div className="register_username register__input">
                 <FontAwesomeIcon icon={faUser} />
                 <FormattedMessage
@@ -129,7 +139,7 @@ const Register = () => {
               {errors.username && (
                 <p className="textError">{errors.username?.message}</p>
               )}
-            </div> */}
+            </div>
 
             <div className="register__inputForm">
               <div className="register__email register__input">
@@ -157,7 +167,7 @@ const Register = () => {
               <PhoneInput
                 country={'dz'}
                 name="phone"
-                onChange={(e) => setPhone(e)}
+                onChange={(e) => setPhone('+' + e)}
               />
             </div>
 
@@ -183,7 +193,7 @@ const Register = () => {
               )}
             </div>
 
-            <div className="register__inputForm">
+            {/* <div className="register__inputForm">
               <div className="register__password register__input">
                 <FontAwesomeIcon icon={faLock} />
                 <FormattedMessage
@@ -203,7 +213,7 @@ const Register = () => {
               {errors.confirmPassword && (
                 <p className="textError">The passwords must be equal</p>
               )}
-            </div>
+            </div> */}
 
             <label htmlFor="rememberMe" className="register__checkbox">
               <input type="checkbox" name="rememberMe" />

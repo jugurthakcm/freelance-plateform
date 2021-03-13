@@ -26,9 +26,7 @@ exports.register = async (req, res) => {
     const phone = phoneJoi
       .string()
       .phoneNumber({
-        defaultCountry: 'DZ',
         format: 'international',
-        strict: true,
       })
       .validate(req.body.phone);
 
@@ -52,6 +50,7 @@ exports.register = async (req, res) => {
     const newUser = new User({
       firstName: user.firstName,
       lastName: user.lastName,
+      username: user.username,
       email: user.email,
       password: hash,
       phone: phone.value,
