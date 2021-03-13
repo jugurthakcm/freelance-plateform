@@ -46,10 +46,11 @@ const englishContent = {
     register: {
       home: 'Home',
       title: 'Register',
-      fullName: 'Full Name',
+      firstName: 'First Name',
+      lastName: 'Last Name',
       username: 'Username',
       email: 'Email',
-      phone: 'Phone Number (Optionel)',
+      phone: 'Phone Number',
       password: 'Password',
       confirmPassword: 'Confirm password',
       terms: 'Accept all our terms',

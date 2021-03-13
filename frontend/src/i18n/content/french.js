@@ -43,10 +43,11 @@ const frenchContent = {
     register: {
       home: 'Acceuil',
       title: 'Inscription',
-      fullName: 'Nom Complet',
+      firstName: 'Prénom',
+      lastName: 'Nom',
       username: 'Pseudo',
       email: 'Email',
-      phone: 'Numéro de téléphone (Optionel)',
+      phone: 'Numéro de téléphone',
       password: 'Mot de passe',
       confirmPassword: 'Confirmez votre mot de passe',
       terms: 'Accepter nos termes',

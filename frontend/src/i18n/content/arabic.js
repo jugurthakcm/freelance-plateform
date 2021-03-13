@@ -43,10 +43,11 @@ const arabicContent = {
     register: {
       home: 'الرئيسية',
       title: 'تسجيل جديد',
-      fullName: 'الإسم الكامل',
+      firstName: 'الإسم',
+      lastName: 'اللقب',
       username: 'إسم المستخدم',
       email: 'البريد الإلكتروني',
-      phone: '(رقم الهاتف (إحتياطي',
+      phone: 'رقم الهاتف',
       password: 'كلمة المرور',
       confirmPassword: 'تأكيد كلمة المرور',
       terms: 'أقبل بالشروط',

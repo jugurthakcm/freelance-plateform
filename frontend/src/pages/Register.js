@@ -23,7 +23,8 @@ const Register = () => {
   const rightAfter = language === 'arabic' ? '0' : 'unset';
 
   const schema = Joi.object({
-    fullName: Joi.string().trim().max(30).required(),
+    firstName: Joi.string().trim().max(30).required(),
+    lastName: Joi.string().trim().max(30).required(),
     username: Joi.string().trim().max(30).required(),
     email: Joi.string()
       .trim()
@@ -54,28 +55,50 @@ const Register = () => {
           </h2>
           <form onSubmit={handleSubmit(submitForm)}>
             <div className="register__inputForm">
-              <div className="register__fullName register__input">
+              <div className="register__firstName register__input">
                 <FontAwesomeIcon icon={faUser} />
                 <FormattedMessage
-                  id="register.fullName"
-                  defaultMessage="Full Name"
+                  id="register.firstName"
+                  defaultMessage="Firsr Name"
                 >
                   {(placeholder) => (
                     <input
                       type="text"
                       placeholder={placeholder}
                       ref={register}
-                      name="fullName"
+                      name="firstName"
                     />
                   )}
                 </FormattedMessage>
               </div>
-              {errors.fullName && (
-                <p className="textError">{errors.fullName?.message}</p>
+              {errors.lastName && (
+                <p className="textError">{errors.firstName?.message}</p>
               )}
             </div>
 
             <div className="register__inputForm">
+              <div className="register__lastName register__input">
+                <FontAwesomeIcon icon={faUser} />
+                <FormattedMessage
+                  id="register.lastName"
+                  defaultMessage="Last Name"
+                >
+                  {(placeholder) => (
+                    <input
+                      type="text"
+                      placeholder={placeholder}
+                      ref={register}
+                      name="lastName"
+                    />
+                  )}
+                </FormattedMessage>
+              </div>
+              {errors.lastName && (
+                <p className="textError">{errors.lastName?.message}</p>
+              )}
+            </div>
+
+            {/* <div className="register__inputForm">
               <div className="register_username register__input">
                 <FontAwesomeIcon icon={faUser} />
                 <FormattedMessage
@@ -95,7 +118,7 @@ const Register = () => {
               {errors.username && (
                 <p className="textError">{errors.username?.message}</p>
               )}
-            </div>
+            </div> */}
 
             <div className="register__inputForm">
               <div className="register__email register__input">
