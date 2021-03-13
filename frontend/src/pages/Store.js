@@ -1,16 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './Store.css';
 import Navbar from '../components/Navbar';
 import StackGrid from 'react-stack-grid';
 import { store } from '../data/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faStar } from '@fortawesome/free-regular-svg-icons';
+import axios from '../axios';
 
 const Store = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('/categories/')
+      .then((data) => setCategories(data.data))
+      .catch((err) => console.error(err));
+  });
+
   return (
     <>
       <Navbar navStore />
+
       <div className="store">
+        <div className="store__categories">
+          {/* <label htmlFor="storeCategories" className="mr-2 pt-2">
+            SORT BY :
+          </label> */}
+          <select name="categories" id="storeCategories" className="ml-2">
+            <option disabled selected>
+              Select a category
+            </option>
+            {categories.map((category) => (
+              <option value={category.title} key={category._id}>
+                {category.title}
+              </option>
+            ))}
+          </select>
+        </div>
         <StackGrid columnWidth={275} gutterWidth={20} gutterHeight={20}>
           {store.map((gig) => (
             <div className="store__gig">
@@ -28,7 +54,7 @@ const Store = () => {
                 <div className="gig__footer">
                   <button>Contact the seller</button>
                   <span>
-                    <FontAwesomeIcon icon={faHeart} /> {gig.likes}
+                    <FontAwesomeIcon icon={faStar} /> {gig.likes}
                   </span>
                 </div>
               </div>
