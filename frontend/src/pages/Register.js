@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './Register.css';
 import registerImg from '../assets/images/Register.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -16,6 +16,7 @@ import 'react-phone-input-2/lib/style.css';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
+import axios from '../axios';
 
 const Register = () => {
   const language = useLanguageContext()[0];
@@ -23,9 +24,8 @@ const Register = () => {
   const rightAfter = language === 'arabic' ? '0' : 'unset';
 
   const schema = Joi.object({
-    firstName: Joi.string().trim().max(30).required(),
-    lastName: Joi.string().trim().max(30).required(),
-    username: Joi.string().trim().max(30).required(),
+    firstName: Joi.string().trim().min(2).max(30).required(),
+    lastName: Joi.string().trim().min(2).max(30).required(),
     email: Joi.string()
       .trim()
       .email({ tlds: { allow: false } })
@@ -38,7 +38,16 @@ const Register = () => {
     resolver: joiResolver(schema),
   });
 
-  const submitForm = (e) => {};
+  const [phone, setPhone] = useState('');
+
+  const submitForm = (e) => {
+    const { firstName, lastName, email, password } = e;
+
+    axios
+      .post('/register', { firstName, lastName, email, phone, password })
+      .then((data) => console.log(data))
+      .catch((e) => console.log(e.response));
+  };
 
   return (
     <div className="register">
@@ -47,7 +56,9 @@ const Register = () => {
           <FontAwesomeIcon icon={faHome} />
           <FormattedMessage id="register.home" />
         </Link>
+
         <img src={registerImg} alt="register" width="400px" />
+
         <div className="register__form">
           <h2>
             <FormattedMessage id="register.title" />
@@ -143,7 +154,11 @@ const Register = () => {
               <label>
                 <FormattedMessage id="register.phone" />
               </label>
-              <PhoneInput country={'dz'} />
+              <PhoneInput
+                country={'dz'}
+                name="phone"
+                onChange={(e) => setPhone(e)}
+              />
             </div>
 
             <div className="register__inputForm">
