@@ -16,7 +16,8 @@ import 'react-phone-input-2/lib/style.css';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
-import axios from '../axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { registerUser } from '../data/actions/userActions';
 
 const Register = () => {
   const language = useLanguageContext()[0];
@@ -41,22 +42,11 @@ const Register = () => {
 
   const [phone, setPhone] = useState('');
 
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
   const submitForm = (e) => {
-    const { firstName, lastName, email, username, password } = e;
-
-    console.log(phone);
-
-    axios
-      .post('/register', {
-        firstName,
-        lastName,
-        username,
-        email,
-        phone,
-        password,
-      })
-      .then((data) => console.log(data))
-      .catch((e) => console.log(e.response));
+    dispatch(registerUser(e, phone));
   };
 
   return (
