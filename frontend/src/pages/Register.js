@@ -33,6 +33,7 @@ const Register = () => {
       .trim()
       .email({ tlds: { allow: false } })
       .required(),
+
     password: Joi.string().trim().required().min(8),
     confirmPassword: Joi.ref('password'),
   });
@@ -52,7 +53,7 @@ const Register = () => {
 
   return (
     <div className="register">
-      <InfoMessage message={user.success} error={user.error} />
+      <InfoMessage message={user.successRegister} error={user.errorRegister} />
       <div className="register__container">
         <Link to="/" className="home__link">
           <FontAwesomeIcon icon={faHome} />

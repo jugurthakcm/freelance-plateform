@@ -2,6 +2,8 @@ import React from 'react';
 import './InfoMessage.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch } from 'react-redux';
+import { resetUserState } from '../data/actions/userActions';
 
 const InfoMessage = ({ message, error }) => {
   const infoBox = document.querySelector('.info');
@@ -17,8 +19,11 @@ const InfoMessage = ({ message, error }) => {
     infoBox.classList.remove('success');
   }
 
+  const dispatch = useDispatch();
+
   const handleClick = () => {
     document.querySelector('.info').style.bottom = '-100px';
+    dispatch(resetUserState());
   };
   return (
     <div className="info">

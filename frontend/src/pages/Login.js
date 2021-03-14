@@ -39,7 +39,7 @@ const Login = () => {
 
   return (
     <div className="login">
-      <InfoMessage message={user.success} error={user.error} />
+      <InfoMessage message={user.successLogin} error={user.errorLogin} />
       <div className="login__container">
         <Link to="/" className="home__link">
           <FontAwesomeIcon icon={faHome} />

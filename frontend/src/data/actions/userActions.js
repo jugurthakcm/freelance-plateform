@@ -29,3 +29,6 @@ export const loginUser = ({ email, password }) => (dispatch) => {
       dispatch({ type: userActionTypes.ERROR_LOGIN, payload: err })
     );
 };
+
+export const resetUserState = () => (dispatch) =>
+  dispatch({ type: 'RESET_USER_STATE' });
