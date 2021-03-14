@@ -221,6 +221,19 @@
   left: -100px;
 }
 
+.navbar__user .dropdown-menu li {
+  cursor: pointer;
+}
+
+.navbar__user a {
+  font-weight: 400;
+}
+
+.navbar__user a:hover::after,
+.navbar__user a:focus::after {
+  display: none;
+}
+
 @media (min-width: 850px) {
   .menu {
     display: none;

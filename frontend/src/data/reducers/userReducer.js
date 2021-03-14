@@ -67,6 +67,13 @@ const userReducer = (state = initialState, action) => {
         token: null,
       };
 
+    case userActionTypes.LOGOUT:
+      return {
+        ...state,
+        user: null,
+        token: null,
+      };
+
     case 'RESET_USER_STATE':
       return {
         ...state,

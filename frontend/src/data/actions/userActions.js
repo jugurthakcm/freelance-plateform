@@ -48,3 +48,8 @@ export const loadUser = (token) => (dispatch) => {
       dispatch({ type: userActionTypes.ERROR_LOAD_USER, payload: err })
     );
 };
+
+export const logoutUser = () => (dispatch) => {
+  localStorage.removeItem('token');
+  dispatch({ type: userActionTypes.LOGOUT });
+};

@@ -15,7 +15,8 @@ import arabic from '../assets/icons/arabic.png';
 import { useLanguageContext } from '../ContextAPI/LanguageProvider';
 import { selectLanguageIcon } from '../util';
 import axios from '../axios';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logoutUser } from '../data/actions/userActions';
 
 const Navbar = ({ navStore }) => {
   const [categories, setCategories] = useState([]);
@@ -45,12 +46,12 @@ const Navbar = ({ navStore }) => {
     aside.classList.remove('aside__closed');
   };
 
-  const [language, dispatch] = useLanguageContext();
+  const [language, dispatchLanguage] = useLanguageContext();
   const languageImage = selectLanguageIcon(language);
 
   const changeLanguage = (language) => {
     localStorage.setItem('language', JSON.stringify({ language }));
-    dispatch({ type: language, language });
+    dispatchLanguage({ type: language, language });
   };
 
   const boxShadow = navStore ? '0 5px 5px rgba(0, 0, 0, 0.15)' : '';
@@ -66,6 +67,8 @@ const Navbar = ({ navStore }) => {
   };
 
   const user = useSelector((state) => state.user);
+
+  const dispatch = useDispatch();
 
   return (
     <nav className="navbar" style={{ boxShadow: boxShadow }}>
@@ -160,7 +163,12 @@ const Navbar = ({ navStore }) => {
                   <li className="dropdown-item">
                     <Link to="/settings">Settings</Link>
                   </li>
-                  <li className="dropdown-item">Logout</li>
+                  <li
+                    className="dropdown-item"
+                    onClick={() => dispatch(logoutUser())}
+                  >
+                    Logout
+                  </li>
                 </ul>
               </div>
             </div>
