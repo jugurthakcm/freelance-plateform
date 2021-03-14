@@ -183,8 +183,8 @@
 }
 
 .navbar__language #dropdownMenuButton {
-  width: 25px;
-  height: 25px;
+  width: 20px;
+  height: 20px;
   background-position: 0 0;
   background-size: contain;
 }
@@ -215,6 +215,10 @@
 
 .navbar__language .dropdown-item:nth-child(3) img {
   margin-right: 17px;
+}
+
+.navbar__user .dropdown-menu {
+  left: -100px;
 }
 
 @media (min-width: 850px) {

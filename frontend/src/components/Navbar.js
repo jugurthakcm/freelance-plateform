@@ -15,6 +15,7 @@ import arabic from '../assets/icons/arabic.png';
 import { useLanguageContext } from '../ContextAPI/LanguageProvider';
 import { selectLanguageIcon } from '../util';
 import axios from '../axios';
+import { useSelector } from 'react-redux';
 
 const Navbar = ({ navStore }) => {
   const [categories, setCategories] = useState([]);
@@ -63,6 +64,8 @@ const Navbar = ({ navStore }) => {
   const closeSearch = () => {
     navbarSearch.style.top = '-100px';
   };
+
+  const user = useSelector((state) => state.user);
 
   return (
     <nav className="navbar" style={{ boxShadow: boxShadow }}>
@@ -134,15 +137,48 @@ const Navbar = ({ navStore }) => {
               onClick={() => closeSearch()}
             />
           </form>
+          {user.user ? (
+            <div className="navbar__user">
+              <div className="dropdown">
+                <div
+                  className="dropdown-toggle"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-haspopup="true"
+                  aria-expanded="false"
+                  // style={{ backgroundImage: `url(${languageImage})` }}
+                >
+                  User
+                </div>
+                <ul
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                >
+                  <li className="dropdown-item">
+                    <Link to="/dashboard">Dashboard</Link>
+                  </li>
+                  <li className="dropdown-item">
+                    <Link to="/settings">Settings</Link>
+                  </li>
+                  <li className="dropdown-item">Logout</li>
+                </ul>
+              </div>
+            </div>
+          ) : (
+            <>
+              <Link
+                to="/login"
+                className="navbar__linkLogin d-sm-inline d-none"
+              >
+                <FormattedMessage id="navbar.login" />
+              </Link>
+              <Link to="/register" className="navbar__linkRegister">
+                <FormattedMessage id="navbar.register" />
+              </Link>
+            </>
+          )}
 
-          <Link to="/login" className="navbar__linkLogin d-sm-inline d-none">
-            <FormattedMessage id="navbar.login" />
-          </Link>
-          <Link to="/register" className="navbar__linkRegister">
-            <FormattedMessage id="navbar.register" />
-          </Link>
-
-          <div className="navbar__language">
+          {/* <div className="navbar__language">
             <div className="dropdown">
               <div
                 id="dropdownMenuButton"
@@ -176,7 +212,7 @@ const Navbar = ({ navStore }) => {
                 </li>
               </ul>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
       {navStore && (
