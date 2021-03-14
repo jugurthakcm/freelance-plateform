@@ -9,6 +9,9 @@ import { useLanguageContext } from '../ContextAPI/LanguageProvider';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
+import { useDispatch, useSelector } from 'react-redux';
+import { loginUser } from '../data/actions/userActions';
+import InfoMessage from '../components/InfoMessage';
 
 const Login = () => {
   const language = useLanguageContext()[0];
@@ -27,10 +30,16 @@ const Login = () => {
     resolver: joiResolver(schema),
   });
 
-  const submitForm = (e) => {};
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+
+  const submitForm = (e) => {
+    dispatch(loginUser(e));
+  };
 
   return (
     <div className="login">
+      <InfoMessage message={user.success} error={user.error} />
       <div className="login__container">
         <Link to="/" className="home__link">
           <FontAwesomeIcon icon={faHome} />

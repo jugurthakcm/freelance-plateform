@@ -17,3 +17,15 @@ export const registerUser = (e, phone) => (dispatch) => {
       dispatch({ type: userActionTypes.ERROR_REGISTER, payload: err })
     );
 };
+
+export const loginUser = ({ email, password }) => (dispatch) => {
+  axios
+    .post('/login', {
+      email,
+      password,
+    })
+    .then((res) => dispatch({ type: userActionTypes.LOGIN, payload: res }))
+    .catch((err) =>
+      dispatch({ type: userActionTypes.ERROR_LOGIN, payload: err })
+    );
+};
