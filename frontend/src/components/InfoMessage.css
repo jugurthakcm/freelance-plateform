@@ -1,0 +1,51 @@
+.info {
+  position: fixed;
+  bottom: -100px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  z-index: 99;
+  padding: 1rem 1rem;
+  border-radius: 10px;
+  transition: bottom 0.4s ease-out;
+}
+
+.info p {
+  color: inherit;
+  font-weight: 500;
+  font-size: 14px;
+  margin-bottom: 0.2rem !important;
+  margin-right: 1rem;
+}
+
+.info button {
+  background-color: inherit;
+  border: none;
+}
+
+.success {
+  background-color: #82f8c3;
+  color: #0f5132;
+}
+
+.success button path {
+  color: #0f5132;
+}
+
+.error {
+  background-color: #ffacb3;
+  color: #ba2929;
+}
+
+.error button path {
+  color: #ba2929;
+}
+
+@media (max-width: 440px) {
+  .info {
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+  }
+}

@@ -18,6 +18,7 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../data/actions/userActions';
+import InfoMessage from '../components/InfoMessage';
 
 const Register = () => {
   const language = useLanguageContext()[0];
@@ -51,6 +52,7 @@ const Register = () => {
 
   return (
     <div className="register">
+      <InfoMessage message={user.success} error={user.error} />
       <div className="register__container">
         <Link to="/" className="home__link">
           <FontAwesomeIcon icon={faHome} />
