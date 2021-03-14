@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
@@ -10,9 +11,18 @@ import I18nProvider from './i18n/Provider';
 import { useLanguageContext } from './ContextAPI/LanguageProvider';
 import Register from './pages/Register';
 import Store from './pages/Store';
+import Dashboard from './pages/Dashboard';
+import { useDispatch } from 'react-redux';
+import { loadUser } from './data/actions/userActions';
 
 function App() {
   const language = useLanguageContext()[0];
+  const token = localStorage.getItem('token');
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    token && dispatch(loadUser(token));
+  }, [token, dispatch]);
 
   // setTimeout(() => {
   //   document.querySelector('.app').classList.remove('app-anim');
@@ -36,6 +46,7 @@ function App() {
             <Route path="/store" component={Store} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
+            <Route path="/dashboard" component={Dashboard} />
           </Switch>
         </I18nProvider>
       </div>

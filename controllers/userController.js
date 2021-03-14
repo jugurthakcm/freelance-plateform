@@ -116,8 +116,19 @@ exports.login = async (req, res) => {
  * @params {}
  */
 exports.logout = (req, res) => {
-  res.clearCookie('token');
+  // res.clearCookie('token');
   res.status(200).send('Successfully logged out');
+};
+
+/**
+ * Load a user
+ * /GET
+ * @params {}
+ */
+exports.loadUser = (req, res) => {
+  User.find({ _id: req.userId }, { password: 0 })
+    .then((data) => res.status(200).json({ user: data }))
+    .catch((err) => res.status(500).json({ error }));
 };
 
 /**

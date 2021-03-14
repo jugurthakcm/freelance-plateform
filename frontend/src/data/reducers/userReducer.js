@@ -7,6 +7,7 @@ const initialState = {
   errorRegister: null,
   successLogin: null,
   errorLogin: null,
+  error: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -50,6 +51,20 @@ const userReducer = (state = initialState, action) => {
         errorRegister: null,
         successLogin: null,
         successRegister: null,
+      };
+
+    case userActionTypes.LOAD_USER:
+      return {
+        ...state,
+        user: action.payload.data.user[0],
+      };
+
+    case userActionTypes.ERROR_LOAD_USER:
+      localStorage.removeItem('token');
+      return {
+        ...state,
+        error: action.payload.response.data,
+        token: null,
       };
 
     case 'RESET_USER_STATE':

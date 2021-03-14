@@ -12,8 +12,11 @@ const {
   editEmail,
   editPassword,
   deleteAccount,
+  loadUser,
 } = require('../controllers/userController');
 const { auth } = require('../middlewares/authMiddleware');
+
+router.get('/user', auth, loadUser);
 
 //Register a user
 router.post('/register', register);

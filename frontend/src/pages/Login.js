@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Login.css';
 import login from '../assets/images/Login.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,6 +12,7 @@ import Joi from 'joi';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../data/actions/userActions';
 import InfoMessage from '../components/InfoMessage';
+import { useHistory } from 'react-router-dom';
 
 const Login = () => {
   const language = useLanguageContext()[0];
@@ -36,6 +37,11 @@ const Login = () => {
   const submitForm = (e) => {
     dispatch(loginUser(e));
   };
+
+  const history = useHistory();
+  useEffect(() => {
+    if (user.token) history.push('/dashboard');
+  }, [user, history]);
 
   return (
     <div className="login">
