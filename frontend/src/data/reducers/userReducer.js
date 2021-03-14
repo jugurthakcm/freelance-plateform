@@ -2,6 +2,7 @@ import { userActionTypes } from '../actionTypes';
 
 const initialState = {
   user: null,
+  token: localStorage.getItem('token'),
   successRegister: null,
   errorRegister: null,
   successLogin: null,
@@ -31,9 +32,10 @@ const userReducer = (state = initialState, action) => {
       };
     //LOGIN
     case userActionTypes.LOGIN:
-      console.log(action.payload.data);
+      localStorage.setItem('token', action.payload.data.token);
       return {
         ...state,
+        token: action.payload.data.token,
         successLogin: 'Logged In',
         errorRegister: null,
         successRegister: null,
@@ -44,7 +46,7 @@ const userReducer = (state = initialState, action) => {
     case userActionTypes.ERROR_LOGIN:
       return {
         ...state,
-        errorLogin: action.payload.response.data,
+        errorLogin: action.payload.response.data.error,
         errorRegister: null,
         successLogin: null,
         successRegister: null,
