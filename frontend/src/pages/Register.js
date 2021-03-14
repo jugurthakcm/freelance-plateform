@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Register.css';
 import registerImg from '../assets/images/Register.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -19,6 +19,7 @@ import Joi from 'joi';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../data/actions/userActions';
 import InfoMessage from '../components/InfoMessage';
+import { useHistory } from 'react-router-dom';
 
 const Register = () => {
   const language = useLanguageContext()[0];
@@ -51,6 +52,10 @@ const Register = () => {
     dispatch(registerUser(e, phone));
   };
 
+  const history = useHistory();
+  useEffect(() => {
+    if (user.token) history.push('/dashboard');
+  }, [user, history]);
   return (
     <div className="register">
       <InfoMessage message={user.successRegister} error={user.errorRegister} />
