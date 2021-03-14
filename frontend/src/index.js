@@ -8,12 +8,21 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import $ from 'jquery'; //eslint-disable-line
 import Popper from 'popper.js'; //eslint-disable-line
 import 'bootstrap/dist/js/bootstrap.bundle.min';
-
 import { LanguageProvider } from './ContextAPI/LanguageProvider';
 import { initialLanguage, languageReducer } from './ContextAPI/languageReducer';
+import { Provider } from 'react-redux';
+import { applyMiddleware, createStore, compose } from 'redux';
+import rootReducer from './data/reducers/rootReducer';
+import thunk from 'redux-thunk';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(
+  rootReducer,
+  composeEnhancers(applyMiddleware(thunk))
+);
 
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <BrowserRouter>
       <LanguageProvider
         initialLanguage={initialLanguage}
@@ -22,7 +31,7 @@ ReactDOM.render(
         <App />
       </LanguageProvider>
     </BrowserRouter>
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
