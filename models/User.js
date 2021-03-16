@@ -39,12 +39,28 @@ const userSchema = mongoose.Schema({
   },
   bio: {
     type: String,
-    max: 250,
+    max: 1000,
     default: null,
   },
   skills: {
     type: Array,
     default: [],
+  },
+  languages: {
+    type: Array,
+    default: [],
+  },
+  education: {
+    type: Array,
+    default: [],
+  },
+  location: {
+    type: String,
+    default: null,
+  },
+  hourlyRate: {
+    type: Number,
+    default: 0,
   },
   createdAt: {
     type: Date,
