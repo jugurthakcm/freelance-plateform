@@ -6,6 +6,7 @@ import { store } from '../data/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-regular-svg-icons';
 import axios from '../axios';
+import SearchBar from '../components/SearchBar';
 
 const Store = () => {
   const [categories, setCategories] = useState([]);
@@ -22,7 +23,7 @@ const Store = () => {
       <Navbar navStore />
 
       <div className="store">
-        <div className="store__categories">
+        {/* <div className="store__categories">
           <select
             name="categories"
             id="storeCategories"
@@ -36,7 +37,10 @@ const Store = () => {
               </option>
             ))}
           </select>
-        </div>
+        </div> */}
+        <form>
+          <SearchBar />
+        </form>
         <StackGrid columnWidth={275} gutterWidth={20} gutterHeight={20}>
           {store.map((gig) => (
             <div className="store__gig">

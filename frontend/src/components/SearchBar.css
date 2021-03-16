@@ -1,0 +1,24 @@
+.searchBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  max-width: 500px !important;
+}
+
+.searchBar input {
+  border: 1px solid darkgray;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border-right: none;
+}
+
+.searchBar button {
+  background-color: var(--yellow);
+  border: none;
+  border-top-right-radius: 5px;
+  border-bottom-right-radius: 5px;
+  padding: 0.55rem 1rem;
+}
