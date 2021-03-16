@@ -86,7 +86,7 @@ const Navbar = ({ navStore }) => {
               src={logoYellow}
               alt="logo"
               width="180px"
-              className="d-sm-block d-none ml-3"
+              className="d-sm-block d-none"
             />
           </div>
 
