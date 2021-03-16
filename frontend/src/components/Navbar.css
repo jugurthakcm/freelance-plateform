@@ -127,7 +127,8 @@
   margin-left: 1.5rem;
 }
 
-.navbar__center a:nth-child(3) {
+.navbar__center a:nth-child(3),
+.navbar__center a:nth-child(4) {
   margin-left: 0;
   margin-right: 1.5rem;
 }
@@ -215,6 +216,11 @@
 
 .navbar__language .dropdown-item:nth-child(3) img {
   margin-right: 17px;
+}
+
+.navbar__user {
+  display: flex;
+  align-items: center;
 }
 
 .navbar__user .dropdown-menu {

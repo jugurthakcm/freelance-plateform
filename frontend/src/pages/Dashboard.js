@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Navbar from '../components/Navbar';
 
 const Dashboard = () => {
   const history = useHistory();
@@ -10,7 +11,12 @@ const Dashboard = () => {
     if (!user.token) history.push('/login');
   }, [user, history]);
 
-  return <div>You are successfully Logged In</div>;
+  return (
+    <>
+      <Navbar />
+      <div className="dashboard"></div>
+    </>
+  );
 };
 
 export default Dashboard;

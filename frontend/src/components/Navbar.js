@@ -7,6 +7,7 @@ import {
   faSearch,
   faTimesCircle,
 } from '@fortawesome/free-solid-svg-icons';
+import { faBell, faCommentAlt } from '@fortawesome/free-regular-svg-icons';
 import logoYellow from '../assets/images/logo_yellow.png';
 import { FormattedMessage } from 'react-intl';
 import french from '../assets/icons/french.png';
@@ -103,6 +104,7 @@ const Navbar = ({ navStore }) => {
             <Link to="/store">
               <FormattedMessage id="navbar.store" />
             </Link>
+            <Link>Find Work</Link>
           </div>
         </div>
 
@@ -114,15 +116,15 @@ const Navbar = ({ navStore }) => {
         />
 
         <div className="navbar__right d-flex">
-          {navStore && (
+          {/* {navStore && (
             <FontAwesomeIcon
               icon={faSearch}
               className="searchBtn mr-3"
               onClick={() => displaySearch()}
             />
-          )}
+          )} */}
 
-          <form className="navbar__search">
+          {/* <form className="navbar__search">
             <FontAwesomeIcon
               icon={faSearch}
               className="searchBtn__input mr-3"
@@ -139,9 +141,11 @@ const Navbar = ({ navStore }) => {
               className="ml-3"
               onClick={() => closeSearch()}
             />
-          </form>
+          </form> */}
           {user.user ? (
             <div className="navbar__user">
+              <FontAwesomeIcon icon={faBell} size="lg" className="mr-3" />
+              <FontAwesomeIcon icon={faCommentAlt} size="lg" className="mr-3" />
               <div className="dropdown">
                 <div
                   className="dropdown-toggle"
