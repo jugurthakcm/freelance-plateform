@@ -1,0 +1,14 @@
+.editLanguage__modal select {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: white;
+}
+
+.editLanguage__modal button {
+  background-color: inherit;
+  border: none;
+}
+
+.editLanguage__modal .d-flex {
+  max-width: 210px;
+}

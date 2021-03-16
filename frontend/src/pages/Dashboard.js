@@ -5,11 +5,13 @@ import Navbar from '../components/Navbar';
 import avatar from '../assets/images/avatar.jpeg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
-  faEdit,
+  faPen,
   faMapMarkerAlt,
   faTimes,
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import './Dashboard.css';
+import EditLanguage from '../components/dashboardModals/EditLanguage';
 
 const Dashboard = () => {
   const history = useHistory();
@@ -47,49 +49,9 @@ const Dashboard = () => {
                   data-bs-toggle="modal"
                   data-bs-target="#languagesModal"
                 >
-                  <FontAwesomeIcon icon={faEdit} className="ml-3" />
+                  <FontAwesomeIcon icon={faPen} className="ml-3" />
                 </button>
-                <div
-                  className="modal fade"
-                  id="languagesModal"
-                  data-bs-backdrop="static"
-                  data-bs-keyboard="false"
-                  tabIndex="-1"
-                  aria-labelledby="languagesModalLabel"
-                  aria-hidden="true"
-                >
-                  <div className="modal-dialog">
-                    <div className="modal-content">
-                      <div className="modal-header">
-                        <h4 className="modal-title" id="languagesModalLabel">
-                          Modal title
-                        </h4>
-                        <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                          style={{ backgroundColor: 'inherit', border: 'none' }}
-                        >
-                          <FontAwesomeIcon icon={faTimes} />
-                        </button>
-                      </div>
-                      <div className="modal-body">...</div>
-                      <div className="modal-footer">
-                        <button
-                          type="button"
-                          className="btn btn-secondary"
-                          data-bs-dismiss="modal"
-                        >
-                          Close
-                        </button>
-                        <button type="button" className="btn btn-warning">
-                          Save changes
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <EditLanguage />
               </div>
 
               <ul>
@@ -106,7 +68,7 @@ const Dashboard = () => {
               <div className="dashboard__title education__title">
                 <h5>Education</h5>
                 <button>
-                  <FontAwesomeIcon icon={faEdit} className="ml-3" />
+                  <FontAwesomeIcon icon={faPen} className="ml-3" />
                 </button>
               </div>
               <h6 className="education__school">Université</h6>
@@ -123,12 +85,12 @@ const Dashboard = () => {
               <div className="dashboard__section presentation__header">
                 <div className="dashboard__title presentation__title">
                   <h4>Title</h4>
-                  <FontAwesomeIcon icon={faEdit} className="ml-3 mt-1" />
+                  <FontAwesomeIcon icon={faPen} className="ml-3 mt-1" />
                 </div>
                 <div className="dashboard__title presentation__hourlyRate">
                   <h5>200 DA/hr</h5>
                   <button>
-                    <FontAwesomeIcon icon={faEdit} className="ml-3" />
+                    <FontAwesomeIcon icon={faPen} className="ml-3" />
                   </button>
                 </div>
               </div>
@@ -137,7 +99,7 @@ const Dashboard = () => {
                 <div className="dashboard__title presentation__bioTitle">
                   <h5>Description</h5>
                   <button>
-                    <FontAwesomeIcon icon={faEdit} className="ml-3" />
+                    <FontAwesomeIcon icon={faPen} className="ml-3" />
                   </button>
                 </div>
 
@@ -153,7 +115,7 @@ const Dashboard = () => {
               <div className="dashboard__title skills__title">
                 <h5>Skills</h5>
                 <button>
-                  <FontAwesomeIcon icon={faEdit} className="ml-3" />
+                  <FontAwesomeIcon icon={faPen} className="ml-3" />
                 </button>
               </div>
               <ul>
