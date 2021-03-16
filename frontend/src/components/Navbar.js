@@ -104,7 +104,7 @@ const Navbar = ({ navStore }) => {
             <Link to="/store">
               <FormattedMessage id="navbar.store" />
             </Link>
-            <Link>Find Work</Link>
+            <Link to="/find-work">Find Work</Link>
           </div>
         </div>
 

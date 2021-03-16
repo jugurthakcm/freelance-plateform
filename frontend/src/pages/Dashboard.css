@@ -1,0 +1,118 @@
+.dashboard {
+  margin-top: 100px;
+  padding: 2rem 2rem !important;
+  border-radius: 0.5rem;
+  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.3);
+}
+
+.dashboard__user {
+  display: flex;
+  align-items: center;
+  /* border-bottom: 1px solid rgba(0, 0, 0, 0.3); */
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.user__image img {
+  border-radius: 50%;
+  margin-right: 3rem;
+}
+
+.user__info h4 {
+  font-weight: 600;
+}
+
+.user__info p {
+  font-size: 14px;
+}
+
+.dashboard__main h5 {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.dashboard__main svg {
+  margin-top: 0px;
+  cursor: pointer;
+}
+
+.dashboard__main svg path {
+  color: darkgray;
+}
+
+.dashboard__main svg:hover path,
+.dashboard__main svg:focus path {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.dashboard__title {
+  display: flex;
+  align-items: flex-start;
+}
+
+.dashboard__title h5::after {
+  content: '';
+  display: block;
+  background-color: var(--yellow);
+  height: 5px;
+  width: 100%;
+  margin-bottom: 0.3rem;
+}
+
+.presentation__hourlyRate h5::after {
+  display: none;
+}
+
+.dashboard__title > button {
+  border: none;
+  background-color: inherit;
+}
+
+.dashboard__section {
+  margin-bottom: 2rem;
+}
+
+.sidebar__languages li {
+  font-weight: 500;
+  font-size: 14px;
+}
+
+.sidebar__languages span {
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.education__school {
+  margin-bottom: 0 !important;
+}
+
+.education__details,
+.education__year {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.presentation__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.presentation__title h4 {
+  font-weight: 600;
+  font-size: 1.8rem;
+}
+
+.presentation__bio p {
+  font-size: 14px;
+}
+
+.presentation__skills li {
+  display: inline-block;
+  margin-right: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: var(--yellow);
+  font-weight: 500;
+  border-radius: 2rem;
+  font-size: 14px;
+}
