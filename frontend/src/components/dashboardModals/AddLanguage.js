@@ -37,7 +37,9 @@ const AddLanguage = () => {
                 <h6>Language</h6>
                 <select>
                   {languages.map((lang) => (
-                    <option value={lang.name}>{lang.name}</option>
+                    <option value={lang.name} key={lang.code}>
+                      {lang.name}
+                    </option>
                   ))}
                 </select>
               </div>

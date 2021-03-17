@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Navbar from '../components/Navbar';
@@ -109,29 +109,36 @@ const Dashboard = () => {
                 <Education />
               </div>
               {u && u.education.length ? (
-                <>
-                  <div className="education__school d-flex align-items-start justify-content-between">
-                    <h6 className="education__school">Université</h6>
-                    <div>
-                      <button
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#EducationModal"
-                      >
-                        <FontAwesomeIcon icon={faPen} />
-                      </button>
-                      <button>
-                        <FontAwesomeIcon icon={faTrash} className="ml-3 mr-5" />
-                      </button>
+                u.education.map((e) => (
+                  <Fragment key={e.id}>
+                    <div className="education__school d-flex align-items-start justify-content-between">
+                      <h6 className="education__school">{e.school}</h6>
+                      <div>
+                        <button
+                          type="button"
+                          data-bs-toggle="modal"
+                          data-bs-target="#EducationModal"
+                        >
+                          <FontAwesomeIcon icon={faPen} />
+                        </button>
+                        <button>
+                          <FontAwesomeIcon
+                            icon={faTrash}
+                            className="ml-3 mr-5"
+                          />
+                        </button>
+                      </div>
                     </div>
-                  </div>
 
-                  <p className="education__details">
-                    School degree, <br />
-                    Speciality computer science
-                  </p>
-                  <p className="education__year">2016-2021</p>
-                </>
+                    <p className="education__details">
+                      {e.degree}, <br />
+                      {e.areaOfStudy}
+                    </p>
+                    <p className="education__year">
+                      {e.yearStart}-{e.yearEnd}
+                    </p>
+                  </Fragment>
+                ))
               ) : (
                 <div className="dashboard__completeProfile">
                   <FontAwesomeIcon

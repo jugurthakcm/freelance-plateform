@@ -53,3 +53,22 @@ export const logoutUser = () => (dispatch) => {
   localStorage.removeItem('token');
   dispatch({ type: userActionTypes.LOGOUT });
 };
+
+export const updateEducation = (
+  id,
+  { school, degree, yearStart, yearEnd, areaOfStudy },
+  token
+) => (dispatch) => {
+  axios
+    .put(
+      '/education',
+      { id, school, degree, yearStart, yearEnd, areaOfStudy },
+      {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+      }
+    )
+    .then(() => window.location.reload())
+    .catch((err) => console.log(err.response));
+};
