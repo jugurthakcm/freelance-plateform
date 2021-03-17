@@ -122,3 +122,27 @@
   border-radius: 2rem;
   font-size: 14px;
 }
+
+.dashboard__completeProfile {
+  font-size: 13px;
+  background-color: var(--black);
+  border-radius: 0.5rem;
+  color: var(--yellow);
+  padding: 0.5rem 0.8rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+}
+
+.dashboard__completeProfile svg {
+  cursor: default;
+}
+
+.dashboard__completeProfile svg path {
+  color: var(--yellow);
+  cursor: default;
+}
+
+.dashboard__completeProfile svg:hover path {
+  color: var(--yellow);
+}

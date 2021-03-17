@@ -9,6 +9,7 @@ import {
   faMapMarkerAlt,
   faPlus,
   faTrash,
+  faExclamationCircle,
 } from '@fortawesome/free-solid-svg-icons';
 import './Dashboard.css';
 import EditLanguage from '../components/dashboardModals/EditLanguage';
@@ -71,13 +72,21 @@ const Dashboard = () => {
               </div>
 
               <ul>
-                {u && u.languages.length
-                  ? u.languages.map((lang) => (
-                      <li>
-                        {lang.lang} : <span>{lang.level}</span>
-                      </li>
-                    ))
-                  : null}
+                {u && u.languages.length ? (
+                  u.languages.map((lang) => (
+                    <li>
+                      {lang.lang} : <span>{lang.level}</span>
+                    </li>
+                  ))
+                ) : (
+                  <div className="dashboard__completeProfile">
+                    <FontAwesomeIcon
+                      icon={faExclamationCircle}
+                      className="mr-2"
+                    />
+                    Add your languages to complete your profile
+                  </div>
+                )}
                 {/* <li>
                   English : <span>Fluent</span>
                 </li>
@@ -123,26 +132,32 @@ const Dashboard = () => {
                   </p>
                   <p className="education__year">2016-2021</p>
                 </>
-              ) : null}
+              ) : (
+                <div className="dashboard__completeProfile">
+                  <FontAwesomeIcon
+                    icon={faExclamationCircle}
+                    className="mr-2"
+                  />
+                  Add your education to complete your profile
+                </div>
+              )}
             </div>
           </div>
 
           <div className="dashboard__right col-md-8">
             <div className="dashboard__presentation">
               <div className="dashboard__section presentation__header">
-                {u && u.title ? (
-                  <div className="dashboard__title presentation__title">
-                    <h4>{u.title}</h4>
-                    <button
-                      type="button"
-                      data-bs-toggle="modal"
-                      data-bs-target="#editTitleModal"
-                    >
-                      <FontAwesomeIcon icon={faPen} className="ml-3 mt-1" />
-                    </button>
-                    <EditTitle />
-                  </div>
-                ) : null}
+                <div className="dashboard__title presentation__title">
+                  {u && u.title ? <h4>{u.title}</h4> : <h4>Add your title</h4>}
+                  <button
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTitleModal"
+                  >
+                    <FontAwesomeIcon icon={faPen} className="ml-3 mt-2" />
+                  </button>
+                  <EditTitle />
+                </div>
 
                 {/* <div className="dashboard__title presentation__hourlyRate">
                   <h5>200 DA/hr</h5>
@@ -164,7 +179,17 @@ const Dashboard = () => {
                   </button>
                   <EditBio />
                 </div>
-                {u && u.bio ? <p>{u.bio}</p> : null}
+                {u && u.bio ? (
+                  <p>{u.bio}</p>
+                ) : (
+                  <div className="dashboard__completeProfile">
+                    <FontAwesomeIcon
+                      icon={faExclamationCircle}
+                      className="mr-2"
+                    />
+                    Add your description to complete your profile
+                  </div>
+                )}
               </div>
             </div>
 
