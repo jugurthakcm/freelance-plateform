@@ -17,3 +17,19 @@ export const selectLanguageIcon = (language) => {
       break;
   }
 };
+
+export const generateYears = (grad) => {
+  const d = new Date();
+  const y = d.getFullYear();
+  let arr = [];
+  if (grad) {
+    for (let i = 1962; i <= y + 10; i++) {
+      arr.unshift(i);
+    }
+  } else {
+    for (let i = 1962; i <= y; i++) {
+      arr.unshift(i);
+    }
+  }
+  return arr;
+};

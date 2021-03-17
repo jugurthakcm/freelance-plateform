@@ -87,6 +87,12 @@
   margin-bottom: 0 !important;
 }
 
+.education__school button {
+  background-color: inherit;
+  border: none;
+  margin-top: -5px;
+}
+
 .education__details,
 .education__year {
   font-size: 14px;

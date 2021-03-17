@@ -8,10 +8,12 @@ import {
   faPen,
   faMapMarkerAlt,
   faPlus,
+  faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import './Dashboard.css';
 import EditLanguage from '../components/dashboardModals/EditLanguage';
 import AddLanguage from '../components/dashboardModals/AddLanguage';
+import Education from '../components/dashboardModals/Education';
 
 const Dashboard = () => {
   const history = useHistory();
@@ -75,11 +77,31 @@ const Dashboard = () => {
             <div className="dashboard__section sidebar__education">
               <div className="dashboard__title education__title">
                 <h5>Education</h5>
-                <button>
-                  <FontAwesomeIcon icon={faPen} className="ml-3" />
+                <button
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#EducationModal"
+                >
+                  <FontAwesomeIcon icon={faPlus} className="ml-3" />
                 </button>
+                <Education />
               </div>
-              <h6 className="education__school">Université</h6>
+              <div className="education__school d-flex align-items-start justify-content-between">
+                <h6 className="education__school">Université</h6>
+                <div>
+                  <button
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#EducationModal"
+                  >
+                    <FontAwesomeIcon icon={faPen} />
+                  </button>
+                  <button>
+                    <FontAwesomeIcon icon={faTrash} className="ml-3 mr-5" />
+                  </button>
+                </div>
+              </div>
+
               <p className="education__details">
                 School degree, <br />
                 Speciality computer science
