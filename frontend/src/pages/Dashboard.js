@@ -7,11 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPen,
   faMapMarkerAlt,
-  faTimes,
   faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import './Dashboard.css';
 import EditLanguage from '../components/dashboardModals/EditLanguage';
+import AddLanguage from '../components/dashboardModals/AddLanguage';
 
 const Dashboard = () => {
   const history = useHistory();
@@ -40,10 +40,17 @@ const Dashboard = () => {
         </div>
 
         <div className="dashboard__main mt-5 row">
-          <div className="dashboard__sidebar col-4">
+          <div className="dashboard__sidebar col-md-4">
             <div className="dashboard__section sidebar__languages">
               <div className="dashboard__title languages__title">
                 <h5>Languages</h5>
+                <button
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addLanguagesModal"
+                >
+                  <FontAwesomeIcon icon={faPlus} className="ml-3" />
+                </button>
                 <button
                   type="button"
                   data-bs-toggle="modal"
@@ -51,6 +58,7 @@ const Dashboard = () => {
                 >
                   <FontAwesomeIcon icon={faPen} className="ml-3" />
                 </button>
+                <AddLanguage />
                 <EditLanguage />
               </div>
 
@@ -80,19 +88,19 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="dashboard__right col-8">
+          <div className="dashboard__right col-md-8">
             <div className="dashboard__presentation">
               <div className="dashboard__section presentation__header">
                 <div className="dashboard__title presentation__title">
                   <h4>Title</h4>
                   <FontAwesomeIcon icon={faPen} className="ml-3 mt-1" />
                 </div>
-                <div className="dashboard__title presentation__hourlyRate">
+                {/* <div className="dashboard__title presentation__hourlyRate">
                   <h5>200 DA/hr</h5>
                   <button>
                     <FontAwesomeIcon icon={faPen} className="ml-3" />
                   </button>
-                </div>
+                </div> */}
               </div>
 
               <div className="dashboard__section presentation__bio">
