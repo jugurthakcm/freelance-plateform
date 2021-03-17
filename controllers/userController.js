@@ -304,3 +304,44 @@ exports.deleteAccount = (req, res) => {
     .then(() => res.status(200).send('Account deleted successfully'))
     .catch(() => res.status(400).send('Error during deleting account'));
 };
+
+exports.updateEducation = async (req, res) => {
+  try {
+    const { id, school, degree, yearStart, yearEnd, areaOfStudy } = req.body;
+
+    if (yearStart > yearEnd) throw "Starting year can't be less than end year";
+
+    const user = await User.findOne({ _id: req.userId });
+
+    const newEducation = user.education.filter((e) => e.id !== id);
+
+    newEducation.push({ id, school, degree, yearStart, yearEnd, areaOfStudy });
+
+    user
+      .updateOne({ education: newEducation })
+      .then(() =>
+        res.status(200).json({ message: 'Education updated successfully' })
+      )
+      .catch((err) => res.status(500).json({ error: err }));
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+};
+
+exports.deleteEducation = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const user = await User.findById(req.userId);
+
+    const newEducation = user.education.filter((e) => e.id !== id);
+
+    user
+      .updateOne({ education: newEducation })
+      .then(() =>
+        res.status(200).json({ message: 'Education deleted successfully' })
+      )
+      .catch((err) => res.status(500).json({ error: err }));
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+};

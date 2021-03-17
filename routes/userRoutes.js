@@ -13,6 +13,8 @@ const {
   editPassword,
   deleteAccount,
   loadUser,
+  updateEducation,
+  deleteEducation,
 } = require('../controllers/userController');
 const { auth } = require('../middlewares/authMiddleware');
 
@@ -50,5 +52,9 @@ router.put('/settings/password/edit', auth, editPassword);
 
 //Delete user's account
 router.delete('/settings/account/delete', auth, deleteAccount);
+
+router.put('/education', auth, updateEducation);
+
+router.delete('/education', auth, deleteEducation);
 
 module.exports = router;
