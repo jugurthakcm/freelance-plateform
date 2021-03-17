@@ -12,13 +12,16 @@ import { useLanguageContext } from './ContextAPI/LanguageProvider';
 import Register from './pages/Register';
 import Store from './pages/Store';
 import Dashboard from './pages/Dashboard';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from './data/actions/userActions';
+import Loading from './components/Loading';
 
 function App() {
   const language = useLanguageContext()[0];
   const token = localStorage.getItem('token');
   const dispatch = useDispatch();
+
+  const user = useSelector((state) => state.user);
 
   useEffect(() => {
     token && dispatch(loadUser(token));
@@ -37,6 +40,7 @@ function App() {
 
       {/* <div className="app app-anim"> */}
       <div className="app">
+        {user && user.loading ? <Loading /> : null}
         <Language />
         <I18nProvider locale={language}>
           <Aside />

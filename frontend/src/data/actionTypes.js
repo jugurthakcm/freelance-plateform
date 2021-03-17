@@ -7,4 +7,5 @@ export const userActionTypes = {
   ERROR_LOGOUT: 'ERROR_LOGOUT',
   LOAD_USER: 'LOAD_USER',
   ERROR_LOAD_USER: 'ERROR_LOAD_USER',
+  LOADING: 'LOADING',
 };

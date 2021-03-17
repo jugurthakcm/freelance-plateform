@@ -2,6 +2,7 @@ import axios from '../../axios';
 import { userActionTypes } from '../actionTypes';
 
 export const registerUser = (e, phone) => (dispatch) => {
+  dispatch({type : userActionTypes.LOADING})
   const { firstName, lastName, username, email, password } = e;
   axios
     .post('/register', {
