@@ -1,0 +1,16 @@
+.editTitle__form {
+  margin: 0 1rem;
+}
+
+.editTitle__form h6 {
+  margin-bottom: 0rem;
+  font-weight: 600;
+}
+
+.editTitle__form input {
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  width: 100%;
+}

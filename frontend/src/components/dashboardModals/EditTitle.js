@@ -1,25 +1,28 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import './EditLanguage.css';
-import languages from '../../data/languages';
+import './EditTitle.css';
 
-const AddLanguage = () => {
+const EditTitle = () => {
   return (
     <div
       className="modal fade"
-      id="addLanguagesModal"
+      id="editTitleModal"
       data-bs-backdrop="static"
       data-bs-keyboard="false"
       tabIndex="-1"
-      aria-labelledby="languagesModalLabel"
+      aria-labelledby="titlesModalLabel"
       aria-hidden="true"
     >
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-header">
-            <h4 className="modal-title" id="languagesModalLabel">
-              Add languages
+            <h4
+              className="modal-title"
+              id="titleModalLabel"
+              style={{ fontWeight: 500, fontSize: '1.5rem' }}
+            >
+              Edit Title
             </h4>
             <button
               type="button"
@@ -32,28 +35,18 @@ const AddLanguage = () => {
             </button>
           </div>
           <div className="modal-body">
-            <div className="addLanguage__modal">
-              <h6>Language</h6>
-              <select
-                className="p-2 rounded d-block bg-white mb-4"
-                style={{ border: '1px solid rgba(0, 0, 0, 0.2)' }}
-              >
-                {languages.map((lang) => (
-                  <option value={lang.name}>{lang.name}</option>
-                ))}
-              </select>
+            <form className="editTitle__form">
+              <label className="row">
+                <h6>Title</h6>
+              </label>
 
-              <h6>Proficiency</h6>
-              <select
-                className="p-2 rounded d-block bg-white"
-                style={{ border: '1px solid rgba(0, 0, 0, 0.2)' }}
-              >
-                <option value="Basic">Basic</option>
-                <option value="Conversational">Conversational</option>
-                <option value="Fluent">Fluent</option>
-                <option value="Native_Bilingual">Native or Bilingual</option>
-              </select>
-            </div>
+              <input
+                type="text"
+                name="title"
+                placeholder="Title"
+                className="row"
+              />
+            </form>
           </div>
           <div className="modal-footer">
             <button
@@ -73,4 +66,4 @@ const AddLanguage = () => {
   );
 };
 
-export default AddLanguage;
+export default EditTitle;

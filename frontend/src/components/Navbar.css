@@ -231,6 +231,10 @@
   cursor: pointer;
 }
 
+.navbar__user .dropdown-item:active {
+  background-color: var(--yellow);
+}
+
 .navbar__user a {
   font-weight: 400;
 }

@@ -14,6 +14,7 @@ import './Dashboard.css';
 import EditLanguage from '../components/dashboardModals/EditLanguage';
 import AddLanguage from '../components/dashboardModals/AddLanguage';
 import Education from '../components/dashboardModals/Education';
+import EditTitle from '../components/dashboardModals/EditTitle';
 
 const Dashboard = () => {
   const history = useHistory();
@@ -115,7 +116,14 @@ const Dashboard = () => {
               <div className="dashboard__section presentation__header">
                 <div className="dashboard__title presentation__title">
                   <h4>Title</h4>
-                  <FontAwesomeIcon icon={faPen} className="ml-3 mt-1" />
+                  <button
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editTitleModal"
+                  >
+                    <FontAwesomeIcon icon={faPen} className="ml-3 mt-1" />
+                  </button>
+                  <EditTitle />
                 </div>
                 {/* <div className="dashboard__title presentation__hourlyRate">
                   <h5>200 DA/hr</h5>
