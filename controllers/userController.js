@@ -31,19 +31,19 @@ exports.register = async (req, res) => {
       .validate(req.body.phone);
 
     if (phone.error) throw 'Invalid phone number';
-    //Validation
+
     const { error, value } = registerValidation(req.body);
     if (error) throw error.details[0].message;
 
     const user = value;
 
     const emailExists = await User.findOne({ email: user.email });
-    if (emailExists) throw 'Email already exists';
+    if (emailExists) throw { field: 'email', error: 'Email already exists' };
 
     const usernameExists = await User.findOne({ username: user.username });
-    if (usernameExists) throw 'Username already exists';
+    if (usernameExists)
+      throw { field: 'username', error: 'Username already exists' };
 
-    //Crypt password
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(user.password, salt);
 
@@ -62,17 +62,22 @@ exports.register = async (req, res) => {
 
     const paramsEmail = { subject: 'Confirm your email', token };
     const emailSent = await sendMail(paramsEmail, user.email);
-    if (!emailSent.messageId) throw 'Failed during sending email';
 
-    //Add the user to the DB
+    if (!emailSent.messageId)
+      return res
+        .status(500)
+        .json({ type: 'server', error: 'Failed during sending email' });
+
     newUser
       .save()
-      .then(() => res.status(200).send('User added successfully'))
+      .then(() =>
+        res.status(200).json({ message: 'You are registred succesfully' })
+      )
       .catch((error) => {
         throw error;
       });
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).json({ error });
   }
 };
 
@@ -260,30 +265,23 @@ exports.editEmail = (req, res) => {
 
 exports.editPassword = async (req, res) => {
   try {
-    //Validate the new password
     const { error, value } = passwordValidation(req.body);
     if (error) throw error;
 
     const { newPassword, confirmedPassword } = value;
 
-    //Getting the old password from body
     const { oldPassword } = req.body;
 
-    //Check newPassword and confirmed one are equals
     if (newPassword !== confirmedPassword) throw 'Passwords must be equals';
 
-    //Get the user from the DB
     const user = await User.findOne({ _id: req.userId });
 
-    //Compare oldPassword to password in DB
     const comparePassword = await bcrypt.compare(oldPassword, user.password);
     if (!comparePassword) throw 'Wrong password';
 
-    //Hash newPassword
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(newPassword, salt);
 
-    //Update the new password
     user
       .updateOne({ password: hash })
       .then(() => res.status(200).send('Password changed successfully'))

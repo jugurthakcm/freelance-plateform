@@ -11,7 +11,6 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
 import { useDispatch, useSelector } from 'react-redux';
 import { loginUser } from '../data/actions/userActions';
-import InfoMessage from '../components/InfoMessage';
 import { useHistory } from 'react-router-dom';
 
 const Login = () => {
@@ -45,7 +44,6 @@ const Login = () => {
 
   return (
     <div className="login">
-      <InfoMessage message={user.successLogin} error={user.errorLogin} />
       <div className="login__container">
         <Link to="/" className="home__link">
           <FontAwesomeIcon icon={faHome} />

@@ -33,9 +33,6 @@ export const loginUser = ({ email, password }) => (dispatch) => {
     );
 };
 
-export const resetUserState = () => (dispatch) =>
-  dispatch({ type: 'RESET_USER_STATE' });
-
 export const loadUser = (token) => (dispatch) => {
   axios
     .get('/user', {

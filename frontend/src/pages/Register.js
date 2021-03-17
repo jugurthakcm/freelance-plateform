@@ -7,6 +7,7 @@ import {
   faLock,
   faHome,
   faUser,
+  faUserTag,
 } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
 import { FormattedMessage } from 'react-intl';
@@ -18,7 +19,6 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
 import { useDispatch, useSelector } from 'react-redux';
 import { registerUser } from '../data/actions/userActions';
-import InfoMessage from '../components/InfoMessage';
 import { useHistory } from 'react-router-dom';
 
 const Register = () => {
@@ -58,7 +58,6 @@ const Register = () => {
   }, [user, history]);
   return (
     <div className="register">
-      <InfoMessage message={user.successRegister} error={user.errorRegister} />
       <div className="register__container">
         <Link to="/" className="home__link">
           <FontAwesomeIcon icon={faHome} />
@@ -119,7 +118,7 @@ const Register = () => {
 
             <div className="register__inputForm">
               <div className="register_username register__input">
-                <FontAwesomeIcon icon={faUser} />
+                <FontAwesomeIcon icon={faUserTag} />
                 <FormattedMessage
                   id="register.username"
                   defaultMessage="Username"
