@@ -1,0 +1,46 @@
+.modal .btn-close {
+  background-color: inherit;
+  border: none;
+}
+
+.modal__field {
+  margin-bottom: 1.5rem;
+  width: 100%;
+}
+
+.modal__field:last-child {
+  margin-bottom: 0;
+}
+
+.modal__field label {
+  margin-bottom: 0;
+}
+
+.modal h6 {
+  margin-bottom: 0.5rem !important;
+}
+
+.modal select,
+.modal input,
+.modal textarea {
+  background-color: inherit;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  width: 100%;
+  display: block;
+}
+
+.modal textarea:focus {
+  border: 1px solid var(--yellow);
+  outline-color: var(--yellow) !important;
+}
+
+.modal-body button {
+  background-color: inherit;
+  border: none;
+}
+
+.education__years select {
+  width: 49%;
+}

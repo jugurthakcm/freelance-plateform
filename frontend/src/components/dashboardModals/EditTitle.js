@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import './EditTitle.css';
+import './dashboardModal.css';
 
 const EditTitle = () => {
   return (
@@ -29,25 +29,20 @@ const EditTitle = () => {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-              style={{ backgroundColor: 'inherit', border: 'none' }}
             >
               <FontAwesomeIcon icon={faTimes} />
             </button>
           </div>
+
           <div className="modal-body">
-            <form className="editTitle__form">
-              <label className="row">
+            <form className="modal__field">
+              <label>
                 <h6>Title</h6>
               </label>
-
-              <input
-                type="text"
-                name="title"
-                placeholder="Title"
-                className="row"
-              />
+              <input type="text" name="title" placeholder="Title" />
             </form>
           </div>
+
           <div className="modal-footer">
             <button
               type="button"

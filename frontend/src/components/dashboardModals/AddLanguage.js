@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import './EditLanguage.css';
+import './dashboardModal.css';
 import languages from '../../data/languages';
 
 const AddLanguage = () => {
@@ -26,35 +26,33 @@ const AddLanguage = () => {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-              style={{ backgroundColor: 'inherit', border: 'none' }}
             >
               <FontAwesomeIcon icon={faTimes} />
             </button>
           </div>
-          <div className="modal-body">
-            <div className="addLanguage__modal">
-              <h6>Language</h6>
-              <select
-                className="p-2 rounded d-block bg-white mb-4"
-                style={{ border: '1px solid rgba(0, 0, 0, 0.2)' }}
-              >
-                {languages.map((lang) => (
-                  <option value={lang.name}>{lang.name}</option>
-                ))}
-              </select>
 
-              <h6>Proficiency</h6>
-              <select
-                className="p-2 rounded d-block bg-white"
-                style={{ border: '1px solid rgba(0, 0, 0, 0.2)' }}
-              >
-                <option value="Basic">Basic</option>
-                <option value="Conversational">Conversational</option>
-                <option value="Fluent">Fluent</option>
-                <option value="Native_Bilingual">Native or Bilingual</option>
-              </select>
-            </div>
+          <div className="modal-body">
+            <form>
+              <div className="modal__field">
+                <h6>Language</h6>
+                <select>
+                  {languages.map((lang) => (
+                    <option value={lang.name}>{lang.name}</option>
+                  ))}
+                </select>
+              </div>
+              <div className="modal__field">
+                <h6>Proficiency</h6>
+                <select>
+                  <option value="Basic">Basic</option>
+                  <option value="Conversational">Conversational</option>
+                  <option value="Fluent">Fluent</option>
+                  <option value="Native_Bilingual">Native or Bilingual</option>
+                </select>
+              </div>
+            </form>
           </div>
+
           <div className="modal-footer">
             <button
               type="button"

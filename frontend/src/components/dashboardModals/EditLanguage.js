@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
-import './EditLanguage.css';
+import './dashboardModal.css';
 
 const EditLanguage = () => {
   return (
@@ -25,25 +25,22 @@ const EditLanguage = () => {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-              style={{ backgroundColor: 'inherit', border: 'none' }}
             >
               <FontAwesomeIcon icon={faTimes} />
             </button>
           </div>
           <div className="modal-body">
-            <div className="editLanguage__modal">
-              <h6>English</h6>
-              <div className="d-flex align-items-center justify-content-between">
-                <select>
-                  <option value="Basic">Basic</option>
-                  <option value="Conversational">Conversational</option>
-                  <option value="Fluent">Fluent</option>
-                  <option value="Native_Bilingual">Native or Bilingual</option>
-                </select>
-                <button>
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
-              </div>
+            <h6>English</h6>
+            <div className="d-flex align-items-center justify-content-between">
+              <select>
+                <option value="Basic">Basic</option>
+                <option value="Conversational">Conversational</option>
+                <option value="Fluent">Fluent</option>
+                <option value="Native_Bilingual">Native or Bilingual</option>
+              </select>
+              <button>
+                <FontAwesomeIcon icon={faTrash} className="ml-3" />
+              </button>
             </div>
           </div>
           <div className="modal-footer">

@@ -1,7 +1,7 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import './EditBio.css';
+import './dashboardModal.css';
 
 const EditBio = () => {
   return (
@@ -34,20 +34,16 @@ const EditBio = () => {
               <FontAwesomeIcon icon={faTimes} />
             </button>
           </div>
+
           <div className="modal-body">
-            <form className="editBio__form">
-              <label className="row">
+            <form className="modal__field">
+              <label>
                 <h6>Description</h6>
               </label>
-
-              <textarea
-                className="row"
-                name="bio"
-                cols="30"
-                rows="5"
-              ></textarea>
+              <textarea name="bio" cols="30" rows="5"></textarea>
             </form>
           </div>
+
           <div className="modal-footer">
             <button
               type="button"

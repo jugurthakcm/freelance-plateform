@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { generateYears } from '../../util';
-import './Education.css';
+import './dashboardModal.css';
 
 const Education = () => {
   return (
@@ -26,30 +26,23 @@ const Education = () => {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-              style={{ backgroundColor: 'inherit', border: 'none' }}
             >
               <FontAwesomeIcon icon={faTimes} />
             </button>
           </div>
           <div className="modal-body">
-            <form className="education__form">
-              <div className="education__field">
-                <label htmlFor="school" className="row">
+            <form>
+              <div className="modal__field">
+                <label htmlFor="school">
                   <h6>School</h6>
                 </label>
-                <input
-                  type="text"
-                  name="school"
-                  placeholder="School"
-                  className="row"
-                />
+                <input type="text" name="school" placeholder="School" />
               </div>
-
-              <div className="education__field">
-                <label htmlFor="year" className="row">
+              <div className="modal__field">
+                <label htmlFor="year">
                   <h6>Dates of attendance</h6>
                 </label>
-                <div className="row justify-content-between">
+                <div className="d-flex justify-content-between education__years">
                   <select name="yearStart">
                     <option disabled selected>
                       From
@@ -68,30 +61,25 @@ const Education = () => {
                   </select>
                 </div>
               </div>
-              <div className="education__field">
-                <label htmlFor="degree" className="row">
+              <div className="modal__field">
+                <label htmlFor="degree">
                   <h6>Degree</h6>
                 </label>
-                <input
-                  type="text"
-                  name="degree"
-                  placeholder="Degree"
-                  className="row"
-                />
+                <input type="text" name="degree" placeholder="Degree" />
               </div>
-              <div className="education__field">
-                <label htmlFor="areaStudy" className="row">
+              <div className="modal__field">
+                <label htmlFor="areaStudy">
                   <h6>Area of study</h6>
                 </label>
                 <input
                   type="text"
                   name="areaStudy"
                   placeholder="Area of study"
-                  className="row"
                 />
               </div>
             </form>
           </div>
+
           <div className="modal-footer">
             <button
               type="button"
