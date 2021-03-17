@@ -15,6 +15,7 @@ import EditLanguage from '../components/dashboardModals/EditLanguage';
 import AddLanguage from '../components/dashboardModals/AddLanguage';
 import Education from '../components/dashboardModals/Education';
 import EditTitle from '../components/dashboardModals/EditTitle';
+import EditBio from '../components/dashboardModals/EditBio';
 
 const Dashboard = () => {
   const history = useHistory();
@@ -136,9 +137,14 @@ const Dashboard = () => {
               <div className="dashboard__section presentation__bio">
                 <div className="dashboard__title presentation__bioTitle">
                   <h5>Description</h5>
-                  <button>
+                  <button
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#editBioModal"
+                  >
                     <FontAwesomeIcon icon={faPen} className="ml-3" />
                   </button>
+                  <EditBio />
                 </div>
 
                 <p>

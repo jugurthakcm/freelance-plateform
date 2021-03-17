@@ -1,14 +1,9 @@
-.editTitle__form {
+.editBio__form {
   margin: 0 1rem;
-  margin-left: 2rem;
+  margin-left: 3rem;
 }
 
-.editTitle__form h6 {
-  margin-bottom: 0rem;
-  font-weight: 600;
-}
-
-.editTitle__form input {
+.editBio__form textarea {
   padding: 0.5rem;
   border-radius: 0.5rem;
   background-color: white;
