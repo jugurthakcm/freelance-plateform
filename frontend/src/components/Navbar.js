@@ -18,6 +18,7 @@ import { selectLanguageIcon } from '../util';
 import axios from '../axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../data/actions/userActions';
+import avatar from '../assets/images/avatar.jpeg';
 
 const Navbar = ({ navStore }) => {
   const [categories, setCategories] = useState([]);
@@ -155,7 +156,12 @@ const Navbar = ({ navStore }) => {
                   aria-expanded="false"
                   // style={{ backgroundImage: `url(${languageImage})` }}
                 >
-                  User
+                  <img
+                    src={avatar}
+                    alt="avatar"
+                    width="30px"
+                    style={{ borderRadius: '50%', cursor: 'pointer' }}
+                  />
                 </div>
                 <ul
                   className="dropdown-menu"

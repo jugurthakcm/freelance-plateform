@@ -20,6 +20,7 @@ import EditBio from '../components/dashboardModals/EditBio';
 const Dashboard = () => {
   const history = useHistory();
   const user = useSelector((state) => state.user);
+  const u = user.user;
 
   useEffect(() => {
     if (!user.token) history.push('/login');
@@ -35,10 +36,10 @@ const Dashboard = () => {
           </div>
 
           <div className="user__info">
-            <h4>KACIMI Jugurtha</h4>
+            <h4>{u && u.firstName + ' ' + u.lastName}</h4>
             <p>
-              <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-1" /> Tizi
-              Ouzou, Algeria
+              <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-1" />
+              {u && u.location ? u.location : 'No location added'}
             </p>
           </div>
         </div>
@@ -55,24 +56,34 @@ const Dashboard = () => {
                 >
                   <FontAwesomeIcon icon={faPlus} className="ml-3" />
                 </button>
-                <button
-                  type="button"
-                  data-bs-toggle="modal"
-                  data-bs-target="#languagesModal"
-                >
-                  <FontAwesomeIcon icon={faPen} className="ml-3" />
-                </button>
+                {u && u.languages.length ? (
+                  <button
+                    type="button"
+                    data-bs-toggle="modal"
+                    data-bs-target="#languagesModal"
+                  >
+                    <FontAwesomeIcon icon={faPen} className="ml-3" />
+                  </button>
+                ) : null}
+
                 <AddLanguage />
                 <EditLanguage />
               </div>
 
               <ul>
-                <li>
+                {u && u.languages.length
+                  ? u.languages.map((lang) => (
+                      <li>
+                        {lang.lang} : <span>{lang.level}</span>
+                      </li>
+                    ))
+                  : null}
+                {/* <li>
                   English : <span>Fluent</span>
                 </li>
                 <li>
                   French : <span>Fluent</span>
-                </li>
+                </li> */}
               </ul>
             </div>
 
@@ -88,44 +99,51 @@ const Dashboard = () => {
                 </button>
                 <Education />
               </div>
-              <div className="education__school d-flex align-items-start justify-content-between">
-                <h6 className="education__school">Université</h6>
-                <div>
-                  <button
-                    type="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#EducationModal"
-                  >
-                    <FontAwesomeIcon icon={faPen} />
-                  </button>
-                  <button>
-                    <FontAwesomeIcon icon={faTrash} className="ml-3 mr-5" />
-                  </button>
-                </div>
-              </div>
+              {u && u.education.length ? (
+                <>
+                  <div className="education__school d-flex align-items-start justify-content-between">
+                    <h6 className="education__school">Université</h6>
+                    <div>
+                      <button
+                        type="button"
+                        data-bs-toggle="modal"
+                        data-bs-target="#EducationModal"
+                      >
+                        <FontAwesomeIcon icon={faPen} />
+                      </button>
+                      <button>
+                        <FontAwesomeIcon icon={faTrash} className="ml-3 mr-5" />
+                      </button>
+                    </div>
+                  </div>
 
-              <p className="education__details">
-                School degree, <br />
-                Speciality computer science
-              </p>
-              <p className="education__year">2016-2021</p>
+                  <p className="education__details">
+                    School degree, <br />
+                    Speciality computer science
+                  </p>
+                  <p className="education__year">2016-2021</p>
+                </>
+              ) : null}
             </div>
           </div>
 
           <div className="dashboard__right col-md-8">
             <div className="dashboard__presentation">
               <div className="dashboard__section presentation__header">
-                <div className="dashboard__title presentation__title">
-                  <h4>Title</h4>
-                  <button
-                    type="button"
-                    data-bs-toggle="modal"
-                    data-bs-target="#editTitleModal"
-                  >
-                    <FontAwesomeIcon icon={faPen} className="ml-3 mt-1" />
-                  </button>
-                  <EditTitle />
-                </div>
+                {u && u.title ? (
+                  <div className="dashboard__title presentation__title">
+                    <h4>{u.title}</h4>
+                    <button
+                      type="button"
+                      data-bs-toggle="modal"
+                      data-bs-target="#editTitleModal"
+                    >
+                      <FontAwesomeIcon icon={faPen} className="ml-3 mt-1" />
+                    </button>
+                    <EditTitle />
+                  </div>
+                ) : null}
+
                 {/* <div className="dashboard__title presentation__hourlyRate">
                   <h5>200 DA/hr</h5>
                   <button>
@@ -146,12 +164,7 @@ const Dashboard = () => {
                   </button>
                   <EditBio />
                 </div>
-
-                <p>
-                  Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ea
-                  beatae hic fuga ipsa non earum sed repudiandae atque ab
-                  voluptatum?
-                </p>
+                {u && u.bio ? <p>{u.bio}</p> : null}
               </div>
             </div>
 
