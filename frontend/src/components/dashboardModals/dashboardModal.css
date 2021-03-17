@@ -31,6 +31,10 @@
   display: block;
 }
 
+.modal textarea {
+  font-size: 14px;
+}
+
 .modal textarea:focus {
   border: 1px solid var(--yellow);
   outline-color: var(--yellow) !important;
