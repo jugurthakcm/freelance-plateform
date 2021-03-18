@@ -11,9 +11,11 @@ const userReducer = (state = initialState, action) => {
   switch (action.type) {
     //REGISTER
     case userActionTypes.REGISTER:
+      localStorage.setItem('token', action.payload.data.token);
       return {
         ...state,
         success: action.payload.data.message,
+        token: action.payload.data.token,
       };
 
     //ERROR_REGISTER

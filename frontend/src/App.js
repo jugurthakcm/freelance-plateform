@@ -23,7 +23,6 @@ function App() {
 
   const user = useSelector((state) => state.user);
   const loading = useSelector((state) => state.loading);
-  console.log(loading);
 
   useEffect(() => {
     token && dispatch(loadUser(token));

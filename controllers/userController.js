@@ -68,10 +68,17 @@ exports.register = async (req, res) => {
         .status(500)
         .json({ type: 'server', error: 'Failed during sending email' });
 
+    const accessToken = jwt.sign({ _id: newUser._id }, process.env.JWT_KEY);
+
     newUser
       .save()
       .then(() =>
-        res.status(200).json({ message: 'You are registred succesfully' })
+        res
+          .status(200)
+          .json({
+            message: 'You are registred succesfully',
+            token: accessToken,
+          })
       )
       .catch((error) => {
         throw error;

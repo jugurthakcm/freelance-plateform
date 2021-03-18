@@ -30,6 +30,17 @@ const Dashboard = () => {
   return (
     <>
       <Navbar />
+      {u && !u.confirmedEmail && (
+        <div
+          className="alert alert-danger dashboard__confirmEmail container"
+          role="alert"
+          style={{ marginBottom: '-50px' }}
+        >
+          A confirmation email was sent to your adress mail, please confirm your
+          registration.
+        </div>
+      )}
+
       <div className="dashboard container">
         <div className="dashboard__user">
           <div className="user__image">
