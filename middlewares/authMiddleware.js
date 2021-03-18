@@ -15,7 +15,7 @@ exports.auth = (req, res, next) => {
   } catch (error) {
     res
       .status(401)
-      .send('You need to be logged in order to perform this action');
+      .json({ error: 'You need to be logged in order to perform this action' });
     next();
   }
 };

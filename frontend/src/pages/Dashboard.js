@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Navbar from '../components/Navbar';
 import avatar from '../assets/images/avatar.jpeg';
@@ -17,14 +17,16 @@ import AddLanguage from '../components/dashboardModals/AddLanguage';
 import Education from '../components/dashboardModals/Education';
 import EditTitle from '../components/dashboardModals/EditTitle';
 import EditBio from '../components/dashboardModals/EditBio';
+import { deleteEducation } from '../data/actions/userActions';
 
 const Dashboard = () => {
   const history = useHistory();
   const user = useSelector((state) => state.user);
   const u = user.user;
 
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    window.scrollTo(0, 0);
     if (!user.token) history.push('/login');
   }, [user, history]);
 
@@ -122,7 +124,7 @@ const Dashboard = () => {
               </div>
               {u && u.education.length ? (
                 u.education.map((e) => (
-                  <Fragment key={e.id}>
+                  <div key={e.id} className="mb-2">
                     <div className="education__school d-flex align-items-start justify-content-between">
                       <h6 className="education__school">{e.school}</h6>
                       <div>
@@ -137,6 +139,9 @@ const Dashboard = () => {
                           <FontAwesomeIcon
                             icon={faTrash}
                             className="ml-3 mr-5"
+                            onClick={() =>
+                              dispatch(deleteEducation(e.id, user.token))
+                            }
                           />
                         </button>
                       </div>
@@ -149,7 +154,7 @@ const Dashboard = () => {
                     <p className="education__year">
                       {e.yearStart}-{e.yearEnd}
                     </p>
-                  </Fragment>
+                  </div>
                 ))
               ) : (
                 <div className="dashboard__completeProfile">

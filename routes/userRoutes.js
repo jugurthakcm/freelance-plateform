@@ -55,6 +55,6 @@ router.delete('/settings/account/delete', auth, deleteAccount);
 
 router.put('/education', auth, updateEducation);
 
-router.delete('/education', auth, deleteEducation);
+router.post('/education', auth, deleteEducation);
 
 module.exports = router;

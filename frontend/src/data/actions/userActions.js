@@ -87,3 +87,22 @@ export const updateEducation = (
       dispatch({ type: loadingActionTypes.NO_LOADING });
     });
 };
+
+export const deleteEducation = (id, token) => (dispatch) =>
+  axios
+    .post(
+      '/education',
+      { id },
+      {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: userActionTypes.EDUCATION_SUCCESS, payload: res });
+      window.location.reload();
+    })
+    .catch((err) => {
+      dispatch({ type: userActionTypes.EDUCATION_ERROR, payload: err });
+    });

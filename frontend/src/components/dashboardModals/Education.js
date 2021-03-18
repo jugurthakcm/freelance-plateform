@@ -26,8 +26,6 @@ const Education = () => {
     resolver: joiResolver(schema),
   });
 
-  if (errors) console.log(errors);
-
   const submitForm = (e) => {
     dispatch(updateEducation(uuidv4(), e, user.token));
   };
