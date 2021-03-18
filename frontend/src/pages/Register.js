@@ -96,7 +96,7 @@ const Register = () => {
                 <FontAwesomeIcon icon={faUser} />
                 <FormattedMessage
                   id="register.firstName"
-                  defaultMessage="Firsr Name"
+                  defaultMessage="First Name"
                 >
                   {(placeholder) => (
                     <input
@@ -108,7 +108,7 @@ const Register = () => {
                   )}
                 </FormattedMessage>
               </div>
-              {errors.lastName && (
+              {errors.firstName && (
                 <p className="textError">{errors.firstName?.message}</p>
               )}
               {e && e.field === 'firstName' && (

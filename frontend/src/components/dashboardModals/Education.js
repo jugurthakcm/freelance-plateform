@@ -13,6 +13,7 @@ import { updateEducation } from '../../data/actions/userActions';
 const Education = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
+
   const schema = Joi.object({
     school: Joi.string().required().min(5).max(50),
     degree: Joi.string().required().min(3).max(50),
@@ -28,9 +29,10 @@ const Education = () => {
   if (errors) console.log(errors);
 
   const submitForm = (e) => {
-    console.log(e);
     dispatch(updateEducation(uuidv4(), e, user.token));
   };
+
+  const e = user.error;
 
   return (
     <div
@@ -68,7 +70,18 @@ const Education = () => {
                   name="school"
                   placeholder="School"
                   ref={register}
+                  className={`${
+                    errors.school || (e && e.field === 'school')
+                      ? 'inputError'
+                      : null
+                  }`}
                 />
+                {errors.school && (
+                  <p className="textError">{errors.school?.message}</p>
+                )}
+                {e && e.field === 'school' && (
+                  <p className="textError">{e.error}</p>
+                )}
               </div>
 
               <div className="modal__field">
@@ -94,6 +107,21 @@ const Education = () => {
                     ))}
                   </select>
                 </div>
+                {errors.yearStart && (
+                  <p className="textError">{errors.yearStart?.message}</p>
+                )}
+                {e && e.field === 'yearStart' && (
+                  <p className="textError">{e.error}</p>
+                )}
+                {errors.yearEnd && (
+                  <p className="textError">{errors.yearEnd?.message}</p>
+                )}
+                {e && e.field === 'yearEnd' && (
+                  <p className="textError">{e.error}</p>
+                )}
+                {e && e.field === 'year' && (
+                  <p className="textError">{e.error}</p>
+                )}
               </div>
 
               <div className="modal__field">
@@ -105,7 +133,18 @@ const Education = () => {
                   name="degree"
                   placeholder="Degree"
                   ref={register}
+                  className={`${
+                    errors.degree || (e && e.field === 'degree')
+                      ? 'inputError'
+                      : null
+                  }`}
                 />
+                {errors.degree && (
+                  <p className="textError">{errors.degree?.message}</p>
+                )}
+                {e && e.field === 'degree' && (
+                  <p className="textError">{e.error}</p>
+                )}
               </div>
 
               <div className="modal__field">
@@ -117,7 +156,18 @@ const Education = () => {
                   name="areaOfStudy"
                   placeholder="Area of study"
                   ref={register}
+                  className={`${
+                    errors.areaOfStudy || (e && e.field === 'areaOfStudy')
+                      ? 'inputError'
+                      : null
+                  }`}
                 />
+                {errors.areaOfStudy && (
+                  <p className="textError">{errors.areaOfStudy?.message}</p>
+                )}
+                {e && e.field === 'areaOfStudy' && (
+                  <p className="textError">{e.error}</p>
+                )}
               </div>
             </div>
 

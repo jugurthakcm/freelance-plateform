@@ -23,11 +23,13 @@ select:focus {
 }
 
 .inputError {
-  border: 2px solid red;
+  border: 2px solid red !important;
 }
 
 .textError {
   color: red;
   font-size: 0.8rem;
   font-weight: 500;
+  display: block;
+  margin-bottom: 0 !important;
 }
