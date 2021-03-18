@@ -15,7 +15,17 @@ exports.registerValidation = ({
   const schema = Joi.object({
     firstName: Joi.string().required().trim().min(2).max(50),
     lastName: Joi.string().required().trim().min(2).max(50),
-    username: Joi.string().required().trim().min(3).max(50),
+    username: Joi.string()
+      .required()
+      .trim()
+      .min(4)
+      .max(20)
+      .pattern(
+        new RegExp('^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){0,20}[a-zA-Z0-9]$')
+      )
+      .messages({
+        'string.pattern.base': 'Invalid username',
+      }),
     email: Joi.string().email().required().trim().max(50),
     password: Joi.string().required().trim().min(8).max(50),
   });

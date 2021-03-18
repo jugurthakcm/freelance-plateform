@@ -29,7 +29,17 @@ const Register = () => {
   const schema = Joi.object({
     firstName: Joi.string().trim().min(2).max(30).required(),
     lastName: Joi.string().trim().min(2).max(30).required(),
-    username: Joi.string().trim().min(2).max(30).required(),
+    username: Joi.string()
+      .trim()
+      .min(4)
+      .max(20)
+      .required()
+      .pattern(
+        new RegExp('^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){0,20}[a-zA-Z0-9]$')
+      )
+      .messages({
+        'string.pattern.base': 'Invalid username',
+      }),
     email: Joi.string()
       .trim()
       .email({ tlds: { allow: false } })
