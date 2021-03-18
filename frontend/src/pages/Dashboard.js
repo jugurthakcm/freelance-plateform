@@ -24,6 +24,7 @@ const Dashboard = () => {
   const u = user.user;
 
   useEffect(() => {
+    window.scrollTo(0, 0);
     if (!user.token) history.push('/login');
   }, [user, history]);
 

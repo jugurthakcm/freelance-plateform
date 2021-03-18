@@ -25,6 +25,7 @@ export const registerUser = (e, phone) => (dispatch) => {
 };
 
 export const loginUser = ({ email, password }) => (dispatch) => {
+  dispatch({ type: loadingActionTypes.LOADING });
   axios
     .post('/login', {
       email,
@@ -33,10 +34,13 @@ export const loginUser = ({ email, password }) => (dispatch) => {
     .then((res) => {
       dispatch({ type: userActionTypes.LOGIN, payload: res });
       dispatch(loadUser(localStorage.getItem('token')));
+      dispatch({ type: loadingActionTypes.NO_LOADING });
+      window.location.reload();
     })
-    .catch((err) =>
-      dispatch({ type: userActionTypes.ERROR_LOGIN, payload: err })
-    );
+    .catch((err) => {
+      dispatch({ type: userActionTypes.ERROR_LOGIN, payload: err });
+      dispatch({ type: loadingActionTypes.NO_LOADING });
+    });
 };
 
 export const loadUser = (token) => (dispatch) => {
