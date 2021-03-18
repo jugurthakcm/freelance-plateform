@@ -30,7 +30,7 @@ exports.register = async (req, res) => {
       })
       .validate(req.body.phone);
 
-    if (phone.error) throw { type: 'phone', error: 'Invalid phone number' };
+    if (phone.error) throw { field: 'phone', error: 'Invalid phone number' };
 
     const { error, value } = registerValidation(req.body);
     if (error)

@@ -77,7 +77,13 @@ const Register = () => {
           </h2>
           <form onSubmit={handleSubmit(submitForm)}>
             <div className="register__inputForm">
-              <div className="register__firstName register__input">
+              <div
+                className={`register__firstName register__input ${
+                  errors.firstName || (e && e.field === 'firstName')
+                    ? 'inputError'
+                    : null
+                }`}
+              >
                 <FontAwesomeIcon icon={faUser} />
                 <FormattedMessage
                   id="register.firstName"
@@ -102,7 +108,13 @@ const Register = () => {
             </div>
 
             <div className="register__inputForm">
-              <div className="register__lastName register__input">
+              <div
+                className={`register__lastName register__input ${
+                  errors.lastName || (e && e.field === 'lastName')
+                    ? 'inputError'
+                    : null
+                }`}
+              >
                 <FontAwesomeIcon icon={faUser} />
                 <FormattedMessage
                   id="register.lastName"
@@ -127,7 +139,13 @@ const Register = () => {
             </div>
 
             <div className="register__inputForm">
-              <div className="register_username register__input">
+              <div
+                className={`register_username register__input ${
+                  errors.username || (e && e.field === 'username')
+                    ? 'inputError'
+                    : null
+                }`}
+              >
                 <FontAwesomeIcon icon={faUserTag} />
                 <FormattedMessage
                   id="register.username"
@@ -152,7 +170,13 @@ const Register = () => {
             </div>
 
             <div className="register__inputForm">
-              <div className="register__email register__input">
+              <div
+                className={`register__email register__input ${
+                  errors.email || (e && e.field === 'email')
+                    ? 'inputError'
+                    : null
+                }`}
+              >
                 <FontAwesomeIcon icon={faEnvelope} />
                 <FormattedMessage id="login.email" defaultMessage="Email">
                   {(placeholder) => (
@@ -177,18 +201,29 @@ const Register = () => {
               <label>
                 <FormattedMessage id="register.phone" />
               </label>
-              <PhoneInput
-                country={'dz'}
-                name="phone"
-                onChange={(e) => setPhone('+' + e)}
-              />
+              <div
+                className={`${e && e.field === 'phone' ? 'inputError' : null}`}
+                style={{ borderRadius: '7px' }}
+              >
+                <PhoneInput
+                  country={'dz'}
+                  name="phone"
+                  onChange={(e) => setPhone('+' + e)}
+                />
+              </div>
               {e && e.field === 'phone' && (
                 <p className="textError">{e.error}</p>
               )}
             </div>
 
             <div className="register__inputForm">
-              <div className="register__password register__input">
+              <div
+                className={`register__password register__input ${
+                  errors.password || (e && e.field === 'password')
+                    ? 'inputError'
+                    : null
+                }`}
+              >
                 <FontAwesomeIcon icon={faLock} />
                 <FormattedMessage
                   id="register.password"

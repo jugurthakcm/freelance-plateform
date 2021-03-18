@@ -21,3 +21,13 @@ button:focus,
 select:focus {
   outline: none !important;
 }
+
+.inputError {
+  border: 2px solid red;
+}
+
+.textError {
+  color: red;
+  font-size: 0.8rem;
+  font-weight: 500;
+}

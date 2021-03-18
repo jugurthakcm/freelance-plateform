@@ -180,15 +180,6 @@
   padding: 7px 15px;
 }
 
-.inputError {
-  border: 2px solid red;
-}
-
-.textError {
-  color: red;
-  font-size: 0.8rem;
-}
-
 @media (max-width: 800px) {
   .register img {
     display: none;
