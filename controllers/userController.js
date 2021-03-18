@@ -12,6 +12,7 @@ const {
   emailValidation,
   passwordValidation,
   skillsValidation,
+  educationValidation,
 } = require('../validation/userValidation');
 const Joi = require('joi');
 const phoneJoi = Joi.extend(require('joi-phone-number'));
@@ -323,9 +324,20 @@ exports.deleteAccount = (req, res) => {
 
 exports.updateEducation = async (req, res) => {
   try {
-    const { id, school, degree, yearStart, yearEnd, areaOfStudy } = req.body;
+    const { error, value } = educationValidation(req.body);
+    if (error)
+      throw {
+        fieldLogin: error.details[0].path[0],
+        message: error.details[0].message,
+      };
 
-    if (yearStart > yearEnd) throw "Starting year can't be less than end year";
+    const { id, school, degree, yearStart, yearEnd, areaOfStudy } = value;
+
+    if (yearStart > yearEnd)
+      throw {
+        field: 'year',
+        error: "Starting year can't be less than end year",
+      };
 
     const user = await User.findOne({ _id: req.userId });
 

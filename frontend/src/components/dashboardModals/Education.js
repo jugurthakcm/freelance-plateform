@@ -4,7 +4,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { generateYears } from '../../util';
 import './dashboardModal.css';
 import { useDispatch, useSelector } from 'react-redux';
-// import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
@@ -26,7 +26,7 @@ const Education = () => {
   });
 
   const submitForm = (e) => {
-    dispatch(updateEducation('1GBf', e, user.token));
+    dispatch(updateEducation(uuidv4(), e, user.token));
   };
 
   return (
