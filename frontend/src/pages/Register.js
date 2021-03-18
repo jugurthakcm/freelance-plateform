@@ -56,6 +56,10 @@ const Register = () => {
   useEffect(() => {
     if (user.token) history.push('/dashboard');
   }, [user, history]);
+
+  const e = user.error;
+  console.log(e);
+
   return (
     <div className="register">
       <div className="register__container">
@@ -92,6 +96,9 @@ const Register = () => {
               {errors.lastName && (
                 <p className="textError">{errors.firstName?.message}</p>
               )}
+              {e && e.field === 'firstName' && (
+                <p className="textError">{e.error}</p>
+              )}
             </div>
 
             <div className="register__inputForm">
@@ -113,6 +120,9 @@ const Register = () => {
               </div>
               {errors.lastName && (
                 <p className="textError">{errors.lastName?.message}</p>
+              )}
+              {e && e.field === 'lastName' && (
+                <p className="textError">{e.error}</p>
               )}
             </div>
 
@@ -136,6 +146,9 @@ const Register = () => {
               {errors.username && (
                 <p className="textError">{errors.username?.message}</p>
               )}
+              {e && e.field === 'username' && (
+                <p className="textError">{e.error}</p>
+              )}
             </div>
 
             <div className="register__inputForm">
@@ -155,6 +168,9 @@ const Register = () => {
               {errors.email && (
                 <p className="textError">{errors.email?.message}</p>
               )}
+              {e && e.field === 'email' && (
+                <p className="textError">{e.error}</p>
+              )}
             </div>
 
             <div className="register__phone">
@@ -166,6 +182,9 @@ const Register = () => {
                 name="phone"
                 onChange={(e) => setPhone('+' + e)}
               />
+              {e && e.field === 'phone' && (
+                <p className="textError">{e.error}</p>
+              )}
             </div>
 
             <div className="register__inputForm">
@@ -187,6 +206,9 @@ const Register = () => {
               </div>
               {errors.password && (
                 <p className="textError">{errors.password?.message}</p>
+              )}
+              {e && e.field === 'password' && (
+                <p className="textError">{e.error}</p>
               )}
             </div>
 

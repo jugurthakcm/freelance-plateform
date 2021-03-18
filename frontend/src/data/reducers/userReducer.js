@@ -5,6 +5,7 @@ const initialState = {
   token: localStorage.getItem('token'),
   success: null,
   error: null,
+  status: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -16,6 +17,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         success: action.payload.data.message,
         token: action.payload.data.token,
+        status: action.payload.status,
       };
 
     //ERROR_REGISTER
@@ -23,6 +25,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload.response.data.error,
+        status: action.payload.response.status,
       };
 
     case userActionTypes.LOGIN:

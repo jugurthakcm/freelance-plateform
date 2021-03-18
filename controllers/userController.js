@@ -30,10 +30,14 @@ exports.register = async (req, res) => {
       })
       .validate(req.body.phone);
 
-    if (phone.error) throw 'Invalid phone number';
+    if (phone.error) throw { type: 'phone', error: 'Invalid phone number' };
 
     const { error, value } = registerValidation(req.body);
-    if (error) throw error.details[0].message;
+    if (error)
+      throw {
+        field: error.details[0].path[0],
+        message: error.details[0].message,
+      };
 
     const user = value;
 
@@ -64,21 +68,17 @@ exports.register = async (req, res) => {
     const emailSent = await sendMail(paramsEmail, user.email);
 
     if (!emailSent.messageId)
-      return res
-        .status(500)
-        .json({ type: 'server', error: 'Failed during sending email' });
+      return res.status(500).json({ error: 'Failed during sending email' });
 
     const accessToken = jwt.sign({ _id: newUser._id }, process.env.JWT_KEY);
 
     newUser
       .save()
       .then(() =>
-        res
-          .status(200)
-          .json({
-            message: 'You are registred succesfully',
-            token: accessToken,
-          })
+        res.status(200).json({
+          message: 'You are registred succesfully',
+          token: accessToken,
+        })
       )
       .catch((error) => {
         throw error;
@@ -309,6 +309,12 @@ exports.deleteAccount = (req, res) => {
     .then(() => res.status(200).send('Account deleted successfully'))
     .catch(() => res.status(400).send('Error during deleting account'));
 };
+
+/**
+ * User update his education
+ * /PUT
+ * @params {id, school, degree, yearStart, yearEnd, areaOfStudy}
+ */
 
 exports.updateEducation = async (req, res) => {
   try {
