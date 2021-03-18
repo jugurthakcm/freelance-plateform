@@ -22,6 +22,8 @@ function App() {
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
+  const loading = useSelector((state) => state.loading);
+  console.log(loading);
 
   useEffect(() => {
     token && dispatch(loadUser(token));
@@ -40,7 +42,7 @@ function App() {
 
       {/* <div className="app app-anim"> */}
       <div className="app">
-        {user && user.loading ? <Loading /> : null}
+        {loading && loading.loading ? <Loading /> : null}
         <Language />
         <I18nProvider locale={language}>
           <Aside />

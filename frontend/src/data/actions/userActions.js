@@ -1,8 +1,8 @@
 import axios from '../../axios';
-import { userActionTypes } from '../actionTypes';
+import { userActionTypes, loadingActionTypes } from '../actionTypes';
 
 export const registerUser = (e, phone) => (dispatch) => {
-  dispatch({type : userActionTypes.LOADING})
+  dispatch({ type: loadingActionTypes.LOADING });
   const { firstName, lastName, username, email, password } = e;
   axios
     .post('/register', {
@@ -13,10 +13,15 @@ export const registerUser = (e, phone) => (dispatch) => {
       phone,
       password,
     })
-    .then((res) => dispatch({ type: userActionTypes.REGISTER, payload: res }))
-    .catch((err) =>
-      dispatch({ type: userActionTypes.ERROR_REGISTER, payload: err })
-    );
+    .then((res) => {
+      dispatch({ type: userActionTypes.REGISTER, payload: res });
+      dispatch({ type: loadingActionTypes.NO_LOADING });
+      window.location.reload();
+    })
+    .catch((err) => {
+      dispatch({ type: userActionTypes.ERROR_REGISTER, payload: err });
+      dispatch({ type: loadingActionTypes.NO_LOADING });
+    });
 };
 
 export const loginUser = ({ email, password }) => (dispatch) => {

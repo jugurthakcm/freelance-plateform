@@ -9,3 +9,8 @@ export const userActionTypes = {
   ERROR_LOAD_USER: 'ERROR_LOAD_USER',
   LOADING: 'LOADING',
 };
+
+export const loadingActionTypes = {
+  LOADING: 'LOADING',
+  NO_LOADING: 'NO_LOADING',
+};

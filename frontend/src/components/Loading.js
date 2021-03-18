@@ -22,11 +22,11 @@ const Loading = () => {
       className="d-flex justify-content-center align-items-center"
     >
       <div
-        class="spinner-border text-warning m-auto"
+        className="spinner-border text-warning m-auto"
         role="status"
         style={style}
       >
-        <span class="visually-hidden"></span>
+        <span className="visually-hidden"></span>
       </div>
     </div>
   );
