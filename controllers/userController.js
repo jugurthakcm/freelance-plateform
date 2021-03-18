@@ -327,7 +327,7 @@ exports.updateEducation = async (req, res) => {
     const { error, value } = educationValidation(req.body);
     if (error)
       throw {
-        fieldLogin: error.details[0].path[0],
+        field: error.details[0].path[0],
         message: error.details[0].message,
       };
 

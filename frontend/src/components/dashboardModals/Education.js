@@ -14,18 +14,21 @@ const Education = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
   const schema = Joi.object({
-    school: Joi.string().trim().min(2).max(30).required(),
-    yearStart: Joi.number().required(),
-    yearEnd: Joi.number().required(),
-    degree: Joi.string().trim().min(2).max(30).required(),
-    areaOfStudy: Joi.string().trim().min(2).max(30).required(),
+    school: Joi.string().required().min(5).max(50),
+    degree: Joi.string().required().min(3).max(50),
+    yearStart: Joi.number().required().integer().positive(),
+    yearEnd: Joi.number().required().integer().positive(),
+    areaOfStudy: Joi.string().required().min(3).max(50),
   });
 
   const { register, handleSubmit, errors } = useForm({
     resolver: joiResolver(schema),
   });
 
+  if (errors) console.log(errors);
+
   const submitForm = (e) => {
+    console.log(e);
     dispatch(updateEducation(uuidv4(), e, user.token));
   };
 
