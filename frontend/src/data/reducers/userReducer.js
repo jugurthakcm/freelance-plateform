@@ -34,12 +34,14 @@ const userReducer = (state = initialState, action) => {
         ...state,
         token: action.payload.data.token,
         success: 'Logged In',
+        status: action.payload.status,
       };
 
     case userActionTypes.ERROR_LOGIN:
       return {
         ...state,
         error: action.payload.response.data.error,
+        status: action.payload.status,
       };
 
     case userActionTypes.LOAD_USER:

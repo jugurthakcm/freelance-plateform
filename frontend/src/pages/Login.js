@@ -42,6 +42,8 @@ const Login = () => {
     if (user.token) history.push('/dashboard');
   }, [user, history]);
 
+  const e = user.error;
+
   return (
     <div className="login">
       <div className="login__container">
@@ -49,15 +51,24 @@ const Login = () => {
           <FontAwesomeIcon icon={faHome} />
           <FormattedMessage id="login.home" />
         </Link>
+
         <img src={login} alt="login" width="400px" />
+
         <div className="login__form">
           <h2>
             <FormattedMessage id="login.title" />
             <div style={{ right: rightAfter, left: leftAfter }}></div>
           </h2>
+
           <form onSubmit={handleSubmit(submitForm)}>
             <div className="login__inputForm">
-              <div className="login__email login__input">
+              <div
+                className={`login__email login__input ${
+                  errors.email || (e && e.fieldLogin === 'email')
+                    ? 'inputError'
+                    : null
+                }`}
+              >
                 <FontAwesomeIcon icon={faEnvelope} />
                 <FormattedMessage id="login.email" defaultMessage="Email">
                   {(placeholder) => (
@@ -73,10 +84,19 @@ const Login = () => {
               {errors.email && (
                 <p className="textError">{errors.email?.message}</p>
               )}
+              {e && e.fieldLogin === 'email' && (
+                <p className="textError">{e.error}</p>
+              )}
             </div>
 
             <div className="login__inputForm">
-              <div className="login__password login__input">
+              <div
+                className={`login__password login__input ${
+                  errors.password || (e && e.fieldLogin === 'password')
+                    ? 'inputError'
+                    : null
+                }`}
+              >
                 <FontAwesomeIcon icon={faLock} />
                 <FormattedMessage id="login.password" defaultMessage="Password">
                   {(placeholder) => (
@@ -91,6 +111,9 @@ const Login = () => {
               </div>
               {errors.password && (
                 <p className="textError">{errors.password?.message}</p>
+              )}
+              {e && e.fieldLogin === 'password' && (
+                <p className="textError">{e.error}</p>
               )}
             </div>
 

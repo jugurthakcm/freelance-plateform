@@ -97,20 +97,25 @@ exports.login = async (req, res) => {
   try {
     //Validation
     const { error, value } = loginValidation(req.body);
-    if (error) throw error.details[0].message;
+    if (error)
+      throw {
+        fieldLogin: error.details[0].path[0],
+        message: error.details[0].message,
+      };
 
     const user = value;
 
     //Verify is user exists
     const userDB = await User.findOne({ email: user.email });
-    if (!userDB) throw "Email doesn't exist";
+    if (!userDB) throw { fieldLogin: 'email', error: "Email doesn't exist" };
 
     //Decrypt password
     const comparePassword = await bcrypt.compare(
       user.password,
       userDB.password
     );
-    if (!comparePassword) throw 'Wrong password';
+    if (!comparePassword)
+      throw { fieldLogin: 'password', error: 'Wrong password' };
 
     //Assign a token to the user
     const token = jwt.sign({ _id: userDB._id }, process.env.JWT_KEY);

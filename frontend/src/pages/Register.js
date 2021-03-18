@@ -58,7 +58,6 @@ const Register = () => {
   }, [user, history]);
 
   const e = user.error;
-  console.log(e);
 
   return (
     <div className="register">
