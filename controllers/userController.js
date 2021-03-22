@@ -413,17 +413,17 @@ exports.updateLanguage = async (req, res) => {
  * @params {id}
  */
 
-exports.deleteEducation = async (req, res) => {
+exports.deleteLanguage = async (req, res) => {
   try {
     const { id } = req.body;
     const user = await User.findById(req.userId);
 
-    const newEducation = user.education.filter((e) => e.id !== id);
+    const newLanguage = user.language.filter((e) => e.id !== id);
 
     user
-      .updateOne({ education: newEducation })
+      .updateOne({ language: newLanguage })
       .then(() =>
-        res.status(200).json({ message: 'Education deleted successfully' })
+        res.status(200).json({ message: 'Language deleted successfully' })
       )
       .catch((err) => res.status(500).json({ error: err }));
   } catch (error) {

@@ -106,3 +106,47 @@ export const deleteEducation = (id, token) => (dispatch) =>
     .catch((err) => {
       dispatch({ type: userActionTypes.EDUCATION_ERROR, payload: err });
     });
+
+export const updateLanguage = (id, { language, level }, token) => (
+  dispatch
+) => {
+  dispatch({ type: loadingActionTypes.LOADING });
+  axios
+    .put(
+      '/language',
+      { id, language, level },
+      {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: userActionTypes.LANGUAGE_SUCCESS, payload: res });
+      dispatch({ type: loadingActionTypes.NO_LOADING });
+      window.location.reload();
+    })
+    .catch((err) => {
+      dispatch({ type: userActionTypes.LANGUAGE_ERROR, payload: err });
+      dispatch({ type: loadingActionTypes.NO_LOADING });
+    });
+};
+
+export const deleteLanguage = (id, token) => (dispatch) =>
+  axios
+    .post(
+      '/language',
+      { id },
+      {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: userActionTypes.LANGUAGE_SUCCESS, payload: res });
+      window.location.reload();
+    })
+    .catch((err) => {
+      dispatch({ type: userActionTypes.LANGUAGE_ERROR, payload: err });
+    });

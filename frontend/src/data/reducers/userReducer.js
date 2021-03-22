@@ -77,6 +77,18 @@ const userReducer = (state = initialState, action) => {
         error: action.payload.response.data.error,
       };
 
+    case userActionTypes.LANGUAGE_SUCCESS:
+      return {
+        ...state,
+        success: action.payload.data.message,
+      };
+
+    case userActionTypes.LANGUAGE_ERROR:
+      return {
+        ...state,
+        error: action.payload.response.data.error,
+      };
+
     default:
       return state;
   }
