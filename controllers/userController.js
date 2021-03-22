@@ -356,6 +356,63 @@ exports.updateEducation = async (req, res) => {
   }
 };
 
+/**
+ * User deletes his education
+ * /POST
+ * @params {id}
+ */
+
+exports.deleteEducation = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const user = await User.findById(req.userId);
+
+    const newEducation = user.education.filter((e) => e.id !== id);
+
+    user
+      .updateOne({ education: newEducation })
+      .then(() =>
+        res.status(200).json({ message: 'Education deleted successfully' })
+      )
+      .catch((err) => res.status(500).json({ error: err }));
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+};
+
+/**
+ * User updates his languages
+ * /PUT
+ * @params {id, language, level}
+ */
+
+exports.updateLanguage = async (req, res) => {
+  try {
+    const { id, language, level } = req.body;
+
+    const user = await User.findOne({ _id: req.userId });
+
+    const newLanguage = user.languages.filter((e) => e.id !== id);
+
+    newLanguage.push({ id, language, level });
+
+    user
+      .updateOne({ languages: newLanguage })
+      .then(() =>
+        res.status(200).json({ message: 'Languages updated successfully' })
+      )
+      .catch((err) => res.status(500).json({ error: err }));
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+};
+
+/**
+ * User deletes his language
+ * /POST
+ * @params {id}
+ */
+
 exports.deleteEducation = async (req, res) => {
   try {
     const { id } = req.body;
