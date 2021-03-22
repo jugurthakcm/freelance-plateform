@@ -89,8 +89,8 @@ const Dashboard = () => {
               <ul>
                 {u && u.languages.length ? (
                   u.languages.map((lang) => (
-                    <li>
-                      {lang.lang} : <span>{lang.level}</span>
+                    <li key={lang.id}>
+                      {lang.language} : <span>{lang.level}</span>
                     </li>
                   ))
                 ) : (
