@@ -18,6 +18,7 @@ import Education from '../components/dashboardModals/Education';
 import EditTitle from '../components/dashboardModals/EditTitle';
 import EditBio from '../components/dashboardModals/EditBio';
 import { deleteEducation } from '../data/actions/userActions';
+import EditEducation from '../components/dashboardModals/EditEducation';
 
 const Dashboard = () => {
   const history = useHistory();
@@ -131,7 +132,7 @@ const Dashboard = () => {
                         <button
                           type="button"
                           data-bs-toggle="modal"
-                          data-bs-target="#EducationModal"
+                          data-bs-target="#EditEducationModal"
                         >
                           <FontAwesomeIcon icon={faPen} />
                         </button>
@@ -146,6 +147,8 @@ const Dashboard = () => {
                         </button>
                       </div>
                     </div>
+
+                    <EditEducation data={e} />
 
                     <p className="education__details">
                       {e.degree}, <br />
