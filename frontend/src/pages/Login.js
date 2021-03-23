@@ -39,7 +39,7 @@ const Login = () => {
 
   const history = useHistory();
   useEffect(() => {
-    if (user.user) history.push('/dashboard');
+    if (user.token) history.push('/dashboard');
   }, [user, history]);
 
   const e = user.error;

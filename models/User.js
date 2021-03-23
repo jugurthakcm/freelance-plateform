@@ -40,7 +40,7 @@ const userSchema = mongoose.Schema({
   bio: {
     type: String,
     max: 1000,
-    default: null,
+    default: '',
   },
   skills: {
     type: Array,
@@ -56,11 +56,11 @@ const userSchema = mongoose.Schema({
   },
   location: {
     type: String,
-    default: null,
+    default: '',
   },
   title: {
     type: String,
-    default: null,
+    default: '',
   },
   createdAt: {
     type: Date,
