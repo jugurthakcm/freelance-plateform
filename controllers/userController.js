@@ -143,10 +143,16 @@ exports.logout = (req, res) => {
  * /GET
  * @params {}
  */
-exports.loadUser = (req, res) => {
-  User.find({ _id: req.userId }, { password: 0 })
-    .then((data) => res.status(200).json({ user: data }))
-    .catch((err) => res.status(500).json({ error }));
+exports.loadUser = async (req, res) => {
+  try {
+    const user = await User.find({ _id: req.userId }, { password: 0 });
+    console.log(user);
+    if (!user.length) throw 'No user';
+
+    res.status(200).json({ user });
+  } catch (error) {
+    res.status(500).json({ error });
+  }
 };
 
 /**
