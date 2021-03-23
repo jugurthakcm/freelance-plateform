@@ -167,3 +167,22 @@ export const updateTitle = (title, token) => (dispatch) =>
     .catch((err) => {
       dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
     });
+
+export const updateBio = (bio, token) => (dispatch) =>
+  axios
+    .put(
+      '/bio',
+      { bio },
+      {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: userActionTypes.UPDATE_SUCCESS, payload: res });
+      window.location.reload();
+    })
+    .catch((err) => {
+      dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
+    });

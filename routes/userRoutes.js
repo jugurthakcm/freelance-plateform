@@ -33,7 +33,7 @@ router.post('/login', login);
 router.post('/logout', auth, logout);
 
 //Update a user's bio
-router.put('/bio/update', auth, updateBio);
+router.put('/bio', auth, updateBio);
 
 //Update a user's skills
 router.put('/skills/update', auth, updateSkills);

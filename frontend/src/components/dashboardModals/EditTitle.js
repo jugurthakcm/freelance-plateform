@@ -46,7 +46,7 @@ const EditTitle = () => {
               data-bs-dismiss="modal"
               aria-label="Close"
             >
-              <FontAwesomeIcon icon={faTimes} />
+              <FontAwesomeIcon icon={faTimes} onClick={() => setTitle('')} />
             </button>
           </div>
 
