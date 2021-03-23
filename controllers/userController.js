@@ -428,3 +428,9 @@ exports.updateLanguage = async (req, res) => {
     res.status(400).json({ error });
   }
 };
+
+exports.updateTitle = (req, res) => {
+  User.findByIdAndUpdate(req.userId, { title: req.body.title })
+    .then(() => res.status(200).json({ message: 'Title updated successfully' }))
+    .catch((err) => res.status(500).json({ error: err }));
+};

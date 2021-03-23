@@ -64,7 +64,7 @@ const Register = () => {
 
   const history = useHistory();
   useEffect(() => {
-    if (user.token) history.push('/dashboard');
+    if (user.user) history.push('/dashboard');
   }, [user, history]);
 
   const e = user.error;

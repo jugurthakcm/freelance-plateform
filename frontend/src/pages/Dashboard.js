@@ -29,7 +29,7 @@ const Dashboard = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!user.token) history.push('/login');
+    if (!user.user) history.push('/login');
   }, [user, history]);
 
   return (

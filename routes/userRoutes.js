@@ -17,6 +17,7 @@ const {
   deleteEducation,
   updateLanguage,
   addLanguage,
+  updateTitle,
 } = require('../controllers/userController');
 const { auth } = require('../middlewares/authMiddleware');
 
@@ -62,5 +63,7 @@ router.post('/education', auth, deleteEducation);
 router.post('/language', auth, addLanguage);
 
 router.put('/language', auth, updateLanguage);
+
+router.put('/title', auth, updateTitle);
 
 module.exports = router;

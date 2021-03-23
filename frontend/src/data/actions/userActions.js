@@ -78,12 +78,12 @@ export const updateEducation = (
       }
     )
     .then((res) => {
-      dispatch({ type: userActionTypes.EDUCATION_SUCCESS, payload: res });
+      dispatch({ type: userActionTypes.UPDATE_SUCCESS, payload: res });
       dispatch({ type: loadingActionTypes.NO_LOADING });
       window.location.reload();
     })
     .catch((err) => {
-      dispatch({ type: userActionTypes.EDUCATION_ERROR, payload: err });
+      dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
       dispatch({ type: loadingActionTypes.NO_LOADING });
     });
 };
@@ -100,11 +100,11 @@ export const deleteEducation = (id, token) => (dispatch) =>
       }
     )
     .then((res) => {
-      dispatch({ type: userActionTypes.EDUCATION_SUCCESS, payload: res });
+      dispatch({ type: userActionTypes.UPDATE_SUCCESS, payload: res });
       window.location.reload();
     })
     .catch((err) => {
-      dispatch({ type: userActionTypes.EDUCATION_ERROR, payload: err });
+      dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
     });
 
 export const addLanguage = (id, { language, level }, token) => (dispatch) => {
@@ -120,12 +120,12 @@ export const addLanguage = (id, { language, level }, token) => (dispatch) => {
       }
     )
     .then((res) => {
-      dispatch({ type: userActionTypes.LANGUAGE_SUCCESS, payload: res });
+      dispatch({ type: userActionTypes.UPDATE_SUCCESS, payload: res });
       dispatch({ type: loadingActionTypes.NO_LOADING });
       window.location.reload();
     })
     .catch((err) => {
-      dispatch({ type: userActionTypes.LANGUAGE_ERROR, payload: err });
+      dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
       dispatch({ type: loadingActionTypes.NO_LOADING });
     });
 };
@@ -142,9 +142,28 @@ export const updateLanguage = (arr, token) => (dispatch) =>
       }
     )
     .then((res) => {
-      dispatch({ type: userActionTypes.LANGUAGE_SUCCESS, payload: res });
+      dispatch({ type: userActionTypes.UPDATE_SUCCESS, payload: res });
       window.location.reload();
     })
     .catch((err) => {
-      dispatch({ type: userActionTypes.LANGUAGE_ERROR, payload: err });
+      dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
+    });
+
+export const updateTitle = (title, token) => (dispatch) =>
+  axios
+    .put(
+      '/title',
+      { title },
+      {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: userActionTypes.UPDATE_SUCCESS, payload: res });
+      window.location.reload();
+    })
+    .catch((err) => {
+      dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
     });

@@ -65,25 +65,13 @@ const userReducer = (state = initialState, action) => {
         token: null,
       };
 
-    case userActionTypes.EDUCATION_SUCCESS:
+    case userActionTypes.UPDATE_SUCCESS:
       return {
         ...state,
         success: action.payload.data.message,
       };
 
-    case userActionTypes.EDUCATION_ERROR:
-      return {
-        ...state,
-        error: action.payload.response.data.error,
-      };
-
-    case userActionTypes.LANGUAGE_SUCCESS:
-      return {
-        ...state,
-        success: action.payload.data.message,
-      };
-
-    case userActionTypes.LANGUAGE_ERROR:
+    case userActionTypes.UPDATE_ERROR:
       return {
         ...state,
         error: action.payload.response.data.error,

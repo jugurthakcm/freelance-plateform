@@ -58,9 +58,9 @@ const userSchema = mongoose.Schema({
     type: String,
     default: null,
   },
-  hourlyRate: {
-    type: Number,
-    default: 0,
+  title: {
+    type: String,
+    default: null,
   },
   createdAt: {
     type: Date,
