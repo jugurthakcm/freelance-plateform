@@ -107,12 +107,10 @@ export const deleteEducation = (id, token) => (dispatch) =>
       dispatch({ type: userActionTypes.EDUCATION_ERROR, payload: err });
     });
 
-export const updateLanguage = (id, { language, level }, token) => (
-  dispatch
-) => {
+export const addLanguage = (id, { language, level }, token) => (dispatch) => {
   dispatch({ type: loadingActionTypes.LOADING });
   axios
-    .put(
+    .post(
       '/language',
       { id, language, level },
       {
@@ -132,11 +130,11 @@ export const updateLanguage = (id, { language, level }, token) => (
     });
 };
 
-export const deleteLanguage = (id, token) => (dispatch) =>
+export const updateLanguage = (arr, token) => (dispatch) =>
   axios
-    .post(
+    .put(
       '/language',
-      { id },
+      { arr },
       {
         headers: {
           authorization: 'Bearer ' + token,

@@ -386,7 +386,7 @@ exports.deleteEducation = async (req, res) => {
  * @params {id, language, level}
  */
 
-exports.updateLanguage = async (req, res) => {
+exports.addLanguage = async (req, res) => {
   try {
     const { id, language, level } = req.body;
 
@@ -399,7 +399,7 @@ exports.updateLanguage = async (req, res) => {
     user
       .updateOne({ languages: newLanguage })
       .then(() =>
-        res.status(200).json({ message: 'Languages updated successfully' })
+        res.status(200).json({ message: 'Languages added successfully' })
       )
       .catch((err) => res.status(500).json({ error: err }));
   } catch (error) {
@@ -410,20 +410,18 @@ exports.updateLanguage = async (req, res) => {
 /**
  * User deletes his language
  * /POST
- * @params {id}
+ * @params {arr}
  */
 
-exports.deleteLanguage = async (req, res) => {
+exports.updateLanguage = async (req, res) => {
   try {
-    const { id } = req.body;
+    const newLanguage = req.body.arr;
     const user = await User.findById(req.userId);
 
-    const newLanguage = user.language.filter((e) => e.id !== id);
-
     user
-      .updateOne({ language: newLanguage })
+      .updateOne({ languages: newLanguage })
       .then(() =>
-        res.status(200).json({ message: 'Language deleted successfully' })
+        res.status(200).json({ message: 'Language updated successfully' })
       )
       .catch((err) => res.status(500).json({ error: err }));
   } catch (error) {

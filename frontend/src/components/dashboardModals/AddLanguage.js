@@ -4,7 +4,7 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import './dashboardModal.css';
 import languages from '../../data/languages';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateLanguage } from '../../data/actions/userActions';
+import { addLanguage } from '../../data/actions/userActions';
 import { v4 as uuidv4 } from 'uuid';
 
 const AddLanguage = () => {
@@ -14,7 +14,7 @@ const AddLanguage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(updateLanguage(uuidv4(), data, user.token));
+    dispatch(addLanguage(uuidv4(), data, user.token));
   };
 
   return (
@@ -72,7 +72,9 @@ const AddLanguage = () => {
                   <option value="Basic">Basic</option>
                   <option value="Conversational">Conversational</option>
                   <option value="Fluent">Fluent</option>
-                  <option value="Native Bilingual">Native or Bilingual</option>
+                  <option value="Native or Bilingual">
+                    Native or Bilingual
+                  </option>
                 </select>
               </div>
             </div>
@@ -86,7 +88,7 @@ const AddLanguage = () => {
                 Close
               </button>
               <button type="submit" className="btn btn-warning">
-                Save changesss
+                Save changes
               </button>
             </div>
           </form>
