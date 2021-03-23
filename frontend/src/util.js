@@ -33,3 +33,18 @@ export const generateYears = (grad) => {
   }
   return arr;
 };
+
+export const sortEducation = (a, b) => {
+  const yearA = a.yearStart;
+  const yearB = b.yearStart;
+
+  let comparison = 0;
+
+  if (yearA > yearB) {
+    comparison = 1;
+  } else if (yearA < yearB) {
+    comparison = -1;
+  }
+
+  return comparison;
+};

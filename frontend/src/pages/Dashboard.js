@@ -19,6 +19,7 @@ import EditTitle from '../components/dashboardModals/EditTitle';
 import EditBio from '../components/dashboardModals/EditBio';
 import { deleteEducation } from '../data/actions/userActions';
 import EditEducation from '../components/dashboardModals/EditEducation';
+import { sortEducation } from '../util';
 
 const Dashboard = () => {
   const history = useHistory();
@@ -102,12 +103,6 @@ const Dashboard = () => {
                     Add your languages to complete your profile
                   </div>
                 )}
-                {/* <li>
-                  English : <span>Fluent</span>
-                </li>
-                <li>
-                  French : <span>Fluent</span>
-                </li> */}
               </ul>
             </div>
 
@@ -124,7 +119,7 @@ const Dashboard = () => {
                 <Education />
               </div>
               {u && u.education.length ? (
-                u.education.map((e) => (
+                u.education.sort(sortEducation).map((e) => (
                   <div key={e.id} className="mb-2">
                     <div className="education__school d-flex align-items-start justify-content-between">
                       <h6 className="education__school">{e.school}</h6>
