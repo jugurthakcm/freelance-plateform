@@ -5,6 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import './dashboardModal.css';
 import { updateSkills } from '../../data/actions/userActions';
+import { useForm } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+import Joi from 'joi';
 
 const EditSkills = () => {
   const user = useSelector((state) => state.user);
@@ -13,16 +16,22 @@ const EditSkills = () => {
   const dispatch = useDispatch();
 
   const [skills, setSkills] = useState([]);
-  const [skill, setSkill] = useState('');
+
+  const schema = Joi.object({
+    skill: Joi.string().trim().min(2).max(50).required(),
+  });
+
+  const { register, handleSubmit, errors, setValue } = useForm({
+    resolver: joiResolver(schema),
+  });
 
   useEffect(() => {
     u && setSkills(u.skills);
   }, [u]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSkills([...skills, { id: uuidv4(), skill }]);
-    setSkill('');
+  const submitForm = (e) => {
+    setSkills([...skills, { id: uuidv4(), skill: e.skill }]);
+    setValue('skill', '');
   };
 
   const handleClickSave = () => {
@@ -81,19 +90,25 @@ const EditSkills = () => {
                 ))}
             </ul>
 
-            <form className="modal__skillsForm" onSubmit={handleSubmit}>
+            <form
+              className="modal__skillsForm"
+              onSubmit={handleSubmit(submitForm)}
+            >
               <input
                 type="text"
                 name="skill"
                 placeholder="Add your skill..."
-                onChange={(e) => setSkill(e.target.value)}
-                value={skill}
+                ref={register}
+                className={` ${errors.skill ? 'inputError' : null}`}
               />
 
               <button type="submit" className="btn btn-warning">
                 Add
               </button>
             </form>
+            {errors.skill && (
+              <p className="textError">{errors.skill?.message}</p>
+            )}
           </div>
 
           <div className="modal-footer">

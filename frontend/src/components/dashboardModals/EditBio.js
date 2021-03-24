@@ -4,20 +4,29 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import './dashboardModal.css';
 import { updateBio } from '../../data/actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+import Joi from 'joi';
 
 const EditBio = () => {
-  const [bio, setBio] = useState('');
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    user.user && setBio(user.user.bio);
-  }, [user]);
+  const schema = Joi.object({
+    bio: Joi.string().trim().min(10).max(1500).required(),
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    user.token && dispatch(updateBio(bio, user.token));
-    setBio('');
+  const { register, handleSubmit, errors, setValue } = useForm({
+    resolver: joiResolver(schema),
+  });
+
+  useEffect(() => {
+    user.user && setValue('bio', user.user.bio);
+  }, [user, setValue]);
+
+  const submitForm = (e) => {
+    user.token && dispatch(updateBio(e.bio, user.token));
+    setValue('bio', '');
   };
 
   return (
@@ -47,11 +56,14 @@ const EditBio = () => {
               aria-label="Close"
               style={{ backgroundColor: 'inherit', border: 'none' }}
             >
-              <FontAwesomeIcon icon={faTimes} onClick={() => setBio('')} />
+              <FontAwesomeIcon
+                icon={faTimes}
+                onClick={() => setValue('bio', '')}
+              />
             </button>
           </div>
 
-          <form className="modal__field" onSubmit={handleSubmit}>
+          <form className="modal__field" onSubmit={handleSubmit(submitForm)}>
             <div className="modal-body">
               <label>
                 <h6>Description</h6>
@@ -60,9 +72,10 @@ const EditBio = () => {
                 name="bio"
                 cols="30"
                 rows="5"
-                onChange={(e) => setBio(e.target.value)}
-                value={bio}
+                ref={register}
+                className={` ${errors.bio ? 'inputError' : null}`}
               ></textarea>
+              {errors.bio && <p className="textError">{errors.bio?.message}</p>}
             </div>
 
             <div className="modal-footer">
@@ -70,7 +83,7 @@ const EditBio = () => {
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
-                onClick={() => setBio('')}
+                onClick={() => setValue('bio', '')}
               >
                 Close
               </button>

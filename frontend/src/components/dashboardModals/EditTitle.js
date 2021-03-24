@@ -4,20 +4,29 @@ import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import './dashboardModal.css';
 import { updateTitle } from '../../data/actions/userActions';
+import { useForm } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+import Joi from 'joi';
 
 const EditTitle = () => {
-  const [title, setTitle] = useState('');
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    user.user && setTitle(user.user.title);
-  }, [user]);
+  const schema = Joi.object({
+    title: Joi.string().trim().min(2).max(50).required(),
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    user.token && dispatch(updateTitle(title, user.token));
-    setTitle('');
+  const { register, handleSubmit, setValue, errors } = useForm({
+    resolver: joiResolver(schema),
+  });
+
+  useEffect(() => {
+    user.user && setValue('title', user.user.title);
+  }, [user, setValue]);
+
+  const submitForm = (e) => {
+    user.token && dispatch(updateTitle(e.title, user.token));
+    setValue('title', '');
   };
 
   return (
@@ -46,11 +55,14 @@ const EditTitle = () => {
               data-bs-dismiss="modal"
               aria-label="Close"
             >
-              <FontAwesomeIcon icon={faTimes} onClick={() => setTitle('')} />
+              <FontAwesomeIcon
+                icon={faTimes}
+                onClick={() => setValue('title', '')}
+              />
             </button>
           </div>
 
-          <form className="modal__field" onSubmit={handleSubmit}>
+          <form className="modal__field" onSubmit={handleSubmit(submitForm)}>
             <div className="modal-body">
               <label>
                 <h6>Title</h6>
@@ -59,9 +71,12 @@ const EditTitle = () => {
                 type="text"
                 name="title"
                 placeholder="Title"
-                onChange={(e) => setTitle(e.target.value)}
-                value={title}
+                ref={register}
+                className={` ${errors.title ? 'inputError' : null}`}
               />
+              {errors.title && (
+                <p className="textError">{errors.title?.message}</p>
+              )}
             </div>
 
             <div className="modal-footer">
@@ -69,7 +84,7 @@ const EditTitle = () => {
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
-                onClick={() => setTitle('')}
+                onClick={() => setValue('title', '')}
               >
                 Close
               </button>
