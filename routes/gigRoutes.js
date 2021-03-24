@@ -11,7 +11,6 @@ const {
   filterGigsPerCategory,
   rateGig,
   getMyPendingGigs,
-  getPendingGigs,
 } = require('../controllers/gigController');
 const { auth } = require('../middlewares/authMiddleware');
 
@@ -24,6 +23,5 @@ router.put('/mygigs/:id/edit', auth, editMyGig);
 router.get('/explore/:category', auth, filterGigsPerCategory);
 router.get('/explore', auth, exploreGigs);
 router.put('/:gigId/rate', auth, rateGig);
-router.get('/gigs/pending', auth, getPendingGigs);
 
 module.exports = router;

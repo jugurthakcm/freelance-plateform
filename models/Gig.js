@@ -7,6 +7,12 @@ const gigSchema = mongoose.Schema({
     min: 1,
     max: 50,
   },
+  Description: {
+    type: String,
+    required: true,
+    min: 1,
+    max: 1500,
+  },
   sellerId: {
     type: String,
     required: true,
@@ -19,11 +25,12 @@ const gigSchema = mongoose.Schema({
     min: 1,
     max: 50,
   },
-  subCategory: {
+  deliveryTime: {
     type: String,
     required: true,
     min: 1,
     max: 50,
+    default: 'Not specified',
   },
   rating: {
     type: Number,

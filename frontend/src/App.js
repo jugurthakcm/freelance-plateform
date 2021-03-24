@@ -15,6 +15,7 @@ import Dashboard from './pages/Dashboard';
 import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from './data/actions/userActions';
 import Loading from './components/Loading';
+import Gig from './pages/Gig';
 
 function App() {
   const language = useLanguageContext()[0];
@@ -52,6 +53,7 @@ function App() {
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />
             <Route path="/dashboard" component={Dashboard} />
+            <Route path="/gig/:gigId" component={Gig} />
           </Switch>
         </I18nProvider>
       </div>

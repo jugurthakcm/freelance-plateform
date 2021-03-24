@@ -15,7 +15,14 @@ exports.addGig = async (req, res) => {
     const { error, value } = gigValidation(req.body);
     if (error) throw error.details[0].message;
 
-    const { title, categoryId, subCategory, price } = value;
+    const {
+      title,
+      categoryId,
+      subCategory,
+      price,
+      deliveryTime,
+      description,
+    } = value;
 
     const category = await Category.findById(categoryId);
 
@@ -28,11 +35,13 @@ exports.addGig = async (req, res) => {
       subCategory,
       price,
       sellerId: req.userId,
+      deliveryTime,
+      description,
     })
-      .then(() => res.status(200).send('Gig added successfully'))
-      .catch(() => res.status(500).send('Failed to add the gig'));
-  } catch (err) {
-    res.status(400).send(err);
+      .then(() => res.status(200).json({ message: 'Gig added successfully' }))
+      .catch(() => res.status(500).json({ error: 'Failed to add the gig' }));
+  } catch (error) {
+    res.status(400).json({ error });
   }
 };
 
@@ -106,7 +115,14 @@ exports.editMyGig = async (req, res) => {
     const { error, value } = gigValidation(req.body);
     if (error) throw error.details[0].message;
 
-    const { title, categoryId, subCategory, price } = value;
+    const {
+      title,
+      categoryId,
+      subCategory,
+      price,
+      description,
+      deliveryTime,
+    } = value;
 
     const category = await Category.findById(categoryId);
 
@@ -124,11 +140,13 @@ exports.editMyGig = async (req, res) => {
         category: categoryTitle,
         subCategory,
         confirmed: false,
+        description,
+        deliveryTime,
       })
-      .then(() => res.status(200).send('Gig Edited successfully'))
-      .catch(() => res.status(400).send('Error editing the gig'));
+      .then(() => res.status(200).json({ message: 'Gig Edited successfully' }))
+      .catch(() => res.status(500).json({ error: 'Error editing the gig' }));
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).json({ error });
   }
 };
 
@@ -187,10 +205,4 @@ exports.rateGig = async (req, res) => {
   } catch (error) {
     res.status(400).send(error);
   }
-};
-
-exports.getPendingGigs = (req, res) => {
-  Gig.find({ sellerId: req.userId, confirmed: false })
-    .then((data) => res.status(200).send(data))
-    .catch(() => res.status(500).send('Error during fetching gigs'));
 };
