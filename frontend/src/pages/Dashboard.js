@@ -270,14 +270,14 @@ const Dashboard = () => {
                 height: '200px',
               }}
             ></div>
-            <div className="gig__details mx-3 my-3">
-              <p className="gig__type">Programmation</p>
-              <h5 className="gig__title">Web applications</h5>
+            <div className="gig__details mx-3 my-2">
               <div className="gig__footer">
                 <span>
                   <FontAwesomeIcon icon={faStar} /> 52
                 </span>
               </div>
+              <p className="gig__type">Programmation</p>
+              <h5 className="gig__title">Web applications</h5>
               <div className="gig__buttons">
                 <button className="btn btn-warning mr-2 d-flex align-items-center">
                   <FontAwesomeIcon icon={faPen} className="mr-2" size={'xs'} />

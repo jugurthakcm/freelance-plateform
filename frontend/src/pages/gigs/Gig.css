@@ -1,0 +1,80 @@
+.gigPage {
+  margin-top: 100px;
+}
+
+.gigPage__image label {
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  position: relative;
+  cursor: pointer;
+}
+
+.gigPage__image label div {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+  margin-top: -10px;
+}
+
+.gigPage__image label p {
+  font-weight: 500;
+  color: gray;
+  font-size: 1.6rem;
+  margin-top: 10px;
+}
+
+.gigPage__image label path {
+  color: gray;
+}
+
+.gigPage__image input {
+  display: none;
+}
+
+.gigPage__info input,
+.gigPage__info select,
+.gigPage__info textarea {
+  background-color: inherit;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.gigPage__inputField {
+  display: flex;
+  align-items: flex-start;
+}
+
+.gigPage__inputField h4 {
+  width: 170px;
+  font-size: 16px;
+  font-weight: 600;
+  margin-top: 10px;
+}
+
+.gigPage__infoDeliveryTime {
+  display: flex;
+  justify-items: flex-start;
+  width: 100%;
+}
+
+.gigPage__infoDeliveryTime select {
+  margin-left: 10px;
+}
+
+.gigPage__inputSubmit {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: 10px;
+}
