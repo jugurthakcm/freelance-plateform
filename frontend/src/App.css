@@ -35,3 +35,9 @@ button:active {
   display: block;
   margin-bottom: 0 !important;
 }
+
+.btn-warning:hover,
+.btn-warning:focus {
+  background-color: orange !important;
+  border-color: orange !important;
+}

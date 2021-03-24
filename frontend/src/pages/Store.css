@@ -84,7 +84,7 @@
 }
 
 .gig__footer button:hover,
-.gig__footer:focus {
+.gig__footer button:focus {
   background-color: orange;
 }
 
