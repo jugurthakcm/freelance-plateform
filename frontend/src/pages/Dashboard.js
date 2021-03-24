@@ -20,6 +20,7 @@ import EditBio from '../components/dashboardModals/EditBio';
 import { deleteEducation } from '../data/actions/userActions';
 import EditEducation from '../components/dashboardModals/EditEducation';
 import { sortEducation } from '../util';
+import EditSkills from '../components/dashboardModals/EditSkills';
 
 const Dashboard = () => {
   const history = useHistory();
@@ -218,14 +219,27 @@ const Dashboard = () => {
             <div className="dashboard__section presentation__skills">
               <div className="dashboard__title skills__title">
                 <h5>Skills</h5>
-                <button>
+                <button
+                  type="button"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editSkillsModal"
+                >
                   <FontAwesomeIcon icon={faPen} className="ml-3" />
                 </button>
+                <EditSkills />
               </div>
               <ul>
-                <li>Mongodb</li>
-                <li>Nodejs</li>
-                <li>React.js</li>
+                {u && u.skills.length ? (
+                  u.skills.map((skill) => <li key={skill.id}>{skill.skill}</li>)
+                ) : (
+                  <div className="dashboard__completeProfile">
+                    <FontAwesomeIcon
+                      icon={faExclamationCircle}
+                      className="mr-2"
+                    />
+                    Add your skills to complete your profile
+                  </div>
+                )}
               </ul>
             </div>
             <div className="dashboard__section dashboard__gigs"></div>

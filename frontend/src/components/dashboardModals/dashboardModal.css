@@ -48,3 +48,35 @@
 .education__years select {
   width: 49%;
 }
+
+.modal__skill {
+  display: inline-block;
+  margin-right: 0.5rem !important;
+  padding: 0.5rem 0.7rem !important;
+  background-color: var(--yellow);
+  font-weight: 500;
+  border-radius: 2rem;
+  font-size: 12px !important;
+}
+
+.modal__skill path {
+  color: black !important;
+}
+
+.modal__skillsForm {
+  display: flex;
+  align-items: center;
+}
+
+.modal__skillsForm input {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.modal__skillsForm button {
+  background-color: var(--yellow) !important;
+  padding-top: 9px;
+  padding-bottom: 9px;
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}

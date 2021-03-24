@@ -146,7 +146,6 @@ exports.logout = (req, res) => {
 exports.loadUser = async (req, res) => {
   try {
     const user = await User.find({ _id: req.userId }, { password: 0 });
-    console.log(user);
     if (!user.length) throw 'No user';
 
     res.status(200).json({ user });
@@ -173,22 +172,23 @@ exports.updateBio = async (req, res) => {
  */
 exports.updateSkills = async (req, res) => {
   try {
-    const { error, value } = skillsValidation(req.body);
-    if (error) throw error.details[0].message;
+    console.log(req.body);
+    const { skills } = req.body;
 
-    const { skillId, skill } = value;
     const user = await User.findById(req.userId);
-    const skills = user.skills;
-    skills.push({ id: skillId, skill });
 
     user
       .updateOne({ skills })
-      .then(() => res.status(200).send('Skills updated successfully'))
-      .catch(() => res.status(400).send('Failed to update the skills'));
+      .then(() =>
+        res.status(200).json({ message: 'Skills updated successfully' })
+      )
+      .catch(() =>
+        res.status(500).json({ error: 'Failed to update the skills' })
+      );
 
     // User.findByIdAndUpdate(req.userId, { skills })
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).json({ error });
   }
 };
 
@@ -206,20 +206,24 @@ exports.deleteSkill = async (req, res) => {
     const { error, value } = deleteSkillValidation(req.body);
     if (error) throw 'Skill is not defined';
 
-    const { skillId } = value;
+    const { id } = value;
 
-    if (!skills.find((skill) => skill.id === skillId))
+    if (!skills.find((skill) => skill.id === id))
       throw "This skill doesn't exist";
 
     //Update the skills array
-    const skillsUpdated = skills.filter((skill) => skill.id !== skillId);
+    const skillsUpdated = skills.filter((skill) => skill.id !== id);
 
     //Update the skills in the db
     User.findByIdAndUpdate(req.userId, { skills: skillsUpdated })
-      .then(() => res.status(200).send('Skill deleted successfully'))
-      .catch(() => res.status(400).send('Failed to delete the skill'));
+      .then(() =>
+        res.status(200).json({ message: 'Skill deleted successfully' })
+      )
+      .catch(() =>
+        res.status(500).json({ error: 'Failed to delete the skill' })
+      );
   } catch (error) {
-    res.status(400).send(error);
+    res.status(400).json({ error });
   }
 };
 

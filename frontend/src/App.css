@@ -18,8 +18,10 @@ body {
 
 input:focus,
 button:focus,
-select:focus {
+select:focus,
+button:active {
   outline: none !important;
+  box-shadow: none !important;
 }
 
 .inputError {
