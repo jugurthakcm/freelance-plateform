@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './Gig.css';
 import Navbar from '../../components/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../../components/Footer';
+import axios from '../../axios';
 
 const AddGig = () => {
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('/categories/')
+      .then((data) => setCategories(data.data))
+      .catch((err) => console.error(err));
+  }, [categories]);
+
   return (
     <>
       <Navbar />
       <div className="gigPage container">
         <form className="row">
-          <div className="gigPage__info col-7">
+          <div className="gigPage__info col-md-7">
             <div className="gigPage__inputField">
               <h4>Title</h4>
               <input type="text" name="title" placeholder="Title" />
@@ -33,8 +43,12 @@ const AddGig = () => {
                 <option value="defineCategory" disabled>
                   Define Category
                 </option>
-                <option value="programming">Programming</option>
-                <option value="design">design</option>
+                {categories &&
+                  categories.map((category) => (
+                    <option value={category.title} key={category._id}>
+                      {category.title}
+                    </option>
+                  ))}
               </select>
             </div>
 
@@ -67,7 +81,7 @@ const AddGig = () => {
               </button>
             </div>
           </div>
-          <div className="gigPage__image col-5">
+          <div className="gigPage__image col-md-5">
             <label htmlFor="upload-image">
               <div>
                 <FontAwesomeIcon icon={faCloudUploadAlt} size={'6x'} />
