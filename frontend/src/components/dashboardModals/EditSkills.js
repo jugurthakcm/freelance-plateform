@@ -29,6 +29,10 @@ const EditSkills = () => {
     user.token && dispatch(updateSkills(skills, user.token));
   };
 
+  const deleteSkill = (id) => {
+    setSkills(skills.filter((e) => e.id !== id));
+  };
+
   return (
     <div
       className="modal fade"
@@ -71,6 +75,7 @@ const EditSkills = () => {
                       icon={faTimes}
                       size={'xs'}
                       className="ml-2"
+                      onClick={() => deleteSkill(skill.id)}
                     />
                   </li>
                 ))}
