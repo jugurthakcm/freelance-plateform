@@ -10,6 +10,7 @@ import {
   faPlus,
   faTrash,
   faExclamationCircle,
+  faStar,
 } from '@fortawesome/free-solid-svg-icons';
 import './Dashboard.css';
 import EditLanguage from '../components/dashboardModals/EditLanguage';
@@ -21,6 +22,7 @@ import { deleteEducation } from '../data/actions/userActions';
 import EditEducation from '../components/dashboardModals/EditEducation';
 import { sortEducation } from '../util';
 import EditSkills from '../components/dashboardModals/EditSkills';
+import Footer from '../components/Footer';
 
 const Dashboard = () => {
   const history = useHistory();
@@ -246,6 +248,55 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+      <div className="dashboard dashboard__gigs container">
+        <div className="dashboard__gigsHeader">
+          <h2>My Gigs</h2>
+          <button className="btn btn-success d-flex align-items-center">
+            <FontAwesomeIcon
+              icon={faPlus}
+              className="mr-2 icon-white"
+              size={'xs'}
+            />
+            <span style={{ color: 'white' }}>Add gig</span>
+          </button>
+        </div>
+
+        <div className="col-lg-3 col-md-4 col-sm-6">
+          <div className="store__gig">
+            <div
+              className="gig__image"
+              style={{
+                backgroundColor: 'blue',
+                height: '200px',
+              }}
+            ></div>
+            <div className="gig__details mx-3 my-3">
+              <p className="gig__type">Programmation</p>
+              <h5 className="gig__title">Web applications</h5>
+              <div className="gig__footer">
+                <span>
+                  <FontAwesomeIcon icon={faStar} /> 52
+                </span>
+              </div>
+              <div className="gig__buttons">
+                <button className="btn btn-warning mr-2 d-flex align-items-center">
+                  <FontAwesomeIcon icon={faPen} className="mr-2" size={'xs'} />
+                  <span>Edit</span>
+                </button>
+                <button className="btn btn-danger ml-2 d-flex align-items-center">
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    className="mr-2 icon-white"
+                    size={'xs'}
+                  />
+                  <span style={{ color: 'white' }}>Delete</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <Footer />
     </>
   );
 };

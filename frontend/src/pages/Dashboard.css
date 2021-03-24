@@ -7,7 +7,7 @@
   padding: 2rem 2rem !important;
   border-radius: 0.5rem;
   box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
 .dashboard__user {
@@ -150,3 +150,36 @@
 .dashboard__completeProfile svg:hover path {
   color: var(--yellow);
 }
+
+.dashboard__gigs {
+  margin-top: 50px !important;
+}
+
+.dashboard__gigsHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+}
+
+.dashboard__gigsHeader h2 {
+  font-weight: 600;
+}
+
+.dashboard .gig__footer {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.dashboard .gig__buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/* .dashboard .gig__buttons button {
+  width: 100%;
+} */
