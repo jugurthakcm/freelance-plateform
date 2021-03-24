@@ -51,6 +51,10 @@
   font-size: 15px;
 }
 
+.gigPage__info select {
+  text-transform: capitalize;
+}
+
 .gigPage__inputField {
   display: flex;
   align-items: flex-start;

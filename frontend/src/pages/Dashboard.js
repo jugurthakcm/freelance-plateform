@@ -23,6 +23,7 @@ import EditEducation from '../components/dashboardModals/EditEducation';
 import { sortEducation } from '../util';
 import EditSkills from '../components/dashboardModals/EditSkills';
 import Footer from '../components/Footer';
+import { Link } from 'react-router-dom';
 
 const Dashboard = () => {
   const history = useHistory();
@@ -252,12 +253,14 @@ const Dashboard = () => {
         <div className="dashboard__gigsHeader">
           <h2>My Gigs</h2>
           <button className="btn btn-success d-flex align-items-center">
-            <FontAwesomeIcon
-              icon={faPlus}
-              className="mr-2 icon-white"
-              size={'xs'}
-            />
-            <span style={{ color: 'white' }}>Add gig</span>
+            <Link to="/gig/add">
+              <FontAwesomeIcon
+                icon={faPlus}
+                className="mr-2 icon-white"
+                size={'xs'}
+              />
+              <span style={{ color: 'white' }}>Add gig</span>
+            </Link>
           </button>
         </div>
 

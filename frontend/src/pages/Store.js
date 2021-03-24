@@ -5,19 +5,9 @@ import StackGrid from 'react-stack-grid';
 import { store } from '../data/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-regular-svg-icons';
-import axios from '../axios';
 import SearchBar from '../components/SearchBar';
 
 const Store = () => {
-  const [categories, setCategories] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get('/categories/')
-      .then((data) => setCategories(data.data))
-      .catch((err) => console.error(err));
-  }, [categories]);
-
   return (
     <>
       <Navbar navStore />

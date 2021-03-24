@@ -15,3 +15,8 @@ export const loadingActionTypes = {
   LOADING: 'LOADING',
   NO_LOADING: 'NO_LOADING',
 };
+
+export const gigActionTypes = {
+  SUCCESS: 'SUCCESS',
+  ERROR: 'ERROR',
+};

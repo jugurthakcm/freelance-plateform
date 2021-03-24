@@ -8,38 +8,30 @@ const {
 /**
  * User adds his gig
  * /POST
- * @params {title, categoryId, subCategory, price}
+ * @params {title, categoryId, price}
  */
 exports.addGig = async (req, res) => {
   try {
     const { error, value } = gigValidation(req.body);
     if (error) throw error.details[0].message;
 
-    const {
-      title,
-      categoryId,
-      subCategory,
-      price,
-      deliveryTime,
-      description,
-    } = value;
+    const { title, category, price, deliveryTime, description } = value;
 
-    const category = await Category.findById(categoryId);
+    const categoryDB = await Category.findById(category);
 
-    if (!category) throw "This category doesn't exist";
-    const categoryTitle = category.title;
+    if (!categoryDB) throw "This category doesn't exist";
+    const categoryTitle = categoryDB.title;
 
     Gig.create({
       title,
       category: categoryTitle,
-      subCategory,
       price,
       sellerId: req.userId,
       deliveryTime,
       description,
     })
       .then(() => res.status(200).json({ message: 'Gig added successfully' }))
-      .catch(() => res.status(500).json({ error: 'Failed to add the gig' }));
+      .catch((err) => res.status(500).json({ error: err }));
   } catch (error) {
     res.status(400).json({ error });
   }

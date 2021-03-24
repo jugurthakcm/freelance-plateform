@@ -7,7 +7,7 @@ const gigSchema = mongoose.Schema({
     min: 1,
     max: 50,
   },
-  Description: {
+  description: {
     type: String,
     required: true,
     min: 1,
