@@ -45,7 +45,13 @@ const gigSchema = mongoose.Schema({
   },
   confirmed: {
     type: Boolean,
+    required: true,
     default: false,
+  },
+  pending: {
+    type: Boolean,
+    default: true,
+    required: true,
   },
   createdAt: {
     type: Date,

@@ -76,9 +76,9 @@ exports.deleteGig = async (req, res) => {
  * @params {userId}
  */
 exports.getMyGigs = (req, res) => {
-  Gig.find({ sellerId: req.userId, confirmed: true })
-    .then((data) => res.status(200).send(data))
-    .catch(() => res.status(400).send('Error during fetching gigs'));
+  Gig.find({ sellerId: req.userId })
+    .then((data) => res.status(200).json({ data }))
+    .catch(() => res.status(500).json({ error: 'Error during fetching gigs' }));
 };
 
 /**
@@ -87,9 +87,9 @@ exports.getMyGigs = (req, res) => {
  * @params {userId}
  */
 exports.getMyPendingGigs = (req, res) => {
-  Gig.find({ sellerId: req.userId, confirmed: false })
-    .then((data) => res.status(200).send(data))
-    .catch(() => res.status(400).send('Error during fetching gigs'));
+  Gig.find({ sellerId: req.userId, confirmed: false, pending: true })
+    .then((data) => res.status(200).json({ data }))
+    .catch(() => res.status(500).json({ error: 'Error during fetching gigs' }));
 };
 
 /**
@@ -99,9 +99,9 @@ exports.getMyPendingGigs = (req, res) => {
  */
 
 exports.getMyGig = (req, res) => {
-  Gig.find({ sellerId: req.userId, _id: req.params.id, confirmed: true })
-    .then((data) => res.status(200).send(data))
-    .catch(() => res.status(400).send('Error during fetching gig'));
+  Gig.find({ sellerId: req.userId, _id: req.params.id })
+    .then((data) => res.status(200).json({ data }))
+    .catch(() => res.status(500).json({ error: 'Error during fetching gig' }));
 };
 
 /**
@@ -156,7 +156,7 @@ exports.editMyGig = async (req, res) => {
  * @params {userId}
  */
 exports.exploreGigs = (req, res) => {
-  Gig.find({ sellerId: { $ne: req.userId }, confirmed: true })
+  Gig.find({ sellerId: { $ne: req.userId }, confirmed: true, pending: false })
     .then((data) => res.status(200).send(data))
     .catch(() => res.status(500).send('Error fetching gigs'));
 };

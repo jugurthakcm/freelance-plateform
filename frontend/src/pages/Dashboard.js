@@ -292,6 +292,9 @@ const Dashboard = () => {
                   <span style={{ color: 'white' }}>Delete</span>
                 </button>
               </div>
+              <p className="dashboard__gigState">
+                <strong className="text-success">Approved</strong>
+              </p>
             </div>
           </div>
         </div>

@@ -180,6 +180,7 @@
   margin-top: 10px;
 }
 
-/* .dashboard .gig__buttons button {
-  width: 100%;
-} */
+.dashboard__gigState {
+  font-size: 14px;
+  margin-top: 10px;
+}

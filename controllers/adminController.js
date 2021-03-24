@@ -91,7 +91,7 @@ exports.getGigs = (req, res) => {
 };
 
 exports.getPendingGigs = (req, res) => {
-  Gig.find({ confirmed: false })
+  Gig.find({ confirmed: false, pending: true })
     .then((data) => res.status(200).send(data))
     .catch(() => res.status(500).send('Error during fetching gigs'));
 };
@@ -107,7 +107,7 @@ exports.approveGig = async (req, res) => {
     if (!gig) throw "This gig doesn't exist";
 
     gig
-      .updateOne({ confirmed: true })
+      .updateOne({ confirmed: true, pending: false })
       .then(() => res.status(200).send('Gig confirmed successfully'))
       .catch(() => res.status(500).send('Error during confirming gig'));
   } catch (error) {
