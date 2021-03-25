@@ -44,10 +44,13 @@ app.use('/', emailRoutes);
 }); */
 
 mongoose
-  .connect(process.env.MONGO_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    'mongodb+srv://jugurthakcm:jugurtha@cluster0.jwpqm.mongodb.net/handelp?retryWrites=true&w=majority',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }
+  )
   .then(() => console.log('Connected to the database'))
   .catch((err) => console.log(err));
 
