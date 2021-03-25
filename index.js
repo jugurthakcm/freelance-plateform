@@ -10,6 +10,7 @@ const requestRoutes = require('./routes/requestRoutes');
 const commentRoutes = require('./routes/commentRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const emailRoutes = require('./routes/emailRoutes');
+// const { Category } = require('./models/Category');
 
 const app = express();
 const PORT = process.env.PORT || 4000;
@@ -26,8 +27,24 @@ app.use('/api/comment', commentRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/', emailRoutes);
 
+/*const arr = [
+  'programmation & tech',
+  'digital marketing',
+  'photography',
+  'translation & writing',
+  'voice',
+  'graphic design',
+  'video motion',
+  'architecture',
+];
+
+ app.get('/addCategories', async (req, res) => {
+  const addData = await arr.map((e) => Category.create({ title: e }));
+  res.send('Data added');
+}); */
+
 mongoose
-  .connect('mongodb://localhost:27017/handelp', {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
