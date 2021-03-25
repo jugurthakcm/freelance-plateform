@@ -1,5 +1,5 @@
 import axios from 'axios';
 
 export default axios.create({
-  baseURL: 'ttps://handelp.herokuapp.com/api/',
+  baseURL: 'https://handelp.herokuapp.com/api/',
 });
