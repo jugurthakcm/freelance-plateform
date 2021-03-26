@@ -73,7 +73,7 @@ router.put('/title', auth, updateTitle);
 const storage = multer.diskStorage({
   destination: 'uploads/',
   filename: function (req, file, cb) {
-    cb(null, 'IMAGE-' + Date.now() + path.extname(file.originalname));
+    cb(null, 'AVATAR-' + Date.now() + path.extname(file.originalname));
   },
 });
 

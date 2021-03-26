@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from '../axios';
+import api from '../api';
 
 const Avatar = () => {
   const [file, setFile] = useState('');
@@ -21,14 +22,21 @@ const Avatar = () => {
   };
 
   return (
-    <form encType="multipart/form-data" onSubmit={handleSubmit}>
-      <input
-        type="file"
-        name="avatar"
-        onChange={(e) => setFile(e.target.files[0])}
-      />
-      <input type="submit" value="submit" />
-    </form>
+    <>
+      <form encType="multipart/form-data" onSubmit={handleSubmit}>
+        <input
+          type="file"
+          name="avatar"
+          onChange={(e) => setFile(e.target.files[0])}
+        />
+        <input type="submit" value="submit" />
+        {/* <img
+          src={api + 'uploads/AVATAR-1616775337731.jpeg'}
+          width="200px"
+          alt="sal"
+        /> */}
+      </form>
+    </>
   );
 };
 
