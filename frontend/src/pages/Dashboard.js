@@ -11,6 +11,7 @@ import {
   faTrash,
   faExclamationCircle,
   faStar,
+  faCamera,
 } from '@fortawesome/free-solid-svg-icons';
 import './Dashboard.css';
 import EditLanguage from '../components/dashboardModals/EditLanguage';
@@ -40,7 +41,15 @@ const Dashboard = () => {
     user.token && dispatch(getMyGigs(user.token));
   }, [user, history, dispatch]);
 
-  console.log('rendring dashboard');
+  const handleMouseEnter = () => {
+    document.querySelector('.user__imageEdit label').classList.add('d-flex');
+    document.querySelector('.user__imageEdit label').classList.remove('d-none');
+  };
+  const handleMouseLeave = () => {
+    document.querySelector('.user__imageEdit label').classList.add('d-none');
+    document.querySelector('.user__imageEdit label').classList.remove('d-flex');
+  };
+
   return (
     <>
       <Navbar />
@@ -58,7 +67,25 @@ const Dashboard = () => {
       <div className="dashboard container">
         <div className="dashboard__user">
           <div className="user__image">
-            <img src={avatar} alt="avatar" width="100px" />
+            <img
+              src={avatar}
+              alt="avatar"
+              width="100px"
+              onMouseEnter={handleMouseEnter}
+              onMouseLeave={handleMouseLeave}
+            />
+            <div className="user__imageEdit">
+              <label htmlFor="profileImage" className="d-none">
+                <FontAwesomeIcon icon={faCamera} className="mr-2" size={'sm'} />
+                Edit
+              </label>
+              <input
+                type="file"
+                name="profileImage"
+                id="profileImage"
+                accept="image/x-png,image/jpeg,image/jpg"
+              />
+            </div>
           </div>
 
           <div className="user__info">
@@ -254,6 +281,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
+
       <div className="dashboard dashboard__gigs container">
         <div className="dashboard__gigsHeader">
           <h2>My Gigs</h2>
