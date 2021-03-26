@@ -16,7 +16,6 @@ const {
 } = require('../validation/userValidation');
 const Joi = require('joi');
 const phoneJoi = Joi.extend(require('joi-phone-number'));
-
 /**
  * Register a user
  * /POST
@@ -443,4 +442,8 @@ exports.updateTitle = (req, res) => {
   User.findByIdAndUpdate(req.userId, { title: req.body.title })
     .then(() => res.status(200).json({ message: 'Title updated successfully' }))
     .catch((err) => res.status(500).json({ error: err }));
+};
+
+exports.editAvatar = (req, res) => {
+  res.send('done');
 };

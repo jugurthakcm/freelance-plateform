@@ -26,6 +26,7 @@ import EditSkills from '../components/dashboardModals/EditSkills';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 import { getMyGigs } from '../data/actions/gigActions';
+import axios from '../axios';
 
 const Dashboard = () => {
   const history = useHistory();
@@ -77,14 +78,14 @@ const Dashboard = () => {
           >
             <img src={avatar} alt="avatar" width="100px" />
             <div className="user__imageEdit">
-              <label htmlFor="profileImage" className="d-none">
+              <label htmlFor="avatar" className="d-none">
                 <FontAwesomeIcon icon={faCamera} className="mr-2" size={'sm'} />
                 Edit
               </label>
               <input
                 type="file"
-                name="profileImage"
-                id="profileImage"
+                name="avatar"
+                id="avatar"
                 accept="image/x-png,image/jpeg,image/jpg"
                 onChange={handleChangeImage}
               />

@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { loadUser } from './data/actions/userActions';
 import Loading from './components/Loading';
 import AddGig from './pages/gigs/AddGig';
+import Avatar from './pages/Avatar';
 
 function App() {
   const language = useLanguageContext()[0];
@@ -54,6 +55,7 @@ function App() {
             <Route path="/register" component={Register} />
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/gig/add" component={AddGig} />
+            <Route path="/avatar" component={Avatar} />
           </Switch>
         </I18nProvider>
       </div>

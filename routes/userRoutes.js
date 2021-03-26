@@ -18,8 +18,11 @@ const {
   updateLanguage,
   addLanguage,
   updateTitle,
+  editAvatar,
 } = require('../controllers/userController');
 const { auth } = require('../middlewares/authMiddleware');
+const path = require('path');
+const multer = require('multer');
 
 router.get('/user', auth, loadUser);
 
@@ -65,5 +68,19 @@ router.post('/language', auth, addLanguage);
 router.put('/language', auth, updateLanguage);
 
 router.put('/title', auth, updateTitle);
+
+//Using multer to upload user avatar
+const storage = multer.diskStorage({
+  destination: 'uploads/',
+  filename: function (req, file, cb) {
+    cb(null, 'IMAGE-' + Date.now() + path.extname(file.originalname));
+  },
+});
+
+const upload = multer({
+  storage: storage,
+}).any();
+
+router.post('/avatar', upload, editAvatar);
 
 module.exports = router;
