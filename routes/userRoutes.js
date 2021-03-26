@@ -73,7 +73,7 @@ router.put('/title', auth, updateTitle);
 const storage = multer.diskStorage({
   destination: 'uploads/',
   filename: function (req, file, cb) {
-    cb(null, 'AVATAR-' + Date.now() + path.extname(file.originalname));
+    cb(null, 'AVATAR-' + req.userId + path.extname(file.originalname));
   },
 });
 
@@ -81,6 +81,6 @@ const upload = multer({
   storage: storage,
 }).any();
 
-router.post('/avatar', upload, editAvatar);
+router.post('/avatar', auth, upload, editAvatar);
 
 module.exports = router;
