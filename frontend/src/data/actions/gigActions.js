@@ -29,7 +29,6 @@ export const addGig = (
 };
 
 export const getMyGigs = (token) => (dispatch) => {
-  console.log(token);
   axios
     .get('/gigs/mygigs', {
       headers: {

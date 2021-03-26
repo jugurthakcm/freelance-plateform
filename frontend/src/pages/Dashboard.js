@@ -50,6 +50,10 @@ const Dashboard = () => {
     document.querySelector('.user__imageEdit label').classList.remove('d-flex');
   };
 
+  const handleChangeImage = (e) => {
+    console.log(e.target.files[0]);
+  };
+
   return (
     <>
       <Navbar />
@@ -66,14 +70,12 @@ const Dashboard = () => {
 
       <div className="dashboard container">
         <div className="dashboard__user">
-          <div className="user__image">
-            <img
-              src={avatar}
-              alt="avatar"
-              width="100px"
-              onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
-            />
+          <div
+            className="user__image"
+            onMouseEnter={handleMouseEnter}
+            onMouseLeave={handleMouseLeave}
+          >
+            <img src={avatar} alt="avatar" width="100px" />
             <div className="user__imageEdit">
               <label htmlFor="profileImage" className="d-none">
                 <FontAwesomeIcon icon={faCamera} className="mr-2" size={'sm'} />
@@ -84,11 +86,12 @@ const Dashboard = () => {
                 name="profileImage"
                 id="profileImage"
                 accept="image/x-png,image/jpeg,image/jpg"
+                onChange={handleChangeImage}
               />
             </div>
           </div>
 
-          <div className="user__info">
+          <div className="user__info ml-5">
             <h4>{u && u.firstName + ' ' + u.lastName}</h4>
             <p>
               <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-1" />
@@ -301,7 +304,7 @@ const Dashboard = () => {
           {gig &&
             gig.myGigs &&
             gig.myGigs.map((gig) => (
-              <div className="col-lg-3 col-md-4 col-sm-6 mb-4">
+              <div className="col-lg-3 col-md-4 col-sm-6 mb-4" key={gig._id}>
                 <div className="store__gig">
                   <div
                     className="gig__image"
