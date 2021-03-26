@@ -43,8 +43,13 @@ app.use('/', emailRoutes);
   res.send('Data added');
 }); */
 
+const mongoURI =
+  process.env.NODE_ENV === 'developement'
+    ? process.env.MONGO_LOCALHOST
+    : process.env.MONGO_URI;
+
 mongoose
-  .connect(process.env.MONGO_URI, {
+  .connect(mongoURI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
