@@ -19,4 +19,5 @@ export const loadingActionTypes = {
 export const gigActionTypes = {
   SUCCESS: 'SUCCESS',
   ERROR: 'ERROR',
+  GET_MY_GIGS: 'GET_MY_GIGS',
 };

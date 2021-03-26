@@ -168,9 +168,26 @@
   font-weight: 600;
 }
 
+.dashboard .gig__type {
+  text-transform: capitalize;
+}
+
+.dashboard .gig__title {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 50px;
+}
+
 .dashboard .gig__footer {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+}
+
+.dashboard .gig__footerPrice {
+  font-weight: 500;
 }
 
 .dashboard .gig__buttons {

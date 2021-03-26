@@ -27,3 +27,17 @@ export const addGig = (
     })
     .catch((err) => dispatch({ type: gigActionTypes.ERROR, payload: err }));
 };
+
+export const getMyGigs = (token) => (dispatch) => {
+  console.log(token);
+  axios
+    .get('/gigs/mygigs', {
+      headers: {
+        authorization: 'Bearer ' + token,
+      },
+    })
+    .then((res) => {
+      dispatch({ type: gigActionTypes.GET_MY_GIGS, payload: res });
+    })
+    .catch((err) => dispatch({ type: gigActionTypes.ERROR, payload: err }));
+};

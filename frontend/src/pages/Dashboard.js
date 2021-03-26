@@ -24,18 +24,23 @@ import { sortEducation } from '../util';
 import EditSkills from '../components/dashboardModals/EditSkills';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
+import { getMyGigs } from '../data/actions/gigActions';
 
 const Dashboard = () => {
   const history = useHistory();
   const user = useSelector((state) => state.user);
   const u = user.user;
 
+  const gig = useSelector((state) => state.gig);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     if (!user.token) history.push('/login');
-  }, [user, history]);
+    user.token && dispatch(getMyGigs(user.token));
+  }, [user, history, dispatch]);
 
+  console.log('rendring dashboard');
   return (
     <>
       <Navbar />
@@ -264,42 +269,63 @@ const Dashboard = () => {
           </button>
         </div>
 
-        <div className="col-lg-3 col-md-4 col-sm-6">
-          <div className="store__gig">
-            <div
-              className="gig__image"
-              style={{
-                backgroundColor: 'blue',
-                height: '200px',
-              }}
-            ></div>
-            <div className="gig__details mx-3 my-2">
-              <div className="gig__footer">
-                <span>
-                  <FontAwesomeIcon icon={faStar} /> 52
-                </span>
+        <div className="row">
+          {gig &&
+            gig.myGigs &&
+            gig.myGigs.map((gig) => (
+              <div className="col-lg-3 col-md-4 col-sm-6 mb-4">
+                <div className="store__gig">
+                  <div
+                    className="gig__image"
+                    style={{
+                      backgroundColor: 'blue',
+                      height: '200px',
+                    }}
+                  ></div>
+                  <div className="gig__details mx-3 my-2">
+                    <p className="gig__type">{gig.category}</p>
+                    <h5 className="gig__title">{gig.title}</h5>
+                    <div className="gig__footer">
+                      <span className="gig__footerPrice">{gig.price} $</span>
+                      <span>
+                        <FontAwesomeIcon icon={faStar} /> {gig.rating}
+                      </span>
+                    </div>
+                    <div className="gig__buttons">
+                      <button className="btn btn-warning mr-2 d-flex align-items-center">
+                        <FontAwesomeIcon
+                          icon={faPen}
+                          className="mr-2"
+                          size={'xs'}
+                        />
+                        <span>Edit</span>
+                      </button>
+                      <button className="btn btn-danger ml-2 d-flex align-items-center">
+                        <FontAwesomeIcon
+                          icon={faTrash}
+                          className="mr-2 icon-white"
+                          size={'xs'}
+                        />
+                        <span style={{ color: 'white' }}>Delete</span>
+                      </button>
+                    </div>
+                    <p className="dashboard__gigState">
+                      {!gig.confirmed & gig.pending ? (
+                        <strong className="text-warning">
+                          Reviewing by an Admin
+                        </strong>
+                      ) : null}
+                      {gig.confirmed & !gig.pending ? (
+                        <strong className="text-success">Approved</strong>
+                      ) : null}
+                      {!gig.confirmed & !gig.pending ? (
+                        <strong className="text-danger">Refused</strong>
+                      ) : null}
+                    </p>
+                  </div>
+                </div>
               </div>
-              <p className="gig__type">Programmation</p>
-              <h5 className="gig__title">Web applications</h5>
-              <div className="gig__buttons">
-                <button className="btn btn-warning mr-2 d-flex align-items-center">
-                  <FontAwesomeIcon icon={faPen} className="mr-2" size={'xs'} />
-                  <span>Edit</span>
-                </button>
-                <button className="btn btn-danger ml-2 d-flex align-items-center">
-                  <FontAwesomeIcon
-                    icon={faTrash}
-                    className="mr-2 icon-white"
-                    size={'xs'}
-                  />
-                  <span style={{ color: 'white' }}>Delete</span>
-                </button>
-              </div>
-              <p className="dashboard__gigState">
-                <strong className="text-success">Approved</strong>
-              </p>
-            </div>
-          </div>
+            ))}
         </div>
       </div>
       <Footer />

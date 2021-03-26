@@ -19,6 +19,13 @@ const gigReducer = (state = initialState, action) => {
         error: action.payload.response.data.error,
       };
 
+    case gigActionTypes.GET_MY_GIGS:
+      return {
+        ...state,
+        success: action.payload.data.message,
+        myGigs: action.payload.data.data,
+      };
+
     default:
       return state;
   }
