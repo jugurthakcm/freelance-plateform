@@ -29,11 +29,11 @@ const Avatar = () => {
 
       const imageData64 = canvasRef.toDataURL('image/' + imageSrcExt);
 
-      const myFilename = 'previewFile.' + imageSrcExt;
+      const myFilename = 'avatar.' + imageSrcExt;
 
       // file to be uploaded
       const myNewCroppedFile = base64StringtoFile(imageData64, myFilename);
-      console.log(myNewCroppedFile);
+
       const formData = new FormData();
       formData.append('file', myNewCroppedFile);
 
@@ -44,7 +44,7 @@ const Avatar = () => {
             authorization: 'Bearer ' + localStorage.getItem('token'),
           },
         })
-        .then((res) => console.log(res.data))
+        .then(() => window.location.reload())
         .catch((err) => console.error(err.response));
     }
   };
@@ -63,6 +63,10 @@ const Avatar = () => {
     );
 
     myFileItemReader.readAsDataURL(file);
+  };
+
+  const handleClose = () => {
+    setImageSrc(null);
   };
 
   return (
@@ -98,7 +102,12 @@ const Avatar = () => {
                 <button className="btn btn-warning mr-2" onClick={handleUpload}>
                   Upload
                 </button>
-                <button className="btn btn-secondary ml-2">Close</button>
+                <button
+                  className="btn btn-secondary ml-2"
+                  onClick={handleClose}
+                >
+                  Close
+                </button>
               </div>
             </div>
           </div>
