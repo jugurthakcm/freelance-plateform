@@ -1,7 +1,41 @@
-.cropImage {
-  position: relative;
-  width: 500px;
-  height: 500px;
+.cropContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 500px;
+  position: absolute;
   left: 50%;
   transform: translateX(-50%);
+  width: 100%;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.imageCropContainer {
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+  height: 400px;
+  background-color: white;
+}
+
+.crop__controls {
+  background-color: white;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  padding: 0px 20px;
+  margin: 20px 0;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  left: 50%;
+}
+
+.crop__controls input {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.crop__controls button {
+  width: 100px;
 }

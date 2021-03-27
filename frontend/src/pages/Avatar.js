@@ -6,74 +6,91 @@ import './Avatar.css';
 
 const Avatar = () => {
   const [file, setFile] = useState('');
+  const [imageSrc, setImageSrc] = useState(null);
+  const [crop, setCrop] = useState({ x: 0, y: 0 });
+  const [zoom, setZoom] = useState(1);
+  const [croppedAreaPixels, setCroppedAreaPixels] = useState(null);
+  const [croppedImage, setCroppedImage] = useState(null);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
 
-    const formData = new FormData();
-    formData.append('file', file);
+  //   const formData = new FormData();
+  //   formData.append('file', file);
 
-    axios
-      .post('/avatar', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-          authorization: 'Bearer ' + localStorage.getItem('token'),
-        },
-      })
-      .then((res) => console.log(res.data))
-      .catch((err) => console.error(err.response));
-  };
+  //   axios
+  //     .post('/avatar', formData, {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data',
+  //         authorization: 'Bearer ' + localStorage.getItem('token'),
+  //       },
+  //     })
+  //     .then((res) => console.log(res.data))
+  //     .catch((err) => console.error(err.response));
+  // };
 
-  useEffect(() => {
-    setImageCrop({
-      image: api + 'uploads/AVATAR-1616775337731.jpeg',
-      crop: { x: 0, y: 0 },
-      zoom: 1,
-      aspect: 1 / 1,
-    });
-  }, []);
-
-  const [imageCrop, setImageCrop] = useState({
-    crop: { x: 0, y: 0 },
-    zoom: 1,
-    aspect: 1 / 1,
-  });
-
-  const onCropChange = (crop) => {
-    setImageCrop({ crop });
-  };
+  const onCropChange = (crop) => {};
 
   const onCropComplete = (croppedArea, croppedAreaPixels) => {
     console.log(croppedArea, croppedAreaPixels);
   };
 
-  const onZoomChange = (zoom) => {
-    setImageCrop({ zoom });
-  };
+  const onZoomChange = (zoom) => {};
 
-  console.log(imageCrop.image, imageCrop.zoom);
+  /* *********************************** */
+
+  function readFile(file) {
+    return new Promise((resolve) => {
+      const reader = new FileReader();
+      reader.addEventListener('load', () => resolve(reader.result), false);
+      reader.readAsDataURL(file);
+    });
+  }
+
+  const handleFileSelect = async (e) => {
+    const file = e.target.files[0];
+    let imageDataUrl = await readFile(file);
+    setImageSrc(imageDataUrl);
+  };
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="file"
-          name="avatar"
-          onChange={(e) => setFile(e.target.files[0])}
-        />
-        <input type="submit" value="submit" />
+      <form>
+        <input type="file" name="avatar" onChange={handleFileSelect} />
+
+        {imageSrc ? (
+          <div className="cropContainer">
+            <div className="imageCropContainer">
+              <Cropper
+                image={imageSrc}
+                crop={crop}
+                zoom={zoom}
+                aspect={1 / 1}
+                onCropChange={setCrop}
+                onCropComplete={onCropComplete}
+                onZoomChange={setZoom}
+              />
+            </div>
+            <div className="crop__controls">
+              <input
+                type="range"
+                name="zoom"
+                min={1}
+                max={3}
+                step={0.1}
+                value={zoom}
+                onChange={(e) => setZoom(e.target.value)}
+              />
+              <div className="crop__controlsButtons">
+                <button className="mr-2">Close</button>
+                <button type="submit" className="ml-2">
+                  Upload
+                </button>
+              </div>
+            </div>
+          </div>
+        ) : null}
       </form>
-      <div className="cropImage d-none">
-        <Cropper
-          image={api + 'uploads/AVATAR-1616775337731.jpeg'}
-          crop={imageCrop.crop}
-          zoom={imageCrop.zoom}
-          aspect={1 / 1}
-          onCropChange={onCropChange}
-          onCropComplete={onCropComplete}
-          onZoomChange={onZoomChange}
-        />
-      </div>
     </>
   );
 };
