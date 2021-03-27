@@ -83,18 +83,6 @@ export function base64StringtoFile(base64String, filename) {
   return new File([u8arr], filename, { type: mime });
 }
 
-// Download a Base64-encoded file
-
-export function downloadBase64File(base64Data, filename) {
-  var element = document.createElement('a');
-  element.setAttribute('href', base64Data);
-  element.setAttribute('download', filename);
-  element.style.display = 'none';
-  document.body.appendChild(element);
-  element.click();
-  document.body.removeChild(element);
-}
-
 export function extractImageFileExtensionFromBase64(base64Data) {
   return base64Data.substring(
     'data:image/'.length,
