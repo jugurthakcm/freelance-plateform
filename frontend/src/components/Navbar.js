@@ -18,10 +18,13 @@ import { selectLanguageIcon } from '../util';
 import axios from '../axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { logoutUser } from '../data/actions/userActions';
-import avatar from '../assets/images/avatar.jpeg';
+import avatar from '../assets/images/avatar.jpg';
+import api from '../api';
 
 const Navbar = ({ navStore }) => {
   const [categories, setCategories] = useState([]);
+  const user = useSelector((state) => state.user);
+  const u = user.user;
 
   useEffect(() => {
     axios
@@ -67,8 +70,6 @@ const Navbar = ({ navStore }) => {
   const closeSearch = () => {
     navbarSearch.style.top = '-100px';
   };
-
-  const user = useSelector((state) => state.user);
 
   const dispatch = useDispatch();
 
@@ -156,12 +157,21 @@ const Navbar = ({ navStore }) => {
                   aria-expanded="false"
                   // style={{ backgroundImage: `url(${languageImage})` }}
                 >
-                  <img
-                    src={avatar}
-                    alt="avatar"
-                    width="30px"
-                    style={{ borderRadius: '50%', cursor: 'pointer' }}
-                  />
+                  {u && u.imageURI ? (
+                    <img
+                      src={api + '/uploads/avatars/' + u.imageURI}
+                      alt="avatar"
+                      width="30px"
+                      style={{ borderRadius: '50%', cursor: 'pointer' }}
+                    />
+                  ) : (
+                    <img
+                      src={avatar}
+                      alt="avatar"
+                      width="30px"
+                      style={{ borderRadius: '50%', cursor: 'pointer' }}
+                    />
+                  )}
                 </div>
                 <ul
                   className="dropdown-menu"

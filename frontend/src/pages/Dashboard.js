@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Navbar from '../components/Navbar';
-import avatar from '../assets/images/avatar.jpeg';
+import avatar from '../assets/images/avatar.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPen,
