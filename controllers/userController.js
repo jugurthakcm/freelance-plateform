@@ -16,6 +16,8 @@ const {
 } = require('../validation/userValidation');
 const Joi = require('joi');
 const phoneJoi = Joi.extend(require('joi-phone-number'));
+const path = require('path');
+
 /**
  * Register a user
  * /POST
@@ -445,5 +447,10 @@ exports.updateTitle = (req, res) => {
 };
 
 exports.editAvatar = (req, res) => {
-  res.send('done');
+  const file = req.files[0];
+  const fileExt = path.extname(file.originalname);
+
+  User.findByIdAndUpdate(req.userId, { imageURI: req.userId + fileExt })
+    .then(() => res.status(200).json({ message: 'Uploading user avatar done' }))
+    .catch((error) => res.status(500).json({ error }));
 };
