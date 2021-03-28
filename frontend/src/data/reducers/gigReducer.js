@@ -3,6 +3,7 @@ import { gigActionTypes } from '../actionTypes';
 const initialState = {
   success: null,
   error: null,
+  myGigs: null,
 };
 
 const gigReducer = (state = initialState, action) => {

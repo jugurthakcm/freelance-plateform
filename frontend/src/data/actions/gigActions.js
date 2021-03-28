@@ -40,3 +40,20 @@ export const getMyGigs = (token) => (dispatch) => {
     })
     .catch((err) => dispatch({ type: gigActionTypes.ERROR, payload: err }));
 };
+
+export const deleteGig = (id, token) => (dispatch) => {
+  axios
+    .post(
+      '/gigs/delete',
+      { id },
+      {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: gigActionTypes.SUCCESS, payload: res });
+    })
+    .catch((err) => dispatch({ type: gigActionTypes.ERROR, payload: err }));
+};

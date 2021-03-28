@@ -25,11 +25,12 @@ import { sortEducation } from '../util';
 import EditSkills from '../components/dashboardModals/EditSkills';
 import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
-import { getMyGigs } from '../data/actions/gigActions';
+import { deleteGig, getMyGigs } from '../data/actions/gigActions';
 import axios from '../axios';
 import Avatar from './Avatar';
 import api from '../api';
 import { extractImageFileExtensionFromBase64 } from '../util';
+import StackGrid from 'react-stack-grid';
 
 const Dashboard = () => {
   const history = useHistory();
@@ -335,63 +336,75 @@ const Dashboard = () => {
           </button>
         </div>
 
-        <div className="row">
-          {gig &&
-            gig.myGigs &&
-            gig.myGigs.map((gig) => (
-              <div className="col-lg-3 col-md-4 col-sm-6 mb-4" key={gig._id}>
-                <div className="store__gig">
-                  <div
-                    className="gig__image"
-                    style={{
-                      backgroundColor: 'blue',
-                      height: '200px',
-                    }}
-                  ></div>
-                  <div className="gig__details mx-3 my-2">
-                    <p className="gig__type">{gig.category}</p>
-                    <h5 className="gig__title">{gig.title}</h5>
-                    <div className="gig__footer">
-                      <span className="gig__footerPrice">{gig.price} $</span>
-                      <span>
-                        <FontAwesomeIcon icon={faStar} /> {gig.rating}
-                      </span>
+        <div className="mt-5">
+          {gig && gig.myGigs && (
+            <StackGrid
+              columnWidth={275}
+              gutterWidth={30}
+              gutterHeight={20}
+              className="d-flex justify-content-between"
+            >
+              {gig.myGigs.map((gig) => (
+                <div key={gig._id}>
+                  <div className="store__gig">
+                    <div
+                      className="gig__image"
+                      style={{
+                        backgroundColor: 'blue',
+                        height: '200px',
+                      }}
+                    ></div>
+                    <div className="gig__details mx-3 my-2">
+                      <p className="gig__type">{gig.category}</p>
+                      <h5 className="gig__title">{gig.title}</h5>
+                      <div className="gig__footer">
+                        <span className="gig__footerPrice">{gig.price} $</span>
+                        <span>
+                          <FontAwesomeIcon icon={faStar} /> {gig.rating}
+                        </span>
+                      </div>
+                      <div className="gig__buttons">
+                        <button className="btn btn-warning mr-2 d-flex align-items-center">
+                          <FontAwesomeIcon
+                            icon={faPen}
+                            className="mr-2"
+                            size={'xs'}
+                          />
+                          <span>Edit</span>
+                        </button>
+                        <button
+                          className="btn btn-danger ml-2 d-flex align-items-center"
+                          onClick={() =>
+                            dispatch(deleteGig(gig._id, user.token))
+                          }
+                        >
+                          <FontAwesomeIcon
+                            icon={faTrash}
+                            className="mr-2 icon-white"
+                            size={'xs'}
+                          />
+                          <span style={{ color: 'white' }}>Delete</span>
+                        </button>
+                      </div>
+                      <p className="dashboard__gigState">
+                        {!gig.confirmed & gig.pending ? (
+                          <strong className="text-warning">
+                            Reviewing by an Admin
+                          </strong>
+                        ) : null}
+                        {gig.confirmed & !gig.pending ? (
+                          <strong className="text-success">Approved</strong>
+                        ) : null}
+                        {!gig.confirmed & !gig.pending ? (
+                          <strong className="text-danger">Refused</strong>
+                        ) : null}
+                      </p>
                     </div>
-                    <div className="gig__buttons">
-                      <button className="btn btn-warning mr-2 d-flex align-items-center">
-                        <FontAwesomeIcon
-                          icon={faPen}
-                          className="mr-2"
-                          size={'xs'}
-                        />
-                        <span>Edit</span>
-                      </button>
-                      <button className="btn btn-danger ml-2 d-flex align-items-center">
-                        <FontAwesomeIcon
-                          icon={faTrash}
-                          className="mr-2 icon-white"
-                          size={'xs'}
-                        />
-                        <span style={{ color: 'white' }}>Delete</span>
-                      </button>
-                    </div>
-                    <p className="dashboard__gigState">
-                      {!gig.confirmed & gig.pending ? (
-                        <strong className="text-warning">
-                          Reviewing by an Admin
-                        </strong>
-                      ) : null}
-                      {gig.confirmed & !gig.pending ? (
-                        <strong className="text-success">Approved</strong>
-                      ) : null}
-                      {!gig.confirmed & !gig.pending ? (
-                        <strong className="text-danger">Refused</strong>
-                      ) : null}
-                    </p>
                   </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </StackGrid>
+          )}
         </div>
       </div>
       <Footer />

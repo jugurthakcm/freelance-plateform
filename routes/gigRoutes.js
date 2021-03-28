@@ -15,13 +15,21 @@ const {
 const { auth } = require('../middlewares/authMiddleware');
 
 router.get('/mygigs', auth, getMyGigs);
+
 router.get('/mygigs/pending', auth, getMyPendingGigs);
+
 router.post('/add', auth, addGig);
-router.delete('/delete', auth, deleteGig);
+
+router.post('/delete', auth, deleteGig);
+
 router.get('/mygigs/:id', auth, getMyGig);
+
 router.put('/mygigs/:id/edit', auth, editMyGig);
+
 router.get('/explore/:category', auth, filterGigsPerCategory);
+
 router.get('/explore', auth, exploreGigs);
+
 router.put('/:gigId/rate', auth, rateGig);
 
 module.exports = router;

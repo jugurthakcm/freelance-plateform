@@ -184,6 +184,10 @@
   margin-top: 50px !important;
 }
 
+.dashboard__gigs .row span {
+  position: unset !important;
+}
+
 .dashboard__gigsHeader {
   width: 100%;
   display: flex;
@@ -207,7 +211,6 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
-  height: 50px;
 }
 
 .dashboard .gig__footer {
