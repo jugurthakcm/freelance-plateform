@@ -19,7 +19,8 @@ body {
 input:focus,
 button:focus,
 select:focus,
-button:active {
+button:active,
+textarea:focus {
   outline: none !important;
   box-shadow: none !important;
 }

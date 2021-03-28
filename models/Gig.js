@@ -19,6 +19,12 @@ const gigSchema = mongoose.Schema({
     min: 1,
     max: 50,
   },
+  categoryId: {
+    type: String,
+    required: true,
+    min: 1,
+    max: 50,
+  },
   category: {
     type: String,
     required: true,

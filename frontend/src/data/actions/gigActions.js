@@ -11,7 +11,7 @@ export const addGig = (
       {
         title,
         description,
-        category,
+        categoryId: category,
         price,
         deliveryTime: deliveryTime + ' ' + deliveryTimeType,
       },
@@ -23,7 +23,7 @@ export const addGig = (
     )
     .then((res) => {
       dispatch({ type: gigActionTypes.SUCCESS, payload: res });
-      window.location.reload();
+      window.location.href = '/dashboard';
     })
     .catch((err) => dispatch({ type: gigActionTypes.ERROR, payload: err }));
 };
@@ -54,6 +54,34 @@ export const deleteGig = (id, token) => (dispatch) => {
     )
     .then((res) => {
       dispatch({ type: gigActionTypes.SUCCESS, payload: res });
+      window.location.reload();
     })
     .catch((err) => dispatch({ type: gigActionTypes.ERROR, payload: err }));
 };
+
+export const editGig = (
+  gigId,
+  { title, description, category, price, deliveryTime, deliveryTimeType },
+  token
+) => (dispatch) =>
+  axios
+    .put(
+      `/gigs/${gigId}/edit`,
+      {
+        title,
+        description,
+        categoryId: category,
+        price,
+        deliveryTime: deliveryTime + ' ' + deliveryTimeType,
+      },
+      {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: gigActionTypes.SUCCESS, payload: res });
+      window.location.href = '/dashboard';
+    })
+    .catch((err) => dispatch({ type: gigActionTypes.ERROR, payload: err }));

@@ -15,16 +15,17 @@ exports.addGig = async (req, res) => {
     const { error, value } = gigValidation(req.body);
     if (error) throw error.details[0].message;
 
-    const { title, category, price, deliveryTime, description } = value;
+    const { title, categoryId, price, deliveryTime, description } = value;
 
-    const categoryDB = await Category.findById(category);
+    const categoryDB = await Category.findById(categoryId);
 
     if (!categoryDB) throw "This category doesn't exist";
-    const categoryTitle = categoryDB.title;
+    const category = categoryDB.title;
 
     Gig.create({
       title,
-      category: categoryTitle,
+      categoryId,
+      category,
       price,
       sellerId: req.userId,
       deliveryTime,
@@ -90,8 +91,8 @@ exports.getMyPendingGigs = (req, res) => {
  * @params {userId, gigId}
  */
 
-exports.getMyGig = (req, res) => {
-  Gig.find({ sellerId: req.userId, _id: req.params.id })
+exports.getGig = (req, res) => {
+  Gig.find({ _id: req.params.id })
     .then((data) => res.status(200).json({ data }))
     .catch(() => res.status(500).json({ error: 'Error during fetching gig' }));
 };

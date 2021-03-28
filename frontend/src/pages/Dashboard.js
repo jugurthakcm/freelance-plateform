@@ -365,12 +365,14 @@ const Dashboard = () => {
                       </div>
                       <div className="gig__buttons">
                         <button className="btn btn-warning mr-2 d-flex align-items-center">
-                          <FontAwesomeIcon
-                            icon={faPen}
-                            className="mr-2"
-                            size={'xs'}
-                          />
-                          <span>Edit</span>
+                          <Link to={`/gig/edit/${gig._id}`}>
+                            <FontAwesomeIcon
+                              icon={faPen}
+                              className="mr-2"
+                              size={'xs'}
+                            />
+                            <span>Edit</span>
+                          </Link>
                         </button>
                         <button
                           className="btn btn-danger ml-2 d-flex align-items-center"

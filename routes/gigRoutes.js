@@ -5,7 +5,7 @@ const {
   addGig,
   deleteGig,
   getMyGigs,
-  getMyGig,
+  getGig,
   editMyGig,
   exploreGigs,
   filterGigsPerCategory,
@@ -22,14 +22,14 @@ router.post('/add', auth, addGig);
 
 router.post('/delete', auth, deleteGig);
 
-router.get('/mygigs/:id', auth, getMyGig);
+router.get('/:id', getGig);
 
-router.put('/mygigs/:id/edit', auth, editMyGig);
+router.put('/:id/edit', auth, editMyGig);
 
 router.get('/explore/:category', auth, filterGigsPerCategory);
 
 router.get('/explore', auth, exploreGigs);
 
-router.put('/:gigId/rate', auth, rateGig);
+router.put('/:id/rate', auth, rateGig);
 
 module.exports = router;
