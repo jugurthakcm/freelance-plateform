@@ -1,4 +1,4 @@
-import React, { Fragment, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import Navbar from '../components/Navbar';
@@ -29,6 +29,7 @@ import { getMyGigs } from '../data/actions/gigActions';
 import axios from '../axios';
 import Avatar from './Avatar';
 import api from '../api';
+import { extractImageFileExtensionFromBase64 } from '../util';
 
 const Dashboard = () => {
   const history = useHistory();
@@ -53,8 +54,28 @@ const Dashboard = () => {
     document.querySelector('.user__imageEdit label').classList.remove('d-flex');
   };
 
+  const [imageSrc, setImageSrc] = useState(null);
+  const [imageSrcExt, setImageSrcExt] = useState(null);
+
+  const handleFileSelect = (e) => {
+    const file = e.target.files[0];
+    const myFileItemReader = new FileReader();
+    myFileItemReader.addEventListener(
+      'load',
+      () => {
+        const myResult = myFileItemReader.result;
+        setImageSrc(myResult);
+        setImageSrcExt(extractImageFileExtensionFromBase64(myResult));
+      },
+      false
+    );
+
+    myFileItemReader.readAsDataURL(file);
+  };
+
   return (
     <>
+      <Avatar imageSrc={imageSrc} imageSrcExt={imageSrcExt} />
       <Navbar />
       {u && !u.confirmedEmail && (
         <div
@@ -90,7 +111,19 @@ const Dashboard = () => {
               />
             )}
 
-            <Avatar />
+            <div className="user__imageEdit">
+              <label htmlFor="avatar" className="d-none">
+                <FontAwesomeIcon icon={faCamera} className="mr-2" size={'sm'} />
+                Edit
+              </label>
+              <input
+                type="file"
+                name="avatar"
+                id="avatar"
+                onChange={handleFileSelect}
+                accept="image/x-png,image/jpeg,image/jpg, image/png"
+              />
+            </div>
           </div>
 
           <div className="user__info ml-5">

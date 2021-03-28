@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import axios from '../axios';
 import Cropper from 'react-easy-crop';
 import './Avatar.css';
@@ -10,11 +10,14 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
 
-const Avatar = () => {
-  const [imageSrc, setImageSrc] = useState(null);
+const Avatar = ({ imageSrc, imageSrcExt }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
-  const [imageSrcExt, setImageSrcExt] = useState(null);
+  const [image, setImage] = useState(null);
+
+  useEffect(() => {
+    setImage(imageSrc);
+  }, [imageSrc]);
 
   const imageCanvasRef = useRef();
 
@@ -51,82 +54,58 @@ const Avatar = () => {
     }
   };
 
-  const handleFileSelect = (e) => {
-    const file = e.target.files[0];
-    const myFileItemReader = new FileReader();
-    myFileItemReader.addEventListener(
-      'load',
-      () => {
-        const myResult = myFileItemReader.result;
-        setImageSrc(myResult);
-        setImageSrcExt(extractImageFileExtensionFromBase64(myResult));
-      },
-      false
-    );
-
-    myFileItemReader.readAsDataURL(file);
-  };
-
-  const handleClose = () => {
-    setImageSrc(null);
+  const handleClose = (e) => {
+    e.preventDefault();
+    setImage(null);
   };
 
   return (
     <>
-      <form>
-        <div className="user__imageEdit">
-          <label htmlFor="avatar" className="d-none">
-            <FontAwesomeIcon icon={faCamera} className="mr-2" size={'sm'} />
-            Edit
-          </label>
-          <input
-            type="file"
-            name="avatar"
-            id="avatar"
-            onChange={handleFileSelect}
-            accept="image/x-png,image/jpeg,image/jpg, image/png"
-          />
-        </div>
-
-        {imageSrc ? (
-          <div className="cropContainer">
-            <canvas ref={imageCanvasRef} className="d-none"></canvas>
-            <div className="imageCropContainer">
-              <Cropper
-                image={imageSrc}
-                crop={crop}
-                zoom={zoom}
-                aspect={1 / 1}
-                onCropChange={setCrop}
-                onCropComplete={onCropComplete}
-                onZoomChange={setZoom}
-              />
-            </div>
-            <div className="crop__controls">
-              <input
-                type="range"
-                name="zoom"
-                min={1}
-                max={3}
-                step={0.1}
-                value={zoom}
-                onChange={(e) => setZoom(e.target.value)}
-              />
-              <div className="crop__controlsButtons">
-                <button className="btn btn-warning mr-2" onClick={handleUpload}>
-                  Upload
-                </button>
-                <button
-                  className="btn btn-secondary ml-2"
-                  onClick={handleClose}
-                >
-                  Close
-                </button>
+      {image ? (
+        <div className="crop">
+          <form>
+            <div className="cropContainer">
+              <canvas ref={imageCanvasRef} className="d-none"></canvas>
+              <div className="imageCropContainer">
+                <Cropper
+                  image={imageSrc}
+                  crop={crop}
+                  zoom={zoom}
+                  aspect={1 / 1}
+                  onCropChange={setCrop}
+                  onCropComplete={onCropComplete}
+                  onZoomChange={setZoom}
+                />
+              </div>
+              <div className="crop__controls">
+                <input
+                  type="range"
+                  name="zoom"
+                  min={1}
+                  max={3}
+                  step={0.1}
+                  value={zoom}
+                  onChange={(e) => setZoom(e.target.value)}
+                />
+                <div className="crop__controlsButtons">
+                  <button
+                    className="btn btn-warning mr-2"
+                    onClick={handleUpload}
+                  >
+                    Upload
+                  </button>
+                  <button
+                    className="btn btn-secondary ml-2"
+                    onClick={handleClose}
+                  >
+                    Close
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
-        ) : null}
-      </form>
+          </form>
+        </div>
+      ) : null}
     </>
   );
 };

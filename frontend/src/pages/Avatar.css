@@ -1,32 +1,41 @@
-/* .cropContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.crop {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  overflow-y: hidden;
+}
+.cropContainer {
   position: absolute;
+  top: 50%;
   left: 50%;
-  transform: translateX(-50%);
-  width: 100%;
+  transform: translate(-50%, -50%);
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  max-width: 500px;
+  width: 100%;
 }
 
 .imageCropContainer {
-  position: absolute;
+  position: relative;
   width: 100%;
   height: 400px;
   background-color: white;
-} */
+}
 
 .crop__controls {
   background-color: white;
   max-width: 500px;
   display: flex;
   flex-direction: column;
-  padding: 0px 20px;
-  margin: 20px 0;
+  padding: 20px 20px;
+  margin: 0px 0;
   align-items: center;
   justify-content: center;
   width: 100%;
-  left: 50%;
+  /* left: 50%; */
   z-index: 99999;
 }
 
@@ -39,7 +48,7 @@
   width: 100px;
 }
 
-.cropContainer {
+/* .cropContainer {
   width: 100vw;
   height: 400px;
   position: absolute;
@@ -57,4 +66,4 @@
   width: 100%;
   height: 400px;
   background-color: white;
-}
+} */
