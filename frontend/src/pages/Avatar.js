@@ -7,6 +7,8 @@ import {
   base64StringtoFile,
   extractImageFileExtensionFromBase64,
 } from '../util';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCamera } from '@fortawesome/free-solid-svg-icons';
 
 const Avatar = () => {
   const [imageSrc, setImageSrc] = useState(null);
@@ -72,7 +74,19 @@ const Avatar = () => {
   return (
     <>
       <form>
-        <input type="file" name="avatar" onChange={handleFileSelect} />
+        <div className="user__imageEdit">
+          <label htmlFor="avatar" className="d-none">
+            <FontAwesomeIcon icon={faCamera} className="mr-2" size={'sm'} />
+            Edit
+          </label>
+          <input
+            type="file"
+            name="avatar"
+            id="avatar"
+            onChange={handleFileSelect}
+            accept="image/x-png,image/jpeg,image/jpg, image/png"
+          />
+        </div>
 
         {imageSrc ? (
           <div className="cropContainer">

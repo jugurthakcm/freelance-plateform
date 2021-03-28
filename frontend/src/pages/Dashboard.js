@@ -27,6 +27,8 @@ import Footer from '../components/Footer';
 import { Link } from 'react-router-dom';
 import { getMyGigs } from '../data/actions/gigActions';
 import axios from '../axios';
+import Avatar from './Avatar';
+import api from '../api';
 
 const Dashboard = () => {
   const history = useHistory();
@@ -51,10 +53,6 @@ const Dashboard = () => {
     document.querySelector('.user__imageEdit label').classList.remove('d-flex');
   };
 
-  const handleChangeImage = (e) => {
-    console.log(e.target.files[0]);
-  };
-
   return (
     <>
       <Navbar />
@@ -76,20 +74,23 @@ const Dashboard = () => {
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
           >
-            <img src={avatar} alt="avatar" width="100px" />
-            <div className="user__imageEdit">
-              <label htmlFor="avatar" className="d-none">
-                <FontAwesomeIcon icon={faCamera} className="mr-2" size={'sm'} />
-                Edit
-              </label>
-              <input
-                type="file"
-                name="avatar"
-                id="avatar"
-                accept="image/x-png,image/jpeg,image/jpg"
-                onChange={handleChangeImage}
+            {u && u.imageURI ? (
+              <img
+                src={api + '/uploads/avatars/' + u.imageURI}
+                alt="avatar"
+                width="100px"
+                className="user__imageAvatar"
               />
-            </div>
+            ) : (
+              <img
+                src={avatar}
+                alt="avatar"
+                width="100px"
+                className="user__imageAvatar"
+              />
+            )}
+
+            <Avatar />
           </div>
 
           <div className="user__info ml-5">
