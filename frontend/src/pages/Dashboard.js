@@ -337,7 +337,7 @@ const Dashboard = () => {
         </div>
 
         <div className="mt-5">
-          {gig && gig.myGigs && (
+          {gig && gig.myGigs && gig.myGigs.length ? (
             <StackGrid
               columnWidth={275}
               gutterWidth={30}
@@ -406,6 +406,8 @@ const Dashboard = () => {
                 </div>
               ))}
             </StackGrid>
+          ) : (
+            <div className="text-center">You don't have any gigs</div>
           )}
         </div>
       </div>

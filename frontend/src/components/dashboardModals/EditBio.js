@@ -16,18 +16,20 @@ const EditBio = () => {
     bio: Joi.string().trim().min(10).max(1500).required(),
   });
 
-  const { register, handleSubmit, errors, setValue } = useForm({
+  const { register, handleSubmit, errors, setValue, watch } = useForm({
     resolver: joiResolver(schema),
   });
-
-  useEffect(() => {
-    user.user && setValue('bio', user.user.bio);
-  }, [user, setValue]);
 
   const submitForm = (e) => {
     user.token && dispatch(updateBio(e.bio, user.token));
     setValue('bio', '');
   };
+
+  const watchBioLength = watch('bio') && watch('bio').length;
+
+  useEffect(() => {
+    user.user && setValue('bio', user.user.bio);
+  }, [user, setValue]);
 
   return (
     <div
@@ -75,6 +77,11 @@ const EditBio = () => {
                 ref={register}
                 className={` ${errors.bio ? 'inputError' : null}`}
               ></textarea>
+              <p className="d-flex justify-content-end mt-2">
+                <strong className="text-secondary">
+                  {watchBioLength && watchBioLength}/1500
+                </strong>
+              </p>
               {errors.bio && <p className="textError">{errors.bio?.message}</p>}
             </div>
 
