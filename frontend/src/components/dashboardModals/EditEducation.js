@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
-import { updateEducation } from '../../data/actions/userActions';
+import { loadUser, updateEducation } from '../../data/actions/userActions';
 
 const EditEducation = ({ data }) => {
   const dispatch = useDispatch();
@@ -27,6 +27,7 @@ const EditEducation = ({ data }) => {
 
   const submitForm = (e) => {
     dispatch(updateEducation(data.id, e, user.token));
+    user.token && dispatch(loadUser(user.token));
   };
 
   const e = user.error;

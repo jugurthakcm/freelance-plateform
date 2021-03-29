@@ -66,7 +66,6 @@ export const updateEducation = (
   { school, degree, yearStart, yearEnd, areaOfStudy },
   token
 ) => (dispatch) => {
-  dispatch({ type: loadingActionTypes.LOADING });
   axios
     .put(
       '/education',
@@ -79,12 +78,9 @@ export const updateEducation = (
     )
     .then((res) => {
       dispatch({ type: userActionTypes.UPDATE_SUCCESS, payload: res });
-      dispatch({ type: loadingActionTypes.NO_LOADING });
-      window.location.reload();
     })
     .catch((err) => {
       dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
-      dispatch({ type: loadingActionTypes.NO_LOADING });
     });
 };
 

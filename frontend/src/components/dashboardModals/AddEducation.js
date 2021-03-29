@@ -8,9 +8,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
-import { updateEducation } from '../../data/actions/userActions';
+import { loadUser, updateEducation } from '../../data/actions/userActions';
 
-const Education = () => {
+const AddEducation = () => {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user);
 
@@ -28,6 +28,7 @@ const Education = () => {
 
   const submitForm = (e) => {
     dispatch(updateEducation(uuidv4(), e, user.token));
+    user.token && dispatch(loadUser(user.token));
   };
 
   const e = user.error;
@@ -188,4 +189,4 @@ const Education = () => {
   );
 };
 
-export default Education;
+export default AddEducation;

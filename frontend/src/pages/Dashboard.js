@@ -16,7 +16,7 @@ import {
 import './Dashboard.css';
 import EditLanguage from '../components/dashboardModals/EditLanguage';
 import AddLanguage from '../components/dashboardModals/AddLanguage';
-import Education from '../components/dashboardModals/Education';
+import AddEducation from '../components/dashboardModals/AddEducation';
 import EditTitle from '../components/dashboardModals/EditTitle';
 import EditBio from '../components/dashboardModals/EditBio';
 import { deleteEducation } from '../data/actions/userActions';
@@ -191,7 +191,7 @@ const Dashboard = () => {
                 >
                   <FontAwesomeIcon icon={faPlus} className="ml-3" />
                 </button>
-                <Education />
+                <AddEducation />
               </div>
               {u && u.education.length ? (
                 u.education.sort(sortEducation).map((e) => (
