@@ -23,11 +23,12 @@ const EditBio = () => {
     resolver: joiResolver(schema),
   });
 
+  const modal = new bootstrapBundle.Modal(
+    document.getElementById('editBioModal')
+  );
+
   const submitForm = (e) => {
     user.token && dispatch(updateBio(e.bio, user.token));
-    const modal = new bootstrapBundle.Modal(
-      document.getElementById('editBioModal')
-    );
     hideModal(modal);
   };
 
@@ -60,13 +61,15 @@ const EditBio = () => {
             <button
               type="button"
               className="btn-close"
-              data-bs-dismiss="modal"
               aria-label="Close"
               style={{ backgroundColor: 'inherit', border: 'none' }}
             >
               <FontAwesomeIcon
                 icon={faTimes}
-                onClick={() => setValue('bio', user.bio)}
+                onClick={() => {
+                  setValue('bio', user.bio);
+                  hideModal(modal);
+                }}
               />
             </button>
           </div>
@@ -95,8 +98,10 @@ const EditBio = () => {
               <button
                 type="button"
                 className="btn btn-secondary"
-                data-bs-dismiss="modal"
-                onClick={() => setValue('bio', user.bio)}
+                onClick={() => {
+                  setValue('bio', user.bio);
+                  hideModal(modal);
+                }}
               >
                 Close
               </button>
