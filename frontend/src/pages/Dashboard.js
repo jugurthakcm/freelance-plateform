@@ -19,7 +19,7 @@ import AddLanguage from '../components/dashboardModals/AddLanguage';
 import AddEducation from '../components/dashboardModals/AddEducation';
 import EditTitle from '../components/dashboardModals/EditTitle';
 import EditBio from '../components/dashboardModals/EditBio';
-import { deleteEducation } from '../data/actions/userActions';
+import { deleteEducation, loadUser } from '../data/actions/userActions';
 import EditEducation from '../components/dashboardModals/EditEducation';
 import { sortEducation } from '../util';
 import EditSkills from '../components/dashboardModals/EditSkills';
@@ -210,9 +210,13 @@ const Dashboard = () => {
                           <FontAwesomeIcon
                             icon={faTrash}
                             className="ml-3 mr-5"
-                            onClick={() =>
-                              dispatch(deleteEducation(e.id, user.token))
-                            }
+                            onClick={async () => {
+                              user.token &&
+                                (await dispatch(
+                                  deleteEducation(e.id, user.token)
+                                ));
+                              dispatch(loadUser(user.token));
+                            }}
                           />
                         </button>
                       </div>

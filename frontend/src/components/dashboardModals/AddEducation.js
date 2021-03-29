@@ -22,16 +22,23 @@ const AddEducation = () => {
     areaOfStudy: Joi.string().required().min(3).max(50),
   });
 
-  const { register, handleSubmit, errors } = useForm({
+  const { register, handleSubmit, errors, setValue } = useForm({
     resolver: joiResolver(schema),
   });
 
   const submitForm = (e) => {
-    dispatch(updateEducation(uuidv4(), e, user.token));
-    user.token && dispatch(loadUser(user.token));
+    user.token && dispatch(updateEducation(uuidv4(), e, user.token));
   };
 
   const e = user.error;
+
+  const handleClose = () => {
+    setValue('school', null);
+    setValue('degree', null);
+    setValue('yearStart', 'From');
+    setValue('yearEnd', 'To');
+    setValue('areaOfStudy', null);
+  };
 
   return (
     <div
@@ -175,6 +182,7 @@ const AddEducation = () => {
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
+                onClick={handleClose}
               >
                 Close
               </button>

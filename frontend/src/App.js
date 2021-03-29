@@ -20,15 +20,16 @@ import EditGig from './pages/gigs/EditGig';
 
 function App() {
   const language = useLanguageContext()[0];
-  const token = localStorage.getItem('token');
   const dispatch = useDispatch();
 
   const user = useSelector((state) => state.user);
   const loading = useSelector((state) => state.loading);
 
   useEffect(() => {
-    user.token && dispatch(loadUser(token));
-  }, [user.token, dispatch, token]);
+    user.token && dispatch(loadUser(user.token));
+  }, [user.token, dispatch]);
+
+  useEffect(() => {}, [user]);
 
   // setTimeout(() => {
   //   document.querySelector('.app').classList.remove('app-anim');
