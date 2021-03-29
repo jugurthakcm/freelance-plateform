@@ -79,7 +79,7 @@ const EditBio = () => {
               ></textarea>
               <p className="d-flex justify-content-end mt-2">
                 <strong className="text-secondary">
-                  {watchBioLength && watchBioLength}/1500
+                  {watchBioLength ? watchBioLength : 0} / 1500
                 </strong>
               </p>
               {errors.bio && <p className="textError">{errors.bio?.message}</p>}
