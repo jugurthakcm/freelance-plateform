@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
 import './dashboardModal.css';
-import { updateBio } from '../../data/actions/userActions';
+import { loadUser, updateBio } from '../../data/actions/userActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
@@ -22,7 +22,7 @@ const EditBio = () => {
 
   const submitForm = (e) => {
     user.token && dispatch(updateBio(e.bio, user.token));
-    setValue('bio', '');
+    user.token && dispatch(loadUser(user.token));
   };
 
   const watchBioLength = watch('bio') && watch('bio').length;
@@ -90,7 +90,7 @@ const EditBio = () => {
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
-                onClick={() => setValue('bio', '')}
+                onClick={() => setValue('bio', user.user.bio)}
               >
                 Close
               </button>
