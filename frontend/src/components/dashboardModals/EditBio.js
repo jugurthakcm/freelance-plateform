@@ -7,8 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
-import bootstrap from 'bootstrap';
-// import $ from 'jquery';
+import 'bootstrap';
+import bootstrapBundle from 'bootstrap/dist/js/bootstrap.bundle';
+import { hideModal } from '../../util';
 
 const EditBio = () => {
   const user = useSelector((state) => state.user);
@@ -24,6 +25,10 @@ const EditBio = () => {
 
   const submitForm = (e) => {
     user.token && dispatch(updateBio(e.bio, user.token));
+    const modal = new bootstrapBundle.Modal(
+      document.getElementById('editBioModal')
+    );
+    hideModal(modal);
   };
 
   const watchBioLength = watch('bio') && watch('bio').length;
@@ -90,15 +95,12 @@ const EditBio = () => {
               <button
                 type="button"
                 className="btn btn-secondary"
+                data-bs-dismiss="modal"
                 onClick={() => setValue('bio', user.bio)}
               >
                 Close
               </button>
-              <button
-                type="submit"
-                className="btn btn-warning"
-                data-bs-dismiss="modal"
-              >
+              <button type="submit" className="btn btn-warning">
                 Save changes
               </button>
             </div>

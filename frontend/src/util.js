@@ -89,3 +89,11 @@ export function extractImageFileExtensionFromBase64(base64Data) {
     base64Data.indexOf(';base64')
   );
 }
+
+export const hideModal = (modal) => {
+  modal._isShown = true;
+  document.querySelector('.modal-backdrop').remove();
+  document.querySelector('body').classList.remove('modal-open');
+  document.querySelector('body').style.paddingRight = '';
+  modal.hide();
+};
