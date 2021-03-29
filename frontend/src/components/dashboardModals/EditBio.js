@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
+import bootstrap from 'bootstrap';
+// import $ from 'jquery';
 
 const EditBio = () => {
   const user = useSelector((state) => state.user);
@@ -27,7 +29,7 @@ const EditBio = () => {
   const watchBioLength = watch('bio') && watch('bio').length;
 
   useEffect(() => {
-    user.user && setValue('bio', user.user.bio);
+    user && setValue('bio', user.bio);
   }, [user, setValue]);
 
   return (
@@ -59,7 +61,7 @@ const EditBio = () => {
             >
               <FontAwesomeIcon
                 icon={faTimes}
-                onClick={() => setValue('bio', '')}
+                onClick={() => setValue('bio', user.bio)}
               />
             </button>
           </div>
@@ -88,12 +90,15 @@ const EditBio = () => {
               <button
                 type="button"
                 className="btn btn-secondary"
-                data-bs-dismiss="modal"
-                onClick={() => setValue('bio', user.user.bio)}
+                onClick={() => setValue('bio', user.bio)}
               >
                 Close
               </button>
-              <button type="submit" className="btn btn-warning">
+              <button
+                type="submit"
+                className="btn btn-warning"
+                data-bs-dismiss="modal"
+              >
                 Save changes
               </button>
             </div>

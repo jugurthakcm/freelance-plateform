@@ -6,6 +6,7 @@ const initialState = {
   success: null,
   error: null,
   status: null,
+  bio: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -48,6 +49,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload.data.user[0],
+        bio: action.payload.data.user[0].bio,
       };
 
     case userActionTypes.ERROR_LOAD_USER:
@@ -75,6 +77,12 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         error: action.payload.response.data.error,
+      };
+
+    case userActionTypes.UPDATE_BIO:
+      return {
+        ...state,
+        bio: action.payload.data.data.bio,
       };
 
     default:

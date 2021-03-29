@@ -161,9 +161,9 @@ exports.loadUser = async (req, res) => {
  * @params {bio}
  */
 exports.updateBio = async (req, res) => {
-  User.findByIdAndUpdate(req.userId, { bio: req.body.bio })
-    .then(() => res.status(200).send('Bio updated successfully'))
-    .catch(() => res.status(400).send('Failed to update the bio'));
+  User.findByIdAndUpdate(req.userId, { bio: req.body.bio }, { new: true })
+    .then((data) => res.status(200).json({ data }))
+    .catch((error) => res.status(500).json({ error }));
 };
 
 /**

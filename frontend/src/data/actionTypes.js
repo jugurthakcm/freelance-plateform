@@ -9,6 +9,7 @@ export const userActionTypes = {
   ERROR_LOAD_USER: 'ERROR_LOAD_USER',
   UPDATE_SUCCESS: 'UPDATE_SUCCESS',
   UPDATE_ERROR: 'UPDATE_ERROR',
+  UPDATE_BIO: 'UPDATE_BIO',
 };
 
 export const loadingActionTypes = {

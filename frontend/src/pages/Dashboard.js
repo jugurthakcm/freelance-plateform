@@ -276,8 +276,8 @@ const Dashboard = () => {
                   </button>
                   <EditBio />
                 </div>
-                {u && u.bio ? (
-                  <p>{u.bio}</p>
+                {user.bio ? (
+                  <p>{user.bio}</p>
                 ) : (
                   <div className="dashboard__completeProfile">
                     <FontAwesomeIcon
