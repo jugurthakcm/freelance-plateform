@@ -21,13 +21,12 @@ const EditEducation = ({ data }) => {
     areaOfStudy: Joi.string().required().min(3).max(50),
   });
 
-  const { register, handleSubmit, errors, setValue } = useForm({
+  const { register, handleSubmit, errors } = useForm({
     resolver: joiResolver(schema),
   });
 
-  const submitForm = async (e) => {
-    user.token && (await dispatch(updateEducation(data.id, e, user.token)));
-    dispatch(loadUser(user.token));
+  const submitForm = (e) => {
+    user.token && dispatch(updateEducation(data.id, e, user.token));
   };
 
   const e = user.error;

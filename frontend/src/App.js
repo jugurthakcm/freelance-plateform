@@ -29,8 +29,6 @@ function App() {
     user.token && dispatch(loadUser(user.token));
   }, [user.token, dispatch]);
 
-  useEffect(() => {}, [user]);
-
   // setTimeout(() => {
   //   document.querySelector('.app').classList.remove('app-anim');
   //   document.querySelector('.intro').classList.add('d-none');

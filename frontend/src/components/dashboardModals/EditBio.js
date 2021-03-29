@@ -22,7 +22,6 @@ const EditBio = () => {
 
   const submitForm = (e) => {
     user.token && dispatch(updateBio(e.bio, user.token));
-    user.token && dispatch(loadUser(user.token));
   };
 
   const watchBioLength = watch('bio') && watch('bio').length;

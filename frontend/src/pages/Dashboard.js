@@ -210,13 +210,9 @@ const Dashboard = () => {
                           <FontAwesomeIcon
                             icon={faTrash}
                             className="ml-3 mr-5"
-                            onClick={async () => {
-                              user.token &&
-                                (await dispatch(
-                                  deleteEducation(e.id, user.token)
-                                ));
-                              dispatch(loadUser(user.token));
-                            }}
+                            onClick={() =>
+                              dispatch(deleteEducation(e.id, user.token))
+                            }
                           />
                         </button>
                       </div>
