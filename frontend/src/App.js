@@ -27,8 +27,8 @@ function App() {
   const loading = useSelector((state) => state.loading);
 
   useEffect(() => {
-    token && dispatch(loadUser(token));
-  }, [token, dispatch]);
+    user.token && dispatch(loadUser(token));
+  }, [user.token, dispatch, token]);
 
   // setTimeout(() => {
   //   document.querySelector('.app').classList.remove('app-anim');
