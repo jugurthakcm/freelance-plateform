@@ -231,6 +231,19 @@
   cursor: pointer;
 }
 
+.navbar__user .dropdown-item {
+  padding: 0 !important;
+}
+
+.navbar__user .dropdown-item:nth-child(3) {
+  padding: 0.25rem 1rem !important;
+}
+
+.navbar__user .dropdown-item a {
+  display: block;
+  padding: 0.25rem 1rem;
+}
+
 .navbar__user .dropdown-item:active {
   background-color: var(--yellow);
 }

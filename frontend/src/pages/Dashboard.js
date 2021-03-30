@@ -324,16 +324,16 @@ const Dashboard = () => {
       <div className="dashboard dashboard__gigs container">
         <div className="dashboard__gigsHeader">
           <h2>My Gigs</h2>
-          <button className="btn btn-success d-flex align-items-center">
-            <Link to="/gig/add">
+          <Link to="/gig/add">
+            <button className="btn btn-success d-flex align-items-center">
               <FontAwesomeIcon
                 icon={faPlus}
                 className="me-2 icon-white"
                 size={'xs'}
               />
               <span style={{ color: 'white' }}>Add gig</span>
-            </Link>
-          </button>
+            </button>
+          </Link>
         </div>
 
         <div className="mt-5">
@@ -364,16 +364,16 @@ const Dashboard = () => {
                         </span>
                       </div>
                       <div className="gig__buttons">
-                        <button className="btn btn-warning me-2 d-flex align-items-center">
-                          <Link to={`/gig/edit/${gig._id}`}>
+                        <Link to={`/gig/edit/${gig._id}`}>
+                          <button className="btn btn-warning me-2 d-flex align-items-center">
                             <FontAwesomeIcon
                               icon={faPen}
                               className="me-2"
                               size={'xs'}
                             />
                             <span>Edit</span>
-                          </Link>
-                        </button>
+                          </button>
+                        </Link>
                         <button
                           className="btn btn-danger ms-2 d-flex align-items-center"
                           onClick={() =>
