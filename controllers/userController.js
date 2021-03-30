@@ -313,12 +313,14 @@ exports.updateEducation = async (req, res) => {
 
     newEducation.push({ id, school, degree, yearStart, yearEnd, areaOfStudy });
 
-    user
-      .updateOne({ education: newEducation })
-      .then(() =>
-        res.status(200).json({ message: 'Education updated successfully' })
-      )
-      .catch((err) => res.status(500).json({ error: err }));
+    User.findByIdAndUpdate(
+      req.userId,
+      { education: newEducation },
+      { new: true }
+    )
+      .select('-password')
+      .then((user) => res.status(200).json({ user }))
+      .catch((error) => res.status(500).json({ error }));
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -337,12 +339,14 @@ exports.deleteEducation = async (req, res) => {
 
     const newEducation = user.education.filter((e) => e.id !== id);
 
-    user
-      .updateOne({ education: newEducation })
-      .then(() =>
-        res.status(200).json({ message: 'Education deleted successfully' })
-      )
-      .catch((err) => res.status(500).json({ error: err }));
+    User.findByIdAndUpdate(
+      req.userId,
+      { education: newEducation },
+      { new: true }
+    )
+      .select('-password')
+      .then((user) => res.status(200).json({ user }))
+      .catch((error) => res.status(500).json({ error }));
   } catch (error) {
     res.status(400).json({ error });
   }

@@ -202,7 +202,7 @@ const Dashboard = () => {
                         <button
                           type="button"
                           data-bs-toggle="modal"
-                          data-bs-target="#EditEducationModal"
+                          data-bs-target={'#EditEducationModal' + e.id}
                         >
                           <FontAwesomeIcon icon={faPen} />
                         </button>

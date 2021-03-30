@@ -1,13 +1,14 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { generateYears } from '../../util';
+import { generateYears, hideModal } from '../../util';
 import './dashboardModal.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
 import { loadUser, updateEducation } from '../../data/actions/userActions';
+import bootstrapBundle from 'bootstrap/dist/js/bootstrap.bundle';
 
 const EditEducation = ({ data }) => {
   const dispatch = useDispatch();
@@ -27,6 +28,11 @@ const EditEducation = ({ data }) => {
 
   const submitForm = (e) => {
     user.token && dispatch(updateEducation(data.id, e, user.token));
+    const modal = new bootstrapBundle.Modal(
+      document.getElementById('EditEducationModal')
+    );
+
+    hideModal(modal);
   };
 
   const e = user.error;
@@ -34,7 +40,7 @@ const EditEducation = ({ data }) => {
   return (
     <div
       className="modal fade"
-      id="EditEducationModal"
+      id={'EditEducationModal' + data.id}
       data-bs-backdrop="static"
       data-bs-keyboard="false"
       tabIndex="-1"

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { generateYears } from '../../util';
+import { generateYears, hideModal } from '../../util';
 import './dashboardModal.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
@@ -9,6 +9,7 @@ import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
 import { loadUser, updateEducation } from '../../data/actions/userActions';
+import bootstrapBundle from 'bootstrap/dist/js/bootstrap.bundle';
 
 const AddEducation = () => {
   const dispatch = useDispatch();
@@ -28,6 +29,16 @@ const AddEducation = () => {
 
   const submitForm = (e) => {
     user.token && dispatch(updateEducation(uuidv4(), e, user.token));
+    const modal = new bootstrapBundle.Modal(
+      document.getElementById('EducationModal')
+    );
+
+    hideModal(modal);
+    setValue('school', null);
+    setValue('degree', null);
+    setValue('yearStart', 'From');
+    setValue('yearEnd', 'To');
+    setValue('areaOfStudy', null);
   };
 
   const e = user.error;
