@@ -162,7 +162,7 @@ exports.loadUser = async (req, res) => {
  */
 exports.updateBio = async (req, res) => {
   User.findByIdAndUpdate(req.userId, { bio: req.body.bio }, { new: true })
-    .then((data) => res.status(200).json({ data }))
+    .then((user) => res.status(200).json({ user }))
     .catch((error) => res.status(500).json({ error }));
 };
 

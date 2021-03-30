@@ -9,9 +9,11 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
 import { hideModal } from '../../util';
 import bootstrapBundle from 'bootstrap/dist/js/bootstrap.bundle';
+import { model } from 'mongoose';
 
 const EditBio = () => {
   const user = useSelector((state) => state.user);
+  const u = user.user;
   const dispatch = useDispatch();
 
   const schema = Joi.object({
@@ -22,20 +24,20 @@ const EditBio = () => {
     resolver: joiResolver(schema),
   });
 
-  const modal = new bootstrapBundle.Modal(
-    document.getElementById('editBioModal')
-  );
-
   const submitForm = (e) => {
     user.token && dispatch(updateBio(e.bio, user.token));
-    modal.hide();
+    const modal = new bootstrapBundle.Modal(
+      document.getElementById('editBioModal')
+    );
+
+    hideModal(modal);
   };
 
   const watchBioLength = watch('bio') && watch('bio').length;
 
   useEffect(() => {
-    user && setValue('bio', user.bio);
-  }, [user, setValue]);
+    u && setValue('bio', u.bio);
+  }, [u, setValue]);
 
   return (
     <div
@@ -64,7 +66,7 @@ const EditBio = () => {
               data-bs-dismiss="modal"
               style={{ backgroundColor: 'inherit', border: 'none' }}
               onClick={() => {
-                setValue('bio', user.bio);
+                u && setValue('bio', u.bio);
               }}
             ></button>
           </div>
@@ -81,12 +83,15 @@ const EditBio = () => {
                 ref={register}
                 className={` ${errors.bio ? 'inputError' : null}`}
               ></textarea>
-              <p className="d-flex justify-content-end mt-2">
-                <strong className="text-secondary">
-                  {watchBioLength ? watchBioLength : 0} / 1500
-                </strong>
-              </p>
-              {errors.bio && <p className="textError">{errors.bio?.message}</p>}
+              <div className="d-flex justify-content-between mt-2">
+                <p className="textError">{errors.bio && errors.bio?.message}</p>
+
+                <p>
+                  <strong className="text-secondary">
+                    {watchBioLength ? watchBioLength : 0} / 1500
+                  </strong>
+                </p>
+              </div>
             </div>
 
             <div className="modal-footer">
@@ -95,7 +100,7 @@ const EditBio = () => {
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
                 onClick={() => {
-                  setValue('bio', user.bio);
+                  u && setValue('bio', u.bio);
                 }}
               >
                 Close

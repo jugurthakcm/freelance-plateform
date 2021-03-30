@@ -6,7 +6,6 @@ const initialState = {
   success: null,
   error: null,
   status: null,
-  bio: null,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -49,7 +48,6 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload.data.user[0],
-        bio: action.payload.data.user[0].bio,
       };
 
     case userActionTypes.ERROR_LOAD_USER:
@@ -70,7 +68,7 @@ const userReducer = (state = initialState, action) => {
     case userActionTypes.UPDATE_SUCCESS:
       return {
         ...state,
-        success: action.payload.data.message,
+        user: action.payload.data.user,
       };
 
     case userActionTypes.UPDATE_ERROR:

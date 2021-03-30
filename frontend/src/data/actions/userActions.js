@@ -177,7 +177,7 @@ export const updateBio = (bio, token) => (dispatch) =>
       }
     )
     .then((res) => {
-      dispatch({ type: userActionTypes.UPDATE_BIO, payload: res });
+      dispatch({ type: userActionTypes.UPDATE_SUCCESS, payload: res });
     })
     .catch((err) => {
       dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });

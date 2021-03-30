@@ -113,7 +113,7 @@ const Dashboard = () => {
             )}
 
             <div className="user__imageEdit">
-              <label htmsFor="avatar" className="d-none">
+              <label htmlFor="avatar" className="d-none">
                 <FontAwesomeIcon icon={faCamera} className="me-2" size={'sm'} />
                 Edit
               </label>
@@ -276,8 +276,8 @@ const Dashboard = () => {
                   </button>
                   <EditBio />
                 </div>
-                {user.bio ? (
-                  <p>{user.bio}</p>
+                {u && u.bio ? (
+                  <p>{u.bio}</p>
                 ) : (
                   <div className="dashboard__completeProfile">
                     <FontAwesomeIcon

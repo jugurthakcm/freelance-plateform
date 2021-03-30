@@ -91,6 +91,7 @@ export function extractImageFileExtensionFromBase64(base64Data) {
 }
 
 export const hideModal = (modal) => {
+  modal._isShown = true;
   document.querySelector('.modal-backdrop').remove();
   document.querySelector('body').classList.remove('modal-open');
   document.querySelector('body').style.paddingRight = '';
