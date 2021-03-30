@@ -7,9 +7,12 @@ import { updateTitle } from '../../data/actions/userActions';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
+import bootstrapBundle from 'bootstrap/dist/js/bootstrap.bundle';
+import { hideModal } from '../../util';
 
 const EditTitle = () => {
   const user = useSelector((state) => state.user);
+  const u = user.user;
   const dispatch = useDispatch();
 
   const schema = Joi.object({
@@ -21,11 +24,16 @@ const EditTitle = () => {
   });
 
   useEffect(() => {
-    user.user && setValue('title', user.user.title);
-  }, [user, setValue]);
+    u && setValue('title', u.title);
+  }, [u, setValue]);
 
   const submitForm = (e) => {
     user.token && dispatch(updateTitle(e.title, user.token));
+    const modal = new bootstrapBundle.Modal(
+      document.getElementById('editTitleModal')
+    );
+
+    hideModal(modal);
     setValue('title', '');
   };
 
@@ -54,7 +62,7 @@ const EditTitle = () => {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-              onClick={() => setValue('title', '')}
+              onClick={() => setValue('title', u.title)}
             ></button>
           </div>
 
@@ -80,7 +88,7 @@ const EditTitle = () => {
                 type="button"
                 className="btn btn-secondary"
                 data-bs-dismiss="modal"
-                onClick={() => setValue('title', '')}
+                onClick={() => setValue('title', u.title)}
               >
                 Close
               </button>

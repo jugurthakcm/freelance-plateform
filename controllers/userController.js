@@ -405,9 +405,9 @@ exports.updateLanguage = async (req, res) => {
 };
 
 exports.updateTitle = (req, res) => {
-  User.findByIdAndUpdate(req.userId, { title: req.body.title })
-    .then(() => res.status(200).json({ message: 'Title updated successfully' }))
-    .catch((err) => res.status(500).json({ error: err }));
+  User.findByIdAndUpdate(req.userId, { title: req.body.title }, { new: true })
+    .then((user) => res.status(200).json({ user }))
+    .catch((error) => res.status(500).json({ error }));
 };
 
 exports.editAvatar = (req, res) => {
