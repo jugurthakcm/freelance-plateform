@@ -82,7 +82,7 @@ const EditLanguage = () => {
                     <button>
                       <FontAwesomeIcon
                         icon={faTrash}
-                        className="ml-3"
+                        className="ms-3"
                         onClick={() => deleteLanguage(lang.id)}
                       />
                     </button>

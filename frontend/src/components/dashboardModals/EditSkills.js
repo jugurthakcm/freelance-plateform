@@ -8,6 +8,8 @@ import { updateSkills } from '../../data/actions/userActions';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
+import { hideModal } from '../../util';
+import bootstrapBundle from 'bootstrap/dist/js/bootstrap.bundle';
 
 const EditSkills = () => {
   const user = useSelector((state) => state.user);
@@ -36,6 +38,11 @@ const EditSkills = () => {
 
   const handleClickSave = () => {
     user.token && dispatch(updateSkills(skills, user.token));
+    const modal = new bootstrapBundle.Modal(
+      document.getElementById('editSkillsModal')
+    );
+
+    hideModal(modal);
   };
 
   const deleteSkill = (id) => {

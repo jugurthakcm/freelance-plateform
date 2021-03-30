@@ -9,7 +9,6 @@ import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
 import { hideModal } from '../../util';
 import bootstrapBundle from 'bootstrap/dist/js/bootstrap.bundle';
-import { model } from 'mongoose';
 
 const EditBio = () => {
   const user = useSelector((state) => state.user);

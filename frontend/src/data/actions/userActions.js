@@ -196,7 +196,6 @@ export const updateSkills = (skills, token) => (dispatch) =>
     )
     .then((res) => {
       dispatch({ type: userActionTypes.UPDATE_SUCCESS, payload: res });
-      window.location.reload();
     })
     .catch((err) => {
       dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
