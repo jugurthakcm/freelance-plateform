@@ -54,12 +54,8 @@ const EditTitle = () => {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-            >
-              <FontAwesomeIcon
-                icon={faTimes}
-                onClick={() => setValue('title', '')}
-              />
-            </button>
+              onClick={() => setValue('title', '')}
+            ></button>
           </div>
 
           <form className="modal__field" onSubmit={handleSubmit(submitForm)}>

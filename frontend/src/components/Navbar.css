@@ -224,7 +224,7 @@
 }
 
 .navbar__user .dropdown-menu {
-  left: -100px;
+  left: -110px !important;
 }
 
 .navbar__user .dropdown-menu li {

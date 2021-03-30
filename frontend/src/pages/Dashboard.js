@@ -60,18 +60,18 @@ const Dashboard = () => {
 
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
-    const myFileItemReader = new FileReader();
-    myFileItemReader.addEventListener(
+    const myFileItemeeader = new FileReader();
+    myFileItemeeader.addEventListener(
       'load',
       () => {
-        const myResult = myFileItemReader.result;
+        const myResult = myFileItemeeader.result;
         setImageSrc(myResult);
         setImageSrcExt(extractImageFileExtensionFromBase64(myResult));
       },
       false
     );
 
-    myFileItemReader.readAsDataURL(file);
+    myFileItemeeader.readAsDataURL(file);
   };
 
   return (
@@ -113,8 +113,8 @@ const Dashboard = () => {
             )}
 
             <div className="user__imageEdit">
-              <label htmlFor="avatar" className="d-none">
-                <FontAwesomeIcon icon={faCamera} className="mr-2" size={'sm'} />
+              <label htmsFor="avatar" className="d-none">
+                <FontAwesomeIcon icon={faCamera} className="me-2" size={'sm'} />
                 Edit
               </label>
               <input
@@ -127,10 +127,10 @@ const Dashboard = () => {
             </div>
           </div>
 
-          <div className="user__info ml-5">
+          <div className="user__info ms-5">
             <h4>{u && u.firstName + ' ' + u.lastName}</h4>
             <p>
-              <FontAwesomeIcon icon={faMapMarkerAlt} className="mr-1" />
+              <FontAwesomeIcon icon={faMapMarkerAlt} className="me-1" />
               {u && u.location ? u.location : 'No location added'}
             </p>
           </div>
@@ -146,7 +146,7 @@ const Dashboard = () => {
                   data-bs-toggle="modal"
                   data-bs-target="#addLanguagesModal"
                 >
-                  <FontAwesomeIcon icon={faPlus} className="ml-3" />
+                  <FontAwesomeIcon icon={faPlus} className="ms-3" />
                 </button>
                 {u && u.languages.length ? (
                   <button
@@ -154,7 +154,7 @@ const Dashboard = () => {
                     data-bs-toggle="modal"
                     data-bs-target="#languagesModal"
                   >
-                    <FontAwesomeIcon icon={faPen} className="ml-3" />
+                    <FontAwesomeIcon icon={faPen} className="ms-3" />
                   </button>
                 ) : null}
 
@@ -173,7 +173,7 @@ const Dashboard = () => {
                   <div className="dashboard__completeProfile">
                     <FontAwesomeIcon
                       icon={faExclamationCircle}
-                      className="mr-2"
+                      className="me-2"
                     />
                     Add your languages to complete your profile
                   </div>
@@ -189,7 +189,7 @@ const Dashboard = () => {
                   data-bs-toggle="modal"
                   data-bs-target="#EducationModal"
                 >
-                  <FontAwesomeIcon icon={faPlus} className="ml-3" />
+                  <FontAwesomeIcon icon={faPlus} className="ms-3" />
                 </button>
                 <AddEducation />
               </div>
@@ -209,7 +209,7 @@ const Dashboard = () => {
                         <button>
                           <FontAwesomeIcon
                             icon={faTrash}
-                            className="ml-3 mr-5"
+                            className="ms-3 me-5"
                             onClick={() =>
                               dispatch(deleteEducation(e.id, user.token))
                             }
@@ -233,7 +233,7 @@ const Dashboard = () => {
                 <div className="dashboard__completeProfile">
                   <FontAwesomeIcon
                     icon={faExclamationCircle}
-                    className="mr-2"
+                    className="me-2"
                   />
                   Add your education to complete your profile
                 </div>
@@ -251,7 +251,7 @@ const Dashboard = () => {
                     data-bs-toggle="modal"
                     data-bs-target="#editTitleModal"
                   >
-                    <FontAwesomeIcon icon={faPen} className="ml-3 mt-2" />
+                    <FontAwesomeIcon icon={faPen} className="ms-3 mt-2" />
                   </button>
                   <EditTitle />
                 </div>
@@ -259,7 +259,7 @@ const Dashboard = () => {
                 {/* <div className="dashboard__title presentation__hourlyRate">
                   <h5>200 DA/hr</h5>
                   <button>
-                    <FontAwesomeIcon icon={faPen} className="ml-3" />
+                    <FontAwesomeIcon icon={faPen} className="ms-3" />
                   </button>
                 </div> */}
               </div>
@@ -272,7 +272,7 @@ const Dashboard = () => {
                     data-bs-toggle="modal"
                     data-bs-target="#editBioModal"
                   >
-                    <FontAwesomeIcon icon={faPen} className="ml-3" />
+                    <FontAwesomeIcon icon={faPen} className="ms-3" />
                   </button>
                   <EditBio />
                 </div>
@@ -282,7 +282,7 @@ const Dashboard = () => {
                   <div className="dashboard__completeProfile">
                     <FontAwesomeIcon
                       icon={faExclamationCircle}
-                      className="mr-2"
+                      className="me-2"
                     />
                     Add your description to complete your profile
                   </div>
@@ -298,7 +298,7 @@ const Dashboard = () => {
                   data-bs-toggle="modal"
                   data-bs-target="#editSkillsModal"
                 >
-                  <FontAwesomeIcon icon={faPen} className="ml-3" />
+                  <FontAwesomeIcon icon={faPen} className="ms-3" />
                 </button>
                 <EditSkills />
               </div>
@@ -309,7 +309,7 @@ const Dashboard = () => {
                   <div className="dashboard__completeProfile">
                     <FontAwesomeIcon
                       icon={faExclamationCircle}
-                      className="mr-2"
+                      className="me-2"
                     />
                     Add your skills to complete your profile
                   </div>
@@ -328,7 +328,7 @@ const Dashboard = () => {
             <Link to="/gig/add">
               <FontAwesomeIcon
                 icon={faPlus}
-                className="mr-2 icon-white"
+                className="me-2 icon-white"
                 size={'xs'}
               />
               <span style={{ color: 'white' }}>Add gig</span>
@@ -364,25 +364,25 @@ const Dashboard = () => {
                         </span>
                       </div>
                       <div className="gig__buttons">
-                        <button className="btn btn-warning mr-2 d-flex align-items-center">
+                        <button className="btn btn-warning me-2 d-flex align-items-center">
                           <Link to={`/gig/edit/${gig._id}`}>
                             <FontAwesomeIcon
                               icon={faPen}
-                              className="mr-2"
+                              className="me-2"
                               size={'xs'}
                             />
                             <span>Edit</span>
                           </Link>
                         </button>
                         <button
-                          className="btn btn-danger ml-2 d-flex align-items-center"
+                          className="btn btn-danger ms-2 d-flex align-items-center"
                           onClick={() =>
                             dispatch(deleteGig(gig._id, user.token))
                           }
                         >
                           <FontAwesomeIcon
                             icon={faTrash}
-                            className="mr-2 icon-white"
+                            className="me-2 icon-white"
                             size={'xs'}
                           />
                           <span style={{ color: 'white' }}>Delete</span>

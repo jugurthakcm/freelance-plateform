@@ -8,11 +8,6 @@ import Footer from '../components/Footer';
 import { useLanguageContext } from '../ContextAPI/LanguageProvider';
 
 const Home = () => {
-  const language = useLanguageContext()[0];
-  const rightText = language === 'arabic' ? 'right' : 'left';
-  const leftAfter = language !== 'arabic' ? '20px' : 'unset';
-  const rightAfter = language === 'arabic' ? '20px' : 'unset';
-
   return (
     <>
       <Navbar />
@@ -20,15 +15,11 @@ const Home = () => {
         <Main />
         <div className="home__description row justify-content-around">
           <div className="description__text col-lg-7 ">
-            <h1
-              style={{
-                textAlign: rightText,
-              }}
-            >
+            <h1>
               <FormattedMessage id="description.descriptionTitle" />
-              <div style={{ right: rightAfter, left: leftAfter }}></div>
+              <div></div>
             </h1>
-            <p className="mt-4" style={{ textAlign: rightText }}>
+            <p className="mt-4">
               <FormattedMessage id="description.descriptionText" />
             </p>
           </div>

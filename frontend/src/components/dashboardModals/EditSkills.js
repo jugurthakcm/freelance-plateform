@@ -67,9 +67,7 @@ const EditSkills = () => {
               className="btn-close"
               data-bs-dismiss="modal"
               aria-label="Close"
-            >
-              <FontAwesomeIcon icon={faTimes} />
-            </button>
+            ></button>
           </div>
 
           <div className="modal-body">
@@ -83,7 +81,7 @@ const EditSkills = () => {
                     <FontAwesomeIcon
                       icon={faTimes}
                       size={'xs'}
-                      className="ml-2"
+                      className="ms-2"
                       onClick={() => deleteSkill(skill.id)}
                     />
                   </li>

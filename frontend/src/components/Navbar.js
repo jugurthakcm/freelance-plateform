@@ -74,7 +74,7 @@ const Navbar = ({ navStore }) => {
   const dispatch = useDispatch();
 
   return (
-    <nav className="navbar" style={{ boxShadow: boxShadow }}>
+    <nav className="navbar container-fluid" style={{ boxShadow: boxShadow }}>
       <div className="navbar__up">
         <div className="navbar__left">
           <div className="navbar__title">
@@ -146,14 +146,14 @@ const Navbar = ({ navStore }) => {
           </form> */}
           {user.user ? (
             <div className="navbar__user">
-              <FontAwesomeIcon icon={faBell} size="lg" className="mr-3" />
-              <FontAwesomeIcon icon={faCommentAlt} size="lg" className="mr-3" />
+              <FontAwesomeIcon icon={faBell} size="lg" className="me-3" />
+              <FontAwesomeIcon icon={faCommentAlt} size="lg" className="me-3" />
               <div className="dropdown">
                 <div
                   className="dropdown-toggle"
                   id="dropdownMenuButton"
                   data-toggle="dropdown"
-                  aria-haspopup="true"
+                  data-bs-toggle="dropdown"
                   aria-expanded="false"
                   // style={{ backgroundImage: `url(${languageImage})` }}
                 >

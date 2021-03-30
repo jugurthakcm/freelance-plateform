@@ -7,9 +7,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
-import 'bootstrap';
-import bootstrapBundle from 'bootstrap/dist/js/bootstrap.bundle';
 import { hideModal } from '../../util';
+import bootstrapBundle from 'bootstrap/dist/js/bootstrap.bundle';
 
 const EditBio = () => {
   const user = useSelector((state) => state.user);
@@ -29,7 +28,7 @@ const EditBio = () => {
 
   const submitForm = (e) => {
     user.token && dispatch(updateBio(e.bio, user.token));
-    hideModal(modal);
+    modal.hide();
   };
 
   const watchBioLength = watch('bio') && watch('bio').length;
@@ -62,16 +61,12 @@ const EditBio = () => {
               type="button"
               className="btn-close"
               aria-label="Close"
+              data-bs-dismiss="modal"
               style={{ backgroundColor: 'inherit', border: 'none' }}
-            >
-              <FontAwesomeIcon
-                icon={faTimes}
-                onClick={() => {
-                  setValue('bio', user.bio);
-                  hideModal(modal);
-                }}
-              />
-            </button>
+              onClick={() => {
+                setValue('bio', user.bio);
+              }}
+            ></button>
           </div>
 
           <form className="modal__field" onSubmit={handleSubmit(submitForm)}>
@@ -98,9 +93,9 @@ const EditBio = () => {
               <button
                 type="button"
                 className="btn btn-secondary"
+                data-bs-dismiss="modal"
                 onClick={() => {
                   setValue('bio', user.bio);
-                  hideModal(modal);
                 }}
               >
                 Close

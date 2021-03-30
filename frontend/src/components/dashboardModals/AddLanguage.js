@@ -39,9 +39,7 @@ const AddLanguage = () => {
                 className="btn-close"
                 data-bs-dismiss="modal"
                 aria-label="Close"
-              >
-                <FontAwesomeIcon icon={faTimes} />
-              </button>
+              ></button>
             </div>
 
             <div className="modal-body">

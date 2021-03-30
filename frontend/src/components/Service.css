@@ -1,3 +1,7 @@
+.service__container {
+  position: relative;
+}
+
 .service__container:hover {
   text-decoration: none;
 }
@@ -74,6 +78,10 @@
   border-color: var(--yellow);
   color: black;
   background-color: var(--yellow);
+}
+
+.service__list .btn-close {
+  float: right;
 }
 
 @media (min-width: 900px) {
