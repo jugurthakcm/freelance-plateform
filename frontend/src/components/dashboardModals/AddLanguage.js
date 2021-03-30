@@ -6,6 +6,8 @@ import languages from '../../data/languages';
 import { useDispatch, useSelector } from 'react-redux';
 import { addLanguage } from '../../data/actions/userActions';
 import { v4 as uuidv4 } from 'uuid';
+import { hideModal } from '../../util';
+import bootstrapBundle from 'bootstrap/dist/js/bootstrap.bundle';
 
 const AddLanguage = () => {
   const dispatch = useDispatch();
@@ -15,6 +17,11 @@ const AddLanguage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(addLanguage(uuidv4(), data, user.token));
+    const modal = new bootstrapBundle.Modal(
+      document.getElementById('addLanguagesModal')
+    );
+
+    hideModal(modal);
   };
 
   return (

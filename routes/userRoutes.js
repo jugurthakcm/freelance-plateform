@@ -6,7 +6,6 @@ const {
   logout,
   updateBio,
   updateSkills,
-  deleteSkill,
   editName,
   editUsername,
   editEmail,
@@ -39,9 +38,6 @@ router.put('/bio', auth, updateBio);
 
 //Update a user's skills
 router.put('/skills/update', auth, updateSkills);
-
-//Delete a user's skill
-router.delete('/skills/delete', auth, deleteSkill);
 
 //Edit user's name
 router.put('/settings/name/edit', auth, editName);

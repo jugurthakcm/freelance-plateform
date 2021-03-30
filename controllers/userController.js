@@ -162,6 +162,7 @@ exports.loadUser = async (req, res) => {
  */
 exports.updateBio = async (req, res) => {
   User.findByIdAndUpdate(req.userId, { bio: req.body.bio }, { new: true })
+    .select('-password')
     .then((user) => res.status(200).json({ user }))
     .catch((error) => res.status(500).json({ error }));
 };
@@ -176,43 +177,9 @@ exports.updateSkills = async (req, res) => {
     const { skills } = req.body;
 
     User.findByIdAndUpdate(req.userId, { skills }, { new: true })
+      .select('-password')
       .then((user) => res.status(200).json({ user }))
       .catch((error) => res.status(500).json({ error }));
-  } catch (error) {
-    res.status(400).json({ error });
-  }
-};
-
-/**
- * Delete a skill
- * /DELETE
- * @params {skillId}
- */
-exports.deleteSkill = async (req, res) => {
-  try {
-    //Get the skills of the user
-    const { skills } = await User.findById(req.userId);
-
-    //Validate the skill request
-    const { error, value } = deleteSkillValidation(req.body);
-    if (error) throw 'Skill is not defined';
-
-    const { id } = value;
-
-    if (!skills.find((skill) => skill.id === id))
-      throw "This skill doesn't exist";
-
-    //Update the skills array
-    const skillsUpdated = skills.filter((skill) => skill.id !== id);
-
-    //Update the skills in the db
-    User.findByIdAndUpdate(req.userId, { skills: skillsUpdated })
-      .then(() =>
-        res.status(200).json({ message: 'Skill deleted successfully' })
-      )
-      .catch(() =>
-        res.status(500).json({ error: 'Failed to delete the skill' })
-      );
   } catch (error) {
     res.status(400).json({ error });
   }
@@ -393,23 +360,25 @@ exports.addLanguage = async (req, res) => {
 
     const user = await User.findOne({ _id: req.userId });
 
-    const newLanguage = user.languages.filter((e) => e.id !== id);
+    const newLanguage = user.languages.filter((e) => e.language !== language);
 
     newLanguage.push({ id, language, level });
 
-    user
-      .updateOne({ languages: newLanguage })
-      .then(() =>
-        res.status(200).json({ message: 'Languages added successfully' })
-      )
-      .catch((err) => res.status(500).json({ error: err }));
+    User.findByIdAndUpdate(
+      req.userId,
+      { languages: newLanguage },
+      { new: true }
+    )
+      .select('-password')
+      .then((user) => res.status(200).json({ user }))
+      .catch((error) => res.status(500).json({ error }));
   } catch (error) {
     res.status(400).json({ error });
   }
 };
 
 /**
- * User deletes his language
+ * User updates a language
  * /POST
  * @params {arr}
  */
@@ -417,14 +386,15 @@ exports.addLanguage = async (req, res) => {
 exports.updateLanguage = async (req, res) => {
   try {
     const newLanguage = req.body.arr;
-    const user = await User.findById(req.userId);
 
-    user
-      .updateOne({ languages: newLanguage })
-      .then(() =>
-        res.status(200).json({ message: 'Language updated successfully' })
-      )
-      .catch((err) => res.status(500).json({ error: err }));
+    User.findByIdAndUpdate(
+      req.userId,
+      { languages: newLanguage },
+      { new: true }
+    )
+      .select('-password')
+      .then((user) => res.status(200).json({ user }))
+      .catch((error) => res.status(500).json({ error }));
   } catch (error) {
     res.status(400).json({ error });
   }

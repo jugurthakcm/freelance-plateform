@@ -4,6 +4,8 @@ import { faTimes, faTrash } from '@fortawesome/free-solid-svg-icons';
 import './dashboardModal.css';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateLanguage } from '../../data/actions/userActions';
+import { hideModal } from '../../util';
+import bootstrapBundle from 'bootstrap/dist/js/bootstrap.bundle';
 
 const EditLanguage = () => {
   const user = useSelector((state) => state.user);
@@ -34,6 +36,11 @@ const EditLanguage = () => {
 
   const handleSubmit = () => {
     user.token && dispatch(updateLanguage(data, user.token));
+    const modal = new bootstrapBundle.Modal(
+      document.getElementById('languagesModal')
+    );
+
+    hideModal(modal);
   };
 
   return (

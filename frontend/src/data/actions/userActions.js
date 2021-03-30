@@ -105,7 +105,6 @@ export const deleteEducation = (id, token) => (dispatch) =>
     });
 
 export const addLanguage = (id, { language, level }, token) => (dispatch) => {
-  dispatch({ type: loadingActionTypes.LOADING });
   axios
     .post(
       '/language',
@@ -118,12 +117,9 @@ export const addLanguage = (id, { language, level }, token) => (dispatch) => {
     )
     .then((res) => {
       dispatch({ type: userActionTypes.UPDATE_SUCCESS, payload: res });
-      dispatch({ type: loadingActionTypes.NO_LOADING });
-      window.location.reload();
     })
     .catch((err) => {
       dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
-      dispatch({ type: loadingActionTypes.NO_LOADING });
     });
 };
 
@@ -140,7 +136,6 @@ export const updateLanguage = (arr, token) => (dispatch) =>
     )
     .then((res) => {
       dispatch({ type: userActionTypes.UPDATE_SUCCESS, payload: res });
-      window.location.reload();
     })
     .catch((err) => {
       dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
