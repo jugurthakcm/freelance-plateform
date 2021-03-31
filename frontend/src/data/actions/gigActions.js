@@ -65,8 +65,9 @@ export const deleteGig = (id, token) => (dispatch) => {
       }
     )
     .then((res) => {
-      dispatch({ type: gigActionTypes.SUCCESS, payload: res });
-      window.location.reload();
+      dispatch({ type: gigActionTypes.GET_MY_GIGS, payload: res });
+
+      // window.location.reload();
     })
     .catch((err) => dispatch({ type: gigActionTypes.ERROR, payload: err }));
 };

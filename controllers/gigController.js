@@ -59,7 +59,13 @@ exports.deleteGig = async (req, res) => {
 
     //Delete the gig
     const deletedGig = await Gig.findByIdAndRemove(id);
-    res.status(200).send({ message: 'Gig deleted successfully' });
+
+    Gig.find({ sellerId: req.userId })
+      .then((data) => res.status(200).json({ data }))
+      .catch(() =>
+        res.status(500).json({ error: 'Error during fetching gigs' })
+      );
+    // res.status(200).send({ message: 'Gig deleted successfully' });
   } catch (error) {
     res.status(500).send({ error });
   }
