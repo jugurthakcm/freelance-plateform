@@ -3,6 +3,7 @@ import { gigActionTypes } from '../actionTypes';
 
 export const addGig = (
   { title, description, category, price, deliveryTime, deliveryTimeType },
+  formData,
   token
 ) => (dispatch) => {
   axios
@@ -22,8 +23,19 @@ export const addGig = (
       }
     )
     .then((res) => {
-      dispatch({ type: gigActionTypes.SUCCESS, payload: res });
-      window.location.href = '/dashboard';
+      const id = res.data.data._id;
+      axios
+        .put(`/gigs/${id}/image`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            authorization: 'Bearer ' + token,
+          },
+        })
+        .then((res) => {
+          dispatch({ type: gigActionTypes.SUCCESS, payload: res });
+          window.location.href = '/dashboard';
+        })
+        .catch((err) => dispatch({ type: gigActionTypes.ERROR, payload: err }));
     })
     .catch((err) => dispatch({ type: gigActionTypes.ERROR, payload: err }));
 };

@@ -1,9 +1,11 @@
 const { Category } = require('../models/Category');
 const { Gig } = require('../models/Gig');
+const { uploadGigsImagesUtil } = require('../util');
 const {
   gigValidation,
   ratingValidation,
 } = require('../validation/gigValidation');
+const path = require('path');
 
 /**
  * User adds his gig
@@ -31,7 +33,7 @@ exports.addGig = async (req, res) => {
       deliveryTime,
       description,
     })
-      .then(() => res.status(200).json({ message: 'Gig added successfully' }))
+      .then((data) => res.status(200).json({ data }))
       .catch((err) => res.status(500).json({ error: err }));
   } catch (error) {
     res.status(400).json({ error });
@@ -198,4 +200,13 @@ exports.rateGig = async (req, res) => {
   } catch (error) {
     res.status(400).send(error);
   }
+};
+
+exports.editGigImage = (req, res) => {
+  const file = req.files[0];
+  const fileExt = path.extname(file.originalname);
+
+  Gig.findByIdAndUpdate(req.params.id, { imageURI: req.params.id + fileExt })
+    .then(() => res.status(200).json({ message: 'Uploading gig image done' }))
+    .catch((error) => res.status(500).json({ error }));
 };

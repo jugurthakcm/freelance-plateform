@@ -11,8 +11,10 @@ const {
   filterGigsPerCategory,
   rateGig,
   getMyPendingGigs,
+  editGigImage,
 } = require('../controllers/gigController');
 const { auth } = require('../middlewares/authMiddleware');
+const { uploadGigsImagesUtil } = require('../util');
 
 router.get('/mygigs', auth, getMyGigs);
 
@@ -31,5 +33,7 @@ router.get('/explore/:category', auth, filterGigsPerCategory);
 router.get('/explore', auth, exploreGigs);
 
 router.put('/:id/rate', auth, rateGig);
+
+router.put('/:id/image', auth, uploadGigsImagesUtil(), editGigImage);
 
 module.exports = router;

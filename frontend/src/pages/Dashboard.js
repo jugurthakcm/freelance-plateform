@@ -336,24 +336,23 @@ const Dashboard = () => {
           </Link>
         </div>
 
-        <div className="mt-5">
+        <div className="mt-4">
           {gig && gig.myGigs && gig.myGigs.length ? (
             <StackGrid
               columnWidth={275}
               gutterWidth={30}
               gutterHeight={20}
-              className="d-flex justify-content-between"
+              monitorImagesLoaded={true}
             >
               {gig.myGigs.map((gig) => (
                 <div key={gig._id}>
                   <div className="store__gig">
-                    <div
-                      className="gig__image"
-                      style={{
-                        backgroundColor: 'blue',
-                        height: '200px',
-                      }}
-                    ></div>
+                    <div className="gig__image">
+                      <img
+                        src={`${api}/uploads/gigs/${gig.imageURI}`}
+                        alt="gig"
+                      />
+                    </div>
                     <div className="gig__details mx-3 my-2">
                       <p className="gig__type">{gig.category}</p>
                       <h5 className="gig__title">{gig.title}</h5>

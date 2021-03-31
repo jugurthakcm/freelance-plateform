@@ -33,6 +33,7 @@ const AddGig = () => {
     deliveryTime: Joi.number().required().min(1),
     deliveryTimeType: Joi.string().trim().required().min(1),
     category: Joi.string().trim().required().min(1).max(50),
+    image: Joi.any(),
   });
 
   const { register, handleSubmit, errors } = useForm({
@@ -42,14 +43,22 @@ const AddGig = () => {
   const dispatch = useDispatch();
 
   const submitForm = (e) => {
-    user.token && dispatch(addGig(e, user.token));
+    const formData = new FormData();
+
+    formData.append('file', e.image[0]);
+
+    user.token && dispatch(addGig(e, formData, user.token));
   };
 
   return (
     <>
       <Navbar />
       <div className="gigPage container">
-        <form className="row" onSubmit={handleSubmit(submitForm)}>
+        <form
+          className="row"
+          onSubmit={handleSubmit(submitForm)}
+          encType="multipart/form-data"
+        >
           <div className="gigPage__info col-md-7">
             <div className="gigPage__inputField">
               <h4>Title</h4>
@@ -134,7 +143,7 @@ const AddGig = () => {
                 <p>Upload image...</p>
               </div>
             </label>
-            <input type="file" name="image" id="upload-image" />
+            <input type="file" name="image" id="upload-image" ref={register} />
           </div>
         </form>
       </div>

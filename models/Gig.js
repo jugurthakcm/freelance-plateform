@@ -59,6 +59,10 @@ const gigSchema = mongoose.Schema({
     default: true,
     required: true,
   },
+  imageURI: {
+    type: String,
+    default: '',
+  },
   createdAt: {
     type: Date,
     default: new Date(),

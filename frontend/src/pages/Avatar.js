@@ -89,13 +89,13 @@ const Avatar = ({ imageSrc, imageSrcExt }) => {
                 />
                 <div className="crop__controlsButtons">
                   <button
-                    className="btn btn-warning mr-2"
+                    className="btn btn-warning me-2"
                     onClick={handleUpload}
                   >
                     Upload
                   </button>
                   <button
-                    className="btn btn-secondary ml-2"
+                    className="btn btn-secondary ms-2"
                     onClick={handleClose}
                   >
                     Close
