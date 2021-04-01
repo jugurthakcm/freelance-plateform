@@ -147,7 +147,13 @@ const Navbar = ({ navStore }) => {
           {user.user ? (
             <div className="navbar__user">
               <FontAwesomeIcon icon={faBell} size="lg" className="me-3" />
-              <FontAwesomeIcon icon={faCommentAlt} size="lg" className="me-3" />
+              <Link to="/chat">
+                <FontAwesomeIcon
+                  icon={faCommentAlt}
+                  size="lg"
+                  className="me-3"
+                />
+              </Link>
               <div className="dropdown">
                 <div
                   className="dropdown-toggle"
