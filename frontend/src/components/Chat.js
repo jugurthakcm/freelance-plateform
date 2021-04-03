@@ -7,10 +7,11 @@ import Navbar from './Navbar';
 
 const Chat = () => {
   useEffect(() => {
+    const message = document.querySelector('.chat__messageBody');
     window.onload = function () {
-      const message = document.querySelector('.chat__messageBody');
       message.scrollTop = message.scrollHeight;
     };
+    message.scrollTop = message.scrollHeight;
   }, []);
 
   return (
