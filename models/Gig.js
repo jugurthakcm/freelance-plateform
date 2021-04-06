@@ -19,17 +19,19 @@ const gigSchema = mongoose.Schema({
     min: 1,
     max: 50,
   },
-  categoryId: {
-    type: String,
-    required: true,
-    min: 1,
-    max: 50,
-  },
   category: {
-    type: String,
-    required: true,
-    min: 1,
-    max: 50,
+    id: {
+      type: String,
+      required: true,
+      min: 1,
+      max: 50,
+    },
+    title: {
+      type: String,
+      required: true,
+      min: 1,
+      max: 50,
+    },
   },
   deliveryTime: {
     type: String,

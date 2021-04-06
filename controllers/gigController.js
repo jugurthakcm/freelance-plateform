@@ -26,8 +26,10 @@ exports.addGig = async (req, res) => {
 
     Gig.create({
       title,
-      categoryId,
-      category,
+      category: {
+        title: category,
+        id: categoryId,
+      },
       price,
       sellerId: req.userId,
       deliveryTime,

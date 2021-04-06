@@ -354,7 +354,7 @@ const Dashboard = () => {
                       />
                     </div>
                     <div className="gig__details mx-3 my-2">
-                      <p className="gig__type">{gig.category}</p>
+                      <p className="gig__type">{gig.category.title}</p>
                       <h5 className="gig__title">{gig.title}</h5>
                       <div className="gig__footer">
                         <span className="gig__footerPrice">{gig.price} $</span>
