@@ -60,18 +60,18 @@ const Dashboard = () => {
 
   const handleFileSelect = (e) => {
     const file = e.target.files[0];
-    const myFileItemeeader = new FileReader();
-    myFileItemeeader.addEventListener(
+    const myFileItemreader = new FileReader();
+    myFileItemreader.addEventListener(
       'load',
       () => {
-        const myResult = myFileItemeeader.result;
+        const myResult = myFileItemreader.result;
         setImageSrc(myResult);
         setImageSrcExt(extractImageFileExtensionFromBase64(myResult));
       },
       false
     );
 
-    myFileItemeeader.readAsDataURL(file);
+    myFileItemreader.readAsDataURL(file);
   };
 
   return (

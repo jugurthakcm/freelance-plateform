@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './Gig.css';
 import Navbar from '../../components/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,6 +11,7 @@ import Joi from 'joi';
 import { useDispatch, useSelector } from 'react-redux';
 import { addGig } from '../../data/actions/gigActions';
 import { useHistory } from 'react-router-dom';
+import { image64toCanvasRef } from '../../util';
 
 const AddGig = () => {
   const [categories, setCategories] = useState([]);
@@ -50,6 +51,32 @@ const AddGig = () => {
     user.token && dispatch(addGig(e, formData, user.token));
   };
 
+  const imageParent = useRef();
+  const [imageWidth, setImageWidth] = useState(null);
+  useEffect(() => {
+    setImageWidth(imageParent.current.offsetWidth);
+  }, [imageParent]);
+
+  window.addEventListener('resize', () => {
+    setImageWidth(imageParent.current.offsetWidth);
+  });
+
+  const [imageSrc, setImageSrc] = useState(null);
+
+  const handleUploadImage = (e) => {
+    const file = e.target.files[0];
+    const myFileItemreader = new FileReader();
+    myFileItemreader.addEventListener(
+      'load',
+      () => {
+        const myResult = myFileItemreader.result;
+        setImageSrc(myResult);
+      },
+      false
+    );
+    myFileItemreader.readAsDataURL(file);
+  };
+
   return (
     <>
       <Navbar />
@@ -59,7 +86,7 @@ const AddGig = () => {
           onSubmit={handleSubmit(submitForm)}
           encType="multipart/form-data"
         >
-          <div className="gigPage__info col-md-7">
+          <div className="gigPage__info col-md-7 d-flex flex-column justify-content-between">
             <div className="gigPage__inputField">
               <h4>Title</h4>
               <input
@@ -130,20 +157,58 @@ const AddGig = () => {
               </div>
             </div>
 
-            <div className="gigPage__inputSubmit">
-              <button type="submit" className="btn btn-warning">
+            <div className="gigPage__inputSubmit d-none d-md-block">
+              <button type="submit" className="btn btn-warning w-100">
                 Save changes
               </button>
             </div>
           </div>
           <div className="gigPage__image col-md-5">
-            <label htmlFor="upload-image">
-              <div>
-                <FontAwesomeIcon icon={faCloudUploadAlt} size={'6x'} />
-                <p>Upload image...</p>
+            {imageSrc ? (
+              <div
+                className="d-flex flex-column justify-content-between h-100"
+                ref={imageParent}
+              >
+                <img src={imageSrc} alt="gig" width={imageWidth} />
+                <div className="gigImage__anotherImage mt-2">
+                  <label
+                    htmlFor="upload-another-image"
+                    className="btn btn-success w-100"
+                  >
+                    Change the image
+                  </label>
+                  <input
+                    type="file"
+                    name="image"
+                    id="upload-another-image"
+                    className="d-none"
+                    ref={register}
+                    onChange={handleUploadImage}
+                  />
+                </div>
               </div>
-            </label>
-            <input type="file" name="image" id="upload-image" ref={register} />
+            ) : (
+              <div className="gigImage__firstUpload">
+                <label htmlFor="upload-image">
+                  <div>
+                    <FontAwesomeIcon icon={faCloudUploadAlt} size={'6x'} />
+                    <p>Upload image...</p>
+                  </div>
+                </label>
+                <input
+                  type="file"
+                  name="image"
+                  id="upload-image"
+                  ref={register}
+                  onChange={handleUploadImage}
+                />
+              </div>
+            )}
+          </div>
+          <div className="gigPage__inputSubmit mt-2 d-md-none d-block">
+            <button type="submit" className="btn btn-warning w-100">
+              Save changes
+            </button>
           </div>
         </form>
       </div>
