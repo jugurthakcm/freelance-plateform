@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import './Gig.css';
 import Navbar from '../../components/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCloudUploadAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCloudUploadAlt, faSave } from '@fortawesome/free-solid-svg-icons';
 import Footer from '../../components/Footer';
 import axios from '../../axios';
 import { useForm } from 'react-hook-form';
@@ -54,7 +54,7 @@ const AddGig = () => {
   const imageParent = useRef();
   const [imageWidth, setImageWidth] = useState(null);
   useEffect(() => {
-    setImageWidth(imageParent.current.offsetWidth);
+    imageParent.current && setImageWidth(imageParent.current.offsetWidth);
   }, [imageParent]);
 
   window.addEventListener('resize', () => {
@@ -158,8 +158,8 @@ const AddGig = () => {
             </div>
 
             <div className="gigPage__inputSubmit d-none d-md-block">
-              <button type="submit" className="btn btn-warning w-100">
-                Save changes
+              <button type="submit" className="btn btn-warning w-100 p-2">
+                Save
               </button>
             </div>
           </div>
@@ -173,7 +173,7 @@ const AddGig = () => {
                 <div className="gigImage__anotherImage mt-2">
                   <label
                     htmlFor="upload-another-image"
-                    className="btn btn-success w-100"
+                    className="btn btn-success w-100 p-2"
                   >
                     Change the image
                   </label>
@@ -206,8 +206,8 @@ const AddGig = () => {
             )}
           </div>
           <div className="gigPage__inputSubmit mt-2 d-md-none d-block">
-            <button type="submit" className="btn btn-warning w-100">
-              Save changes
+            <button type="submit" className="btn btn-warning w-100 p-2">
+              Save
             </button>
           </div>
         </form>
