@@ -184,6 +184,7 @@ const Navbar = ({ navStore }) => {
                   <li className="dropdown-item">
                     <Link to="/settings">Settings</Link>
                   </li>
+                  <li className="dropdown-item">Upgrade</li>
                   <li
                     className="dropdown-item"
                     onClick={() => dispatch(logoutUser())}
