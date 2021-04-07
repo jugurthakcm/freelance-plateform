@@ -18,6 +18,7 @@ import Loading from './components/Loading';
 import AddGig from './pages/gigs/AddGig';
 import EditGig from './pages/gigs/EditGig';
 import Chat from './components/Chat';
+import Settings from './pages/Settings';
 
 function App() {
   const language = useLanguageContext()[0];
@@ -57,6 +58,7 @@ function App() {
             <Route path="/gig/add" component={AddGig} />
             <Route path="/gig/edit/:gigId" component={EditGig} />
             <Route path="/chat" component={Chat} />
+            <Route path="/settings" component={Settings} />
           </Switch>
         </I18nProvider>
       </div>

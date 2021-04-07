@@ -1,0 +1,82 @@
+.settings {
+  margin-top: 100px;
+}
+
+.settings__aside {
+  position: relative;
+}
+
+.settings__aside div {
+  position: fixed;
+  width: inherit;
+}
+
+.settings__aside h5::after {
+  content: '';
+  display: block;
+  width: 60%;
+  height: 1px;
+  /* border: 1px solid var(--black); */
+  background-color: var(--black);
+  margin: 10px 0 15px 0;
+}
+
+.settings__aside li {
+  font-size: 15px;
+  margin-bottom: 0.5rem;
+  color: gray;
+  cursor: pointer;
+}
+
+.settings__aside li:hover,
+.settings__aside li:active {
+  color: var(--black);
+}
+
+.settings__section {
+  margin-bottom: 2rem;
+}
+
+.settings__change h4::after {
+  content: '';
+  display: block;
+  width: 90%;
+  height: 1px;
+  /* border: 1px solid var(--black); */
+  background-color: var(--black);
+  margin: 5px 0 20px 0;
+}
+
+.settings__section .settings__input {
+  max-width: 400px;
+  background-color: inherit;
+  padding: 0.5rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  width: 100%;
+  display: block;
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.settings__input path {
+  color: rgba(0, 0, 0, 0.3);
+}
+
+.settings__input input {
+  border: none;
+  width: 90%;
+  margin-left: 10px;
+}
+
+.settings__section .btn {
+  padding: 0.4rem 2rem;
+}
+
+.settings__section .btn-danger {
+  padding: 0.4rem 1rem;
+}
+
+.settings__section .btn-danger path {
+  color: white;
+}
