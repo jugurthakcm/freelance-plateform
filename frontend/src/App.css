@@ -1,8 +1,12 @@
+html {
+  scroll-behavior: smooth !important;
+}
+
 body {
   overflow-x: hidden;
   color: var(--black);
+  scroll-behavior: smooth !important;
 }
-
 .app-anim {
   display: none;
 }

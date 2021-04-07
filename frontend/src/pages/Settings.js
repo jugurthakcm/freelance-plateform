@@ -9,12 +9,20 @@ import {
   faUserTag,
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
+import { useLanguageContext } from '../ContextAPI/LanguageProvider';
 
 const Settings = () => {
   const handleScroll = (id) => {
     const el = document.getElementById(id);
     console.log(el.scrollHeight);
     window.scrollTo(0, el.offsetTop - 100);
+  };
+
+  const [language, dispatchLanguage] = useLanguageContext();
+
+  const changeLanguage = (language) => {
+    localStorage.setItem('language', JSON.stringify({ language }));
+    dispatchLanguage({ type: language, language });
   };
 
   return (
@@ -30,6 +38,7 @@ const Settings = () => {
                 <li onClick={() => handleScroll('changeUsername')}>Username</li>
                 <li onClick={() => handleScroll('changeEmail')}>Email</li>
                 <li onClick={() => handleScroll('changePassword')}>Password</li>
+                <li onClick={() => handleScroll('changeLanguage')}>Language</li>
                 <li onClick={() => handleScroll('deleteAccount')}>
                   Delete Account
                 </li>
@@ -134,7 +143,28 @@ const Settings = () => {
             </div>
 
             <div
-              className="settings__section settings__changeDeleteAccount"
+              className="settings__section settings__changeLanguage"
+              id="changeLanguage"
+            >
+              <h4>Change Language</h4>
+              <form>
+                <select
+                  className="form-select mb-2"
+                  onChange={(e) => changeLanguage(e.target.value)}
+                  value={language}
+                >
+                  <option value="english">English</option>
+                  <option value="french">Français</option>
+                  <option value="arabic">العربية</option>
+                </select>
+                {/* <button type="submit" className="btn btn-warning">
+                  Save
+                </button> */}
+              </form>
+            </div>
+
+            <div
+              className="settings__section settings__deleteAccount"
               id="deleteAccount"
             >
               <h4>Delete account</h4>

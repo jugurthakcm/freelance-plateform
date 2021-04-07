@@ -54,11 +54,6 @@ const Navbar = ({ navStore }) => {
   const [language, dispatchLanguage] = useLanguageContext();
   const languageImage = selectLanguageIcon(language);
 
-  const changeLanguage = (language) => {
-    localStorage.setItem('language', JSON.stringify({ language }));
-    dispatchLanguage({ type: language, language });
-  };
-
   const boxShadow = navStore ? '0 5px 5px rgba(0, 0, 0, 0.15)' : '';
 
   const navbarSearch = document.querySelector('.navbar__search');

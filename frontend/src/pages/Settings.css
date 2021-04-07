@@ -80,3 +80,12 @@
 .settings__section .btn-danger path {
   color: white;
 }
+
+.settings__changeLanguage select {
+  max-width: 400px;
+}
+
+.settings__changeLanguage select:active,
+.settings__changeLanguage select:focus {
+  border-color: rgba(0, 0, 0, 0.2);
+}
