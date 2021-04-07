@@ -85,7 +85,7 @@ const EditGig = (props) => {
   }, [imageParent]);
 
   window.addEventListener('resize', () => {
-    setImageWidth(imageParent.current.offsetWidth);
+    imageParent.current && setImageWidth(imageParent.current.offsetWidth);
   });
 
   const [imageSrc, setImageSrc] = useState(null);
