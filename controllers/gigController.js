@@ -136,17 +136,22 @@ exports.editMyGig = async (req, res) => {
 
     if (!gig) throw "This gig doesn't exist";
 
-    gig
-      .updateOne({
+    Gig.findOneAndUpdate(
+      { _id: req.params.id, sellerId: req.userId },
+      {
         title,
         price,
-        category: categoryTitle,
+        category: {
+          id: categoryId,
+          title: categoryTitle,
+        },
         subCategory,
         confirmed: false,
         description,
         deliveryTime,
-      })
-      .then(() => res.status(200).json({ message: 'Gig Edited successfully' }))
+      }
+    )
+      .then((gig) => res.status(200).json({ gig }))
       .catch(() => res.status(500).json({ error: 'Error editing the gig' }));
   } catch (error) {
     res.status(400).json({ error });
@@ -212,6 +217,7 @@ exports.rateGig = async (req, res) => {
 
 exports.editGigImage = (req, res) => {
   const file = req.files[0];
+  console.log(file);
   const fileExt = path.extname(file.originalname);
 
   Gig.findByIdAndUpdate(req.params.id, { imageURI: req.params.id + fileExt })

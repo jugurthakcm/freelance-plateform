@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import './Gig.css';
 import Navbar from '../../components/Navbar';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -11,11 +11,14 @@ import Joi from 'joi';
 import { useDispatch, useSelector } from 'react-redux';
 import { addGig, editGig } from '../../data/actions/gigActions';
 import { useHistory } from 'react-router-dom';
+import api from '../../api';
 
 const EditGig = (props) => {
   const [categories, setCategories] = useState([]);
   const user = useSelector((state) => state.user);
   const history = useHistory();
+
+  const [imageFile, setImageFile] = useState(null);
 
   const gigId = props.match.params.gigId;
 
@@ -46,10 +49,11 @@ const EditGig = (props) => {
         const gig = res.data.data[0];
         setValue('title', gig.title);
         setValue('description', gig.description);
-        setValue('category', gig.categoryId);
+        setValue('category', gig.category.id);
         setValue('price', gig.price);
         setValue('deliveryTime', gig.deliveryTime.split(' ')[0]);
         setValue('deliveryTimeType', gig.deliveryTime.split(' ')[1]);
+        setImageSrc(api + '/uploads/gigs/' + gig.imageURI);
       })
       .catch((err) => console.error(err));
   }, [user, history, gigId, setValue]);
@@ -57,7 +61,49 @@ const EditGig = (props) => {
   const dispatch = useDispatch();
 
   const submitForm = (e) => {
-    user.token && dispatch(editGig(gigId, e, user.token));
+    const formData = new FormData();
+
+    if (!imageFile) {
+      fetch(imageSrc)
+        .then((res) => res.blob())
+        .then((blob) => {
+          const file = new File([blob], 'dot.png', blob);
+          formData.append('file', file);
+        });
+    } else {
+      formData.append('file', imageFile);
+    }
+
+    user.token && dispatch(editGig(gigId, e, formData, user.token));
+  };
+
+  const imageParent = useRef();
+  const [imageWidth, setImageWidth] = useState(null);
+
+  useEffect(() => {
+    imageParent.current && setImageWidth(imageParent.current.offsetWidth);
+  }, [imageParent]);
+
+  window.addEventListener('resize', () => {
+    setImageWidth(imageParent.current.offsetWidth);
+  });
+
+  const [imageSrc, setImageSrc] = useState(null);
+
+  const handleUploadImage = (e) => {
+    const file = e.target.files[0];
+
+    const myFileItemreader = new FileReader();
+    myFileItemreader.addEventListener(
+      'load',
+      () => {
+        const myResult = myFileItemreader.result;
+        setImageSrc(myResult);
+      },
+      false
+    );
+    myFileItemreader.readAsDataURL(file);
+    setImageFile(e.target.files[0]);
   };
 
   return (
@@ -65,7 +111,7 @@ const EditGig = (props) => {
       <Navbar />
       <div className="gigPage container">
         <form className="row" onSubmit={handleSubmit(submitForm)}>
-          <div className="gigPage__info col-md-7">
+          <div className="gigPage__info col-md-7 d-flex flex-column justify-content-between">
             <div className="gigPage__inputField">
               <h4>Title</h4>
               <input
@@ -137,19 +183,33 @@ const EditGig = (props) => {
             </div>
 
             <div className="gigPage__inputSubmit">
-              <button type="submit" className="btn btn-warning">
-                Save changes
+              <button type="submit" className="btn btn-warning w-100 p-2">
+                Save
               </button>
             </div>
           </div>
           <div className="gigPage__image col-md-5">
-            <label htmlFor="upload-image">
-              <div>
-                <FontAwesomeIcon icon={faCloudUploadAlt} size={'6x'} />
-                <p>Upload image...</p>
+            <div
+              className="d-flex flex-column justify-content-between h-100"
+              ref={imageParent}
+            >
+              <img src={imageSrc} alt="gig" width={imageWidth} />
+              <div className="gigImage__anotherImage mt-2">
+                <label
+                  htmlFor="upload-another-image"
+                  className="btn btn-success w-100 p-2"
+                >
+                  Change the image
+                </label>
+                <input
+                  type="file"
+                  name="image"
+                  id="upload-another-image"
+                  className="d-none"
+                  onChange={handleUploadImage}
+                />
               </div>
-            </label>
-            <input type="file" name="image" id="upload-image" />
+            </div>
           </div>
         </form>
       </div>

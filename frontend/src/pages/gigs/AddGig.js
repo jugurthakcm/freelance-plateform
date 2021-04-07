@@ -35,6 +35,7 @@ const AddGig = () => {
     deliveryTimeType: Joi.string().trim().required().min(1),
     category: Joi.string().trim().required().min(1).max(50),
     image: Joi.any(),
+    anotherImage: Joi.any(),
   });
 
   const { register, handleSubmit, errors } = useForm({
@@ -65,6 +66,7 @@ const AddGig = () => {
 
   const handleUploadImage = (e) => {
     const file = e.target.files[0];
+
     const myFileItemreader = new FileReader();
     myFileItemreader.addEventListener(
       'load',
@@ -179,7 +181,7 @@ const AddGig = () => {
                   </label>
                   <input
                     type="file"
-                    name="image"
+                    name="anotherImage"
                     id="upload-another-image"
                     className="d-none"
                     ref={register}
@@ -195,15 +197,16 @@ const AddGig = () => {
                     <p>Upload image...</p>
                   </div>
                 </label>
-                <input
-                  type="file"
-                  name="image"
-                  id="upload-image"
-                  ref={register}
-                  onChange={handleUploadImage}
-                />
               </div>
             )}
+            <input
+              type="file"
+              name="image"
+              id="upload-image"
+              className="d-none"
+              ref={register}
+              onChange={handleUploadImage}
+            />
           </div>
           <div className="gigPage__inputSubmit mt-2 d-md-none d-block">
             <button type="submit" className="btn btn-warning w-100 p-2">

@@ -75,6 +75,7 @@ export const deleteGig = (id, token) => (dispatch) => {
 export const editGig = (
   gigId,
   { title, description, category, price, deliveryTime, deliveryTimeType },
+  formData,
   token
 ) => (dispatch) =>
   axios
@@ -94,7 +95,18 @@ export const editGig = (
       }
     )
     .then((res) => {
-      dispatch({ type: gigActionTypes.SUCCESS, payload: res });
-      window.location.href = '/dashboard';
+      const id = res.data.gig._id;
+      axios
+        .put(`/gigs/${id}/image`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            authorization: 'Bearer ' + token,
+          },
+        })
+        .then((res) => {
+          dispatch({ type: gigActionTypes.SUCCESS, payload: res });
+          window.location.href = '/dashboard';
+        })
+        .catch((err) => dispatch({ type: gigActionTypes.ERROR, payload: err }));
     })
     .catch((err) => dispatch({ type: gigActionTypes.ERROR, payload: err }));
