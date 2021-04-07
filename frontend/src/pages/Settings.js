@@ -11,6 +11,12 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const Settings = () => {
+  const handleScroll = (id) => {
+    const el = document.getElementById(id);
+    console.log(el.scrollHeight);
+    window.scrollTo(0, el.offsetTop - 100);
+  };
+
   return (
     <>
       <Navbar />
@@ -20,16 +26,21 @@ const Settings = () => {
             <div>
               <h5>Account Settings</h5>
               <ul>
-                <li>Name</li>
-                <li>Username</li>
-                <li>Email</li>
-                <li>Password</li>
-                <li>Delete Account</li>
+                <li onClick={() => handleScroll('changeName')}>Name</li>
+                <li onClick={() => handleScroll('changeUsername')}>Username</li>
+                <li onClick={() => handleScroll('changeEmail')}>Email</li>
+                <li onClick={() => handleScroll('changePassword')}>Password</li>
+                <li onClick={() => handleScroll('deleteAccount')}>
+                  Delete Account
+                </li>
               </ul>
             </div>
           </div>
           <div className="settings__change col-9">
-            <div className="settings__section settings__changeName">
+            <div
+              className="settings__section settings__changeName"
+              id="changeName"
+            >
               <h4>Change name</h4>
               <form>
                 <div className="settings__input">
@@ -52,7 +63,10 @@ const Settings = () => {
               </form>
             </div>
 
-            <div className="settings__section settings__changeUsername">
+            <div
+              className="settings__section settings__changeUsername"
+              id="changeUsername"
+            >
               <h4>Change username</h4>
               <form>
                 <div className="settings__input">
@@ -66,7 +80,10 @@ const Settings = () => {
               </form>
             </div>
 
-            <div className="settings__section settings__changeEmail">
+            <div
+              className="settings__section settings__changeEmail"
+              id="changeEmail"
+            >
               <h4>Change email</h4>
               <form>
                 <div className="settings__input">
@@ -79,7 +96,10 @@ const Settings = () => {
               </form>
             </div>
 
-            <div className="settings__section settings__changePassword">
+            <div
+              className="settings__section settings__changePassword"
+              id="changePassword"
+            >
               <h4>Change Password</h4>
               <form>
                 <div className="settings__input">
@@ -113,7 +133,10 @@ const Settings = () => {
               </form>
             </div>
 
-            <div className="settings__section settings__changeDeleteAccount">
+            <div
+              className="settings__section settings__changeDeleteAccount"
+              id="deleteAccount"
+            >
               <h4>Delete account</h4>
               <form>
                 <button type="submit" className="btn btn-danger">
