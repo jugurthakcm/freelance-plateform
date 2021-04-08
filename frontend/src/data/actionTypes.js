@@ -10,6 +10,7 @@ export const userActionTypes = {
   UPDATE_SUCCESS: 'UPDATE_SUCCESS',
   UPDATE_ERROR: 'UPDATE_ERROR',
   UPDATE_BIO: 'UPDATE_BIO',
+  IS_LOADING: 'IS_LOADING',
 };
 
 export const loadingActionTypes = {

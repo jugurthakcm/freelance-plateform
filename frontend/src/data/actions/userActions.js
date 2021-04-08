@@ -44,6 +44,7 @@ export const loginUser = ({ email, password }) => (dispatch) => {
 };
 
 export const loadUser = (token) => (dispatch) => {
+  dispatch({ type: userActionTypes.IS_LOADING });
   axios
     .get('/user', {
       headers: {

@@ -6,6 +6,7 @@ const initialState = {
   success: null,
   error: null,
   status: null,
+  isLoading: false,
 };
 
 const userReducer = (state = initialState, action) => {
@@ -48,6 +49,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload.data.user[0],
+        isLoading: false,
       };
 
     case userActionTypes.ERROR_LOAD_USER:
@@ -56,6 +58,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         error: action.payload.response.data,
         token: null,
+        isLoading: false,
       };
 
     case userActionTypes.LOGOUT:
@@ -77,10 +80,10 @@ const userReducer = (state = initialState, action) => {
         error: action.payload.response.data.error,
       };
 
-    case userActionTypes.UPDATE_BIO:
+    case userActionTypes.IS_LOADING:
       return {
         ...state,
-        bio: action.payload.data.data.bio,
+        isLoading: true,
       };
 
     default:
