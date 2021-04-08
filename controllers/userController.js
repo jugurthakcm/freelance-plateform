@@ -30,6 +30,8 @@ exports.register = async (req, res) => {
       .phoneNumber({
         format: 'international',
       })
+      .min(8)
+      .max(15)
       .validate(req.body.phone);
 
     if (phone.error) throw { field: 'phone', error: 'Invalid phone number' };
