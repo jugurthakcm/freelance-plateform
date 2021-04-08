@@ -139,75 +139,78 @@ const Navbar = ({ navStore }) => {
               onClick={() => closeSearch()}
             />
           </form> */}
-          {user.user ? (
-            <div className="navbar__user">
-              <FontAwesomeIcon icon={faBell} size="lg" className="me-3" />
-              <Link to="/chat">
-                <FontAwesomeIcon
-                  icon={faCommentAlt}
-                  size="lg"
-                  className="me-3"
-                />
-              </Link>
-              <div className="dropdown">
-                <div
-                  className="dropdown-toggle"
-                  id="dropdownMenuButton"
-                  data-toggle="dropdown"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                  // style={{ backgroundImage: `url(${languageImage})` }}
-                >
-                  {u && u.imageURI ? (
-                    <img
-                      src={api + '/uploads/avatars/' + u.imageURI}
-                      alt="avatar"
-                      width="30px"
-                      style={{ borderRadius: '50%', cursor: 'pointer' }}
-                    />
-                  ) : (
-                    <img
-                      src={avatar}
-                      alt="avatar"
-                      width="30px"
-                      style={{ borderRadius: '50%', cursor: 'pointer' }}
-                    />
-                  )}
-                </div>
-                <ul
-                  className="dropdown-menu"
-                  aria-labelledby="dropdownMenuButton"
-                >
-                  <li className="dropdown-item">
-                    <Link to="/dashboard">Dashboard</Link>
-                  </li>
-                  <li className="dropdown-item">
-                    <Link to="/settings">Settings</Link>
-                  </li>
-                  <li className="dropdown-item">Upgrade</li>
-                  <li
-                    className="dropdown-item"
-                    onClick={() => dispatch(logoutUser())}
-                  >
-                    Logout
-                  </li>
-                </ul>
-              </div>
-            </div>
-          ) : (
+          {!user.isLoading && (
             <>
-              <Link
-                to="/login"
-                className="navbar__linkLogin d-sm-inline d-none"
-              >
-                <FormattedMessage id="navbar.login" />
-              </Link>
-              <Link to="/register" className="navbar__linkRegister">
-                <FormattedMessage id="navbar.register" />
-              </Link>
+              {user.user ? (
+                <div className="navbar__user">
+                  <FontAwesomeIcon icon={faBell} size="lg" className="me-3" />
+                  <Link to="/chat">
+                    <FontAwesomeIcon
+                      icon={faCommentAlt}
+                      size="lg"
+                      className="me-3"
+                    />
+                  </Link>
+                  <div className="dropdown">
+                    <div
+                      className="dropdown-toggle"
+                      id="dropdownMenuButton"
+                      data-toggle="dropdown"
+                      data-bs-toggle="dropdown"
+                      aria-expanded="false"
+                      // style={{ backgroundImage: `url(${languageImage})` }}
+                    >
+                      {u && u.imageURI ? (
+                        <img
+                          src={api + '/uploads/avatars/' + u.imageURI}
+                          alt="avatar"
+                          width="30px"
+                          style={{ borderRadius: '50%', cursor: 'pointer' }}
+                        />
+                      ) : (
+                        <img
+                          src={avatar}
+                          alt="avatar"
+                          width="30px"
+                          style={{ borderRadius: '50%', cursor: 'pointer' }}
+                        />
+                      )}
+                    </div>
+                    <ul
+                      className="dropdown-menu"
+                      aria-labelledby="dropdownMenuButton"
+                    >
+                      <li className="dropdown-item">
+                        <Link to="/dashboard">Dashboard</Link>
+                      </li>
+                      <li className="dropdown-item">
+                        <Link to="/settings">Settings</Link>
+                      </li>
+                      <li className="dropdown-item">Upgrade</li>
+                      <li
+                        className="dropdown-item"
+                        onClick={() => dispatch(logoutUser())}
+                      >
+                        Logout
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="navbar__linkLogin d-sm-inline d-none"
+                  >
+                    <FormattedMessage id="navbar.login" />
+                  </Link>
+                  <Link to="/register" className="navbar__linkRegister">
+                    <FormattedMessage id="navbar.register" />
+                  </Link>
+                </>
+              )}
             </>
           )}
-
           {/* <div className="navbar__language">
             <div className="dropdown">
               <div
