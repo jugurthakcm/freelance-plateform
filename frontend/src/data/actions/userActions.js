@@ -213,3 +213,66 @@ export const changeName = ({ firstName, lastName }, token) => (dispatch) => {
       dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
     });
 };
+
+export const changeUsername = ({ username }, token) => (dispatch) => {
+  axios
+    .put(
+      '/settings/username/edit',
+      { username },
+      {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: userActionTypes.UPDATE_SUCCESS, payload: res });
+      window.location.reload();
+    })
+    .catch((err) => {
+      dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
+    });
+};
+
+export const changeEmail = ({ email }, token) => (dispatch) => {
+  axios
+    .put(
+      '/settings/email/edit',
+      { email },
+      {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: userActionTypes.UPDATE_SUCCESS, payload: res });
+      window.location.reload();
+    })
+    .catch((err) => {
+      dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
+    });
+};
+
+export const changePassword = (
+  { oldPassword, newPassword, confirmedPassword },
+  token
+) => (dispatch) => {
+  axios
+    .put(
+      '/settings/password/edit',
+      { oldPassword, newPassword, confirmedPassword },
+      {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: userActionTypes.UPDATE_SUCCESS, payload: res });
+      window.location.reload();
+    })
+    .catch((err) => {
+      dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
+    });
+};

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Navbar from '../components/Navbar';
 import './Settings.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,12 +14,23 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import { joiResolver } from '@hookform/resolvers/joi';
 import Joi from 'joi';
-import { changeName } from '../data/actions/userActions';
+import {
+  changeEmail,
+  changeName,
+  changePassword,
+  changeUsername,
+} from '../data/actions/userActions';
+import { useHistory } from 'react-router-dom';
 
 const Settings = () => {
   const dispatch = useDispatch();
+  const history = useHistory();
   const user = useSelector((state) => state.user);
   const token = user && user.token;
+
+  useEffect(() => {
+    if (!user.token) history.push('/login');
+  }, [user, history]);
 
   const handleScroll = (id) => {
     const el = document.getElementById(id);
@@ -51,9 +62,19 @@ const Settings = () => {
     dispatch(changeName(e, token));
   };
 
-  /* //Change username Form Handle
+  //Change username Form Handle
   const schemaUsername = Joi.object({
-    username: Joi.string().trim().min(2).max(30).required(),
+    username: Joi.string()
+      .trim()
+      .min(4)
+      .max(20)
+      .required()
+      .pattern(
+        new RegExp('^[a-zA-Z0-9]([._](?![._])|[a-zA-Z0-9]){0,20}[a-zA-Z0-9]$')
+      )
+      .messages({
+        'string.pattern.base': 'Invalid username',
+      }),
   });
 
   const {
@@ -61,47 +82,50 @@ const Settings = () => {
     handleSubmit: handleSubmitUsername,
     errors: errorsUsername,
   } = useForm({
-    resolver: joiResolver(schemaName),
+    resolver: joiResolver(schemaUsername),
   });
 
   const submitChangeUsername = (e) => {
-    dispatch(changeName(e, token));
+    dispatch(changeUsername(e, token));
   };
 
-  //Change Name Form Handle
-  const schemaName = Joi.object({
-    firstName: Joi.string().trim().min(2).max(30).required(),
-    lastName: Joi.string().trim().min(2).max(30).required(),
+  //Change Email Form Handle
+  const schemaEmail = Joi.object({
+    email: Joi.string()
+      .trim()
+      .email({ tlds: { allow: false } })
+      .required(),
   });
 
   const {
-    register: registerName,
-    handleSubmit: handleSubmitName,
-    errors: errorsName,
+    register: registerEmail,
+    handleSubmit: handleSubmitEmail,
+    errors: errorsEmail,
   } = useForm({
-    resolver: joiResolver(schemaName),
+    resolver: joiResolver(schemaEmail),
   });
 
-  const submitChangeName = (e) => {
-    dispatch(changeName(e, token));
+  const submitChangeEmail = (e) => {
+    dispatch(changeEmail(e, token));
   };
-  //Change Name Form Handle
-  const schemaName = Joi.object({
-    firstName: Joi.string().trim().min(2).max(30).required(),
-    lastName: Joi.string().trim().min(2).max(30).required(),
+  //Change Password Form Handle
+  const schemaPassword = Joi.object({
+    oldPassword: Joi.string().trim().required(),
+    newPassword: Joi.string().trim().required().min(8),
+    confirmedPassword: Joi.ref('newPassword'),
   });
 
   const {
-    register: registerName,
-    handleSubmit: handleSubmitName,
-    errors: errorsName,
+    register: registerPassword,
+    handleSubmit: handleSubmitPassword,
+    errors: errorsPassword,
   } = useForm({
-    resolver: joiResolver(schemaName),
+    resolver: joiResolver(schemaPassword),
   });
 
-  const submitChangeName = (e) => {
-    dispatch(changeName(e, token));
-  }; */
+  const submitChangePassword = (e) => {
+    dispatch(changePassword(e, token));
+  };
 
   return (
     <>
@@ -139,6 +163,9 @@ const Settings = () => {
                     ref={registerName}
                   />
                 </div>
+                {errorsName.firstName && (
+                  <p className="textError">{errorsName.firstName?.message}</p>
+                )}
 
                 <div className="settings__input">
                   <FontAwesomeIcon icon={faUser} />
@@ -149,6 +176,11 @@ const Settings = () => {
                     ref={registerName}
                   />
                 </div>
+                {errorsName.lastName && (
+                  <p className="textError">
+                    {errorsPassword.lastName?.message}
+                  </p>
+                )}
 
                 <button type="submit" className="btn btn-warning">
                   Save
@@ -161,12 +193,21 @@ const Settings = () => {
               id="changeUsername"
             >
               <h4>Change username</h4>
-              <form>
+              <form onSubmit={handleSubmitUsername(submitChangeUsername)}>
                 <div className="settings__input">
                   <FontAwesomeIcon icon={faUserTag} />
-                  <input type="text" name="username" placeholder="Username" />
+                  <input
+                    type="text"
+                    name="username"
+                    placeholder="Username"
+                    ref={registerUsername}
+                  />
                 </div>
-
+                {errorsUsername.username && (
+                  <p className="textError">
+                    {errorsUsername.username?.message}
+                  </p>
+                )}
                 <button type="submit" className="btn btn-warning">
                   Save
                 </button>
@@ -178,11 +219,19 @@ const Settings = () => {
               id="changeEmail"
             >
               <h4>Change email</h4>
-              <form>
+              <form onSubmit={handleSubmitEmail(submitChangeEmail)}>
                 <div className="settings__input">
                   <FontAwesomeIcon icon={faEnvelope} />
-                  <input type="email" name="email" placeholder="Email" />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email"
+                    ref={registerEmail}
+                  />
                 </div>
+                {errorsEmail.email && (
+                  <p className="textError">{errorsEmail.email?.message}</p>
+                )}
                 <button type="submit" className="btn btn-warning">
                   Save
                 </button>
@@ -194,31 +243,49 @@ const Settings = () => {
               id="changePassword"
             >
               <h4>Change Password</h4>
-              <form>
+              <form onSubmit={handleSubmitPassword(submitChangePassword)}>
                 <div className="settings__input">
                   <FontAwesomeIcon icon={faLock} />
                   <input
                     type="password"
                     name="oldPassword"
                     placeholder="Old Password"
+                    ref={registerPassword}
                   />
                 </div>
+                {errorsPassword.oldPassword && (
+                  <p className="textError">
+                    {errorsPassword.oldPassword?.message}
+                  </p>
+                )}
                 <div className="settings__input">
                   <FontAwesomeIcon icon={faLock} />
                   <input
                     type="password"
                     name="newPassword"
                     placeholder="New Password"
+                    ref={registerPassword}
                   />
                 </div>
+                {errorsPassword.newPassword && (
+                  <p className="textError">
+                    {errorsPassword.newPassword?.message}
+                  </p>
+                )}
                 <div className="settings__input">
                   <FontAwesomeIcon icon={faLock} />
                   <input
                     type="password"
-                    name="confirmPassword"
+                    name="confirmedPassword"
                     placeholder="Confirm Password"
+                    ref={registerPassword}
                   />
                 </div>
+                {errorsPassword.confirmedPassword && (
+                  <p className="textError">
+                    {errorsPassword.confirmedPassword?.message}
+                  </p>
+                )}
 
                 <button type="submit" className="btn btn-warning">
                   Save

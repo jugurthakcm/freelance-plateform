@@ -214,13 +214,13 @@ exports.editName = (req, res) => {
 exports.editUsername = (req, res) => {
   //Validate the username
   const { error, value } = usernameValidation(req.body);
-  if (error) res.status(400).send(error.details[0].message);
+  if (error) res.status(500).json({ error: error.details[0].message });
 
   const { username } = value;
 
-  User.findOneAndUpdate({ _id: req.userId }, { username })
-    .then(() => res.status(200).send('Username changed successfully'))
-    .catch((err) => res.status(400).send(err));
+  User.findByIdAndUpdate(req.userId, { username }, { new: true })
+    .then((user) => res.status(200).json({ user }))
+    .catch((error) => res.status(500).json({ error }));
 };
 
 /**
@@ -232,12 +232,12 @@ exports.editUsername = (req, res) => {
 exports.editEmail = (req, res) => {
   //Validate the email
   const { error, value } = emailValidation(req.body);
-  if (error) res.status(400).send(error.details[0].message);
+  if (error) res.status(500).json({ error: error.details[0].message });
 
   const { email } = value;
-  User.findOneAndUpdate({ _id: req.userId }, { email })
-    .then(() => res.status(200).send('Email changed successfully'))
-    .catch((err) => res.status(400).send(err));
+  User.findByIdAndUpdate(req.userId, { email }, { new: true })
+    .then((user) => res.status(200).json({ user }))
+    .catch((err) => res.status(500).json(err));
 };
 
 /**
@@ -266,11 +266,11 @@ exports.editPassword = async (req, res) => {
     const hash = await bcrypt.hash(newPassword, salt);
 
     user
-      .updateOne({ password: hash })
-      .then(() => res.status(200).send('Password changed successfully'))
-      .catch((err) => res.status(400).send(err));
+      .updateOne({ password: hash }, { new: true })
+      .then((user) => res.status(200).json({ user }))
+      .catch((error) => res.status(400).json({ error }));
   } catch (error) {
-    res.status(400).send(error);
+    res.status(500).json({ error });
   }
 };
 
