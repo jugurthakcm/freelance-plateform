@@ -196,7 +196,8 @@ exports.updateSkills = async (req, res) => {
 exports.editName = (req, res) => {
   //Validate the name
   const { error, value } = nameValidation(req.body);
-  if (error) res.status(500).error({ error: error.details[0].message });
+  if (error)
+    res.status(500).error({ field: 'name', error: error.details[0].message });
 
   const { firstName, lastName } = value;
 
@@ -214,7 +215,10 @@ exports.editName = (req, res) => {
 exports.editUsername = (req, res) => {
   //Validate the username
   const { error, value } = usernameValidation(req.body);
-  if (error) res.status(500).json({ error: error.details[0].message });
+  if (error)
+    res
+      .status(500)
+      .json({ field: 'username', error: error.details[0].message });
 
   const { username } = value;
 
@@ -229,15 +233,23 @@ exports.editUsername = (req, res) => {
  * @params {email}
  */
 
-exports.editEmail = (req, res) => {
-  //Validate the email
-  const { error, value } = emailValidation(req.body);
-  if (error) res.status(500).json({ error: error.details[0].message });
+exports.editEmail = async (req, res) => {
+  try {
+    //Validate the email
+    const { error, value } = emailValidation(req.body);
+    if (error) throw { field: 'email', error: error.details[0].message };
 
-  const { email } = value;
-  User.findByIdAndUpdate(req.userId, { email }, { new: true })
-    .then((user) => res.status(200).json({ user }))
-    .catch((err) => res.status(500).json(err));
+    const { email } = value;
+
+    const emailExists = await User.findOne({ email });
+    if (emailExists) throw { field: 'email', error: 'Email already exists' };
+
+    User.findByIdAndUpdate(req.userId, { email }, { new: true })
+      .then((user) => res.status(200).json({ user }))
+      .catch((err) => res.status(500).json(err));
+  } catch (error) {
+    res.status(500).json({ error });
+  }
 };
 
 /**
@@ -249,18 +261,20 @@ exports.editEmail = (req, res) => {
 exports.editPassword = async (req, res) => {
   try {
     const { error, value } = passwordValidation(req.body);
-    if (error) throw error;
+    if (error) throw { field: 'password', error };
 
     const { newPassword, confirmedPassword } = value;
 
     const { oldPassword } = req.body;
 
-    if (newPassword !== confirmedPassword) throw 'Passwords must be equals';
+    if (newPassword !== confirmedPassword)
+      throw { field: 'password', error: 'Passwords must be equals' };
 
     const user = await User.findOne({ _id: req.userId });
 
     const comparePassword = await bcrypt.compare(oldPassword, user.password);
-    if (!comparePassword) throw 'Wrong password';
+    if (!comparePassword)
+      throw { field: 'oldPassword', error: 'Wrong password' };
 
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(newPassword, salt);

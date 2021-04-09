@@ -127,6 +127,8 @@ const Settings = () => {
     dispatch(changePassword(e, token));
   };
 
+  const e = user.error;
+
   return (
     <>
       <Navbar />
@@ -154,33 +156,40 @@ const Settings = () => {
             >
               <h4>Change name</h4>
               <form onSubmit={handleSubmitName(submitChangeName)}>
-                <div className="settings__input">
-                  <FontAwesomeIcon icon={faUser} />
-                  <input
-                    type="text"
-                    name="firstName"
-                    placeholder="First name"
-                    ref={registerName}
-                  />
+                <div className="mb-2">
+                  <div className="settings__input">
+                    <FontAwesomeIcon icon={faUser} />
+                    <input
+                      type="text"
+                      name="firstName"
+                      placeholder="First name"
+                      ref={registerName}
+                    />
+                  </div>
+                  {errorsName.firstName && (
+                    <p className="textError">{errorsName.firstName?.message}</p>
+                  )}
                 </div>
-                {errorsName.firstName && (
-                  <p className="textError">{errorsName.firstName?.message}</p>
-                )}
 
-                <div className="settings__input">
-                  <FontAwesomeIcon icon={faUser} />
-                  <input
-                    type="text"
-                    name="lastName"
-                    placeholder="Last name"
-                    ref={registerName}
-                  />
+                <div className="mb-2">
+                  <div className="settings__input">
+                    <FontAwesomeIcon icon={faUser} />
+                    <input
+                      type="text"
+                      name="lastName"
+                      placeholder="Last name"
+                      ref={registerName}
+                    />
+                  </div>
+                  {errorsName.lastName && (
+                    <p className="textError">
+                      {errorsPassword.lastName?.message}
+                    </p>
+                  )}
+                  {e && e.field === 'name' && (
+                    <p className="textError">{e.error}</p>
+                  )}
                 </div>
-                {errorsName.lastName && (
-                  <p className="textError">
-                    {errorsPassword.lastName?.message}
-                  </p>
-                )}
 
                 <button type="submit" className="btn btn-warning">
                   Save
@@ -194,20 +203,26 @@ const Settings = () => {
             >
               <h4>Change username</h4>
               <form onSubmit={handleSubmitUsername(submitChangeUsername)}>
-                <div className="settings__input">
-                  <FontAwesomeIcon icon={faUserTag} />
-                  <input
-                    type="text"
-                    name="username"
-                    placeholder="Username"
-                    ref={registerUsername}
-                  />
+                <div className="mb-2">
+                  <div className="settings__input">
+                    <FontAwesomeIcon icon={faUserTag} />
+                    <input
+                      type="text"
+                      name="username"
+                      placeholder="Username"
+                      ref={registerUsername}
+                    />
+                  </div>
+                  {errorsUsername.username && (
+                    <p className="textError">
+                      {errorsUsername.username?.message}
+                    </p>
+                  )}
+                  {e && e.field === 'username' && (
+                    <p className="textError">{e.error}</p>
+                  )}
                 </div>
-                {errorsUsername.username && (
-                  <p className="textError">
-                    {errorsUsername.username?.message}
-                  </p>
-                )}
+
                 <button type="submit" className="btn btn-warning">
                   Save
                 </button>
@@ -220,18 +235,24 @@ const Settings = () => {
             >
               <h4>Change email</h4>
               <form onSubmit={handleSubmitEmail(submitChangeEmail)}>
-                <div className="settings__input">
-                  <FontAwesomeIcon icon={faEnvelope} />
-                  <input
-                    type="email"
-                    name="email"
-                    placeholder="Email"
-                    ref={registerEmail}
-                  />
+                <div className="mb-2">
+                  <div className="settings__input">
+                    <FontAwesomeIcon icon={faEnvelope} />
+                    <input
+                      type="email"
+                      name="email"
+                      placeholder="Email"
+                      ref={registerEmail}
+                    />
+                  </div>
+                  {errorsEmail.email && (
+                    <p className="textError">{errorsEmail.email?.message}</p>
+                  )}
+                  {e && e.field === 'email' && (
+                    <p className="textError">{e.error}</p>
+                  )}
                 </div>
-                {errorsEmail.email && (
-                  <p className="textError">{errorsEmail.email?.message}</p>
-                )}
+
                 <button type="submit" className="btn btn-warning">
                   Save
                 </button>
@@ -244,48 +265,62 @@ const Settings = () => {
             >
               <h4>Change Password</h4>
               <form onSubmit={handleSubmitPassword(submitChangePassword)}>
-                <div className="settings__input">
-                  <FontAwesomeIcon icon={faLock} />
-                  <input
-                    type="password"
-                    name="oldPassword"
-                    placeholder="Old Password"
-                    ref={registerPassword}
-                  />
+                <div className="mb-2">
+                  <div className="settings__input">
+                    <FontAwesomeIcon icon={faLock} />
+                    <input
+                      type="password"
+                      name="oldPassword"
+                      placeholder="Old Password"
+                      ref={registerPassword}
+                    />
+                  </div>
+                  {errorsPassword.oldPassword && (
+                    <p className="textError">
+                      {errorsPassword.oldPassword?.message}
+                    </p>
+                  )}
+                  {e && e.field === 'oldPassword' && (
+                    <p className="textError">{e.error}</p>
+                  )}
                 </div>
-                {errorsPassword.oldPassword && (
-                  <p className="textError">
-                    {errorsPassword.oldPassword?.message}
-                  </p>
-                )}
-                <div className="settings__input">
-                  <FontAwesomeIcon icon={faLock} />
-                  <input
-                    type="password"
-                    name="newPassword"
-                    placeholder="New Password"
-                    ref={registerPassword}
-                  />
+
+                <div className="mb-2">
+                  <div className="settings__input">
+                    <FontAwesomeIcon icon={faLock} />
+                    <input
+                      type="password"
+                      name="newPassword"
+                      placeholder="New Password"
+                      ref={registerPassword}
+                    />
+                  </div>
+                  {errorsPassword.newPassword && (
+                    <p className="textError">
+                      {errorsPassword.newPassword?.message}
+                    </p>
+                  )}
                 </div>
-                {errorsPassword.newPassword && (
-                  <p className="textError">
-                    {errorsPassword.newPassword?.message}
-                  </p>
-                )}
-                <div className="settings__input">
-                  <FontAwesomeIcon icon={faLock} />
-                  <input
-                    type="password"
-                    name="confirmedPassword"
-                    placeholder="Confirm Password"
-                    ref={registerPassword}
-                  />
+
+                <div className="mb-2">
+                  <div className="settings__input">
+                    <FontAwesomeIcon icon={faLock} />
+                    <input
+                      type="password"
+                      name="confirmedPassword"
+                      placeholder="Confirm Password"
+                      ref={registerPassword}
+                    />
+                  </div>
+                  {errorsPassword.confirmedPassword && (
+                    <p className="textError">
+                      {errorsPassword.confirmedPassword?.message}
+                    </p>
+                  )}
+                  {e && e.field === 'password' && (
+                    <p className="textError">{e.error}</p>
+                  )}
                 </div>
-                {errorsPassword.confirmedPassword && (
-                  <p className="textError">
-                    {errorsPassword.confirmedPassword?.message}
-                  </p>
-                )}
 
                 <button type="submit" className="btn btn-warning">
                   Save
