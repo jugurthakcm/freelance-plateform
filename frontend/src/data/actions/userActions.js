@@ -193,3 +193,23 @@ export const updateSkills = (skills, token) => (dispatch) =>
     .catch((err) => {
       dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
     });
+
+export const changeName = ({ firstName, lastName }, token) => (dispatch) => {
+  axios
+    .put(
+      '/settings/name/edit',
+      { firstName, lastName },
+      {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: userActionTypes.UPDATE_SUCCESS, payload: res });
+      window.location.reload();
+    })
+    .catch((err) => {
+      dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
+    });
+};

@@ -22,6 +22,7 @@
   color: var(--black);
   font-size: 3rem;
   text-align: center;
+  margin-bottom: 2rem;
 }
 
 .main__buttons {
@@ -29,6 +30,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
+  margin-top: 2rem;
 }
 
 .main__buttons button {

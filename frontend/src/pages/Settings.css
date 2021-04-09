@@ -8,13 +8,12 @@
 
 .settings__aside div {
   position: fixed;
-  width: inherit;
 }
 
 .settings__aside h5::after {
   content: '';
   display: block;
-  width: 60%;
+  width: 120%;
   height: 1px;
   /* border: 1px solid var(--black); */
   background-color: var(--black);

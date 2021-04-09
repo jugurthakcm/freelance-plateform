@@ -196,13 +196,13 @@ exports.updateSkills = async (req, res) => {
 exports.editName = (req, res) => {
   //Validate the name
   const { error, value } = nameValidation(req.body);
-  if (error) res.status(400).send(error.details[0].message);
+  if (error) res.status(500).error({ error: error.details[0].message });
 
   const { firstName, lastName } = value;
 
-  User.findOneAndUpdate({ _id: req.userId }, { firstName, lastName })
-    .then(() => res.status(200).send('Name changed successfully'))
-    .catch((err) => res.status(400).send(err));
+  User.findByIdAndUpdate(req.userId, { firstName, lastName }, { new: true })
+    .then((user) => res.status(200).json({ user }))
+    .catch((error) => res.status(500).json({ error }));
 };
 
 /**

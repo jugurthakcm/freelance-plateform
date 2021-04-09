@@ -10,11 +10,19 @@ import {
   faTrashAlt,
 } from '@fortawesome/free-solid-svg-icons';
 import { useLanguageContext } from '../ContextAPI/LanguageProvider';
+import { useDispatch, useSelector } from 'react-redux';
+import { useForm } from 'react-hook-form';
+import { joiResolver } from '@hookform/resolvers/joi';
+import Joi from 'joi';
+import { changeName } from '../data/actions/userActions';
 
 const Settings = () => {
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user);
+  const token = user && user.token;
+
   const handleScroll = (id) => {
     const el = document.getElementById(id);
-    console.log(el.scrollHeight);
     window.scrollTo(0, el.offsetTop - 100);
   };
 
@@ -24,6 +32,76 @@ const Settings = () => {
     localStorage.setItem('language', JSON.stringify({ language }));
     dispatchLanguage({ type: language, language });
   };
+
+  //Change Name Form Handle
+  const schemaName = Joi.object({
+    firstName: Joi.string().trim().min(2).max(30).required(),
+    lastName: Joi.string().trim().min(2).max(30).required(),
+  });
+
+  const {
+    register: registerName,
+    handleSubmit: handleSubmitName,
+    errors: errorsName,
+  } = useForm({
+    resolver: joiResolver(schemaName),
+  });
+
+  const submitChangeName = (e) => {
+    dispatch(changeName(e, token));
+  };
+
+  /* //Change username Form Handle
+  const schemaUsername = Joi.object({
+    username: Joi.string().trim().min(2).max(30).required(),
+  });
+
+  const {
+    register: registerUsername,
+    handleSubmit: handleSubmitUsername,
+    errors: errorsUsername,
+  } = useForm({
+    resolver: joiResolver(schemaName),
+  });
+
+  const submitChangeUsername = (e) => {
+    dispatch(changeName(e, token));
+  };
+
+  //Change Name Form Handle
+  const schemaName = Joi.object({
+    firstName: Joi.string().trim().min(2).max(30).required(),
+    lastName: Joi.string().trim().min(2).max(30).required(),
+  });
+
+  const {
+    register: registerName,
+    handleSubmit: handleSubmitName,
+    errors: errorsName,
+  } = useForm({
+    resolver: joiResolver(schemaName),
+  });
+
+  const submitChangeName = (e) => {
+    dispatch(changeName(e, token));
+  };
+  //Change Name Form Handle
+  const schemaName = Joi.object({
+    firstName: Joi.string().trim().min(2).max(30).required(),
+    lastName: Joi.string().trim().min(2).max(30).required(),
+  });
+
+  const {
+    register: registerName,
+    handleSubmit: handleSubmitName,
+    errors: errorsName,
+  } = useForm({
+    resolver: joiResolver(schemaName),
+  });
+
+  const submitChangeName = (e) => {
+    dispatch(changeName(e, token));
+  }; */
 
   return (
     <>
@@ -51,19 +129,25 @@ const Settings = () => {
               id="changeName"
             >
               <h4>Change name</h4>
-              <form>
+              <form onSubmit={handleSubmitName(submitChangeName)}>
                 <div className="settings__input">
                   <FontAwesomeIcon icon={faUser} />
                   <input
                     type="text"
                     name="firstName"
                     placeholder="First name"
+                    ref={registerName}
                   />
                 </div>
 
                 <div className="settings__input">
                   <FontAwesomeIcon icon={faUser} />
-                  <input type="text" name="lastName" placeholder="Last name" />
+                  <input
+                    type="text"
+                    name="lastName"
+                    placeholder="Last name"
+                    ref={registerName}
+                  />
                 </div>
 
                 <button type="submit" className="btn btn-warning">
