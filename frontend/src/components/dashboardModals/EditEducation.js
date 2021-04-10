@@ -26,16 +26,18 @@ const EditEducation = ({ data }) => {
     resolver: joiResolver(schema),
   });
 
+  const e = user.error;
+
   const submitForm = (e) => {
     user.token && dispatch(updateEducation(data.id, e, user.token));
-    const modal = new bootstrapBundle.Modal(
-      document.getElementById('EditEducationModal')
-    );
+    if (!e) {
+      const modal = new bootstrapBundle.Modal(
+        document.getElementById('EditEducationModal')
+      );
 
-    hideModal(modal);
+      hideModal(modal);
+    }
   };
-
-  const e = user.error;
 
   return (
     <div

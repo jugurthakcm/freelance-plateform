@@ -50,6 +50,7 @@ const userReducer = (state = initialState, action) => {
         ...state,
         user: action.payload.data.user[0],
         isLoading: false,
+        error: null,
       };
 
     case userActionTypes.ERROR_LOAD_USER:
@@ -72,6 +73,7 @@ const userReducer = (state = initialState, action) => {
       return {
         ...state,
         user: action.payload.data.user,
+        error: null,
       };
 
     case userActionTypes.UPDATE_ERROR:

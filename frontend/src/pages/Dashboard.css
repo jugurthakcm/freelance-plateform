@@ -198,6 +198,10 @@
   color: var(--yellow);
 }
 
+.dashboard__right {
+  padding-right: 0 !important;
+}
+
 .education__school h6 {
   font-size: 18px;
   font-weight: 600;
@@ -306,10 +310,6 @@
   color: var(--yellow);
 } */
 
-.dashboard__gigs {
-  margin-top: 50px !important;
-}
-
 .dashboard__gigs .row span {
   position: unset !important;
 }
@@ -370,4 +370,10 @@
 
 .dashboard .store__gig img {
   width: 275px;
+}
+
+@media (max-width: 768px) {
+  .dashboard__right {
+    padding-left: 0 !important;
+  }
 }

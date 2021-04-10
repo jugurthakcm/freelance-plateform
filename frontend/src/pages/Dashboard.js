@@ -81,7 +81,7 @@ const Dashboard = () => {
           <Avatar imageSrc={imageSrc} imageSrcExt={imageSrcExt} />
           <Navbar />
           {u && !u.confirmedEmail && (
-            <div className="dashboard__confirmEmail container" role="alert">
+            <div className="dashboard__confirmEmail container">
               <h5>Important !</h5>
               <p>
                 A confirmation email was sent to your adress mail, please
@@ -92,7 +92,7 @@ const Dashboard = () => {
 
           <div className="dashboard__container container">
             <div className="row">
-              <div className="dashboard__user dashboard col-4">
+              <div className="dashboard__user dashboard col-md-4 mb-3">
                 <div className="dashboard__userTop">
                   <div
                     className="user__image"
@@ -252,7 +252,7 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              <div className="dashboard__right col-8">
+              <div className="dashboard__right col-md-8">
                 <div className="dashboard__education dashboard mb-3">
                   <div className="dashboard__title mb-4">
                     <h5>Education</h5>
@@ -330,7 +330,7 @@ const Dashboard = () => {
               </div>
             </div>
 
-            <div className="row">
+            <div className="row mt-3">
               <div className="dashboard dashboard__gigs">
                 <div className="dashboard__gigsHeader">
                   <h2>My Gigs</h2>

@@ -29,16 +29,18 @@ const AddEducation = () => {
 
   const submitForm = (e) => {
     user.token && dispatch(updateEducation(uuidv4(), e, user.token));
-    const modal = new bootstrapBundle.Modal(
-      document.getElementById('EducationModal')
-    );
+    if (!e) {
+      const modal = new bootstrapBundle.Modal(
+        document.getElementById('EducationModal')
+      );
 
-    hideModal(modal);
-    setValue('school', null);
-    setValue('degree', null);
-    setValue('yearStart', 'From');
-    setValue('yearEnd', 'To');
-    setValue('areaOfStudy', null);
+      hideModal(modal);
+      setValue('school', null);
+      setValue('degree', null);
+      setValue('yearStart', 'From');
+      setValue('yearEnd', 'To');
+      setValue('areaOfStudy', null);
+    }
   };
 
   const e = user.error;
