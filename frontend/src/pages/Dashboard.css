@@ -1,18 +1,38 @@
 .dashboard__confirmEmail {
   margin-top: 100px;
+  background-color: #f50057;
+  color: white;
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.dashboard__confirmEmail h5 {
+  color: white;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 17px;
+}
+
+.dashboard__confirmEmail p {
+  color: white;
+  font-weight: 500;
+  font-size: 15px;
 }
 
 .dashboard {
-  margin-top: 100px;
   padding: 2rem 2rem !important;
-  border-radius: 0.5rem;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 0.3rem;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
   border: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-.dashboard__user {
+.dashboard__userTop {
   display: flex;
   align-items: center;
+  flex-direction: column;
+  justify-content: center;
   /* border-bottom: 1px solid rgba(0, 0, 0, 0.3); */
   padding-bottom: 1rem;
   margin-bottom: 1rem;
@@ -38,8 +58,8 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100px;
-  height: 100px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   background-color: rgba(0, 0, 0, 0.5);
   font-weight: 500;
@@ -52,15 +72,150 @@
   color: white;
 }
 
-.user__info h4 {
+.user__info {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+.user__info h5 {
   font-weight: 600;
+  margin-bottom: 5px;
 }
 
-.user__info p {
+.user__title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: darkgray;
+  font-weight: 500;
+  margin-bottom: 0;
+}
+
+.user__title .dashboard__editBtn {
+  background-color: white;
+}
+
+.user__title .dashboard__editBtn path {
+  color: darkgray;
+}
+
+.dashboard__editBtn {
+  border: none;
+  font-size: 15px;
+}
+
+.user__description {
   font-size: 14px;
+  font-weight: 500;
+  margin-top: 2rem;
+  color: var(--black);
+  text-align: justify;
 }
 
-.dashboard__main h5 {
+.dashboard__editBtn {
+  background-color: var(--yellow);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  width: 25px;
+  font-size: 14px;
+  padding-left: 2px;
+  padding-bottom: 1px;
+}
+
+.dashboard__editBtn path {
+  color: var(--black);
+}
+
+.dashboard__title {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  justify-content: space-between;
+}
+
+.dashboard__title h5 {
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.dashboard__title h5::after {
+  content: '';
+  display: block;
+  background-color: var(--yellow);
+  height: 4px;
+  width: 100%;
+  margin-bottom: 0.3rem;
+  border-radius: 10px;
+}
+
+.sidebar__languages li {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.sidebar__languages span {
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.presentation__skills li {
+  display: inline-block;
+  margin-right: 0.5rem;
+  padding: 0.4rem 1rem;
+  background-color: var(--yellow);
+  font-weight: 500;
+  border-radius: 1rem;
+  font-size: 14px;
+  margin-top: 0.5rem;
+}
+
+.dashboard__completeProfile {
+  font-size: 13px;
+  background-color: var(--black);
+  border-radius: 0.5rem;
+  color: var(--yellow);
+  padding: 0.5rem 0.8rem;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  text-align: left !important;
+  margin-bottom: 5px;
+}
+
+.dashboard__completeProfile svg {
+  cursor: default;
+}
+
+.dashboard__completeProfile svg path {
+  color: var(--yellow);
+  cursor: default;
+}
+
+.dashboard__completeProfile svg:hover path {
+  color: var(--yellow);
+}
+
+.education__school h6 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.education__details {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.education__year {
+  font-size: 13px;
+  font-weight: 500;
+  color: gray;
+}
+
+/* .dashboard__main h5 {
   font-weight: 600;
   font-size: 18px;
 }
@@ -79,19 +234,9 @@
   color: rgba(0, 0, 0, 0.5);
 }
 
-.dashboard__title {
-  display: flex;
-  align-items: flex-start;
-}
 
-.dashboard__title h5::after {
-  content: '';
-  display: block;
-  background-color: var(--yellow);
-  height: 5px;
-  width: 100%;
-  margin-bottom: 0.3rem;
-}
+
+
 
 .presentation__hourlyRate h5::after {
   display: none;
@@ -146,26 +291,7 @@
   font-size: 14px;
 }
 
-.presentation__skills li {
-  display: inline-block;
-  margin-right: 0.5rem;
-  padding: 0.4rem 1rem;
-  background-color: var(--yellow);
-  font-weight: 500;
-  border-radius: 1rem;
-  font-size: 14px;
-}
 
-.dashboard__completeProfile {
-  font-size: 13px;
-  background-color: var(--black);
-  border-radius: 0.5rem;
-  color: var(--yellow);
-  padding: 0.5rem 0.8rem;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-}
 
 .dashboard__completeProfile svg {
   cursor: default;
@@ -178,7 +304,7 @@
 
 .dashboard__completeProfile svg:hover path {
   color: var(--yellow);
-}
+} */
 
 .dashboard__gigs {
   margin-top: 50px !important;
