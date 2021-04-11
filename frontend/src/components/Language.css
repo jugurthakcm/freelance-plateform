@@ -24,11 +24,11 @@
   justify-content: space-around;
   height: 230px;
   width: 300px;
-  background-color: rgb(245, 245, 245);
+  background-color: white;
   z-index: 999;
   list-style: none;
   border-radius: 1rem;
-  padding: 20px 25px;
+  padding: 1rem !important;
 }
 
 .language__item {

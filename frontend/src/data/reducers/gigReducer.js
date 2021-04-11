@@ -4,6 +4,7 @@ const initialState = {
   success: null,
   error: null,
   myGigs: null,
+  exploreGigs: null,
 };
 
 const gigReducer = (state = initialState, action) => {
@@ -25,6 +26,13 @@ const gigReducer = (state = initialState, action) => {
         ...state,
         success: action.payload.data.message,
         myGigs: action.payload.data.data,
+      };
+
+    case gigActionTypes.EXPLORE_GIGS:
+      return {
+        ...state,
+        success: action.payload.data.message,
+        exploreGigs: action.payload.data.gigs,
       };
 
     default:

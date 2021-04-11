@@ -1,5 +1,6 @@
 const { Category } = require('../models/Category');
 const { Gig } = require('../models/Gig');
+const { User } = require('../models/User');
 const { uploadGigsImagesUtil } = require('../util');
 const {
   gigValidation,
@@ -24,6 +25,11 @@ exports.addGig = async (req, res) => {
     if (!categoryDB) throw "This category doesn't exist";
     const category = categoryDB.title;
 
+    const userDB = await User.findById(req.userId);
+
+    if (!userDB) throw "This user doesn't exist";
+    const user = userDB.firstName + ' ' + userDB.lastName;
+
     Gig.create({
       title,
       category: {
@@ -31,7 +37,7 @@ exports.addGig = async (req, res) => {
         id: categoryId,
       },
       price,
-      sellerId: req.userId,
+      seller: { id: req.userId, name: user },
       deliveryTime,
       description,
     })
@@ -62,7 +68,7 @@ exports.deleteGig = async (req, res) => {
     //Delete the gig
     const deletedGig = await Gig.findByIdAndRemove(id);
 
-    Gig.find({ sellerId: req.userId })
+    Gig.find({ 'seller.id': req.userId })
       .then((data) => res.status(200).json({ data }))
       .catch(() =>
         res.status(500).json({ error: 'Error during fetching gigs' })
@@ -79,7 +85,8 @@ exports.deleteGig = async (req, res) => {
  * @params {userId}
  */
 exports.getMyGigs = (req, res) => {
-  Gig.find({ sellerId: req.userId })
+  Gig.find({ 'seller.id': req.userId })
+    .sort({ createdAt: -1 })
     .then((data) => res.status(200).json({ data }))
     .catch(() => res.status(500).json({ error: 'Error during fetching gigs' }));
 };
@@ -132,12 +139,15 @@ exports.editMyGig = async (req, res) => {
     if (!category) throw "This category doesn't exist";
     const categoryTitle = category.title;
 
-    const gig = await Gig.findOne({ _id: req.params.id, sellerId: req.userId });
+    const gig = await Gig.findOne({
+      _id: req.params.id,
+      'seller.id': req.userId,
+    });
 
     if (!gig) throw "This gig doesn't exist";
 
     Gig.findOneAndUpdate(
-      { _id: req.params.id, sellerId: req.userId },
+      { _id: req.params.id, seller: { id: req.userId } },
       {
         title,
         price,
@@ -164,9 +174,14 @@ exports.editMyGig = async (req, res) => {
  * @params {userId}
  */
 exports.exploreGigs = (req, res) => {
-  Gig.find({ sellerId: { $ne: req.userId }, confirmed: true, pending: false })
-    .then((data) => res.status(200).send(data))
-    .catch(() => res.status(500).send('Error fetching gigs'));
+  Gig.find({
+    'seller.id': { $ne: req.userId },
+    confirmed: true,
+    pending: false,
+  })
+    .sort({ createdAt: -1 })
+    .then((gigs) => res.status(200).json({ gigs }))
+    .catch((error) => res.status(500).json({ error }));
 };
 
 /**

@@ -13,11 +13,19 @@ const gigSchema = mongoose.Schema({
     min: 1,
     max: 1500,
   },
-  sellerId: {
-    type: String,
-    required: true,
-    min: 1,
-    max: 50,
+  seller: {
+    id: {
+      type: String,
+      required: true,
+      min: 1,
+      max: 50,
+    },
+    name: {
+      type: String,
+      required: true,
+      min: 1,
+      max: 50,
+    },
   },
   category: {
     id: {

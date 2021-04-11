@@ -24,13 +24,13 @@ router.post('/add', auth, addGig);
 
 router.post('/delete', auth, deleteGig);
 
-router.get('/:id', getGig);
-
-router.put('/:id/edit', auth, editMyGig);
-
 router.get('/explore/:category', auth, filterGigsPerCategory);
 
 router.get('/explore', auth, exploreGigs);
+
+router.get('/:id', getGig);
+
+router.put('/:id/edit', auth, editMyGig);
 
 router.put('/:id/rate', auth, rateGig);
 

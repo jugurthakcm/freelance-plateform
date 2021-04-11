@@ -110,3 +110,16 @@ export const editGig = (
         .catch((err) => dispatch({ type: gigActionTypes.ERROR, payload: err }));
     })
     .catch((err) => dispatch({ type: gigActionTypes.ERROR, payload: err }));
+
+export const exploreGigs = (token) => (dispatch) => {
+  axios
+    .get('/gigs/explore', {
+      headers: {
+        authorization: 'Bearer ' + token,
+      },
+    })
+    .then((res) => {
+      dispatch({ type: gigActionTypes.EXPLORE_GIGS, payload: res });
+    })
+    .catch((err) => dispatch({ type: gigActionTypes.ERROR, payload: err }));
+};

@@ -22,7 +22,7 @@ import avatar from '../assets/images/avatar.jpg';
 import api from '../api';
 
 const Navbar = ({ navStore }) => {
-  const [categories, setCategories] = useState();
+  const [categories, setCategories] = useState([]);
   const user = useSelector((state) => state.user);
   const u = user.user;
 
