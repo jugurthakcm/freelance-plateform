@@ -6,12 +6,11 @@ const { User } = require('../models/User');
 const {
   registerValidation,
   loginValidation,
-  deleteSkillValidation,
   nameValidation,
   usernameValidation,
   emailValidation,
   passwordValidation,
-  skillsValidation,
+  experienceValidation,
   educationValidation,
 } = require('../validation/userValidation');
 const Joi = require('joi');
@@ -358,6 +357,74 @@ exports.deleteEducation = async (req, res) => {
     User.findByIdAndUpdate(
       req.userId,
       { education: newEducation },
+      { new: true }
+    )
+      .select('-password')
+      .then((user) => res.status(200).json({ user }))
+      .catch((error) => res.status(500).json({ error }));
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+};
+
+/**
+ * User update his experience
+ * /PUT
+ * @params {id, company, job, yearStart, yearEnd, areaOfWork}
+ */
+
+exports.updateExperience = async (req, res) => {
+  try {
+    const { error, value } = experienceValidation(req.body);
+    if (error)
+      throw {
+        field: error.details[0].path[0],
+        message: error.details[0].message,
+      };
+
+    const { id, company, job, yearStart, yearEnd, areaOfWork } = value;
+
+    if (yearStart > yearEnd)
+      throw {
+        field: 'year',
+        error: "Starting year can't be less than end year",
+      };
+
+    const user = await User.findOne({ _id: req.userId });
+
+    const newExperience = user.experience.filter((e) => e.id !== id);
+
+    newExperience.push({ id, company, job, yearStart, yearEnd, areaOfWork });
+
+    User.findByIdAndUpdate(
+      req.userId,
+      { experience: newExperience },
+      { new: true }
+    )
+      .select('-password')
+      .then((user) => res.status(200).json({ user }))
+      .catch((error) => res.status(500).json({ error }));
+  } catch (error) {
+    res.status(400).json({ error });
+  }
+};
+
+/**
+ * User deletes his experience
+ * /POST
+ * @params {id}
+ */
+
+exports.deleteExperience = async (req, res) => {
+  try {
+    const { id } = req.body;
+    const user = await User.findById(req.userId);
+
+    const newExperience = user.experience.filter((e) => e.id !== id);
+
+    User.findByIdAndUpdate(
+      req.userId,
+      { experience: newExperience },
       { new: true }
     )
       .select('-password')

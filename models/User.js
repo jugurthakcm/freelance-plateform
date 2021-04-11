@@ -54,6 +54,10 @@ const userSchema = mongoose.Schema({
     type: Array,
     default: [],
   },
+  experience: {
+    type: Array,
+    default: [],
+  },
   location: {
     type: String,
     default: '',

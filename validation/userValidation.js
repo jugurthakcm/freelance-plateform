@@ -170,3 +170,30 @@ exports.educationValidation = ({
     areaOfStudy,
   });
 };
+
+exports.experienceValidation = ({
+  id,
+  company,
+  job,
+  yearStart,
+  yearEnd,
+  areaOfWork,
+}) => {
+  const schema = Joi.object({
+    id: Joi.string().required().trim().min(1),
+    company: Joi.string().required().min(5).max(50),
+    job: Joi.string().required().min(3).max(50),
+    yearStart: Joi.number().required().integer().positive(),
+    yearEnd: Joi.number().required().integer().positive(),
+    areaOfWork: Joi.string().required().min(3).max(50),
+  });
+
+  return schema.validate({
+    id,
+    company,
+    job,
+    yearStart,
+    yearEnd,
+    areaOfWork,
+  });
+};
