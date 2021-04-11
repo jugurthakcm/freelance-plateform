@@ -1,6 +1,6 @@
 .navbar__sticky {
   background-color: white;
-  box-shadow: 0 5px 5px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   color: var(--black) !important;
   transition: all 0.5s;
 }
