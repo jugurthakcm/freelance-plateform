@@ -27,14 +27,14 @@ exports.register = async (req, res) => {
   try {
     const phone = phoneJoi
       .string()
+      .min(8)
+      .max(15)
       .phoneNumber({
         format: 'international',
       })
-      .min(7)
-      .max(15)
       .validate(req.body.phone);
 
-    if (phone.error) throw { field: 'phone', error: 'Invalid phone number' };
+    if (phone.error) throw { field: 'phone', error: phone.error };
 
     const { error, value } = registerValidation(req.body);
     if (error)

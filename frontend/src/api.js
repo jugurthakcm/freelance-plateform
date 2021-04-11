@@ -1,4 +1,4 @@
-const nodeEnv = 'production';
+const nodeEnv = 'developement';
 
 export default nodeEnv === 'developement'
   ? 'http://localhost:4000'
