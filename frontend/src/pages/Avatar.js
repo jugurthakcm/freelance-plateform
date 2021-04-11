@@ -9,11 +9,14 @@ import {
 } from '../util';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCamera } from '@fortawesome/free-solid-svg-icons';
+import { loadingActionTypes } from '../data/actionTypes';
+import { useDispatch } from 'react-redux';
 
 const Avatar = ({ imageSrc, imageSrcExt }) => {
   const [crop, setCrop] = useState({ x: 0, y: 0 });
   const [zoom, setZoom] = useState(1);
   const [image, setImage] = useState(null);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     setImage(imageSrc);
@@ -42,6 +45,8 @@ const Avatar = ({ imageSrc, imageSrcExt }) => {
       const formData = new FormData();
       formData.append('file', myNewCroppedFile);
 
+      dispatch({ type: loadingActionTypes.LOADING });
+
       axios
         .post('/avatar', formData, {
           headers: {
@@ -49,7 +54,10 @@ const Avatar = ({ imageSrc, imageSrcExt }) => {
             authorization: 'Bearer ' + localStorage.getItem('token'),
           },
         })
-        .then(() => window.location.reload())
+        .then(() => {
+          dispatch({ type: loadingActionTypes.NO_LOADING });
+          window.location.reload();
+        })
         .catch((err) => console.error(err.response));
     }
   };
