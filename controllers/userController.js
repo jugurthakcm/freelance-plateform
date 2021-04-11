@@ -30,7 +30,7 @@ exports.register = async (req, res) => {
       .phoneNumber({
         format: 'international',
       })
-      .min(8)
+      .min(7)
       .max(15)
       .validate(req.body.phone);
 
