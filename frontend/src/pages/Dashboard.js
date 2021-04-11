@@ -90,7 +90,7 @@ const Dashboard = () => {
             </div>
           )}
 
-          <div className="dashboard__container container">
+          <div className="dashboard__container container-lg">
             <div className="row">
               <div className="dashboard__user dashboard col-md-4 mb-3">
                 <div className="dashboard__userTop">
@@ -148,27 +148,20 @@ const Dashboard = () => {
                       </button>
                       <EditTitle />
                     </h6>
-                    <p className="user__description">
-                      {u && u.bio ? (
-                        u.bio
-                      ) : (
-                        <span className="dashboard__completeProfile">
-                          <FontAwesomeIcon
-                            icon={faExclamationCircle}
-                            className="me-2"
-                          />
-                          Add your description to complete your profile
-                        </span>
-                      )}
-                      <button
-                        type="button"
-                        data-bs-toggle="modal"
-                        data-bs-target="#editBioModal"
-                        className="dashboard__editBtn"
-                      >
-                        <FontAwesomeIcon icon={faPen} />
-                      </button>
-                    </p>
+                    <div className="user__description">
+                      <div className="dashboard__title">
+                        <h5>Description</h5>
+                        <button
+                          type="button"
+                          data-bs-toggle="modal"
+                          data-bs-target="#editBioModal"
+                          className="dashboard__editBtn"
+                        >
+                          <FontAwesomeIcon icon={faPen} />
+                        </button>
+                      </div>
+                      <p className="mb-2">{u && u.bio && u.bio}</p>
+                    </div>
                     <EditBio />
                   </div>
                 </div>
@@ -203,21 +196,13 @@ const Dashboard = () => {
                     </div>
 
                     <ul>
-                      {u && u.languages.length ? (
-                        u.languages.map((lang) => (
-                          <li key={lang.id}>
-                            {lang.language} : <span>{lang.level}</span>
-                          </li>
-                        ))
-                      ) : (
-                        <div className="dashboard__completeProfile">
-                          <FontAwesomeIcon
-                            icon={faExclamationCircle}
-                            className="me-2"
-                          />
-                          Add your languages to complete your profile
-                        </div>
-                      )}
+                      {u && u.languages.length
+                        ? u.languages.map((lang) => (
+                            <li key={lang.id}>
+                              {lang.language} : <span>{lang.level}</span>
+                            </li>
+                          ))
+                        : null}
                     </ul>
                   </div>
                   <div className="dashboard__section presentation__skills">
@@ -234,19 +219,11 @@ const Dashboard = () => {
                       <EditSkills />
                     </div>
                     <ul>
-                      {u && u.skills.length ? (
-                        u.skills.map((skill) => (
-                          <li key={skill.id}>{skill.skill}</li>
-                        ))
-                      ) : (
-                        <div className="dashboard__completeProfile">
-                          <FontAwesomeIcon
-                            icon={faExclamationCircle}
-                            className="me-2"
-                          />
-                          Add your skills to complete your profile
-                        </div>
-                      )}
+                      {u && u.skills.length
+                        ? u.skills.map((skill) => (
+                            <li key={skill.id}>{skill.skill}</li>
+                          ))
+                        : null}
                     </ul>
                   </div>
                 </div>
@@ -254,7 +231,7 @@ const Dashboard = () => {
 
               <div className="dashboard__right col-md-8">
                 <div className="dashboard__education dashboard mb-3">
-                  <div className="dashboard__title mb-4">
+                  <div className="dashboard__title">
                     <h5>Education</h5>
                     <button
                       type="button"
@@ -266,51 +243,43 @@ const Dashboard = () => {
                     </button>
                     <AddEducation />
                   </div>
-                  {u && u.education.length ? (
-                    u.education.sort(sortEducation).map((e) => (
-                      <div key={e.id} className="mb-2">
-                        <div className="education__school d-flex align-items-start justify-content-between">
-                          <h6>{e.school}</h6>
-                          <div className="d-flex align-items-center justify-content-between">
-                            <button
-                              type="button"
-                              data-bs-toggle="modal"
-                              data-bs-target={'#EditEducationModal' + e.id}
-                              className="dashboard__editBtn"
-                            >
-                              <FontAwesomeIcon icon={faPen} />
-                            </button>
-                            <button className="dashboard__editBtn ms-2">
-                              <FontAwesomeIcon
-                                icon={faTrash}
-                                onClick={() =>
-                                  dispatch(deleteEducation(e.id, user.token))
-                                }
-                              />
-                            </button>
+                  {u && u.education.length
+                    ? u.education.sort(sortEducation).map((e) => (
+                        <div key={e.id} className="mb-2">
+                          <div className="education__school d-flex align-items-start justify-content-between">
+                            <h6>{e.school}</h6>
+                            <div className="d-flex align-items-center justify-content-between">
+                              <button
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target={'#EditEducationModal' + e.id}
+                                className="dashboard__editBtn"
+                              >
+                                <FontAwesomeIcon icon={faPen} />
+                              </button>
+                              <button className="dashboard__editBtn ms-2">
+                                <FontAwesomeIcon
+                                  icon={faTrash}
+                                  onClick={() =>
+                                    dispatch(deleteEducation(e.id, user.token))
+                                  }
+                                />
+                              </button>
+                            </div>
                           </div>
+
+                          <EditEducation data={e} />
+
+                          <p className="education__details">
+                            {e.degree}, <br />
+                            {e.areaOfStudy}
+                          </p>
+                          <p className="education__year">
+                            {e.yearStart}-{e.yearEnd}
+                          </p>
                         </div>
-
-                        <EditEducation data={e} />
-
-                        <p className="education__details">
-                          {e.degree}, <br />
-                          {e.areaOfStudy}
-                        </p>
-                        <p className="education__year">
-                          {e.yearStart}-{e.yearEnd}
-                        </p>
-                      </div>
-                    ))
-                  ) : (
-                    <div className="dashboard__completeProfile">
-                      <FontAwesomeIcon
-                        icon={faExclamationCircle}
-                        className="me-2"
-                      />
-                      Add your education to complete your profile
-                    </div>
-                  )}
+                      ))
+                    : null}
                 </div>
 
                 <div className="dashboard__experience dashboard">
