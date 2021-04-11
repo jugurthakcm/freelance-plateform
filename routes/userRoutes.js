@@ -18,6 +18,8 @@ const {
   addLanguage,
   updateTitle,
   editAvatar,
+  updateExperience,
+  deleteExperience,
 } = require('../controllers/userController');
 const { auth } = require('../middlewares/authMiddleware');
 const { uploadAvatarUtil } = require('../util');
@@ -54,9 +56,13 @@ router.put('/settings/password/edit', auth, editPassword);
 //Delete user's account
 router.delete('/settings/account/delete', auth, deleteAccount);
 
-router.put('/education', auth, updateEducation);
+router.put('/education/update', auth, updateEducation);
 
-router.post('/education', auth, deleteEducation);
+router.post('/education/delete', auth, deleteEducation);
+
+router.put('/experience/update', auth, updateExperience);
+
+router.post('/experience/delete', auth, deleteExperience);
 
 router.post('/language', auth, addLanguage);
 

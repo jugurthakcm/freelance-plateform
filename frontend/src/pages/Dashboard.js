@@ -17,10 +17,16 @@ import './Dashboard.css';
 import EditLanguage from '../components/dashboardModals/EditLanguage';
 import AddLanguage from '../components/dashboardModals/AddLanguage';
 import AddEducation from '../components/dashboardModals/AddEducation';
+import AddExperience from '../components/dashboardModals/AddExperience';
 import EditTitle from '../components/dashboardModals/EditTitle';
 import EditBio from '../components/dashboardModals/EditBio';
-import { deleteEducation, loadUser } from '../data/actions/userActions';
+import {
+  deleteEducation,
+  deleteExperience,
+  loadUser,
+} from '../data/actions/userActions';
 import EditEducation from '../components/dashboardModals/EditEducation';
+import EditExperience from '../components/dashboardModals/EditExperience';
 import { sortEducation } from '../util';
 import EditSkills from '../components/dashboardModals/EditSkills';
 import Footer from '../components/Footer';
@@ -92,7 +98,7 @@ const Dashboard = () => {
 
           <div className="dashboard__container container-lg">
             <div className="row">
-              <div className="dashboard__user dashboard col-md-4 mb-3">
+              <div className="dashboard__user dashboard col-md-4">
                 <div className="dashboard__userTop">
                   <div
                     className="user__image"
@@ -293,8 +299,45 @@ const Dashboard = () => {
                     >
                       <FontAwesomeIcon icon={faPlus} />
                     </button>
-                    {/* <AddEducation /> */}
+                    <AddExperience />
                   </div>
+                  {u && u.experience.length
+                    ? u.experience.sort(sortEducation).map((e) => (
+                        <div key={e.id} className="mb-2">
+                          <div className="education__school d-flex align-items-start justify-content-between">
+                            <h6>{e.company}</h6>
+                            <div className="d-flex align-items-center justify-content-between">
+                              <button
+                                type="button"
+                                data-bs-toggle="modal"
+                                data-bs-target={'#EditExperienceModal' + e.id}
+                                className="dashboard__editBtn"
+                              >
+                                <FontAwesomeIcon icon={faPen} />
+                              </button>
+                              <button className="dashboard__editBtn ms-2">
+                                <FontAwesomeIcon
+                                  icon={faTrash}
+                                  onClick={() =>
+                                    dispatch(deleteExperience(e.id, user.token))
+                                  }
+                                />
+                              </button>
+                            </div>
+                          </div>
+
+                          <EditExperience data={e} />
+
+                          <p className="education__details">
+                            {e.job}, <br />
+                            {e.areaOfWork}
+                          </p>
+                          <p className="education__year">
+                            {e.yearStart}-{e.yearEnd}
+                          </p>
+                        </div>
+                      ))
+                    : null}
                 </div>
               </div>
             </div>

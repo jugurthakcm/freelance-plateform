@@ -1,6 +1,7 @@
 import axios from '../../axios';
 import { userActionTypes, loadingActionTypes } from '../actionTypes';
 
+//Register User
 export const registerUser = (e, phone) => (dispatch) => {
   dispatch({ type: loadingActionTypes.LOADING });
   const { firstName, lastName, username, email, password } = e;
@@ -24,6 +25,7 @@ export const registerUser = (e, phone) => (dispatch) => {
     });
 };
 
+//Login User
 export const loginUser = ({ email, password }) => (dispatch) => {
   dispatch({ type: loadingActionTypes.LOADING });
   axios
@@ -43,6 +45,7 @@ export const loginUser = ({ email, password }) => (dispatch) => {
     });
 };
 
+//Load user
 export const loadUser = (token) => (dispatch) => {
   dispatch({ type: userActionTypes.IS_LOADING });
   axios
@@ -57,11 +60,13 @@ export const loadUser = (token) => (dispatch) => {
     );
 };
 
+//Logout user
 export const logoutUser = () => (dispatch) => {
   localStorage.removeItem('token');
   dispatch({ type: userActionTypes.LOGOUT });
 };
 
+//Update Education
 export const updateEducation = (
   id,
   { school, degree, yearStart, yearEnd, areaOfStudy },
@@ -69,7 +74,7 @@ export const updateEducation = (
 ) => (dispatch) => {
   axios
     .put(
-      '/education',
+      '/education/update',
       { id, school, degree, yearStart, yearEnd, areaOfStudy },
       {
         headers: {
@@ -85,10 +90,11 @@ export const updateEducation = (
     });
 };
 
+//Delete Education
 export const deleteEducation = (id, token) => (dispatch) =>
   axios
     .post(
-      '/education',
+      '/education/delete',
       { id },
       {
         headers: {
@@ -103,6 +109,50 @@ export const deleteEducation = (id, token) => (dispatch) =>
       dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
     });
 
+//Update experience
+export const updateExperience = (
+  id,
+  { company, job, yearStart, yearEnd, areaOfWork },
+  token
+) => (dispatch) => {
+  axios
+    .put(
+      '/experience/update',
+      { id, company, job, yearStart, yearEnd, areaOfWork },
+      {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: userActionTypes.UPDATE_SUCCESS, payload: res });
+    })
+    .catch((err) => {
+      dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
+    });
+};
+
+//Delete Experience
+export const deleteExperience = (id, token) => (dispatch) =>
+  axios
+    .post(
+      '/experience/delete',
+      { id },
+      {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: userActionTypes.UPDATE_SUCCESS, payload: res });
+    })
+    .catch((err) => {
+      dispatch({ type: userActionTypes.UPDATE_ERROR, payload: err });
+    });
+
+//Add language
 export const addLanguage = (id, { language, level }, token) => (dispatch) => {
   axios
     .post(
