@@ -24,3 +24,8 @@ export const gigActionTypes = {
   GET_MY_GIGS: 'GET_MY_GIGS',
   EXPLORE_GIGS: 'EXPLORE_GIGS',
 };
+
+export const chatActionTypes = {
+  CREATE_CHAT: 'CREATE_CHAT',
+  ERROR: 'ERROR',
+};

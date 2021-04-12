@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import './Chat.css';
 import Navbar from './Navbar';
+import io from 'socket.io-client';
 
 const Chat = () => {
+  let socket = io();
+
   useEffect(() => {
     const message = document.querySelector('.chat__messageBody');
     window.onload = function () {

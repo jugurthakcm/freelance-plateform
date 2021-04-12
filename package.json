@@ -9,7 +9,7 @@
   "scripts": {
     "client": "cd frontend && yarn start",
     "build frontend": "cd frontend && yarn build",
-    "dev": "concurrently \"cd frontend && yarn start\" \"nodemon index.js\"",
+    "dev": "concurrently \"cd frontend && yarn start\" \"nodemon index.js\" \"nodemon chatServer.js\"",
     "serve": "nodemon index.js",
     "start": "node index.js"
   },
@@ -26,6 +26,7 @@
     "mongoose": "^5.11.15",
     "multer": "^1.4.2",
     "nodemailer": "^6.5.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "socket.io": "^4.0.1"
   }
 }

@@ -8,6 +8,7 @@ import { faStar } from '@fortawesome/free-regular-svg-icons';
 import SearchBar from '../components/SearchBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { exploreGigs } from '../data/actions/gigActions';
+import { createChat } from '../data/actions/chatActions';
 import api from '../api';
 
 const Store = () => {
@@ -18,6 +19,10 @@ const Store = () => {
   useEffect(() => {
     user.token && dispatch(exploreGigs(user.token));
   }, [user, dispatch]);
+
+  const handleContactSeller = (id) => {
+    user.token && dispatch(createChat(id, user.token));
+  };
 
   return (
     <>
@@ -46,7 +51,7 @@ const Store = () => {
           {gig &&
             gig.exploreGigs &&
             gig.exploreGigs.map((gig) => (
-              <div className="store__gig">
+              <div className="store__gig" key={gig._id}>
                 <div className="gig__image">
                   <img
                     src={`${api}/uploads/gigs/${gig.imageURI}`}
@@ -60,7 +65,9 @@ const Store = () => {
                   <p className="gig__seller">{gig.seller.name}</p>
                   <span className="gig__footerPrice">{gig.price} $</span>
                   <div className="gig__footer">
-                    <button>Contact the seller</button>
+                    <button onClick={() => handleContactSeller(gig.seller.id)}>
+                      Contact the seller
+                    </button>
                     <span>
                       <FontAwesomeIcon icon={faStar} /> {gig.likes}
                     </span>
