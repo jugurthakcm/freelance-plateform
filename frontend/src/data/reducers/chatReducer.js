@@ -1,6 +1,7 @@
 import { chatActionTypes } from '../actionTypes';
 
 const initialState = {
+  newChat: null,
   chat: null,
   error: null,
 };
@@ -8,6 +9,12 @@ const initialState = {
 const chatReducer = (state = initialState, action) => {
   switch (action.type) {
     case chatActionTypes.CREATE_CHAT:
+      return {
+        ...state,
+        newChat: action.payload.data.chat,
+      };
+
+    case chatActionTypes.GET_CHAT:
       return {
         ...state,
         chat: action.payload.data.chat,

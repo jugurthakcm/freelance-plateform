@@ -7,7 +7,7 @@ const router = express.Router();
 
 router.post('/create', auth, async (req, res) => {
   try {
-    const chatExists = await Chat.find({
+    const chatExists = await Chat.findOne({
       $or: [
         {
           'participant1.id': req.userId,
@@ -20,8 +20,9 @@ router.post('/create', auth, async (req, res) => {
       ],
     });
 
-    if (chatExists) res.status(200).json({ chat: chatExists });
-    else {
+    if (chatExists) {
+      res.status(200).json({ chat: chatExists });
+    } else {
       const participant1 = await User.findById(req.userId).select(
         'firstName lastName'
       );
@@ -32,11 +33,11 @@ router.post('/create', auth, async (req, res) => {
       Chat.create({
         participant1: {
           id: req.userId,
-          name: participant1.firstName + participant1.lastName,
+          name: `${participant1.firstName} ${participant1.lastName}`,
         },
         participant2: {
           id: req.body.participant,
-          name: participant2.firstName + participant2.lastName,
+          name: `${participant2.firstName} ${participant2.lastName}`,
         },
       })
         .then((chat) => res.status(200).json({ chat }))
@@ -45,6 +46,12 @@ router.post('/create', auth, async (req, res) => {
   } catch (error) {
     res.status(500).json({ error });
   }
+});
+
+router.get('/:id', auth, (req, res) => {
+  Chat.findById(req.params.id)
+    .then((chat) => res.status(200).json({ chat }))
+    .catch((error) => res.status(500).json({ error }));
 });
 
 module.exports = router;

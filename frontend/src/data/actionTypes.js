@@ -27,5 +27,6 @@ export const gigActionTypes = {
 
 export const chatActionTypes = {
   CREATE_CHAT: 'CREATE_CHAT',
+  GET_CHAT: 'GET_CHAT',
   ERROR: 'ERROR',
 };

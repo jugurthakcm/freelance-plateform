@@ -16,7 +16,26 @@ export const createChat = (participant, token) => (dispatch) => {
     )
     .then((res) => {
       dispatch({ type: chatActionTypes.CREATE_CHAT, payload: res });
-      window.location.href = '/chat/' + res.data.chat[0]._id;
+      window.location.href = '/chat/' + res.data.chat._id;
     })
     .catch((err) => dispatch({ type: chatActionTypes.ERROR, payload: err }));
+};
+
+export const getChat = (id, token) => (dispatch) => {
+  axios
+    .get(
+      '/chat/' + id,
+
+      {
+        headers: {
+          authorization: 'Bearer ' + token,
+        },
+      }
+    )
+    .then((res) => {
+      dispatch({ type: chatActionTypes.GET_CHAT, payload: res });
+    })
+    .catch((err) => {
+      dispatch({ type: chatActionTypes.ERROR, payload: err });
+    });
 };

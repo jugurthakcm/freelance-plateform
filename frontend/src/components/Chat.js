@@ -1,12 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import avatar from '../assets/images/avatar.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import './Chat.css';
 import Navbar from './Navbar';
 import io from 'socket.io-client';
+import { useSelector, useDispatch } from 'react-redux';
+import { getChat } from '../data/actions/chatActions';
+import { useHistory } from 'react-router-dom';
 
-const Chat = () => {
+const Chat = (props) => {
+  const { id } = props.match.params;
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const user = useSelector((state) => state.user);
+  const chat = useSelector((state) => state.chat);
+  const [participant, setParticipant] = useState();
+
   let socket = io();
 
   useEffect(() => {
@@ -16,6 +27,24 @@ const Chat = () => {
     };
     message.scrollTop = message.scrollHeight;
   }, []);
+
+  useEffect(() => {
+    if (!user.token) history.push('/login');
+
+    user.token && dispatch(getChat(id, user.token));
+  }, [dispatch, user, id, history]);
+
+  useEffect(() => {
+    const userId = user && user.user && user.user._id;
+    const participant1 = chat && chat.chat && chat.chat.participant1;
+    const participant2 = chat && chat.chat && chat.chat.participant2;
+
+    if (userId && participant1 && userId !== participant1.id) {
+      setParticipant(participant1.name);
+    } else if (userId && participant2 && userId !== participant2.id) {
+      setParticipant(participant2.name);
+    }
+  }, [user, chat]);
 
   return (
     <div className="chatPage">
@@ -46,7 +75,7 @@ const Chat = () => {
                 <img src={avatar} alt="avatar" width="50px" />
               </div>
               <div className="chat__contactNameMessage">
-                <strong>KACIMI Jugurtha</strong>
+                <strong>{participant && participant}</strong>
               </div>
             </div>
             <div className="chat__messageBody">
