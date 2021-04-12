@@ -1,12 +1,10 @@
-import axios from 'axios';
+import axios from '../../axios';
 import { chatActionTypes } from '../actionTypes';
-
-const apiChat = 'http://localhost:5000';
 
 export const createChat = (participant, token) => (dispatch) => {
   axios
     .post(
-      apiChat + '/chat/create',
+      '/chat/create',
       {
         participant,
       },

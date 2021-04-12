@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const app = express();
 const cors = require('cors');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
@@ -10,10 +11,20 @@ const requestRoutes = require('./routes/requestRoutes');
 const commentRoutes = require('./routes/commentRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const emailRoutes = require('./routes/emailRoutes');
+const chatRoutes = require('./routes/chatRoutes');
 // const { Category } = require('./models/Category');
 const path = require('path');
 
-const app = express();
+//Configure socket.io SERVER
+const http = require('http');
+const server = http.createServer(app);
+const io = require('socket.io')(server, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+  },
+});
+
 const PORT = process.env.PORT || 4000;
 
 app.use(cors());
@@ -27,6 +38,7 @@ app.use('/api/gigs', gigRoutes);
 app.use('/api/requests', requestRoutes);
 app.use('/api/comment', commentRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/chat', chatRoutes);
 app.use('/', emailRoutes);
 
 /*const arr = [
@@ -61,4 +73,8 @@ mongoose
 
 app.get('/', (req, res) => res.send('Hello world'));
 
-app.listen(PORT, () => console.log('Listening to ' + PORT));
+server.listen(PORT, () => console.log('Listening to ' + PORT));
+
+io.on('connection', (socket) => {
+  console.log('a user connected');
+});
