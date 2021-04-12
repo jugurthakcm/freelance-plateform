@@ -14,8 +14,9 @@ export const createChat = (participant, token) => (dispatch) => {
         },
       }
     )
-    .then((res) =>
-      dispatch({ type: chatActionTypes.CREATE_CHAT, payload: res })
-    )
+    .then((res) => {
+      dispatch({ type: chatActionTypes.CREATE_CHAT, payload: res });
+      window.location.href = '/chat/' + res.data.chat[0]._id;
+    })
     .catch((err) => dispatch({ type: chatActionTypes.ERROR, payload: err }));
 };
