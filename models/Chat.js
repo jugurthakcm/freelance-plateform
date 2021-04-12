@@ -34,6 +34,10 @@ const chatSchema = mongoose.Schema({
     type: Date,
     default: new Date(),
   },
+  lastModified: {
+    type: Date,
+    default: new Date(),
+  },
 });
 
 exports.Chat = mongoose.model('chats', chatSchema);

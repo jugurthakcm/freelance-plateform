@@ -33,6 +33,7 @@ export const getChat = (id, token) => (dispatch) => {
       }
     )
     .then((res) => {
+      if (!res.data.chat) window.location.href = '/';
       dispatch({ type: chatActionTypes.GET_CHAT, payload: res });
     })
     .catch((err) => {
