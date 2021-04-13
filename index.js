@@ -12,11 +12,13 @@ const commentRoutes = require('./routes/commentRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const emailRoutes = require('./routes/emailRoutes');
 const chatRoutes = require('./routes/chatRoutes');
+const messageRoutes = require('./routes/messageRoutes');
 // const { Category } = require('./models/Category');
 const path = require('path');
 
 //Configure socket.io SERVER
 const http = require('http');
+const { chatServer } = require('./chatServer');
 const server = http.createServer(app);
 const io = require('socket.io')(server, {
   cors: {
@@ -39,6 +41,7 @@ app.use('/api/requests', requestRoutes);
 app.use('/api/comment', commentRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/chat', chatRoutes);
+app.use('/api/messages', messageRoutes);
 app.use('/', emailRoutes);
 
 /*const arr = [
@@ -73,8 +76,6 @@ mongoose
 
 app.get('/', (req, res) => res.send('Hello world'));
 
-server.listen(PORT, () => console.log('Listening to ' + PORT));
+chatServer(io);
 
-io.on('connection', (socket) => {
-  console.log('a user connected');
-});
+server.listen(PORT, () => console.log('Listening to ' + PORT));

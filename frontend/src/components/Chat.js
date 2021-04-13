@@ -4,10 +4,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import './Chat.css';
 import Navbar from './Navbar';
-import io from 'socket.io-client';
+import { io } from 'socket.io-client';
 import { useSelector, useDispatch } from 'react-redux';
 import { getChat } from '../data/actions/chatActions';
 import { useHistory } from 'react-router-dom';
+import api from '../api';
+import { getMessages } from '../data/actions/messageActions';
 
 const Chat = (props) => {
   const { id } = props.match.params;
@@ -16,9 +18,12 @@ const Chat = (props) => {
 
   const user = useSelector((state) => state.user);
   const chat = useSelector((state) => state.chat);
-  const [participant, setParticipant] = useState();
+  const messages = useSelector((state) => state.message);
+  const [participant, setParticipant] = useState({});
 
-  let socket = io();
+  const userId = user?.user?._id;
+
+  let socket = io(api);
 
   useEffect(() => {
     const message = document.querySelector('.chat__messageBody');
@@ -35,16 +40,32 @@ const Chat = (props) => {
   }, [dispatch, user, id, history]);
 
   useEffect(() => {
-    const userId = user && user.user && user.user._id;
-    const participant1 = chat && chat.chat && chat.chat.participant1;
-    const participant2 = chat && chat.chat && chat.chat.participant2;
+    const participant1 = chat?.chat?.participant1;
+    const participant2 = chat?.chat?.participant2;
 
     if (userId && participant1 && userId !== participant1.id) {
-      setParticipant(participant1.name);
+      setParticipant({ name: participant1.name, id: participant1.id });
     } else if (userId && participant2 && userId !== participant2.id) {
-      setParticipant(participant2.name);
+      setParticipant({ name: participant2.name, id: participant2.id });
     }
-  }, [user, chat]);
+  }, [userId, chat]);
+
+  const [message, setMessage] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    socket.emit('chat message', {
+      message,
+      chatId: id,
+      sender: userId,
+      receiver: participant.id,
+    });
+    setMessage('');
+  };
+
+  useEffect(() => {
+    user.token && dispatch(getMessages(id, user.token));
+  }, [user, id, dispatch]);
 
   return (
     <div className="chatPage">
@@ -62,8 +83,8 @@ const Chat = (props) => {
                   <strong>KACIMI Jugurtha</strong>
                   <p>This my last message</p>
                 </div>
-                <div className="chat__contactOptions">
-                  <FontAwesomeIcon icon={faEllipsisV} />
+                <div className="chat__contactOption">
+                  {/* <FontAwesomeIcon icon={faEllipsisV} /> */}
                 </div>
               </div>
             </div>
@@ -75,11 +96,44 @@ const Chat = (props) => {
                 <img src={avatar} alt="avatar" width="50px" />
               </div>
               <div className="chat__contactNameMessage">
-                <strong>{participant && participant}</strong>
+                <strong>{participant && participant.name}</strong>
               </div>
             </div>
             <div className="chat__messageBody">
-              <div className="chat__messageSender">
+              {messages?.messages?.map((message) => {
+                if (message.sender === userId) {
+                  return (
+                    <div className="chat__messageReceiver">
+                      <div className="chat__receivermage">
+                        <img
+                          src={avatar}
+                          alt="avatar"
+                          width="25px"
+                          className="chat__messageAvatar"
+                        />
+                      </div>
+                      <div className="chat__receiverText">
+                        {message.content}
+                      </div>
+                    </div>
+                  );
+                } else {
+                  return (
+                    <div className="chat__messageSender">
+                      <div className="chat__senderImage">
+                        <img
+                          src={avatar}
+                          alt="avatar"
+                          width="25px"
+                          className="chat__messageAvatar"
+                        />
+                      </div>
+                      <div className="chat__senderText">{message.content}</div>
+                    </div>
+                  );
+                }
+              })}
+              {/* <div className="chat__messageSender">
                 <div className="chat__senderImage">
                   <img
                     src={avatar}
@@ -171,18 +225,20 @@ const Chat = (props) => {
                   Reprehenderit, ullam repudiandae neque beatae eveniet iure.
                   Dolor quasi repellat molestiae dolores.
                 </div>
-              </div>
+              </div> */}
             </div>
-            <div className="chat__messageInput">
+            <form className="chat__messageInput" onSubmit={handleSubmit}>
               <input
                 type="text"
                 name="message"
                 placeholder="Type your message here..."
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
               />
-              <button>
+              <button type="submit">
                 <FontAwesomeIcon icon={faPaperPlane} />
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </div>

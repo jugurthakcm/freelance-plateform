@@ -30,3 +30,8 @@ export const chatActionTypes = {
   GET_CHAT: 'GET_CHAT',
   ERROR: 'ERROR',
 };
+
+export const messageActionTypes = {
+  GET_MESSAGES: 'GET_MESSAGES',
+  ERROR: 'ERROR',
+};
