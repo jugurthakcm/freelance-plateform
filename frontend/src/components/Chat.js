@@ -1,17 +1,21 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import avatar from '../assets/images/avatar.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEllipsisV, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
 import './Chat.css';
 import Navbar from './Navbar';
-import { io } from 'socket.io-client';
 import { useSelector, useDispatch } from 'react-redux';
 import { getChat } from '../data/actions/chatActions';
 import { useHistory } from 'react-router-dom';
-import api from '../api';
+
 import { getMessages } from '../data/actions/messageActions';
+// import { io } from 'socket.io-client';
+// import api from '../api';
+import { useSocketContext } from '../ContextAPI/SocketProvider';
 
 const Chat = (props) => {
+  const socket = useSocketContext();
+
   const { id } = props.match.params;
   const dispatch = useDispatch();
   const history = useHistory();
@@ -20,11 +24,11 @@ const Chat = (props) => {
   const chat = useSelector((state) => state.chat);
   const messages = useSelector((state) => state.message);
   const [participant, setParticipant] = useState({});
+  const [users, setUsers] = useState([]);
 
   const userId = user?.user?._id;
 
-  let socket = io(api);
-
+  //Scroll to last messages in chat
   useEffect(() => {
     const message = document.querySelector('.chat__messageBody');
     window.onload = function () {
@@ -33,12 +37,14 @@ const Chat = (props) => {
     message.scrollTop = message.scrollHeight;
   }, []);
 
+  //Get chat instance from database
   useEffect(() => {
     if (!user.token) history.push('/login');
 
     user.token && dispatch(getChat(id, user.token));
   }, [dispatch, user, id, history]);
 
+  //Associate the participant
   useEffect(() => {
     const participant1 = chat?.chat?.participant1;
     const participant2 = chat?.chat?.participant2;
@@ -54,25 +60,76 @@ const Chat = (props) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    socket.emit('chat message', {
+
+    socket.emit('private message', {
       message,
       chatId: id,
       sender: userId,
       receiver: participant.id,
+      to: users[users.length - 1]?.id || null,
     });
+
+    const a = document.getElementsByClassName('chat__messageBody')[0];
+    const b = document.createElement('div');
+    b.classList.add('chat__messageReceiver');
+    const c = document.createElement('div');
+    c.innerText = message;
+    c.classList.add('chat__receiverText');
+    b.appendChild(c);
+    a.appendChild(b);
+    a.scrollTop = a.scrollHeight;
     setMessage('');
   };
 
+  //Get messages from database
   useEffect(() => {
     user.token && dispatch(getMessages(id, user.token));
   }, [user, id, dispatch]);
+
+  // Configure socket.io
+  useEffect(() => {
+    socket.auth = userId && { userId };
+    socket.connect();
+
+    //Check if error while logging user
+    socket.on('connect_error', (err) => {
+      if (err.message === 'invalid user') {
+        console.log(err.message);
+      }
+    });
+
+    socket.on('users', (users) => {
+      users && setUsers(users.filter((u) => u.id !== socket.id));
+    });
+
+    socket.on('user connected', (user) => {
+      setUsers([...users, user]);
+    });
+
+    //display sent message
+    socket.on('private message', (message) => {
+      const a = document.getElementsByClassName('chat__messageBody')[0];
+
+      const b = document.createElement('div');
+      b.classList.add('chat__messageSender');
+      const c = document.createElement('div');
+      c.innerText = message.content;
+      c.classList.add('chat__senderText');
+      b.appendChild(c);
+      a.appendChild(b);
+      a.scrollTop = a.scrollHeight;
+    });
+    return () => {
+      socket.off('private message');
+    };
+  }, [userId, users, socket]);
 
   return (
     <div className="chatPage">
       <Navbar />
       <div className="container">
         <div className="chat row p-4">
-          <div className="chat__aside col-4">
+          {/* <div className="chat__aside col-4">
             <h2>Chat</h2>
             <div className="chat__contacts">
               <div className="chat__contact">
@@ -84,13 +141,13 @@ const Chat = (props) => {
                   <p>This my last message</p>
                 </div>
                 <div className="chat__contactOption">
-                  {/* <FontAwesomeIcon icon={faEllipsisV} /> */}
+                  
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
 
-          <div className="chat__messages col-8">
+          <div className="chat__messages col-12">
             <div className="chat__messageHeader">
               <div className="chat__contactImage">
                 <img src={avatar} alt="avatar" width="50px" />
@@ -103,15 +160,15 @@ const Chat = (props) => {
               {messages?.messages?.map((message) => {
                 if (message.sender === userId) {
                   return (
-                    <div className="chat__messageReceiver">
-                      <div className="chat__receivermage">
+                    <div className="chat__messageReceiver" key={message._id}>
+                      {/* <div className="chat__receivermage">
                         <img
                           src={avatar}
                           alt="avatar"
                           width="25px"
                           className="chat__messageAvatar"
                         />
-                      </div>
+                      </div> */}
                       <div className="chat__receiverText">
                         {message.content}
                       </div>
@@ -119,113 +176,20 @@ const Chat = (props) => {
                   );
                 } else {
                   return (
-                    <div className="chat__messageSender">
-                      <div className="chat__senderImage">
+                    <div className="chat__messageSender" key={message._id}>
+                      {/* <div className="chat__senderImage">
                         <img
                           src={avatar}
                           alt="avatar"
                           width="25px"
                           className="chat__messageAvatar"
                         />
-                      </div>
+                      </div> */}
                       <div className="chat__senderText">{message.content}</div>
                     </div>
                   );
                 }
               })}
-              {/* <div className="chat__messageSender">
-                <div className="chat__senderImage">
-                  <img
-                    src={avatar}
-                    alt="avatar"
-                    width="25px"
-                    className="chat__messageAvatar"
-                  />
-                </div>
-                <div className="chat__senderText">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Reprehenderit, ullam repudiandae neque beatae eveniet iure.
-                  Dolor quasi repellat molestiae dolores.
-                </div>
-              </div>
-
-              <div className="chat__messageReceiver">
-                <div className="chat__receiverImage">
-                  <img
-                    src={avatar}
-                    alt="avatar"
-                    width="25px"
-                    className="chat__messageAvatar"
-                  />
-                </div>
-                <div className="chat__receiverText">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Reprehenderit, ullam repudiandae neque beatae eveniet iure.
-                  Dolor quasi repellat molestiae dolores.
-                </div>
-              </div>
-              <div className="chat__messageSender">
-                <div className="chat__senderImage">
-                  <img
-                    src={avatar}
-                    alt="avatar"
-                    width="25px"
-                    className="chat__messageAvatar"
-                  />
-                </div>
-                <div className="chat__senderText">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Reprehenderit, ullam repudiandae neque beatae eveniet iure.
-                  Dolor quasi repellat molestiae dolores.
-                </div>
-              </div>
-
-              <div className="chat__messageReceiver">
-                <div className="chat__receiverImage">
-                  <img
-                    src={avatar}
-                    alt="avatar"
-                    width="25px"
-                    className="chat__messageAvatar"
-                  />
-                </div>
-                <div className="chat__receiverText">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Reprehenderit, ullam repudiandae neque beatae eveniet iure.
-                  Dolor quasi repellat molestiae dolores.
-                </div>
-              </div>
-              <div className="chat__messageSender">
-                <div className="chat__senderImage">
-                  <img
-                    src={avatar}
-                    alt="avatar"
-                    width="25px"
-                    className="chat__messageAvatar"
-                  />
-                </div>
-                <div className="chat__senderText">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Reprehenderit, ullam repudiandae neque beatae eveniet iure.
-                  Dolor quasi repellat molestiae dolores.
-                </div>
-              </div>
-
-              <div className="chat__messageReceiver">
-                <div className="chat__receiverImage">
-                  <img
-                    src={avatar}
-                    alt="avatar"
-                    width="25px"
-                    className="chat__messageAvatar"
-                  />
-                </div>
-                <div className="chat__receiverText">
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
-                  Reprehenderit, ullam repudiandae neque beatae eveniet iure.
-                  Dolor quasi repellat molestiae dolores.
-                </div>
-              </div> */}
             </div>
             <form className="chat__messageInput" onSubmit={handleSubmit}>
               <input

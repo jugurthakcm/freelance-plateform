@@ -12,6 +12,8 @@ import { applyMiddleware, createStore, compose } from 'redux';
 import rootReducer from './data/reducers/rootReducer';
 import thunk from 'redux-thunk';
 import 'bootstrap/dist/js/bootstrap.bundle';
+import { SocketProvider } from './ContextAPI/SocketProvider';
+import socket from './socket';
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
@@ -22,12 +24,14 @@ const store = createStore(
 ReactDOM.render(
   <Provider store={store}>
     <BrowserRouter>
-      <LanguageProvider
-        initialLanguage={initialLanguage}
-        languageReducer={languageReducer}
-      >
-        <App />
-      </LanguageProvider>
+      <SocketProvider socket={socket}>
+        <LanguageProvider
+          initialLanguage={initialLanguage}
+          languageReducer={languageReducer}
+        >
+          <App />
+        </LanguageProvider>
+      </SocketProvider>
     </BrowserRouter>
   </Provider>,
   document.getElementById('root')
