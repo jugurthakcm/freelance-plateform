@@ -132,9 +132,9 @@ const Settings = () => {
   return (
     <>
       <Navbar />
-      <div className="settings container">
+      <div className="settings container-lg">
         <div className="row">
-          <div className="settings__aside col-3">
+          <div className="settings__aside col-md-3 d-none d-md-block">
             <div>
               <h5>Account Settings</h5>
               <ul>
@@ -149,7 +149,7 @@ const Settings = () => {
               </ul>
             </div>
           </div>
-          <div className="settings__change col-9">
+          <div className="settings__change col-md-9">
             <div
               className="settings__section settings__changeName"
               id="changeName"
