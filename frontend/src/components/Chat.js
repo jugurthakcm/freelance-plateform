@@ -36,7 +36,7 @@ const Chat = (props) => {
   const userId = user?.user?._id;
 
   useEffect(() => {
-    if (!id) chat?.myChats && history.push(`/chat/${chat.myChats[0]._id}`);
+    if (!id) chat?.myChats && history.push(`/chat/${chat?.myChats[0]?._id}`);
   }, [id, chat, history]);
 
   //Scroll to last messages in chat
