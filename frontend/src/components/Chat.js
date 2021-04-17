@@ -36,7 +36,10 @@ const Chat = (props) => {
   const userId = user?.user?._id;
 
   useEffect(() => {
-    if (!id) chat?.myChats && history.push(`/chat/${chat?.myChats[0]?._id}`);
+    if (!id) {
+      const chatId = chat?.myChats?.length && chat.myChats[0]?._id;
+      if (chatId) history.push(`/chat/${chatId}`);
+    }
   }, [id, chat, history]);
 
   //Scroll to last messages in chat
@@ -165,7 +168,6 @@ const Chat = (props) => {
           <div className="chat__bar col-md-4 d-md-none d-flex">
             {chat?.myChats?.map((e) => (
               <Link
-                className="chat__contacts"
                 key={e._id}
                 to={`/chat/${e._id}`}
                 onClick={() => (window.location.href = `/chat/${e._id}`)}
@@ -207,9 +209,8 @@ const Chat = (props) => {
           <div className="chat__aside col-md-4 d-none d-md-block">
             <h2>Chat</h2>
             {chat?.myChats?.map((e) => (
-              <div className="chat__contacts">
+              <div className="chat__contacts" key={e._id}>
                 <Link
-                  key={e._id}
                   to={`/chat/${e._id}`}
                   onClick={() => (window.location.href = `/chat/${e._id}`)}
                 >

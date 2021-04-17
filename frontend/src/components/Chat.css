@@ -190,11 +190,13 @@
 
 @media (max-width: 768px) {
   .chat__bar .chat__contact {
+    display: flex;
     padding: 0.5rem;
   }
 
   .chat__bar .chat__contactImage img {
     width: 40px;
+    margin-right: -20px;
   }
 
   .chat__bar .chat__contactImage {

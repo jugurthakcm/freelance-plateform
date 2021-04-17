@@ -24,19 +24,21 @@ router.post('/create', auth, async (req, res) => {
       res.status(200).json({ chat: chatExists });
     } else {
       const participant1 = await User.findById(req.userId).select(
-        'firstName lastName'
+        'firstName lastName imageURI'
       );
       const participant2 = await User.findById(req.body.participant).select(
-        'firstName lastName'
+        'firstName lastName imageURI'
       );
       Chat.create({
         participant1: {
           id: req.userId,
           name: `${participant1.firstName} ${participant1.lastName}`,
+          imageURI: participant1.imageURI,
         },
         participant2: {
           id: req.body.participant,
           name: `${participant2.firstName} ${participant2.lastName}`,
+          imageURI: participant2.imageURI,
         },
       })
         .then((chat) => res.status(200).json({ chat }))

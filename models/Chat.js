@@ -8,11 +8,33 @@ const chatSchema = mongoose.Schema({
       min: 1,
       max: 50,
     },
+    name: {
+      type: String,
+      required: true,
+      min: 1,
+      max: 50,
+    },
+    imageURI: {
+      type: String,
+      min: 1,
+      max: 50,
+    },
   },
   participant2: {
     id: {
       type: String,
       required: true,
+      min: 1,
+      max: 50,
+    },
+    name: {
+      type: String,
+      required: true,
+      min: 1,
+      max: 50,
+    },
+    imageURI: {
+      type: String,
       min: 1,
       max: 50,
     },
