@@ -54,6 +54,11 @@ const Navbar = ({ navStore }) => {
   const [language, dispatchLanguage] = useLanguageContext();
   const languageImage = selectLanguageIcon(language);
 
+  const changeLanguage = (language) => {
+    localStorage.setItem('language', JSON.stringify({ language }));
+    dispatchLanguage({ type: language, language });
+  };
+
   const boxShadow = navStore ? '0 5px 5px rgba(0, 0, 0, 0.15)' : '';
 
   const navbarSearch = document.querySelector('.navbar__search');
@@ -73,12 +78,26 @@ const Navbar = ({ navStore }) => {
       <div className="navbar__up">
         <div className="navbar__left">
           <div className="navbar__title">
-            <FontAwesomeIcon
+            {/* <FontAwesomeIcon
               icon={faBars}
-              className="menu"
               size="2x"
+              }
+            /> */}
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="35"
+              height="35"
+              fill="black"
+              class="bi bi-list"
+              viewBox="0 0 16 16"
               onClick={() => handleClick()}
-            />
+              className="menu"
+            >
+              <path
+                fill-rule="evenodd"
+                d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"
+              />
+            </svg>
 
             <img
               src={logoYellow}
@@ -101,7 +120,6 @@ const Navbar = ({ navStore }) => {
             <Link to="/store">
               <FormattedMessage id="navbar.store" />
             </Link>
-            <Link to="/find-work">Find Work</Link>
           </div>
         </div>
 
@@ -141,6 +159,40 @@ const Navbar = ({ navStore }) => {
           </form> */}
           {!user.isLoading && (
             <>
+              <div className="navbar__language me-3">
+                <div className="dropdown">
+                  <div
+                    id="dropdownMenuButton"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                    style={{ backgroundImage: `url(${languageImage})` }}
+                  ></div>
+                  <ul
+                    className="dropdown-menu"
+                    aria-labelledby="dropdownMenuButton"
+                  >
+                    <li
+                      className="dropdown-item"
+                      onClick={() => changeLanguage('french')}
+                    >
+                      <img src={french} alt="french" /> Français
+                    </li>
+                    <li
+                      className="dropdown-item"
+                      onClick={() => changeLanguage('english')}
+                    >
+                      <img src={english} alt="english" /> English
+                    </li>
+                    <li
+                      className="dropdown-item"
+                      onClick={() => changeLanguage('arabic')}
+                    >
+                      <img src={arabic} alt="arabic" />
+                      العربية
+                    </li>
+                  </ul>
+                </div>
+              </div>
               {user.user ? (
                 <div className="navbar__user">
                   <FontAwesomeIcon icon={faBell} size="lg" className="me-3" />
@@ -211,41 +263,6 @@ const Navbar = ({ navStore }) => {
               )}
             </>
           )}
-          {/* <div className="navbar__language">
-            <div className="dropdown">
-              <div
-                id="dropdownMenuButton"
-                data-toggle="dropdown"
-                aria-haspopup="true"
-                aria-expanded="false"
-                style={{ backgroundImage: `url(${languageImage})` }}
-              ></div>
-              <ul
-                className="dropdown-menu"
-                aria-labelledby="dropdownMenuButton"
-              >
-                <li
-                  className="dropdown-item"
-                  onClick={() => changeLanguage('french')}
-                >
-                  <img src={french} alt="french" /> Français
-                </li>
-                <li
-                  className="dropdown-item"
-                  onClick={() => changeLanguage('english')}
-                >
-                  <img src={english} alt="english" /> English
-                </li>
-                <li
-                  className="dropdown-item"
-                  onClick={() => changeLanguage('arabic')}
-                >
-                  <img src={arabic} alt="arabic" />
-                  العربية
-                </li>
-              </ul>
-            </div>
-          </div> */}
         </div>
       </div>
       {navStore && (
