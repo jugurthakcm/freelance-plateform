@@ -29,7 +29,6 @@ router.post('/create', auth, async (req, res) => {
       const participant2 = await User.findById(req.body.participant).select(
         'firstName lastName'
       );
-
       Chat.create({
         participant1: {
           id: req.userId,
@@ -48,6 +47,24 @@ router.post('/create', auth, async (req, res) => {
   }
 });
 
+//Get all chats of a user
+router.get('/user-chats', auth, (req, res) => {
+  Chat.find({
+    $or: [
+      {
+        'participant1.id': req.userId,
+      },
+      {
+        'participant2.id': req.userId,
+      },
+    ],
+  })
+    .sort({ lastModified: -1 })
+    .then((chats) => res.status(200).json({ chats }))
+    .catch((error) => res.status(500).json({ error }));
+});
+
+//Get chat by its id
 router.get('/:id', auth, (req, res) => {
   Chat.findById(req.params.id)
     .then((chat) => res.status(200).json({ chat }))

@@ -1,4 +1,5 @@
 const { Message } = require('./models/Message');
+const { Chat } = require('./models/Chat');
 
 exports.chatServer = (io) => {
   io.use((socket, next) => {
@@ -41,14 +42,30 @@ exports.chatServer = (io) => {
           sender: sender,
           receiver: receiver,
           chatId: chatId,
-        });
+        })
+          .then(() =>
+            Chat.findByIdAndUpdate(chatId, {
+              lastModified: new Date(),
+            })
+              .then(() => console.log('message added'))
+              .catch((err) => console.error(err))
+          )
+          .catch((err) => console.error(err));
       } else {
         Message.create({
           content: message,
           sender: sender,
           receiver: receiver,
           chatId: chatId,
-        });
+        })
+          .then(() =>
+            Chat.findByIdAndUpdate(chatId, {
+              lastModified: new Date(),
+            })
+              .then(() => console.log('message added'))
+              .catch((err) => console.error(err))
+          )
+          .catch((err) => console.error(err));
       }
     });
   });

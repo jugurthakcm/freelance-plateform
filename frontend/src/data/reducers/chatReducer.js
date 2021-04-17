@@ -3,6 +3,7 @@ import { chatActionTypes } from '../actionTypes';
 const initialState = {
   newChat: null,
   chat: null,
+  myChats: null,
   error: null,
 };
 
@@ -18,6 +19,12 @@ const chatReducer = (state = initialState, action) => {
       return {
         ...state,
         chat: action.payload.data.chat,
+      };
+
+    case chatActionTypes.GET_ALL_CHATS:
+      return {
+        ...state,
+        myChats: action.payload.data.chats,
       };
 
     case chatActionTypes.ERROR:

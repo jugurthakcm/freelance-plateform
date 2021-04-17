@@ -501,3 +501,10 @@ exports.editAvatar = (req, res) => {
     .then(() => res.status(200).json({ message: 'Uploading user avatar done' }))
     .catch((error) => res.status(500).json({ error }));
 };
+
+exports.getUser = (req, res) => {
+  User.findById(req.params.id)
+    .select('firstName lastName imageURI')
+    .then((user) => res.status(200).json({ user }))
+    .catch((error) => res.status(500).json({ error }));
+};

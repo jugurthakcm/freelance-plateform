@@ -24,6 +24,10 @@ const messageSchema = mongoose.Schema({
     min: 1,
     max: 50,
   },
+  read: {
+    type: Boolean,
+    default: false,
+  },
   createdAt: {
     type: Date,
     default: new Date(),

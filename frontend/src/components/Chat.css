@@ -13,23 +13,32 @@
 
 .chat__aside {
   background-color: white;
-  padding: 2rem !important;
+  /* padding: 2rem !important; */
   border-radius: 2rem;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .chat__aside h2 {
   font-weight: 600;
+  margin-top: 1rem;
+  margin-left: 1rem;
 }
 
 .chat__contacts {
-  margin-top: 1rem;
+  /* margin-top: 1rem; */
 }
 
 .chat__contact {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+}
+
+.chat__contact:hover {
+  background-color: rgb(253, 253, 174);
 }
 
 .chat__contactImage img {

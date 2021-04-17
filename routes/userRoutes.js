@@ -20,6 +20,7 @@ const {
   editAvatar,
   updateExperience,
   deleteExperience,
+  getUser,
 } = require('../controllers/userController');
 const { auth } = require('../middlewares/authMiddleware');
 const { uploadAvatarUtil } = require('../util');
@@ -71,5 +72,7 @@ router.put('/language', auth, updateLanguage);
 router.put('/title', auth, updateTitle);
 
 router.post('/avatar', auth, uploadAvatarUtil(), editAvatar);
+
+router.get('/user/:id', getUser);
 
 module.exports = router;

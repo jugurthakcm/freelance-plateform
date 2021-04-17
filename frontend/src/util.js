@@ -1,6 +1,8 @@
 import french from './assets/icons/french.png';
 import english from './assets/icons/english.png';
 import arabic from './assets/icons/arabic.png';
+import axios from './axios';
+import { resolveContent } from 'nodemailer/lib/shared';
 
 export const selectLanguageIcon = (language) => {
   switch (language) {
@@ -96,4 +98,10 @@ export const hideModal = (modal) => {
   document.querySelector('body').classList.remove('modal-open');
   document.querySelector('body').style.paddingRight = '';
   modal.hide();
+};
+
+//Get user from its id
+export const getUserFromId = async (id) => {
+  const res = await axios.get('/user/' + id);
+  return res.data.user;
 };

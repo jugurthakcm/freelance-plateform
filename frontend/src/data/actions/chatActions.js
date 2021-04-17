@@ -40,3 +40,18 @@ export const getChat = (id, token) => (dispatch) => {
       dispatch({ type: chatActionTypes.ERROR, payload: err });
     });
 };
+
+export const getMyChats = (token) => (dispatch) => {
+  axios
+    .get('/chat/user-chats', {
+      headers: {
+        authorization: 'Bearer ' + token,
+      },
+    })
+    .then((res) => {
+      dispatch({ type: chatActionTypes.GET_ALL_CHATS, payload: res });
+    })
+    .catch((err) => {
+      dispatch({ type: chatActionTypes.ERROR, payload: err });
+    });
+};
