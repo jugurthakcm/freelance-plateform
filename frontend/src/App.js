@@ -57,7 +57,7 @@ function App() {
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/gig/add" component={AddGig} />
             <Route path="/gig/edit/:gigId" component={EditGig} />
-            <Route path="/chat/:id" component={Chat} />
+            <Route path="/chat/:id?" component={Chat} />
             <Route path="/settings" component={Settings} />
           </Switch>
         </I18nProvider>

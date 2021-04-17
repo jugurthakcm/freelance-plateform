@@ -35,6 +35,10 @@ const Chat = (props) => {
 
   const userId = user?.user?._id;
 
+  useEffect(() => {
+    if (!id) chat?.myChats && history.push(`/chat/${chat.myChats[0]._id}`);
+  }, [id, chat, history]);
+
   //Scroll to last messages in chat
   useEffect(() => {
     const message = document.querySelector('.chat__messageBody');
@@ -203,53 +207,54 @@ const Chat = (props) => {
           <div className="chat__aside col-md-4 d-none d-md-block">
             <h2>Chat</h2>
             {chat?.myChats?.map((e) => (
-              <Link
-                className="chat__contacts"
-                key={e._id}
-                to={`/chat/${e._id}`}
-                onClick={() => (window.location.href = `/chat/${e._id}`)}
-              >
-                <div className="chat__contact">
-                  <div className="d-flex align-items-center">
-                    <div className="chat__contactImage me-3">
-                      {(userId === e.participant1.id &&
-                      e.participant2.imageURI ? (
-                        <img
-                          src={`${api}/uploads/avatars/${e.participant2.imageURI}`}
-                          alt="avatar"
-                          width="50px"
-                        />
-                      ) : (
-                        <img src={avatar} alt="avatar" width="50px" />
-                      )) ||
-                        (userId === e.participant2.id &&
-                        e.participant1.imageURI ? (
+              <div className="chat__contacts">
+                <Link
+                  key={e._id}
+                  to={`/chat/${e._id}`}
+                  onClick={() => (window.location.href = `/chat/${e._id}`)}
+                >
+                  <div className="chat__contact">
+                    <div className="d-flex align-items-center">
+                      <div className="chat__contactImage me-3">
+                        {(userId === e.participant1.id &&
+                        e.participant2.imageURI ? (
                           <img
-                            src={`${api}/uploads/avatars/${e.participant1.imageURI}`}
+                            src={`${api}/uploads/avatars/${e.participant2.imageURI}`}
                             alt="avatar"
                             width="50px"
                           />
                         ) : (
                           <img src={avatar} alt="avatar" width="50px" />
-                        ))}
-                    </div>
+                        )) ||
+                          (userId === e.participant2.id &&
+                          e.participant1.imageURI ? (
+                            <img
+                              src={`${api}/uploads/avatars/${e.participant1.imageURI}`}
+                              alt="avatar"
+                              width="50px"
+                            />
+                          ) : (
+                            <img src={avatar} alt="avatar" width="50px" />
+                          ))}
+                      </div>
 
-                    <div className="chat__contactNameMessage">
-                      <h6 className="mb-0">
-                        {(userId === e.participant1.id &&
-                          e.participant2.name) ||
-                          (userId === e.participant2.id && e.participant1.name)}
-                      </h6>
+                      <div className="chat__contactNameMessage">
+                        <h6 className="mb-0">
+                          {(userId === e.participant1.id &&
+                            e.participant2.name) ||
+                            (userId === e.participant2.id &&
+                              e.participant1.name)}
+                        </h6>
 
-                      <p>Last Message</p>
+                        <p>Last Message</p>
+                      </div>
                     </div>
                   </div>
-
-                  <div className="chat__contactDelete">
-                    <FontAwesomeIcon icon={faTrash} />
-                  </div>
+                </Link>
+                <div className="chat__contactDelete">
+                  <FontAwesomeIcon icon={faTrash} />
                 </div>
-              </Link>
+              </div>
             ))}
           </div>
 

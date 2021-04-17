@@ -42,16 +42,15 @@
   background-color: inherit;
 }
 
-.chat__contact {
+.chat__contacts {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  cursor: pointer;
-  padding: 0.5rem 1rem;
   border-radius: 1rem;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
 }
 
-.chat__contact:hover {
+.chat__contacts:hover {
   background-color: rgb(253, 253, 174);
 }
 
@@ -72,11 +71,12 @@
 
 .chat__contactDelete path {
   color: darkgrey;
+  cursor: pointer;
 }
 
 .chat__contactDelete path:hover,
 .chat__contactDelete path:active {
-  color: red;
+  color: #f50057;
 }
 
 .chat__messages {
