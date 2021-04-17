@@ -1,7 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react';
 import avatar from '../assets/images/avatar.jpg';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEllipsisV, faPaperPlane } from '@fortawesome/free-solid-svg-icons';
+import {
+  faEllipsisV,
+  faPaperPlane,
+  faTrash,
+} from '@fortawesome/free-solid-svg-icons';
 import './Chat.css';
 import Navbar from './Navbar';
 import { useSelector, useDispatch } from 'react-redux';
@@ -143,11 +147,55 @@ const Chat = (props) => {
     user.token && dispatch(getMyChats(user.token));
   }, [user, dispatch]);
 
+  useEffect(() => {}, []);
+
   return (
     <div className="chatPage">
       <Navbar />
       <div className="container-lg">
         <div className="chat row p-4">
+          <div className="chat__bar col-md-4 d-md-none d-flex">
+            {chat?.myChats?.map((e) => (
+              <Link
+                className="chat__contacts"
+                key={e._id}
+                to={`/chat/${e._id}`}
+                onClick={() => (window.location.href = `/chat/${e._id}`)}
+              >
+                <div className="chat__contact">
+                  <div className="chat__contactImage">
+                    {(userId === e.participant1.id &&
+                    e.participant2.imageURI ? (
+                      <img
+                        src={`${api}/uploads/avatars/${e.participant2.imageURI}`}
+                        alt="avatar"
+                        width="50px"
+                      />
+                    ) : (
+                      <img src={avatar} alt="avatar" width="50px" />
+                    )) ||
+                      (userId === e.participant2.id &&
+                      e.participant1.imageURI ? (
+                        <img
+                          src={`${api}/uploads/avatars/${e.participant1.imageURI}`}
+                          alt="avatar"
+                          width="50px"
+                        />
+                      ) : (
+                        <img src={avatar} alt="avatar" width="50px" />
+                      ))}
+                  </div>
+
+                  <div className="chat__contactNameMessage">
+                    <h6>
+                      {(userId === e.participant1.id && e.participant2.name) ||
+                        (userId === e.participant2.id && e.participant1.name)}
+                    </h6>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
           <div className="chat__aside col-md-4 d-none d-md-block">
             <h2>Chat</h2>
             {chat?.myChats?.map((e) => (
@@ -158,20 +206,49 @@ const Chat = (props) => {
                 onClick={() => (window.location.href = `/chat/${e._id}`)}
               >
                 <div className="chat__contact">
-                  <div className="chat__contactImage">
-                    <img src={avatar} alt="avatar" />
+                  <div className="d-flex align-items-center">
+                    <div className="chat__contactImage me-3">
+                      {(userId === e.participant1.id &&
+                      e.participant2.imageURI ? (
+                        <img
+                          src={`${api}/uploads/avatars/${e.participant2.imageURI}`}
+                          alt="avatar"
+                          width="50px"
+                        />
+                      ) : (
+                        <img src={avatar} alt="avatar" width="50px" />
+                      )) ||
+                        (userId === e.participant2.id &&
+                        e.participant1.imageURI ? (
+                          <img
+                            src={`${api}/uploads/avatars/${e.participant1.imageURI}`}
+                            alt="avatar"
+                            width="50px"
+                          />
+                        ) : (
+                          <img src={avatar} alt="avatar" width="50px" />
+                        ))}
+                    </div>
+
+                    <div className="chat__contactNameMessage">
+                      <strong>
+                        {(userId === e.participant1.id &&
+                          e.participant2.name) ||
+                          (userId === e.participant2.id && e.participant1.name)}
+                      </strong>
+
+                      <p>
+                        {messages &&
+                          messages.messages &&
+                          messages.messages[messages.messages.length - 1]
+                            .content}
+                      </p>
+                    </div>
                   </div>
 
-                  <div className="chat__contactNameMessage">
-                    <strong>
-                      {(userId === e.participant1.id && e.participant2.name) ||
-                        (userId === e.participant2.id && e.participant1.name)}
-                    </strong>
-
-                    <p>This my last message</p>
+                  <div className="chat__contactOption">
+                    <FontAwesomeIcon icon={faTrash} />
                   </div>
-
-                  <div className="chat__contactOption"></div>
                 </div>
               </Link>
             ))}
@@ -190,7 +267,7 @@ const Chat = (props) => {
                   <img src={avatar} alt="avatar" width="50px" />
                 )}
               </div>
-              <div className="chat__contactNameMessage">
+              <div className="chat__contactNameMessage ms-3">
                 <strong>
                   {participant?.firstName &&
                     participant?.lastName &&
@@ -216,7 +293,7 @@ const Chat = (props) => {
                       </div>
                     </div>
                   );
-                } else {
+                } else if (message.sender !== userId && message.chatId === id) {
                   return (
                     <div className="chat__messageSender" key={message._id}>
                       {/* <div className="chat__senderImage">
