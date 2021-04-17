@@ -70,19 +70,13 @@
   font-size: 14px;
 }
 
-.chat__contactOptions {
-  padding: 0.5rem;
-  width: 30px;
-  height: 30px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.3);
+.chat__contactDelete path {
+  color: darkgrey;
 }
 
-.chat__contactOptions path {
-  color: darkgrey;
+.chat__contactDelete path:hover,
+.chat__contactDelete path:active {
+  color: red;
 }
 
 .chat__messages {

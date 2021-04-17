@@ -42,7 +42,7 @@ const Chat = (props) => {
       message.scrollTop = message.scrollHeight;
     };
     message.scrollTop = message.scrollHeight;
-  }, []);
+  }, [messages]);
 
   //Get chat instance from database
   useEffect(() => {
@@ -68,12 +68,16 @@ const Chat = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
+    const receiverId = participant._id || participant.id;
+
+    const arr = users.filter((e) => e.userId === receiverId);
+
     socket.emit('private message', {
       message,
       chatId: id,
       sender: userId,
       receiver: participant._id || participant.id,
-      to: users[users.length - 1]?.id || null,
+      to: arr[0]?.id || null,
     });
 
     const a = document.getElementsByClassName('chat__messageBody')[0];
@@ -231,22 +235,17 @@ const Chat = (props) => {
                     </div>
 
                     <div className="chat__contactNameMessage">
-                      <strong>
+                      <h6 className="mb-0">
                         {(userId === e.participant1.id &&
                           e.participant2.name) ||
                           (userId === e.participant2.id && e.participant1.name)}
-                      </strong>
+                      </h6>
 
-                      <p>
-                        {messages &&
-                          messages.messages &&
-                          messages.messages[messages.messages.length - 1]
-                            .content}
-                      </p>
+                      <p>Last Message</p>
                     </div>
                   </div>
 
-                  <div className="chat__contactOption">
+                  <div className="chat__contactDelete">
                     <FontAwesomeIcon icon={faTrash} />
                   </div>
                 </div>
