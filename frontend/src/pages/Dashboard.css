@@ -141,7 +141,7 @@
   margin-bottom: 0;
 }
 
-.dashboard__title h5::after {
+/* .dashboard__title h5::after {
   content: '';
   display: block;
   background-color: var(--primary-color);
@@ -149,7 +149,7 @@
   width: 100%;
   margin-bottom: 0.3rem;
   border-radius: 10px;
-}
+} */
 
 .sidebar__languages li {
   font-weight: 500;
