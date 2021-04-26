@@ -122,12 +122,8 @@ export const services = [
     ],
   },
   {
-    title: <FormattedMessage id="services.architecture" />,
+    title: <FormattedMessage id="services.writing" />,
     background: architecture,
-    list: [
-      'Architecture intérieure',
-      'Arcihtecture urbanisme',
-      'Architecture paysagiste',
-    ],
+    list: ["Ecriture d'articles", "Ecriture d'histoires", 'Ecriture de livres'],
   },
 ];

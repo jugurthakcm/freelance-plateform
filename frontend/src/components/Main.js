@@ -16,9 +16,9 @@ const Main = () => {
       />
       <div className="main__content col-md-12 pl-3 pr-4">
         <h1 className="main__slogan">
-          Hand it to the right freelance.
+          This is a freelance plateform.
           <br />
-          We are the solution
+          Contact me for details
         </h1>
         <div className="main__buttons">
           {/* <div className="main__searchBar">
