@@ -35,19 +35,16 @@ const Aside = () => {
   }, []);
 
   return (
-    <aside
-      ref={aside}
-      className="aside d-flex flex-column justify-content-between aside__closed"
-    >
-      <button
-        type="button"
-        className="close mr-3 mt-1"
-        aria-label="Close"
-        onClick={() => handleClick()}
-      >
-        <span>&times;</span>
-      </button>
-      <ul className="d-flex flex-column aside__links">
+    <aside ref={aside} className="aside aside__closed">
+      <div className="close__container">
+        <button
+          type="button"
+          className="btn-close me-2"
+          aria-label="Close"
+          onClick={handleClick}
+        ></button>
+      </div>
+      <ul className="aside__links">
         {asideLinks.map((asideLink) => (
           <li className="aside__item" key={asideLink.link}>
             <NavLink
@@ -69,7 +66,6 @@ const Aside = () => {
           <FormattedMessage id="navbar.login" />
         </Link>
       </div>
-      <Footer aside={true} />
     </aside>
   );
 };
