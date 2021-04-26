@@ -108,7 +108,7 @@ const EditLanguage = () => {
             </button>
             <button
               type="button"
-              className="btn btn-warning"
+              className="btn btn-info"
               onClick={handleSubmit}
             >
               Save changes
