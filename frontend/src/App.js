@@ -2,9 +2,7 @@ import { useEffect } from 'react';
 import './App.css';
 import { Route, Switch } from 'react-router-dom';
 import Home from './pages/Home';
-import Video from './pages/Video';
 import Aside from './components/Aside';
-import Services from './pages/Services';
 import Language from './components/Language';
 import Login from './pages/Login';
 import I18nProvider from './i18n/Provider';
@@ -50,7 +48,6 @@ function App() {
           <Aside />
           <Switch>
             <Route exact path="/" component={Home} />
-            <Route path="/services" component={Services} />
             <Route path="/store" component={Store} />
             <Route path="/login" component={Login} />
             <Route path="/register" component={Register} />

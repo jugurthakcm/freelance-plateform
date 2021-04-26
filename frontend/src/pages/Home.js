@@ -5,7 +5,9 @@ import freelance from '../assets/images/logo512.png';
 import { FormattedMessage } from 'react-intl';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { useLanguageContext } from '../ContextAPI/LanguageProvider';
+
+import Service from '../components/Service';
+import { services } from '../data/services';
 
 const Home = () => {
   return (
@@ -14,22 +16,16 @@ const Home = () => {
       <div className="home">
         <Main />
         <div className="home__description row justify-content-around">
-          <div className="description__text col-lg-7 ">
+          <div className="services px-4">
             <h1>
-              <FormattedMessage id="description.descriptionTitle" />
-              <div></div>
+              <FormattedMessage id="services.title" />
             </h1>
-            <p className="mt-4">
-              <FormattedMessage id="description.descriptionText" />
-            </p>
+            <div className="row">
+              {services.map((service) => (
+                <Service service={service} />
+              ))}
+            </div>
           </div>
-
-          <img
-            src={freelance}
-            alt="description"
-            className="description__image col-lg-5"
-            style={{ maxWidth: 400 }}
-          />
         </div>
       </div>
       <Footer />

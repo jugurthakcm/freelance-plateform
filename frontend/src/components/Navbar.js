@@ -111,12 +111,6 @@ const Navbar = ({ navStore }) => {
             <Link to="/">
               <FormattedMessage id="navbar.home" />
             </Link>
-            <Link to="/about">
-              <FormattedMessage id="navbar.about" />
-            </Link>
-            <Link to="/services">
-              <FormattedMessage id="navbar.services" />
-            </Link>
             <Link to="/store">
               <FormattedMessage id="navbar.store" />
             </Link>

@@ -4,16 +4,25 @@
   margin: 2rem 20px 0 20px !important;
 }
 
-.description__text h1 {
-  font-weight: 600;
+.services {
+  margin-left: 18px;
+  margin-right: 18px;
+  margin-top: 100px;
 }
 
-.description__text h1 div {
+.services h1 {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 2rem;
+}
+
+.services h1::after {
+  content: '';
   display: block;
   height: 8px;
   background-color: var(--primary-color);
-  width: 100px;
-  text-align: right;
-  position: absolute;
-  margin-top: 5px;
+  width: 150px;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
 }
