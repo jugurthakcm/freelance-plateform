@@ -195,7 +195,7 @@ const AddExperience = () => {
               >
                 Close
               </button>
-              <button type="submit" className="btn btn-warning">
+              <button type="submit" className="btn btn-info">
                 Save changes
               </button>
             </div>

@@ -107,7 +107,7 @@ const EditSkills = () => {
                 className={` ${errors.skill ? 'inputError' : null}`}
               />
 
-              <button type="submit" className="btn btn-warning">
+              <button type="submit" className="btn btn-info">
                 Add
               </button>
             </form>
@@ -126,7 +126,7 @@ const EditSkills = () => {
             </button>
             <button
               type="button"
-              className="btn btn-warning"
+              className="btn btn-info"
               onClick={handleClickSave}
             >
               Save changes
