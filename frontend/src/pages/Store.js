@@ -1,14 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import './Store.css';
 import Navbar from '../components/Navbar';
 import StackGrid from 'react-stack-grid';
-import { store } from '../data/store';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-regular-svg-icons';
 import SearchBar from '../components/SearchBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { exploreGigs } from '../data/actions/gigActions';
-import { createChat } from '../data/actions/chatActions';
 import api from '../api';
 
 const Store = () => {
@@ -23,10 +21,6 @@ const Store = () => {
   useEffect(() => {
     user.token && dispatch(exploreGigs(user.token));
   }, [user, dispatch]);
-
-  const handleContactSeller = (id) => {
-    user.token && dispatch(createChat(id, user.token));
-  };
 
   return (
     <>
@@ -69,9 +63,7 @@ const Store = () => {
                   <p className="gig__seller">{gig.seller.name}</p>
                   <span className="gig__footerPrice">{gig.price} $</span>
                   <div className="gig__footer">
-                    <button onClick={() => handleContactSeller(gig.seller.id)}>
-                      Contact the seller
-                    </button>
+                    <button>Contact the seller</button>
                     <span>
                       <FontAwesomeIcon icon={faStar} /> {gig.likes}
                     </span>
