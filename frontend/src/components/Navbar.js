@@ -78,11 +78,6 @@ const Navbar = ({ navStore }) => {
       <div className="navbar__up">
         <div className="navbar__left">
           <div className="navbar__title">
-            {/* <FontAwesomeIcon
-              icon={faBars}
-              size="2x"
-              }
-            /> */}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="35"
@@ -99,12 +94,7 @@ const Navbar = ({ navStore }) => {
               />
             </svg>
 
-            <img
-              src={logoYellow}
-              alt="logo"
-              width="180px"
-              className="d-sm-block d-none"
-            />
+            <h1>Freelancer</h1>
           </div>
 
           <div className="navbar__center">
@@ -114,6 +104,8 @@ const Navbar = ({ navStore }) => {
             <Link to="/store">
               <FormattedMessage id="navbar.store" />
             </Link>
+            <Link to="/">Find Work</Link>
+            <Link to="/">About Us</Link>
           </div>
         </div>
 
