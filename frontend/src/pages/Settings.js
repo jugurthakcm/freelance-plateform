@@ -195,7 +195,7 @@ const Settings = () => {
                   )}
                 </div>
 
-                <button type="submit" className="btn btn-warning">
+                <button type="submit" className="btn btn-info">
                   Save
                 </button>
               </form>
@@ -227,7 +227,7 @@ const Settings = () => {
                   )}
                 </div>
 
-                <button type="submit" className="btn btn-warning">
+                <button type="submit" className="btn btn-info">
                   Save
                 </button>
               </form>
@@ -257,7 +257,7 @@ const Settings = () => {
                   )}
                 </div>
 
-                <button type="submit" className="btn btn-warning">
+                <button type="submit" className="btn btn-info">
                   Save
                 </button>
               </form>
@@ -326,7 +326,7 @@ const Settings = () => {
                   )}
                 </div>
 
-                <button type="submit" className="btn btn-warning">
+                <button type="submit" className="btn btn-info">
                   Save
                 </button>
               </form>
@@ -347,7 +347,7 @@ const Settings = () => {
                   <option value="french">Français</option>
                   <option value="arabic">العربية</option>
                 </select>
-                {/* <button type="submit" className="btn btn-warning">
+                {/* <button type="submit" className="btn btn-info">
                   Save
                 </button> */}
               </form>
