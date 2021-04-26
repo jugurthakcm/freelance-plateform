@@ -1,9 +1,9 @@
 {
-  "name": "handelp",
+  "name": "freelance-plateform",
   "version": "1.0.0",
   "main": "index.js",
-  "repository": "https://github.com/jugurthakcm/handelp.git",
-  "author": "jugurthakcm <kjugurtha1711@gmail.com>",
+  "repository": "https://github.com/jugurthakcm/freelance-plateform.git",
+  "author": "KACIMI Jugurtha <jugurthakacimidev@gmail.com>",
   "license": "MIT",
   "private": true,
   "scripts": {
