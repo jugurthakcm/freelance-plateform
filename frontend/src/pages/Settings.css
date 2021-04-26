@@ -16,7 +16,7 @@
   width: 110%;
   height: 1px;
   /* border: 1px solid var(--black); */
-  background-color: var(--black);
+  background-color: var(--secondary-color);
   margin: 10px 0 15px 0;
 }
 
@@ -42,7 +42,7 @@
   width: 90%;
   height: 1px;
   /* border: 1px solid var(--black); */
-  background-color: var(--black);
+  background-color: var(--secondary-color);
   margin: 7px 0 20px 0;
 }
 

@@ -108,12 +108,12 @@
   font-size: 14px;
   font-weight: 500;
   margin-top: 2rem;
-  color: var(--black);
+  color: var(--secondary-color);
   text-align: justify;
 }
 
 .dashboard__editBtn {
-  background-color: var(--yellow);
+  background-color: var(--primary-color);
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -126,7 +126,7 @@
 }
 
 .dashboard__editBtn path {
-  color: var(--black);
+  color: var(--secondary-color);
 }
 
 .dashboard__title {
@@ -144,7 +144,7 @@
 .dashboard__title h5::after {
   content: '';
   display: block;
-  background-color: var(--yellow);
+  background-color: var(--primary-color);
   height: 4px;
   width: 100%;
   margin-bottom: 0.3rem;
@@ -165,37 +165,11 @@
   display: inline-block;
   margin-right: 0.5rem;
   padding: 0.4rem 1rem;
-  background-color: var(--yellow);
+  background-color: var(--primary-color);
   font-weight: 500;
   border-radius: 1rem;
   font-size: 14px;
   margin-top: 0.5rem;
-}
-
-.dashboard__completeProfile {
-  font-size: 13px;
-  background-color: var(--black);
-  border-radius: 0.5rem;
-  color: var(--yellow);
-  padding: 0.5rem 0.8rem;
-  font-weight: 500;
-  display: inline-flex;
-  align-items: center;
-  text-align: left !important;
-  margin-bottom: 5px;
-}
-
-.dashboard__completeProfile svg {
-  cursor: default;
-}
-
-.dashboard__completeProfile svg path {
-  color: var(--yellow);
-  cursor: default;
-}
-
-.dashboard__completeProfile svg:hover path {
-  color: var(--yellow);
 }
 
 .dashboard__right {
@@ -302,12 +276,12 @@
 }
 
 .dashboard__completeProfile svg path {
-  color: var(--yellow);
+  color: var(--primary-color);
   cursor: default;
 }
 
 .dashboard__completeProfile svg:hover path {
-  color: var(--yellow);
+  color: var(--primary-color);
 } */
 
 .dashboard__gigs .row span {

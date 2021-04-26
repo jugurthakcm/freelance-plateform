@@ -85,8 +85,8 @@
 }
 
 .gig__footer button {
-  background-color: var(--yellow);
-  color: var(--black);
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
   border-radius: 5px;
   border: none;
   padding: 5px 12px;

@@ -16,7 +16,7 @@
 }
 
 .searchBar button {
-  background-color: var(--yellow);
+  background-color: var(--primary-color);
   border: none;
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;

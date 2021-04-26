@@ -4,7 +4,7 @@
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: var(--black);
+  background-color: var(--secondary-color);
   overflow: hidden;
 }
 
@@ -31,7 +31,7 @@
   display: block;
   height: 5px;
   width: 80px;
-  background-color: var(--yellow);
+  background-color: var(--primary-color);
   position: absolute;
 }
 
@@ -130,10 +130,10 @@
 }
 
 .login__submit button {
-  border: 1px solid var(--yellow);
-  color: var(--black);
+  border: 1px solid var(--primary-color);
+  color: var(--secondary-color);
   font-weight: 500;
-  background-color: var(--yellow);
+  background-color: var(--primary-color);
   border-radius: 5px;
   padding: 7px 15px;
 }
@@ -144,15 +144,15 @@
 }
 
 .login__register a {
-  color: var(--black);
+  color: var(--secondary-color);
   font-weight: 500;
-  border-bottom: 1px solid var(--black);
+  border-bottom: 1px solid var(--secondary-color);
 }
 
 .login__register a:hover,
 .login__register a:active {
   text-decoration: none;
-  color: var(--black);
+  color: var(--secondary-color);
 }
 
 @media (max-width: 800px) {

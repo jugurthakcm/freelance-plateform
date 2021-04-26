@@ -14,7 +14,7 @@
   content: '';
   display: block;
   height: 8px;
-  background-color: var(--yellow);
+  background-color: var(--primary-color);
   width: 150px;
   position: relative;
   left: 50%;

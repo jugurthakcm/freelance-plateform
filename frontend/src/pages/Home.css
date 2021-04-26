@@ -11,7 +11,7 @@
 .description__text h1 div {
   display: block;
   height: 8px;
-  background-color: var(--yellow);
+  background-color: var(--primary-color);
   width: 100px;
   text-align: right;
   position: absolute;

@@ -30,13 +30,13 @@
 }
 
 .aside__link {
-  color: var(--black);
+  color: var(--secondary-color);
   font-weight: 500;
   font-size: 1.4rem;
 }
 
 .aside__link:hover {
-  color: var(--yellow);
+  color: var(--primary-color);
   text-decoration: none;
 }
 
@@ -68,20 +68,20 @@
 }
 
 .aside__register {
-  color: var(--black);
-  border: 1px solid var(--yellow);
-  background-color: var(--yellow);
+  color: var(--secondary-color);
+  border: 1px solid var(--primary-color);
+  background-color: var(--primary-color);
 }
 
 .aside__register:hover,
 .aside__register:active {
   text-decoration: none;
-  color: var(--black);
+  color: var(--secondary-color);
 }
 
 .aside__login {
-  border-color: var(--black);
-  background-color: var(--black);
+  border-color: var(--secondary-color);
+  background-color: var(--secondary-color);
   color: white;
 }
 

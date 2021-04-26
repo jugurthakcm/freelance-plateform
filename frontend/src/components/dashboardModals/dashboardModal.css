@@ -40,8 +40,8 @@
 }
 
 .modal textarea:focus {
-  border: 1px solid var(--yellow);
-  outline-color: var(--yellow) !important;
+  border: 1px solid var(--primary-color);
+  outline-color: var(--primary-color) !important;
 }
 
 .modal-body button {
@@ -57,7 +57,7 @@
   display: inline-block;
   margin-right: 0.5rem !important;
   padding: 0.5rem 0.7rem !important;
-  background-color: var(--yellow);
+  background-color: var(--primary-color);
   font-weight: 500;
   border-radius: 2rem;
   font-size: 12px !important;
@@ -78,7 +78,7 @@
 }
 
 .modal__skillsForm button {
-  background-color: var(--yellow) !important;
+  background-color: var(--primary-color) !important;
   padding-top: 9px;
   padding-bottom: 9px;
   border-bottom-left-radius: 0;

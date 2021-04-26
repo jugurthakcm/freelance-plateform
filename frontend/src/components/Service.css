@@ -75,9 +75,9 @@
 
 .service__list span:hover,
 .service__list span:focus {
-  border-color: var(--yellow);
+  border-color: var(--primary-color);
   color: black;
-  background-color: var(--yellow);
+  background-color: var(--primary-color);
 }
 
 .service__list .btn-close {

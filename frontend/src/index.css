@@ -1,6 +1,6 @@
 :root {
-  --yellow: #fece1b;
-  --black: #0f0e1b;
+  --primary-color: #8ecae6;
+  --secondary-color: #001f2b;
 }
 
 * {
