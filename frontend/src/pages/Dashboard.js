@@ -80,6 +80,10 @@ const Dashboard = () => {
     myFileItemreader.readAsDataURL(file);
   };
 
+  useEffect(() => {
+    document.title = 'Dashboard - Freelancer';
+  }, []);
+
   return (
     <>
       {!user.isLoading && (

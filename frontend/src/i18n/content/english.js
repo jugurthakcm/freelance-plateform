@@ -19,7 +19,7 @@ const englishContent = {
       home: 'Home',
       about: 'About',
       services: 'Services',
-      store: 'Store',
+      explore: 'Explore',
       login: 'Login',
       register: 'Register',
     },

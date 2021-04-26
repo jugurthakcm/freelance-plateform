@@ -220,6 +220,11 @@
 
 .navbar__user .dropdown-menu li {
   cursor: pointer;
+  color: var(--secondary-color) !important;
+}
+
+.navbar__user .dropdown-menu a {
+  color: var(--secondary-color) !important;
 }
 
 .navbar__user .dropdown-item {

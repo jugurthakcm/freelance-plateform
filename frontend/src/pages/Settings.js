@@ -129,6 +129,10 @@ const Settings = () => {
 
   const e = user.error;
 
+  useEffect(() => {
+    document.title = 'Settings - Freelancer';
+  }, []);
+
   return (
     <>
       <Navbar />

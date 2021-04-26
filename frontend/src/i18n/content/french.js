@@ -16,7 +16,7 @@ const frenchContent = {
       home: 'Accueil',
       about: 'A Propos',
       services: 'Services',
-      store: 'Boutique',
+      explore: 'Explorer',
       login: 'Connexion',
       register: 'Inscription',
     },

@@ -102,7 +102,7 @@ const Navbar = ({ navStore }) => {
               <FormattedMessage id="navbar.home" />
             </Link>
             <Link to="/store">
-              <FormattedMessage id="navbar.store" />
+              <FormattedMessage id="navbar.explore" />
             </Link>
             <Link to="/">Find Work</Link>
             <Link to="/">About Us</Link>

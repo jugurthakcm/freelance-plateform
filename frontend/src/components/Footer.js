@@ -15,15 +15,9 @@ const Footer = ({ aside }) => {
   return (
     <div className={`footer ${aside && `aside__footer`}`}>
       <div className={`footer__left ${aside && `aside__footerLeft`}`}>
-        {/* <h1 className="footer__title">Handelp</h1> */}
-        <img
-          src={logoBlack}
-          alt="logo"
-          width="150px"
-          className="footer__title"
-        />
+        <h1 className="footer__title">Freelancer</h1>
         <p className="footer__copyright">
-          © <FormattedMessage id="footer.copyright" />. Handelp.{' '}
+          © <FormattedMessage id="footer.copyright" />. Freelancer.{' '}
           {date.getFullYear()}
         </p>
       </div>

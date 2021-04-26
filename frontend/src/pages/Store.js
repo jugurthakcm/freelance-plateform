@@ -17,6 +17,10 @@ const Store = () => {
   const gig = useSelector((state) => state.gig);
 
   useEffect(() => {
+    document.title = 'Explore - Freelancer';
+  }, []);
+
+  useEffect(() => {
     user.token && dispatch(exploreGigs(user.token));
   }, [user, dispatch]);
 

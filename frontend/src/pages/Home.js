@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Main from '../components/Main';
 import './Home.css';
 import freelance from '../assets/images/logo512.png';
@@ -10,6 +10,10 @@ import Service from '../components/Service';
 import { services } from '../data/services';
 
 const Home = () => {
+  useEffect(() => {
+    document.title = 'Freelancer';
+  }, []);
+
   return (
     <>
       <Navbar />
